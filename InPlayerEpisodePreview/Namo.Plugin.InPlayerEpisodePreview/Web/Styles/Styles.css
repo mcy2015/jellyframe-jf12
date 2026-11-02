@@ -1,0 +1,224 @@
+.selectedListItem {
+    height: auto;
+}
+.previewListItem {
+    flex-direction: column;
+    align-items: flex-start;
+}
+.previewListItemContent {
+    width: 100%;
+    min-height: 15.5vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.previewListItem-sideBySide {
+    margin-bottom: 1em;
+}
+.previewListItem-sideBySide .previewItemTitle .actionSheetItemText {
+    font-size: 1.3em;
+}
+.previewListItem-sideBySide .previewListItemContent .itemMiscInfo.previewItemDetails {
+    margin-left: 0.5em !important;
+}
+.previewPopup {
+    animation: 140ms ease-out 0s 1 normal both running scaleup;
+    position: fixed;
+    margin: 0;
+    bottom: 1.5vh;
+    left: 50vw;
+    width: 48vw;
+}
+.previewPopupTitle {
+    max-height: 4vh;
+}
+.previewPopupTitle h1.actionSheetTitle {
+    margin-left: 0 !important;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.previewGroupWatchedCount {
+    cursor: pointer;
+    pointer-events: auto;
+    margin-left: auto;
+    margin-right: 0.4em;
+    padding: 0.2em 0.6em;
+    border-radius: 0.3em;
+    white-space: nowrap;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.15s, background-color 0.15s;
+}
+.previewGroupWatchedCount:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+/* Remove button highlighting when hovering over the group statistics */
+.previewGroupListItemTitle:has(.previewGroupWatchedCount:hover) {
+    background: none !important;
+    box-shadow: none !important;
+}
+.previewPopupScroller {
+    max-height: 60vh;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent !important;
+}
+.previewPopupScroller::-webkit-scrollbar {
+    width: 8px;
+}
+.previewPopupScroller::-webkit-scrollbar-track {
+    background: transparent;
+}
+.previewPopupScroller::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+}
+.previewPopupScroller::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.previewQuickActionContainer,
+.previewVersionRow {
+    margin-left: auto;
+    margin-right: -0.5em;
+}
+.previewQuickActionContainer button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+.previewItemContainer {
+    width: 100%;
+}
+.previewItemTitle {
+    pointer-events: none;
+}
+.previewItemTitle.previewItemTitle-noIndex .actionsheetListItemBody {
+    padding-inline-start: 0 !important;
+}
+.previewGroupListItemTitle {
+    width: 100%;
+}
+.previewGroupListItemTitle .listItemBody {
+    min-width: 0;
+}
+.previewGroupListItemTitle .actionSheetItemText {
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.previewItemImageCard {
+    max-width: 30%;
+}
+.previewItemContentRow {
+    align-items: flex-start;
+}
+.previewItemDescriptionColumn {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+.previewItemDescription {
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+    display: block;
+    overflow: hidden;
+    max-height: 150px;
+}
+.previewItemDescription.expanded {
+    max-height: none;
+}
+.previewItemReadMoreButton {
+    align-self: flex-start;
+    margin-left: 0.5em;
+    margin-top: 0.25em;
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.9em;
+    opacity: 0.75;
+}
+.previewItemReadMoreButton:hover {
+    opacity: 1;
+}
+.previewItemDetails {
+    margin-left: 1em;
+    justify-content: start !important;
+}
+
+/* Lock the position and width of this details, so that no theme can change them */
+.previewListItemContent .itemMiscInfo.previewItemDetails {
+    max-width: none !important;
+    position: relative !important;
+    top: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin-left: 1em !important;
+    margin-top: 0 !important;
+}
+.blur {
+    filter: blur(6px);
+    transition: filter 0.3s ease;
+    display: inline-block;
+}
+.blur:hover {
+    filter: blur(0);
+}
+.previewItemImageCard .blur {
+    filter: blur(32px);
+}
+.previewItemImageCard:hover .blur {
+    filter: blur(0);
+}
+.previewScrollSpinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 0;
+}
+.previewScrollSpinner .docspinner {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin: 0 !important;
+    width: 1.95em !important;
+    height: 1.95em !important;
+    z-index: auto !important;
+}
+.previewVersionRow {
+    align-items: center;
+    gap: 0.3em;
+}
+.previewVersionSelect {
+    width: auto;
+    max-width: 14em;
+    height: auto;
+    line-height: normal;
+    padding: 0 0.4em;
+    border-radius: 0.2em;
+    font-size: inherit;
+    font-family: inherit;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+.previewVersionPlayButton.paper-icon-button-light {
+    margin: 0 0.29em 0 0;
+    padding: 0.1em 0.556em 0.1em 0.1em;
+}
+.previewVersionPlayButton.paper-icon-button-light > .material-icons {
+    font-size: 1.3em;
+}
+.previewVersionPlayButton:disabled {
+    opacity: 0.3;
+    cursor: default;
+}

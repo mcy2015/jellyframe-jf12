@@ -1,0 +1,283 @@
+// SPDX-FileCopyrightText: 2026 AbandonedCart
+// SPDX-FileCopyrightText: 2026 rlauuzo
+// SPDX-License-Identifier: GPL-3.0-only
+
+using System.Text.Json;
+using IntroSkipper.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace IntroSkipper.Db;
+
+/// <summary>
+/// Season-state (<see cref="DbSeasonState"/>) operations of <see cref="IntroSkipperDatabase"/>,
+/// plus the queue-verification snapshot that joins season state, analysis records and segments.
+/// </summary>
+public sealed partial class IntroSkipperDatabase
+{
+    /// <summary>Returns the optional analysis-window overrides for a season.</summary>
+    /// <param name="seasonId">Season ID.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The saved overrides, with null values meaning inherit.</returns>
+    public async Task<AnalysisOverrides> GetAnalysisOverridesAsync(Guid seasonId, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync().ConfigureAwait(false);
+        using var db = _contextFactory.CreateDbContext();
+        var result = await db.SeasonAnalysisOverrides
+            .AsNoTracking()
+            .Where(s => s.SeasonId == seasonId)
+            .Select(s => new
+            {
+                s.AnalysisPercent,
+                s.AnalysisLengthLimit,
+                s.PreviewFromCreditsEnd,
+                s.SubtitleRecapDetection,
+                s.SubtitlePreviewDetection
+            })
+            .SingleOrDefaultAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        return result is null
+            ? new AnalysisOverrides(null, null, null, null, null)
+            : new AnalysisOverrides(
+                result.AnalysisPercent,
+                result.AnalysisLengthLimit,
+                result.PreviewFromCreditsEnd,
+                result.SubtitleRecapDetection,
+                result.SubtitlePreviewDetection);
+    }
+
+    /// <summary>Stores or clears the optional analysis-window overrides for a season.</summary>
+    /// <param name="seasonId">Season ID.</param>
+    /// <param name="analysisPercent">Percentage override, or null to inherit.</param>
+    /// <param name="analysisLengthLimit">Runtime limit override in minutes, or null to inherit.</param>
+    /// <param name="previewFromCreditsEnd">Whether to derive a preview after credits, or null to inherit.</param>
+    /// <param name="subtitleRecapDetection">Whether to enable subtitle recap detection, or null to inherit.</param>
+    /// <param name="subtitlePreviewDetection">Whether to enable subtitle preview detection, or null to inherit.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation.</returns>
+    public async Task SetAnalysisOverridesAsync(
+        Guid seasonId,
+        int? analysisPercent,
+        int? analysisLengthLimit,
+        bool? previewFromCreditsEnd,
+        bool? subtitleRecapDetection,
+        bool? subtitlePreviewDetection,
+        CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync().ConfigureAwait(false);
+        using var db = _contextFactory.CreateDbContext();
+
+        if (analysisPercent is null
+            && analysisLengthLimit is null
+            && previewFromCreditsEnd is null
+            && subtitleRecapDetection is null
+            && subtitlePreviewDetection is null)
+        {
+            await db.SeasonAnalysisOverrides
+                .Where(s => s.SeasonId == seasonId)
+                .ExecuteDeleteAsync(cancellationToken)
+                .ConfigureAwait(false);
+            return;
+        }
+
+        await db.Database.ExecuteSqlAsync(
+            $"""
+            INSERT INTO "SeasonAnalysisOverrides" ("SeasonId", "AnalysisPercent", "AnalysisLengthLimit", "PreviewFromCreditsEnd", "SubtitleRecapDetection", "SubtitlePreviewDetection")
+            VALUES ({seasonId}, {analysisPercent}, {analysisLengthLimit}, {previewFromCreditsEnd}, {subtitleRecapDetection}, {subtitlePreviewDetection})
+            ON CONFLICT("SeasonId") DO UPDATE SET
+                "AnalysisPercent" = excluded."AnalysisPercent",
+                "AnalysisLengthLimit" = excluded."AnalysisLengthLimit",
+                "PreviewFromCreditsEnd" = excluded."PreviewFromCreditsEnd",
+                "SubtitleRecapDetection" = excluded."SubtitleRecapDetection",
+                "SubtitlePreviewDetection" = excluded."SubtitlePreviewDetection"
+            """,
+            cancellationToken).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Sets the analyzer actions for a season.
+    /// </summary>
+    /// <param name="seasonId">Season ID.</param>
+    /// <param name="analyzerActions">Analyzer actions keyed by analysis mode.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public async Task SetAnalyzerActionAsync(Guid seasonId, IReadOnlyDictionary<AnalysisMode, AnalyzerAction> analyzerActions, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync().ConfigureAwait(false);
+        using var db = _contextFactory.CreateDbContext();
+
+        // One transaction so a cancelled request cannot leave the season with a
+        // partially updated action set.
+        var transaction = await db.Database.BeginTransactionAsync(cancellationToken).ConfigureAwait(false);
+        await using (transaction.ConfigureAwait(false))
+        {
+            foreach (var (mode, action) in analyzerActions)
+            {
+                await db.Database.ExecuteSqlAsync(
+                    $"""
+                    INSERT INTO "SeasonStates" ("SeasonId", "Type", "Action", "SettledReanalysisEpisodeIds")
+                    VALUES ({seasonId}, {(int)mode}, {(int)action}, '[]')
+                    ON CONFLICT("SeasonId", "Type") DO UPDATE SET "Action" = excluded."Action"
+                    """,
+                    cancellationToken).ConfigureAwait(false);
+            }
+
+            await transaction.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+    }
+
+    /// <summary>
+    /// Returns the analyzer action and settled-season reanalysis state for every mode
+    /// of a season that has a stored row; modes without a row are absent and mean
+    /// <see cref="AnalyzerAction.Default"/>.
+    /// </summary>
+    /// <param name="seasonId">Season ID.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Settled reanalysis state keyed by analysis mode.</returns>
+    public async Task<IReadOnlyDictionary<AnalysisMode, (AnalyzerAction Action, IReadOnlySet<Guid> SettledReanalysisEpisodeIds)>> GetSettleReanalysisStatesAsync(
+        Guid seasonId,
+        CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync().ConfigureAwait(false);
+        using var db = _contextFactory.CreateDbContext();
+        var states = await db.SeasonStates
+            .AsNoTracking()
+            .Where(s => s.SeasonId == seasonId)
+            .Select(s => new
+            {
+                s.Type,
+                s.Action,
+                s.SettledReanalysisEpisodeIds
+            })
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        return states.ToDictionary(
+            s => s.Type,
+            s => (s.Action, (IReadOnlySet<Guid>)s.SettledReanalysisEpisodeIds.ToHashSet()));
+    }
+
+    /// <summary>
+    /// Records that season analysis modes have been re-analyzed for the given episode set.
+    /// Call only for modes whose reanalysis completed.
+    /// </summary>
+    /// <param name="seasonId">Season ID.</param>
+    /// <param name="modes">Analysis modes that were re-analyzed.</param>
+    /// <param name="episodeIds">Episode IDs that were re-analyzed.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+    public async Task RecordSettleReanalysisAsync(
+        Guid seasonId,
+        IReadOnlyCollection<AnalysisMode> modes,
+        IReadOnlyCollection<Guid> episodeIds,
+        CancellationToken cancellationToken = default)
+    {
+        if (modes.Count == 0)
+        {
+            return;
+        }
+
+        // Same JSON shape EF writes for the primitive collection, so the raw upsert and
+        // tracked reads agree.
+        var settledEpisodeIds = JsonSerializer.Serialize(episodeIds, (JsonSerializerOptions?)null);
+
+        await InitializeAsync().ConfigureAwait(false);
+        using var db = _contextFactory.CreateDbContext();
+        foreach (var mode in modes)
+        {
+            await db.Database.ExecuteSqlAsync(
+                $"""
+                INSERT INTO "SeasonStates" ("SeasonId", "Type", "Action", "SettledReanalysisEpisodeIds")
+                VALUES ({seasonId}, {(int)mode}, {(int)AnalyzerAction.Default}, {settledEpisodeIds})
+                ON CONFLICT("SeasonId", "Type") DO UPDATE SET
+                    "SettledReanalysisEpisodeIds" = excluded."SettledReanalysisEpisodeIds"
+                """,
+                cancellationToken).ConfigureAwait(false);
+        }
+    }
+
+    /// <summary>
+    /// Returns the analyzer action for every analysis mode of a season, filling in
+    /// <see cref="AnalyzerAction.Default"/> for modes without a stored row.
+    /// </summary>
+    /// <param name="seasonId">Season ID.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>Analyzer actions keyed by analysis mode.</returns>
+    public async Task<IReadOnlyDictionary<AnalysisMode, AnalyzerAction>> GetAllAnalyzerActionsAsync(Guid seasonId, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync().ConfigureAwait(false);
+        using var db = _contextFactory.CreateDbContext();
+        var states = await db.SeasonStates
+            .AsNoTracking()
+            .Where(s => s.SeasonId == seasonId)
+            .Select(s => new { s.Type, s.Action })
+            .ToDictionaryAsync(s => s.Type, s => s.Action, cancellationToken)
+            .ConfigureAwait(false);
+
+        // Fill in defaults for any missing modes
+        var result = new Dictionary<AnalysisMode, AnalyzerAction>();
+        foreach (var mode in Enum.GetValues<AnalysisMode>())
+        {
+            result[mode] = states.TryGetValue(mode, out var action) ? action : AnalyzerAction.Default;
+        }
+
+        return result;
+    }
+
+    /// <summary>
+    /// Returns a snapshot of the season's analyzer actions, the episodes' analysis records
+    /// and the modes their active segments cover, used by queue verification to avoid
+    /// per-episode database lookups. The episode ID set is bound as one JSON parameter, so
+    /// the episode count is unbounded.
+    /// </summary>
+    /// <param name="seasonId">Season ID.</param>
+    /// <param name="episodeIds">Episode IDs in the season.</param>
+    /// <param name="cancellationToken">Cancellation token.</param>
+    /// <returns>The season queue snapshot.</returns>
+    public async Task<SeasonQueueSnapshot> GetSeasonQueueSnapshotAsync(Guid seasonId, IReadOnlyCollection<Guid> episodeIds, CancellationToken cancellationToken = default)
+    {
+        await InitializeAsync().ConfigureAwait(false);
+        using var db = _contextFactory.CreateDbContext();
+        var episodeIdArray = (Guid[])[.. episodeIds.Distinct()];
+
+        var analyzerActions = await db.SeasonStates
+            .AsNoTracking()
+            .Where(s => s.SeasonId == seasonId)
+            .Select(s => new { s.Type, s.Action })
+            .ToDictionaryAsync(s => s.Type, s => s.Action, cancellationToken)
+            .ConfigureAwait(false);
+
+        var analyzed = await db.AnalyzedItems
+            .AsNoTracking()
+            .Where(a => EF.Parameter(episodeIdArray).Contains(a.ItemId))
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        // Project only the consumed columns: queue verification tests mode presence and
+        // user provenance, nothing else, so the tick, Id, ConfigHash and timestamp columns
+        // are all skipped. That avoids a per-row Guid parse plus two DateTime TEXT parses
+        // on a query that runs once per season per scan, and keeps seconds-typed segment
+        // payloads off this internal path (ticks stay internal).
+        var segments = await db.Segments
+            .AsNoTracking()
+            .Where(s => EF.Parameter(episodeIdArray).Contains(s.ItemId) && s.State == SegmentState.Active)
+            .Select(s => new { s.ItemId, s.Type, s.Source })
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+
+        return new SeasonQueueSnapshot(
+            analyzed.ToDictionary(a => (a.ItemId, a.Type), a => new AnalysisRecord(a.ConfigHash, a.FileVersion)),
+            analyzerActions,
+            segments
+                .GroupBy(s => s.ItemId)
+                .ToDictionary(
+                    group => group.Key,
+                    group => (IReadOnlySet<AnalysisMode>)group.Select(s => s.Type).ToHashSet()),
+            segments
+                .Where(s => s.Source == SegmentSource.User)
+                .GroupBy(s => s.Type)
+                .ToDictionary(
+                    group => group.Key,
+                    group => (IReadOnlySet<Guid>)group.Select(s => s.ItemId).ToHashSet()));
+    }
+}

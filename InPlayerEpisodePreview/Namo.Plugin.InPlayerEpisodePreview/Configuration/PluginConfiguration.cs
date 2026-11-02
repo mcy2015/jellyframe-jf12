@@ -1,0 +1,92 @@
+using MediaBrowser.Model.Plugins;
+
+namespace Namo.Plugin.InPlayerEpisodePreview.Configuration;
+
+/// <summary>
+/// Class PluginConfiguration
+/// </summary>
+public class PluginConfiguration : BasePluginConfiguration
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PluginConfiguration"/> class.
+    /// </summary>
+    public PluginConfiguration() {}
+
+    public int[] EnabledItemTypes { get; set; } = [
+        (int)AvailablePreviewItemTypes.Series,
+        (int)AvailablePreviewItemTypes.Movie,
+        (int)AvailablePreviewItemTypes.Video,
+        (int)AvailablePreviewItemTypes.BoxSet
+    ];
+
+    public bool BlurDescription { get; set; } = false;
+    public bool BlurThumbnail { get; set; } = false;
+    public int EpisodePageSize { get; set; } = 10;
+
+    /// <summary>
+    /// Whether the description/thumbnail blur only applies to items the user hasn't watched yet.
+    /// </summary>
+    public bool OnlyBlurUnwatched { get; set; } = false;
+
+    /// <summary>
+    /// Whether to show "played/total watched" counts on groups.
+    /// </summary>
+    public bool ShowWatchedCount { get; set; } = true;
+
+    /// <summary>
+    /// Which format the watched-count badge is displayed in.
+    /// </summary>
+    public int WatchCountDisplayMode { get; set; } = (int)Namo.Plugin.InPlayerEpisodePreview.Configuration.WatchCountDisplayMode.HoursMinutes;
+
+    /// <summary>
+    /// Whether to search for other Collections/Playlists containing the item being played
+    /// </summary>
+    public bool SearchContainingCollections { get; set; } = true;
+
+    /// <summary>
+    /// Whether a movie not played from a Collection/Playlist lists the other videos in its folder.
+    /// </summary>
+    public bool DisplayMovieFolderSiblings { get; set; } = false;
+
+    /// <summary>
+    /// Whether to show Virtual (missing/unaired) items
+    /// </summary>
+    public bool DisplayMissingEpisodes { get; set; } = false;
+
+    /// <summary>
+    /// Whether the preview closes when an item is started from it.
+    /// </summary>
+    public bool AutoClosePreview { get; set; } = true;
+
+    /// <summary>
+    /// Whether to list a stacked video's additional parts (e.g. files named "Part 1"/"Part 2" that
+    /// Jellyfin's naming resolver merges into one library item) as separate, individually playable entries.
+    /// </summary>
+    public bool DisplayAdditionalVideoParts { get; set; } = true;
+
+    /// <summary>
+    /// Whether an item with multiple versions shows the version dropdown and switch button.
+    /// </summary>
+    public bool ShowAlternateVersions { get; set; } = true;
+
+    /// <summary>
+    /// Whether to show the watch progress bar on an item's image card in the preview
+    /// </summary>
+    public bool ShowWatchProgress { get; set; } = true;
+
+    /// <summary>
+    /// Whether to show every list item's details expanded by default, instead of requiring a click to reveal them.
+    /// </summary>
+    public bool ExpandAllItems { get; set; } = false;
+
+    /// <summary>
+    /// How an item's title, details and description are arranged when expanded.
+    /// Only takes effect while <see cref="ExpandAllItems"/> is on.
+    /// </summary>
+    public int ExpandedItemLayout { get; set; } = (int)Namo.Plugin.InPlayerEpisodePreview.Configuration.ExpandedItemLayout.SideBySide;
+
+    /// <summary>
+    /// The minimum level of logs the frontend writes to the browser console
+    /// </summary>
+    public int LogLevel { get; set; } = (int)FrontendLogLevel.Information;
+}

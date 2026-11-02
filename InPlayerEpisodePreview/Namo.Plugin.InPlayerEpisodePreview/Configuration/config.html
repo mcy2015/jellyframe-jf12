@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>播放器内分集预览</title>
+</head>
+<body>
+<div id="InPlayerEpisodePreviewPage" data-role="page" class="page type-interior pluginConfigurationPage">
+    <div data-role="content">
+        <div class="content-primary">
+            <div class="verticalSection">
+                <div class="sectionTitleContainer">
+                    <h2 class="sectionTitle">播放器内分集预览</h2>
+                    <a is="emby-linkbutton" class="raised raised-mini emby-button" style="margin-left: 2em;"
+                       target="_blank" href="https://github.com/Namo2/InPlayerEpisodePreview">
+                        <i class="md-icon button-icon button-icon-left secondaryText"></i>
+                        <span>帮助</span>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <br/>
+
+            <form id="InPlayerEpisodePreviewForm">
+                <div class="checkboxContainer">
+                    <label class="emby-checkbox-label">
+                        <input id="enabledItemTypes-series" is="emby-checkbox" name="enabledItemTypes-series"
+                               type="checkbox"/>
+                        <span>为剧集启用预览按钮</span>
+                    </label>
+                </div>
+                <div class="checkboxContainer">
+                    <label class="emby-checkbox-label">
+                        <input id="enabledItemTypes-movie" is="emby-checkbox" name="enabledItemTypes-movie"
+                               type="checkbox"/>
+                        <span>为电影启用预览按钮</span>
+                    </label>
+                </div>
+                <div class="checkboxContainer">
+                    <label class="emby-checkbox-label">
+                        <input id="enabledItemTypes-boxset" is="emby-checkbox" name="enabledItemTypes-boxset"
+                               type="checkbox"/>
+                        <span>为合集/系列启用预览按钮</span>
+                    </label>
+                </div>
+                <div class="checkboxContainer">
+                    <label class="emby-checkbox-label">
+                        <input id="enabledItemTypes-video" is="emby-checkbox" name="enabledItemTypes-video"
+                               type="checkbox"/>
+                        <span>为（家庭）视频启用预览按钮</span>
+                    </label>
+                </div>
+                <hr>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="blurDescription" is="emby-checkbox" name="blurDescription"
+                               type="checkbox"/>
+                        <span>模糊分集简介</span>
+                    </label>
+                    <div class="fieldDescription">仅悬停时显示分集简介</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="blurThumbnail" is="emby-checkbox" name="blurThumbnail"
+                               type="checkbox"/>
+                        <span>模糊分集缩略图</span>
+                    </label>
+                    <div class="fieldDescription">仅悬停时显示分集缩略图</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="onlyBlurUnwatched" is="emby-checkbox" name="onlyBlurUnwatched"
+                               type="checkbox"/>
+                        <span>仅模糊未看过的条目</span>
+                    </label>
+                    <div class="fieldDescription">只对你还没看过的分集模糊简介/缩略图</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="showWatchedCount" is="emby-checkbox" name="showWatchedCount"
+                               type="checkbox"/>
+                        <span>显示「已看/总数」计数</span>
+                    </label>
+                    <div class="fieldDescription">在每个分组名旁显示已看计数</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="showWatchProgress" is="emby-checkbox" name="showWatchProgress"
+                               type="checkbox"/>
+                        <span>显示观看进度条</span>
+                    </label>
+                    <div class="fieldDescription">在分集图片卡上显示进度条</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="expandAllItems" is="emby-checkbox" name="expandAllItems"
+                               type="checkbox"/>
+                        <span>展开显示全部条目</span>
+                    </label>
+                    <div class="fieldDescription">直接展示每个条目的详情，无需点击展开</div>
+                </div>
+                <div class="selectContainer hide" id="expandedItemLayoutContainer">
+                    <label class="selectLabel" for="expandedItemLayout">展开条目的布局</label>
+                    <select is="emby-select" id="expandedItemLayout" name="expandedItemLayout" class="emby-select-withcolor emby-select">
+                        <option value="0">默认（标题在图片和简介上方）</option>
+                        <option value="1">并排（标题与简介在图片旁）</option>
+                    </select>
+                    <div class="fieldDescription">每个条目的标题、详情与简介如何排布</div>
+                </div>
+                <div class="selectContainer">
+                    <label class="selectLabel" for="watchCountDisplayMode">已看计数显示方式</label>
+                    <select is="emby-select" id="watchCountDisplayMode" name="watchCountDisplayMode" class="emby-select-withcolor emby-select">
+                        <option value="0">观看计数（如 3/10 已看）</option>
+                        <option value="1">观看时长（仅时:分，如 36h 12m）</option>
+                        <option value="2">观看时长（全部单位，如 1d 12h）</option>
+                        <option value="3">观看进度（%）</option>
+                    </select>
+                    <div class="fieldDescription">已看计数徽标以哪种格式显示</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="searchContainingCollections" is="emby-checkbox" name="searchContainingCollections"
+                               type="checkbox"/>
+                        <span>搜索包含当前播放条目的其他合集/播放列表</span>
+                    </label>
+                    <div class="fieldDescription">显示当前播放条目所属的其他合集/播放列表——单部电影和从合集/播放列表里播放的条目均适用</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="displayMovieFolderSiblings" is="emby-checkbox" name="displayMovieFolderSiblings"
+                               type="checkbox"/>
+                        <span>电影显示同文件夹的其他视频</span>
+                    </label>
+                    <div class="fieldDescription">当电影不是从合集/播放列表播放时，列出其文件夹里的其他视频。直接放在媒体库根目录的电影不受影响</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="autoClosePreview" is="emby-checkbox" name="autoClosePreview"
+                               type="checkbox"/>
+                        <span>开始播放时关闭预览</span>
+                    </label>
+                    <div class="fieldDescription">从预览中开始播放条目后自动关闭预览弹窗</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="displayAdditionalVideoParts" is="emby-checkbox" name="displayAdditionalVideoParts"
+                               type="checkbox"/>
+                        <span>分集分段单列</span>
+                    </label>
+                    <div class="fieldDescription">将堆叠视频的每一部分（如命名为「Part 1」「Part 2」的文件）在列表中单独列出</div>
+                </div>
+                <div class="checkboxContainer checkboxContainer-withDescription">
+                    <label class="emby-checkbox-label">
+                        <input id="showAlternateVersions" is="emby-checkbox" name="showAlternateVersions"
+                               type="checkbox"/>
+                        <span>显示其他版本</span>
+                    </label>
+                    <div class="fieldDescription">为有多个版本的条目（如 4K 和 1080p 文件）显示版本下拉框与切换按钮</div>
+                </div>
+
+
+                <hr>
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="episodePageSize">每页分集数</label>
+                    <input id="episodePageSize" is="emby-input" type="number" min="1" max="200" step="1" />
+                    <div class="fieldDescription">滚动时一次加载的分集数量（默认：10）</div>
+                </div>
+
+                <hr>
+                <div class="selectContainer">
+                    <label class="selectLabel" for="logLevel">前端日志级别</label>
+                    <select is="emby-select" id="logLevel" name="logLevel" class="emby-select-withcolor emby-select">
+                        <option value="0">无</option>
+                        <option value="1">错误</option>
+                        <option value="2">信息</option>
+                        <option value="3">调试</option>
+                    </select>
+                    <div class="fieldDescription">播放器内分集预览向浏览器控制台输出多少日志，前缀为 "[InPlayerEpisodePreview]"。排障时「调试」级别很有用。</div>
+                </div>
+
+                <div style="background-color: rgba(255, 255, 255, 0.05); border-left: 4px solid #00a4dc; border-radius: 4px; padding: 1em 1.5em; margin: 1.5em 0; display: flex; align-items: center; gap: 1em;">
+                    <i class="material-icons" style="color: #00a4dc; font-size: 24px;">info</i>
+                    <div>
+                        所有更改需刷新页面后生效。<br/>
+                        若旧设置仍然生效，请强制清除浏览器缓存。
+                    </div>
+                </div>
+                <div>
+                    <button class="raised button-submit block emby-button" is="emby-button" type="submit">
+                        <span>保存</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        const pluginId = '73833d5f-0bcb-45dc-ab8b-7ce668f4345d'
+        const page = document.querySelector('#InPlayerEpisodePreviewPage')
+        const form = document.querySelector('#InPlayerEpisodePreviewForm')
+
+        function loadConfig() {
+            Dashboard.showLoadingMsg()
+            ApiClient.getPluginConfiguration(pluginId).then((config) => {
+                document.querySelector('#enabledItemTypes-series').checked = config.EnabledItemTypes.includes(28)
+                document.querySelector('#enabledItemTypes-movie').checked = config.EnabledItemTypes.includes(13)
+                document.querySelector('#enabledItemTypes-boxset').checked = config.EnabledItemTypes.includes(5)
+                document.querySelector('#enabledItemTypes-video').checked = config.EnabledItemTypes.includes(35)
+
+                document.querySelector('#blurDescription').checked = config.BlurDescription
+                document.querySelector('#blurThumbnail').checked = config.BlurThumbnail
+                document.querySelector('#onlyBlurUnwatched').checked = config.OnlyBlurUnwatched
+                document.querySelector('#showWatchedCount').checked = config.ShowWatchedCount
+                document.querySelector('#showWatchProgress').checked = config.ShowWatchProgress
+                document.querySelector('#expandAllItems').checked = config.ExpandAllItems
+                document.querySelector('#expandedItemLayout').value = config.ExpandedItemLayout
+                document.querySelector('#expandedItemLayoutContainer').classList.toggle('hide', !config.ExpandAllItems)
+                document.querySelector('#watchCountDisplayMode').value = config.WatchCountDisplayMode
+                document.querySelector('#searchContainingCollections').checked = config.SearchContainingCollections
+                document.querySelector('#displayMovieFolderSiblings').checked = config.DisplayMovieFolderSiblings
+                document.querySelector('#displayAdditionalVideoParts').checked = config.DisplayAdditionalVideoParts
+                document.querySelector('#autoClosePreview').checked = config.AutoClosePreview
+                document.querySelector('#showAlternateVersions').checked = config.ShowAlternateVersions
+                document.querySelector('#episodePageSize').value = config.EpisodePageSize
+                document.querySelector('#logLevel').value = config.LogLevel
+
+                Dashboard.hideLoadingMsg()
+            });
+        }
+
+        async function saveConfig(e) {
+            e.preventDefault()
+            Dashboard.showLoadingMsg()
+
+            const config = await ApiClient.getPluginConfiguration(pluginId);
+
+            const enabledItemTypes = [];
+            if (document.querySelector('#enabledItemTypes-series').checked)
+                enabledItemTypes.push(28);
+            if (document.querySelector('#enabledItemTypes-movie').checked)
+                enabledItemTypes.push(13);
+            if (document.querySelector('#enabledItemTypes-boxset').checked)
+                enabledItemTypes.push(5);
+            if (document.querySelector('#enabledItemTypes-video').checked)
+                enabledItemTypes.push(35);
+            config.EnabledItemTypes = enabledItemTypes
+
+            config.BlurDescription = document.querySelector('#blurDescription').checked
+            config.BlurThumbnail = document.querySelector('#blurThumbnail').checked
+            config.OnlyBlurUnwatched = document.querySelector('#onlyBlurUnwatched').checked
+            config.ShowWatchedCount = document.querySelector('#showWatchedCount').checked
+            config.ShowWatchProgress = document.querySelector('#showWatchProgress').checked
+            config.ExpandAllItems = document.querySelector('#expandAllItems').checked
+            config.ExpandedItemLayout = parseInt(document.querySelector('#expandedItemLayout').value, 10)
+            config.WatchCountDisplayMode = parseInt(document.querySelector('#watchCountDisplayMode').value, 10)
+            config.SearchContainingCollections = document.querySelector('#searchContainingCollections').checked
+            config.DisplayMovieFolderSiblings = document.querySelector('#displayMovieFolderSiblings').checked
+            config.DisplayAdditionalVideoParts = document.querySelector('#displayAdditionalVideoParts').checked
+            config.AutoClosePreview = document.querySelector('#autoClosePreview').checked
+            config.ShowAlternateVersions = document.querySelector('#showAlternateVersions').checked
+            config.EpisodePageSize = parseInt(document.querySelector('#episodePageSize').value, 10) || 10
+            config.LogLevel = parseInt(document.querySelector('#logLevel').value, 10)
+
+            try {
+                const result = await ApiClient.updatePluginConfiguration(pluginId, config)
+                Dashboard.processPluginConfigurationUpdateResult(result)
+            } catch {
+                Dashboard.hideLoadingMsg()
+            }
+
+            return false
+        }
+
+        page.addEventListener('pageshow', loadConfig)
+        form.addEventListener('submit', saveConfig)
+        document.querySelector('#expandAllItems').addEventListener('change', (e) => {
+            document.querySelector('#expandedItemLayoutContainer').classList.toggle('hide', !e.target.checked)
+        })
+    </script>
+</div>
+</body>
+</html>

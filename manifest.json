@@ -191,5 +191,47 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Intro Skipper",
+    "guid": "c83d86bb-a1e0-4c35-a113-e2101cf4ee6b",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Intro Skipper (upstream: intro-skipper/intro-skipper, 12.0 branch), dashboard UI localized to zh-CN.",
+    "description": "Automatically detect and skip intro/credit sequences. Built from the upstream 12.0 branch (code level 12.0.6.1) with the TypeScript dashboard translated to Simplified Chinese.",
+    "owner": "mcy2015 (upstream: intro-skipper org)",
+    "versions": [
+      {
+        "version": "12.0.6.1",
+        "changelog": "Built from upstream 12.0 branch @ 2026-10-31; dashboard web UI (tabs/components, ~200 strings) localized to zh-CN; tsc + vite + dotnet build all clean.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/IntroSkipper_12.0.6.1_jf124.zip",
+        "checksum": "B66A1BEA62D723482FF771425736A700",
+        "timestamp": "2026-11-02T07:40:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "InPlayerEpisodePreview",
+    "guid": "73833d5f-0bcb-45dc-ab8b-7ce668f4345d",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of In-Player Episode Preview 2.5.0 (upstream: Namo2/InPlayerEpisodePreview), config page localized to zh-CN.",
+    "description": "Displays a preview of episodes/other content while browsing or during playback. Rebuilt against Jellyfin 12.4 (net10.0) with the admin config page localized to Simplified Chinese. Requires the File Transformation plugin for injection.",
+    "owner": "mcy2015 (upstream: Namo2)",
+    "versions": [
+      {
+        "version": "2.5.0.1",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 (net10.0); config page + popup group label localized to zh-CN.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/InPlayerEpisodePreview_2.5.0.1_jf124.zip",
+        "checksum": "9AD5776897C8D7E1CFE53A1EB005F7D1",
+        "timestamp": "2026-11-02T07:40:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
   }
 ]

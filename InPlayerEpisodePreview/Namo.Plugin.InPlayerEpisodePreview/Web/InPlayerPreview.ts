@@ -1,0 +1,661 @@
+﻿import {Logger} from "./Services/Logger";
+import {PreviewButtonTemplate} from "./Components/PreviewButtonTemplate";
+import {ProgramDataStore} from "./Services/ProgramDataStore";
+import {DialogContainerTemplate} from "./Components/DialogContainerTemplate";
+import {PlaybackHandler} from "./Services/PlaybackHandler";
+import {ListElementFactory} from "./ListElementFactory";
+import {PopupTitleTemplate} from "./Components/PopupTitleTemplate";
+import {adjustWatchedCount, DataFetcher, cycleWatchedCountMode, updateBlurDom} from "./Services/DataFetcher";
+import {ItemType} from "./Models/ItemType";
+import {PluginSettings} from "./Models/PluginSettings";
+import {ServerSettings} from "./Models/ServerSettings";
+import {Endpoints} from "./Endpoints";
+import {Group, UNKNOWN_WATCHED_COUNT} from "./Models/PreviewData/Group";
+import {GroupItemsResult} from "./Models/PreviewData/GroupItemsResult";
+import {PreviewItem} from "./Models/PreviewData/PreviewItem";
+import {activateSpinner, spinnerHtml} from "./Components/Spinner";
+import {setItemOverlayActive, updateItemProgressDom} from "./Components/ListElementTemplate";
+import {updateEndTimeDisplay} from "./Components/ItemDetails";
+import {carryPositionOver, getSelectedVersionRunTimeTicks, isPreviewingOtherVersion} from "./Components/VersionSelectTemplate";
+
+import './Styles/Styles.css'
+
+// init services and helpers
+const logger: Logger = new Logger()
+const programDataStore: ProgramDataStore = new ProgramDataStore()
+const playbackHandler: PlaybackHandler = new PlaybackHandler(logger)
+const listElementFactory = new ListElementFactory(playbackHandler, programDataStore, logger)
+
+const collectionsByItemId = new Map<string, Promise<Group[]>>()
+
+async function fetchContainingCollections(itemId: string): Promise<Group[]> {
+    const url = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.CONTAINING_COLLECTIONS}`
+        .replace('{userId}', ApiClient.getCurrentUserId())
+        .replace('{itemId}', itemId))
+    try {
+        const raw: any[] = await ApiClient.ajax({ type: 'GET', url, dataType: 'json' })
+        return raw.map((g: any) => ({
+            groupId: g.GroupId,
+            groupName: g.GroupName,
+            items: [],
+            indexNumber: g.IndexNumber,
+            playedItemCount: g.PlayedItemCount,
+            totalItemCount: g.TotalItemCount,
+            playedRuntimeTicks: g.PlayedRuntimeTicks,
+            totalRuntimeTicks: g.TotalRuntimeTicks
+        }))
+    } catch (ex: unknown) {
+        logger.error("Couldn't load Collections/Playlists containing this movie", ex)
+        return []
+    }
+}
+
+function getContainingCollections(itemId: string): Promise<Group[]> {
+    let promise = collectionsByItemId.get(itemId)
+    if (!promise) {
+        promise = fetchContainingCollections(itemId)
+        collectionsByItemId.set(itemId, promise)
+    }
+    return promise
+}
+
+function initialize() {
+    // Ensure ApiClient/Events exist and user is logged in
+    if (typeof ApiClient === 'undefined' || typeof Events === 'undefined' || !ApiClient.getCurrentUserId?.()) {
+        setTimeout(initialize, 300)
+        return
+    }
+
+    new DataFetcher(programDataStore)
+
+    const pluginSettingsUrl = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.PLUGIN_SETTINGS}`)
+    ApiClient.ajax({ type: 'GET', url: pluginSettingsUrl, dataType: 'json' })
+        .then((config: PluginSettings) => {
+            programDataStore.pluginSettings = config
+            logger.setLogLevel(config.LogLevel)
+        })
+        .catch((ex: unknown) => logger.error("Couldn't load plugin settings, falling back to defaults", ex))
+
+    const serverSettingsUrl = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.SERVER_SETTINGS}`)
+    ApiClient.ajax({ type: 'GET', url: serverSettingsUrl, dataType: 'json' })
+        .then((config: ServerSettings) => programDataStore.serverSettings = config)
+        .catch((ex: unknown) => logger.error("Couldn't load server settings, falling back to defaults", ex))
+
+    logger.info("InPlayerEpisodePreview initialized")
+}
+initialize()
+
+const SEARCH_COLLECTIONS_GROUP_NAME = '搜索相关合集/播放列表'
+
+const videoPaths: string[] = ['/video']
+let previousRoutePath: string = null
+let previewContainerLoaded: boolean = false
+
+let pendingPreloadItemId: string | null = null
+let pendingPreload: Promise<void> | null = null
+let preloadObserver: MutationObserver | null = null
+let buttonsContainerObserver: MutationObserver | null = null
+
+function getActiveButtonsBar(): HTMLElement | null {
+    return document.querySelector<HTMLElement>('[data-type="video-osd"]:not(.hide) .buttons')
+}
+
+// Wait for the OSD's `.buttons` container to exist
+function waitForButtonsContainer(onReady: () => void): void {
+    if (getActiveButtonsBar()) {
+        onReady()
+        return
+    }
+
+    buttonsContainerObserver?.disconnect()
+    buttonsContainerObserver = new MutationObserver(() => {
+        if (!getActiveButtonsBar()) return
+        buttonsContainerObserver?.disconnect()
+        buttonsContainerObserver = null
+        onReady()
+    })
+    buttonsContainerObserver.observe(document.body, { childList: true, subtree: true })
+}
+
+document.addEventListener('viewshow', viewShowEventHandler)
+window.addEventListener('popstate', viewShowEventHandler)
+window.addEventListener('popstate', () => document.getElementById('previewPopup')?.remove())
+
+function getActiveRatingButton(): Element | null {
+    return getActiveButtonsBar()?.querySelector('.btnUserRating.autoSize.paper-icon-button-light') ?? null
+}
+
+function getLatestUserRatingItemId(): string | null {
+    return getActiveRatingButton()?.getAttribute('data-id') ?? null
+}
+
+let pendingItemSwitchButton: Element | null = null
+let itemSwitchObserver: MutationObserver | null = null
+
+function onVideoEmptied(): void {
+    lastTrackedPositionSecond = -1
+    itemSwitchObserver?.disconnect()
+    pendingItemSwitchButton = getActiveRatingButton()
+    if (!pendingItemSwitchButton) return
+    
+    itemSwitchObserver = new MutationObserver(() => stopWaitingForItemSwitch())
+    itemSwitchObserver.observe(pendingItemSwitchButton, { attributes: true, attributeFilter: ['data-id'] })
+}
+
+function stopWaitingForItemSwitch(): void {
+    itemSwitchObserver?.disconnect()
+    itemSwitchObserver = null
+    pendingItemSwitchButton = null
+}
+
+let lastTrackedPositionSecond: number = -1
+function onVideoTimeUpdate(this: HTMLVideoElement): void {
+    if (pendingItemSwitchButton) {
+        // A recreated OSD has a new button. The observed one never updates.
+        if (pendingItemSwitchButton === getActiveRatingButton()) return
+        stopWaitingForItemSwitch()
+    }
+
+    const positionSecond = Math.floor(this.currentTime)
+    if (positionSecond === lastTrackedPositionSecond) return
+    lastTrackedPositionSecond = positionSecond
+
+    const itemId = getLatestUserRatingItemId()
+    if (!itemId) return
+
+    if (itemId !== programDataStore.activeMediaSourceId) {
+        const previousItemId = programDataStore.activeMediaSourceId
+        programDataStore.activeMediaSourceId = itemId
+        setItemOverlayActive(previousItemId, false)
+        setItemOverlayActive(itemId, true)
+    }
+
+    const item = programDataStore.getItemById(itemId)
+    if (!item || !item.RunTimeTicks) return
+
+    const positionTicks = this.currentTime * 10_000_000
+    const playedPercentage = (positionTicks / item.RunTimeTicks) * 100
+
+    const played = item.UserData.Played || playedPercentage >= programDataStore.serverSettings.MaxResumePct
+    const updatedItem: PreviewItem = {
+        ...item,
+        UserData: {
+            ...item.UserData,
+            PlaybackPositionTicks: positionTicks,
+            PlayedPercentage: playedPercentage,
+            Played: played
+        }
+    }
+    programDataStore.updateItem(updatedItem)
+    
+    if (isPreviewingOtherVersion(itemId)) {
+        const previewedItem = carryPositionOver({ ...updatedItem, RunTimeTicks: getSelectedVersionRunTimeTicks(itemId) ?? updatedItem.RunTimeTicks }, positionTicks)
+        updateItemProgressDom(itemId, previewedItem.UserData.PlayedPercentage)
+        updateEndTimeDisplay(previewedItem)
+    } else {
+        updateItemProgressDom(itemId, playedPercentage)
+        updateEndTimeDisplay(updatedItem)
+        if (played !== item.UserData.Played) updateBlurDom(programDataStore, itemId, played)
+    }
+    adjustWatchedCount(programDataStore, item, item.UserData.Played, played, item.UserData.PlaybackPositionTicks, positionTicks)
+}
+
+function onVideoRateChange(): void {
+    document.querySelectorAll<HTMLElement>('.endsAt[data-item-id]').forEach(element => {
+        const item = programDataStore.getItemById(element.dataset.itemId)
+        if (!item) return
+        updateEndTimeDisplay(isPreviewingOtherVersion(item.Id)
+            ? carryPositionOver({ ...item, RunTimeTicks: getSelectedVersionRunTimeTicks(item.Id) ?? item.RunTimeTicks }, item.UserData.PlaybackPositionTicks)
+            : item)
+    })
+}
+
+// Tracks which BoxSet/Playlist details page (if any) was visited immediately before navigating into playback
+const DETAILS_ROUTE_PATH: string = '/details'
+const DASHBOARD_ROUTE_PATH: string = '/home'
+const collectionLikeItemTypes: Set<ItemType> = new Set([ItemType.BoxSet, ItemType.Playlist])
+let pendingSourceCollectionId: string = null
+const EMPTY_GUID = '00000000-0000-0000-0000-000000000000'
+
+function recordSourceCollection(collectionId: string): void {
+    programDataStore.invalidateGroupsCache()
+
+    const url = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.SET_SOURCE_COLLECTION}`
+        .replace('{userId}', ApiClient.getCurrentUserId())
+        .replace('{deviceId}', ApiClient.deviceId())
+        .replace('{collectionId}', collectionId))
+    ApiClient.ajax({type: 'GET', url}).catch((ex: unknown) => logger.error("Couldn't record source collection for playback session", ex))
+}
+
+function clearSourceCollection(): void {
+    recordSourceCollection(EMPTY_GUID)
+}
+
+function captureSourceCollection(currentRoutePath: string): void {
+    const [currentPath, currentQuery] = currentRoutePath.split('?')
+    const previousPath = previousRoutePath?.split('?')[0]
+
+    if (currentPath === DASHBOARD_ROUTE_PATH) {
+        pendingSourceCollectionId = null
+        clearSourceCollection()
+        return
+    }
+
+    if (currentPath === DETAILS_ROUTE_PATH) {
+        const detailsId = new URLSearchParams(currentQuery ?? '').get('id')
+        pendingSourceCollectionId = null
+        if (!detailsId) return
+
+        ApiClient.getItem(ApiClient.getCurrentUserId(), detailsId).then((item) => {
+            const itemType: ItemType = ItemType[item.Type as unknown as keyof typeof ItemType]
+            pendingSourceCollectionId = collectionLikeItemTypes.has(itemType) ? detailsId : null
+        })
+        return
+    }
+
+    if (videoPaths.includes(currentPath) && previousPath === DETAILS_ROUTE_PATH) {
+        if (pendingSourceCollectionId)
+            recordSourceCollection(pendingSourceCollectionId)
+        else
+            clearSourceCollection()
+    }
+
+    pendingSourceCollectionId = null
+}
+
+// Retrieve the current collection/playlist id through a play action on a card the same way as hellyfin does it itself
+// https://github.com/jellyfin/jellyfin-web/blob/release-10.11.z/src/components/shortcuts.js#L216
+const PLAYBACK_TRIGGER_ACTIONS: Set<string> = new Set(['play', 'resume', 'playallfromhere'])
+function onDocumentClickCapture(event: MouseEvent): void {
+    // Cycle group stat display mode
+    const watchedCountElement = (event.target as HTMLElement)?.closest?.<HTMLElement>('#previewPopup .previewGroupWatchedCount')
+    if (watchedCountElement) {
+        event.stopPropagation()
+        const groupElement = watchedCountElement.closest<HTMLElement>('[id^="group-"]')
+        const group = groupElement ? programDataStore.groups.find(g => `group-${g.groupId}` === groupElement.id) : programDataStore.activeGroup
+        if (group) cycleWatchedCountMode(programDataStore, watchedCountElement, group)
+        return
+    }
+
+    // Only capture native events and ignore any from the Preview List
+    if ((event.target as HTMLElement)?.closest?.('#previewPopup')) return
+
+    const actionElement = (event.target as HTMLElement)?.closest?.('[data-action]') as HTMLElement | null
+    if (!actionElement || !PLAYBACK_TRIGGER_ACTIONS.has(actionElement.getAttribute('data-action'))) return
+
+    const card = actionElement.closest('[data-id]') as HTMLElement | null
+    if (!card) return
+
+    const childOfCollectionId = card.getAttribute('data-collectionid') ?? card.getAttribute('data-playlistid')
+    if (childOfCollectionId) {
+        recordSourceCollection(childOfCollectionId)
+        return
+    }
+
+    const cardItemType: ItemType = ItemType[card.getAttribute('data-type') as unknown as keyof typeof ItemType]
+    const cardId = card.getAttribute('data-id')
+    if (cardId && collectionLikeItemTypes.has(cardItemType)) {
+        recordSourceCollection(cardId)
+        return
+    }
+    
+    clearSourceCollection()
+}
+document.addEventListener('click', onDocumentClickCapture, true)
+
+function viewShowEventHandler(): void {
+    const currentRoutePath: string = getLocationPath()
+
+    function getLocationPath(): string {
+        const location: string = window.location.toString()
+        const currentRouteIndex: number = location.lastIndexOf('/')
+        return location.substring(currentRouteIndex)
+    }
+
+    // Initial attempt to load the video view or schedule retries.
+    captureSourceCollection(currentRoutePath)
+    attemptLoadVideoView()
+    previousRoutePath = currentRoutePath
+    
+    function attemptLoadVideoView(): void {
+        if (videoPaths.includes(currentRoutePath)) {
+            // Check if the preview container is already loaded before loading
+            if (previewContainerLoaded || isPreviewButtonCreated()) return
+
+            // Reserve immediately so a second viewshow doesn't queue another wait
+            previewContainerLoaded = true
+            waitForButtonsContainer(() => {
+                // The view may have moved on (e.g. navigated back out of the player) while we were waiting
+                if (!videoPaths.includes(getLocationPath()) || isPreviewButtonCreated()) return
+                loadVideoView()
+            })
+        } else if (videoPaths.includes(previousRoutePath)) {
+            unloadVideoView()
+        }
+    }
+    
+    function loadVideoView(): void {
+        logger.debug("Loading video view")
+
+        let previewButton: PreviewButtonTemplate | null = null
+        let previewButtonLoading: boolean = false
+
+        // Only actually inserted into the OSD once the item's type is confirmed enabled - see preloadPreviewData.
+        function insertPreviewButton(): void {
+            if (previewButton) return
+            if (!videoPaths.includes(getLocationPath())) return
+
+            const buttonsBar = getActiveButtonsBar()
+            if (!buttonsBar) {
+                waitForButtonsContainer(insertPreviewButton)
+                return
+            }
+
+            // lastElementChild.parentElement is used for casting from Element to HTMLElement
+            const parent: HTMLElement = buttonsBar.lastElementChild.parentElement as HTMLElement;
+
+            let index: number = Array.from(parent.children).findIndex((child: Element): boolean => child.classList.contains("btnUserRating"));
+            // if index is invalid try to use the old position (used in Jellyfin 10.8.12)
+            if (index === -1)
+                index = Array.from(parent.children).findIndex((child: Element): boolean => child.classList.contains("osdTimeText"))
+
+            previewButton = new PreviewButtonTemplate(parent, index)
+            previewButton.render(previewButtonClickHandler)
+            const videoElement = document.querySelector<HTMLVideoElement>('video.htmlvideoplayer')
+            videoElement?.addEventListener('timeupdate', onVideoTimeUpdate)
+            videoElement?.addEventListener('ratechange', onVideoRateChange)
+            videoElement?.addEventListener('emptied', onVideoEmptied)
+        }
+
+        const fetchPreviewItemType = async (itemId: string): Promise<ItemType> => {
+            const userId = ApiClient.getCurrentUserId()
+            const url = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.ITEM_PREVIEW_TYPE}`
+                .replace('{userId}', userId)
+                .replace('{deviceId}', ApiClient.deviceId())
+                .replace('{itemId}', itemId))
+            const rawType: string = await ApiClient.ajax({ type: 'GET', url, dataType: 'json' })
+            return ItemType[rawType as keyof typeof ItemType]
+        }
+
+        const loadItemPreviewData = async (itemId: string): Promise<{
+            itemType: string, containerName: string | null, groups: Group[], activeGroupId: string, activeItemIndex: number
+        }> => {
+            const userId = ApiClient.getCurrentUserId()
+            const url = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.ITEM_PREVIEW_DATA}`
+                .replace('{userId}', userId)
+                .replace('{deviceId}', ApiClient.deviceId())
+                .replace('{itemId}', itemId))
+            const raw = await ApiClient.ajax({ type: 'GET', url, dataType: 'json' })
+            return {
+                itemType: raw.ItemType,
+                containerName: raw.ContainerName,
+                groups: raw.Groups.map((g: any) => ({
+                    groupId: g.GroupId,
+                    groupName: g.GroupName,
+                    items: [],
+                    indexNumber: g.IndexNumber,
+                    playedItemCount: g.PlayedItemCount,
+                    totalItemCount: g.TotalItemCount,
+                    playedRuntimeTicks: g.PlayedRuntimeTicks,
+                    totalRuntimeTicks: g.TotalRuntimeTicks
+                })),
+                activeGroupId: raw.ActiveGroupId,
+                activeItemIndex: raw.ActiveItemIndex
+            }
+        }
+
+        const loadGroupItems = async (groupId: string, startIndex: number = 0, limit: number = programDataStore.pluginSettings.EpisodePageSize): Promise<GroupItemsResult> => {
+            const userId = ApiClient.getCurrentUserId()
+            const url = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.GROUP_ITEMS}`
+                .replace('{userId}', userId)
+                .replace('{groupId}', groupId),
+                { startIndex, limit })
+            const raw = await ApiClient.ajax({ type: 'GET', url, dataType: 'json' })
+            const result: GroupItemsResult = { items: raw.Items, totalRecordCount: raw.TotalRecordCount }
+
+            programDataStore.recordLoadedItems(groupId, result.items, startIndex, result.totalRecordCount)
+            return result
+        }
+        
+        function preloadPreviewData(itemId: string | null): void {
+            if (!itemId) return
+            if (!programDataStore.isGroupsCacheExpired && programDataStore.groups.some(g => g.items.some(item => item.Id === itemId))) {
+                // Already fetched (and therefore already known-allowed) earlier this session - just show the button.
+                insertPreviewButton()
+                return
+            }
+            if (pendingPreloadItemId === itemId) return
+
+            pendingPreloadItemId = itemId
+            pendingPreload = (async (): Promise<void> => {
+                const previewType = await fetchPreviewItemType(itemId)
+                if (!programDataStore.isTypeAllowedForPreview(previewType)) {
+                    logger.debug(`Preview not enabled for item type '${previewType}', skipping button for item ${itemId}`)
+                    return
+                }
+
+                insertPreviewButton()
+
+                const { itemType, containerName, groups, activeGroupId, activeItemIndex } = await loadItemPreviewData(itemId)
+                programDataStore.groups = groups
+                programDataStore.markGroupsFetched()
+                programDataStore.type = ItemType[itemType as keyof typeof ItemType]
+                programDataStore.boxSetName = containerName ?? ''
+
+                const PAGE_SIZE = programDataStore.pluginSettings.EpisodePageSize
+                const pageOfActiveEpisode = Math.floor(activeItemIndex / PAGE_SIZE)
+                const initialWindowStartIndex = Math.max(0, (pageOfActiveEpisode - 1) * PAGE_SIZE)
+                const initialWindowLimit = (pageOfActiveEpisode + 2) * PAGE_SIZE - initialWindowStartIndex
+
+                await loadGroupItems(activeGroupId, initialWindowStartIndex, initialWindowLimit)
+                logger.debug(`Preloaded ${groups.length} group(s) for item ${itemId}`)
+            })().catch((ex: unknown) => {
+                logger.error("Couldn't preload preview data", ex)
+            }).finally(() => {
+                if (pendingPreloadItemId === itemId) pendingPreloadItemId = null
+            })
+        }
+        
+        // Playing item can change without new viewshow, e.g. pre-roll intro → episode.
+        function schedulePreload(): void {
+            let checkedItemId: string | null = null
+
+            const checkPlayingItem = (): void => {
+                if (previewButton) {
+                    preloadObserver?.disconnect()
+                    preloadObserver = null
+                    return
+                }
+
+                const itemId = getLatestUserRatingItemId()
+                if (!itemId || itemId === checkedItemId) return
+                checkedItemId = itemId
+                preloadPreviewData(itemId)
+            }
+
+            preloadObserver?.disconnect()
+            preloadObserver = new MutationObserver(checkPlayingItem)
+            preloadObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-id'] })
+            checkPlayingItem()
+        }
+
+        schedulePreload()
+
+        async function previewButtonClickHandler(): Promise<void> {
+            if (previewButtonLoading) return
+            previewButtonLoading = true
+            try {
+                await doPreviewButtonClick()
+            } catch (ex: unknown) {
+                logger.error("Couldn't open preview popup", ex)
+                document.getElementById('previewPopup')?.remove()
+            } finally {
+                previewButtonLoading = false
+            }
+        }
+
+        async function doPreviewButtonClick(): Promise<void> {
+            // This is experimental and will maybe be used in future releases
+            const getNowPlayingItemIdFromSession = async (): Promise<string | null> => {
+                const url = ApiClient.getUrl(`/${Endpoints.BASE}${Endpoints.NOW_PLAYING_ITEM}`)
+                try {
+                    return await ApiClient.ajax({ type: 'GET', url, dataType: 'json' })
+                } catch (ex: unknown) {
+                    logger.error("Couldn't resolve now-playing item from session, falling back to OSD rating button", ex)
+                    return null
+                }
+            }
+            
+            const dialogContainer: DialogContainerTemplate = new DialogContainerTemplate(document.body, document.body.children.length - 1)
+            dialogContainer.render()
+
+            const contentDiv: HTMLElement = document.getElementById('popupContentContainer')
+
+            const itemId = getLatestUserRatingItemId()
+
+            // If there is no response of the OSD's preload of this same item, wait for it instead of firing a duplicate fetch.
+            if (pendingPreloadItemId === itemId && pendingPreload) {
+                contentDiv.innerHTML = `<div class="previewScrollSpinner">${spinnerHtml()}</div>`
+                activateSpinner(contentDiv)
+                await pendingPreload
+            }
+
+            const cachedGroup = !programDataStore.isGroupsCacheExpired
+                ? programDataStore.groups.find(g => g.items.some(item => item.Id === itemId))
+                : undefined
+
+            let activeGroupId: string
+            let initialPage: GroupItemsResult
+            let initialWindowStartIndex: number
+
+            if (cachedGroup) {
+                logger.debug(`Opening preview popup for item ${itemId} using cached group data`)
+                activeGroupId = cachedGroup.groupId
+                initialWindowStartIndex = cachedGroup.loadedStartIndex ?? 0
+                initialPage = { items: [...cachedGroup.items], totalRecordCount: cachedGroup.loadedTotalRecordCount ?? cachedGroup.items.length }
+            } else {
+                logger.debug(`Opening preview popup for item ${itemId}, fetching group data`)
+                contentDiv.innerHTML = `<div class="previewScrollSpinner">${spinnerHtml()}</div>`
+                activateSpinner(contentDiv)
+
+                const { itemType, containerName, groups, activeGroupId: fetchedActiveGroupId, activeItemIndex } = await loadItemPreviewData(itemId)
+                programDataStore.groups = groups
+                programDataStore.markGroupsFetched()
+                programDataStore.type = ItemType[itemType as keyof typeof ItemType]
+                programDataStore.boxSetName = containerName ?? ''
+                activeGroupId = fetchedActiveGroupId
+
+                // Load a 3-page window (page of the active episode, plus one page before and after)
+                const PAGE_SIZE = programDataStore.pluginSettings.EpisodePageSize
+                const pageOfActiveEpisode = Math.floor(activeItemIndex / PAGE_SIZE)
+                initialWindowStartIndex = Math.max(0, (pageOfActiveEpisode - 1) * PAGE_SIZE)
+                const initialWindowLimit = (pageOfActiveEpisode + 2) * PAGE_SIZE - initialWindowStartIndex
+
+                initialPage = await loadGroupItems(activeGroupId, initialWindowStartIndex, initialWindowLimit)
+            }
+
+            programDataStore.activeMediaSourceId = itemId
+            programDataStore.activeGroupId = activeGroupId
+
+            contentDiv.innerHTML = '' // remove the loading spinner
+            const viewToken = programDataStore.beginNewView()
+            
+            const isStandaloneMovie = programDataStore.type === ItemType.Movie
+            const isSourcedFromCollection = programDataStore.type === ItemType.Playlist || programDataStore.type === ItemType.BoxSet
+            
+            if (isStandaloneMovie && programDataStore.pluginSettings.SearchContainingCollections) {
+                programDataStore.groups = programDataStore.groups.map((g, i) => i === 0 && g.groupId === itemId ? { ...g, groupName: SEARCH_COLLECTIONS_GROUP_NAME } : g)
+            }
+            
+            const isSearchingCollections = (isStandaloneMovie || isSourcedFromCollection) && programDataStore.pluginSettings.SearchContainingCollections && programDataStore.groups.length === 1
+            let collectionsSearchDone = !isSearchingCollections
+            const collectionsSearch: Promise<void> = isSearchingCollections
+                ? getContainingCollections(itemId).then(collectionGroups => {
+                    if (!collectionGroups.length || programDataStore.activeMediaSourceId !== itemId) return
+                    const selfGroup = programDataStore.groups[0]
+                    // Exclude the collection/playlist this item was already played from - it's already the active/default group.
+                    const newGroups = collectionGroups.filter(g => g.groupId !== selfGroup.groupId)
+                    if (!newGroups.length) return
+                    programDataStore.groups = [selfGroup, ...newGroups].map((g, i) => ({ ...g, indexNumber: i }))
+                }).finally(() => { collectionsSearchDone = true })
+                : Promise.resolve()
+
+            const canSwitchGroups = (): boolean => programDataStore.type !== ItemType.Movie || programDataStore.pluginSettings.SearchContainingCollections
+
+            const popupTitle: PopupTitleTemplate = new PopupTitleTemplate(document.getElementById('popupFocusContainer'), -1, programDataStore)
+            popupTitle.render(async (e: MouseEvent) => {
+                e.stopPropagation()
+                if (!canSwitchGroups()) return
+
+                popupTitle.setVisible(false);
+                const contentDiv: HTMLElement = document.getElementById('popupContentContainer')
+                contentDiv.innerHTML = ''
+
+                listElementFactory.createGroupElements(programDataStore.groups, contentDiv, programDataStore.activeGroup.indexNumber, popupTitle, loadGroupItems)
+                const groupViewToken = programDataStore.currentViewToken
+
+                if (collectionsSearchDone) return
+
+                const spinner = document.createElement('div')
+                spinner.classList.add('previewScrollSpinner')
+                spinner.innerHTML = spinnerHtml()
+                contentDiv.appendChild(spinner)
+                activateSpinner(spinner)
+
+                await collectionsSearch
+                // The view may have moved on (e.g. a group was selected, or the popup closed) while this was loading.
+                if (!programDataStore.isCurrentView(groupViewToken)) return
+
+                spinner.remove()
+                contentDiv.innerHTML = ''
+                listElementFactory.createGroupElements(programDataStore.groups, contentDiv, programDataStore.activeGroup.indexNumber, popupTitle, loadGroupItems)
+            })
+            popupTitle.setSwitchable(canSwitchGroups())
+            popupTitle.setVisible(canSwitchGroups())
+
+            await listElementFactory.createLazyItemList(contentDiv, (startIndex) => loadGroupItems(activeGroupId, startIndex), viewToken, initialPage, initialWindowStartIndex)
+            popupTitle.setText(programDataStore.activeGroup?.groupName ?? '')
+            if (programDataStore.activeGroup) popupTitle.setWatchedCount(programDataStore.activeGroup)
+            if (programDataStore.pluginSettings.ShowWatchedCount && programDataStore.activeGroup?.playedItemCount === UNKNOWN_WATCHED_COUNT) {
+                listElementFactory.ensureGroupWatchedCount(programDataStore.activeGroup)
+                    .then(updated => popupTitle.setWatchedCount(updated))
+                    .catch((ex: unknown) => logger.error(`Couldn't load watched count for group ${programDataStore.activeGroup?.groupId}`, ex))
+            }
+
+            // scroll to the item that is currently playing
+            const activeItem = contentDiv.querySelector('.selectedListItem') 
+            if (!activeItem) {
+                logger.error("Couldn't find active media source element in preview list. This should never happen", programDataStore)
+            }
+            activeItem?.parentElement.scrollIntoView()
+        }
+    }
+    function unloadVideoView(): void {
+        logger.debug("Unloading video view")
+
+        // Clear old data and reset previewContainerLoaded flag
+        const videoElement = document.querySelector<HTMLVideoElement>('video.htmlvideoplayer')
+        videoElement?.removeEventListener('timeupdate', onVideoTimeUpdate)
+        videoElement?.removeEventListener('ratechange', onVideoRateChange)
+        videoElement?.removeEventListener('emptied', onVideoEmptied)
+        stopWaitingForItemSwitch()
+        lastTrackedPositionSecond = -1
+
+        preloadObserver?.disconnect()
+        preloadObserver = null
+        pendingPreloadItemId = null
+        pendingPreload = null
+
+        buttonsContainerObserver?.disconnect()
+        buttonsContainerObserver = null
+
+        document.getElementById('previewPopup')?.remove()
+        document.querySelectorAll('#popupPreviewButton').forEach(element => element.remove())
+
+        previewContainerLoaded = false // Reset flag when unloading
+    }
+
+    function isPreviewButtonCreated(): boolean {
+        return getActiveButtonsBar()?.querySelector('#popupPreviewButton') != null
+    }
+}

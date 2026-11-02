@@ -1,0 +1,23 @@
+bin/
+obj/
+BenchmarkDotNet.Artifacts/
+/package/
+*.lscache
+
+# Web dashboard build output (built from web/ source)
+IntroSkipper/Configuration/index.js
+IntroSkipper/Configuration/index.css
+IntroSkipper/Configuration/introskipper.js
+IntroSkipper/Configuration/introskipper.css
+
+# Web dashboard dependencies
+web/node_modules
+
+# Visual Studio
+.vs/
+
+# JetBrains Rider
+.idea/
+
+# CreditsRunner manifests, labels and results name real media and hardware
+tools/CreditsRunner/**/*.json

@@ -1,0 +1,50 @@
+version: 2
+updates:
+  # Fetch and update latest `nuget` pkgs
+  - package-ecosystem: nuget
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      # Jellyfin.Controller and Jellyfin.Model ship together and must stay on
+      # the same version; one grouped PR keeps them in lockstep. The plugin
+      # cannot load on a server older than the version it compiled against,
+      # so merging a bump raises the next release's minimum Jellyfin version.
+      jellyfin:
+        patterns:
+          - Jellyfin.*
+    ignore:
+      # The plugin loads the server's EF Core and UTF.Unknown and fails to load
+      # if it compiled against a newer one. Move them by hand with a Jellyfin
+      # bump, to the versions that Jellyfin release ships.
+      - dependency-name: Microsoft.EntityFrameworkCore.*
+      - dependency-name: UTF.Unknown
+    labels:
+      - chore
+      - dependency
+      - nuget
+    commit-message:
+      prefix: chore
+      include: scope
+
+  # Fetch and update latest `github-actions` pkgs
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      # The codeql-action sub-actions (init, autobuild, analyze) must run at the
+      # same version within a workflow; separate bump PRs leave the intermediate
+      # merges with mismatched versions, which fails the CodeQL run outright.
+      codeql-action:
+        patterns:
+          - github/codeql-action
+          - github/codeql-action/*
+    labels:
+      - dependency
+      - github_actions
+    commit-message:
+      prefix: ci
+      include: scope

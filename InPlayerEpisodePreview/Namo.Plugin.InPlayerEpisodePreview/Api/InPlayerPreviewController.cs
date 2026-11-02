@@ -1,0 +1,629 @@
+using MediaBrowser.Controller.Configuration;
+using MediaBrowser.Controller.Library;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Collections.Concurrent;
+using Microsoft.Net.Http.Headers;
+using Jellyfin.Data.Enums;
+using MediaBrowser.Controller.Dto;
+using MediaBrowser.Controller.Entities;
+using MediaBrowser.Controller.Entities.Movies;
+using MediaBrowser.Controller.Entities.TV;
+using MediaBrowser.Controller.Net;
+using MediaBrowser.Controller.Playlists;
+using MediaBrowser.Controller.Session;
+using MediaBrowser.Model.Entities;
+using MediaBrowser.Model.Querying;
+using MediaBrowser.Model.Session;
+using Namo.Plugin.InPlayerEpisodePreview.Api.DTOs;
+using Namo.Plugin.InPlayerEpisodePreview.Configuration;
+using Namo.Plugin.InPlayerEpisodePreview.Helpers;
+using Namo.Plugin.InPlayerEpisodePreview.JellyfinVersionSpecific;
+using Namo.Plugin.InPlayerEpisodePreview.Services;
+
+namespace Namo.Plugin.InPlayerEpisodePreview.Api;
+
+/// <summary>
+/// Controller for accessing show data.
+/// </summary>
+[ApiController]
+[Route("InPlayerPreview")]
+[Authorize]
+public class InPlayerPreviewController : ControllerBase
+{
+    private readonly ILogger<InPlayerPreviewController> _logger;
+    private readonly ILibraryManager _libraryManager;
+    private readonly IServerConfigurationManager _configurationManager;
+    private readonly ISessionManager _sessionManager;
+    private readonly IUserManager _userManager;
+    private readonly IDtoService _dtoService;
+    private readonly IAuthorizationContext _authorizationContext;
+    private readonly IMediaSourceManager _mediaSourceManager;
+    private readonly IUserDataManager _userDataManager;
+    private readonly FolderPreviewService _folderPreviewService;
+
+    private readonly PluginConfiguration _config;
+
+    /// <summary>
+    /// Tracks which collection/playlist a play action originated from, keyed by "{userId}:{deviceId}".
+    /// </summary>
+    private static readonly ConcurrentDictionary<string, Guid> SourceCollectionByDevice = new();
+
+    /// <summary>
+    ///  limit database query to only necessary fields
+    /// </summary>
+    private static readonly DtoOptions PreviewDtoOptions = new(false)
+    {
+        Fields = [ItemFields.Overview, ItemFields.MediaSourceCount],
+        ImageTypes = [ImageType.Primary],
+        ImageTypeLimit = 1
+    };
+
+    private const int UnknownWatchedCount = -1;
+
+    /// <summary>
+    /// Preview type for pre-roll intros. No BaseItemKind. Frontend never enables it.
+    /// </summary>
+    private const string IntroPreviewType = "Intro";
+
+    /// <summary>
+    /// Provider id the Local Intros plugin (and its forks) sets on its intro items.
+    /// </summary>
+    private const string PreRollProviderId = "prerolls.video";
+
+    // Intro plugins create their items outside any library, so these have no parent
+    private static bool IsPreRollIntro(BaseItem item)
+        => item.ProviderIds.ContainsKey(PreRollProviderId) || (item is Video && item.GetParent() is null);
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="InPlayerPreviewController"/> class.
+    /// </summary>
+    public InPlayerPreviewController(
+        ILibraryManager libraryManager,
+        ILogger<InPlayerPreviewController> logger,
+        IServerConfigurationManager configurationManager,
+        ISessionManager sessionManager,
+        IUserManager userManager,
+        IDtoService dtoService,
+        IAuthorizationContext authorizationContext,
+        IMediaSourceManager mediaSourceManager,
+        IUserDataManager userDataManager,
+        FolderPreviewService folderPreviewService)
+    {
+        _libraryManager = libraryManager;
+        _logger = logger;
+        _configurationManager = configurationManager;
+        _sessionManager = sessionManager;
+        _userManager = userManager;
+        _dtoService = dtoService;
+        _authorizationContext = authorizationContext;
+        _mediaSourceManager = mediaSourceManager;
+        _userDataManager = userDataManager;
+        _folderPreviewService = folderPreviewService;
+
+        _config = InPlayerEpisodePreviewPlugin.Instance!.Configuration;
+    }
+
+    /// <summary>
+    /// Get embedded javascript file for client-side code.
+    /// </summary>
+    /// <response code="200">Javascript file successfully returned.</response>
+    /// <response code="404">File not found.</response>
+    /// <returns>The "inPlayerPreview.js" embedded file.</returns>
+    [HttpGet("ClientScript")]
+    [AllowAnonymous]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [Produces("application/javascript")]
+    public ActionResult GetClientScript([FromQuery] string? v)
+    {
+        var scriptStream = ClientScript.Open();
+        if (scriptStream == null)
+        {
+            _logger.LogError("Embedded client script not found at resource path {0}", ClientScript.ResourcePath);
+            return NotFound();
+        }
+
+        // Hashed URL content never changes. Other URLs must revalidate via ETag.
+        Response.Headers.CacheControl = v == ClientScript.Hash
+            ? "public, max-age=31536000, immutable"
+            : "no-cache";
+
+        return File(scriptStream, "application/javascript", null, new EntityTagHeaderValue($"\"{ClientScript.Hash}\""));
+    }
+
+    /// <summary>
+    /// This controller starts playback of a new item.
+    /// Could be replaced by /Sessions/{sessionId}/Playing, if frontend loads session itself
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="ticks"></param>
+    /// <param name="mediaSourceId">Alternate version to play. Server default version if empty.</param>
+    /// <returns></returns>
+    [HttpGet("Items/{id}/Play/{ticks}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> StartMedia([FromRoute] Guid id, [FromRoute] long ticks = 0, [FromQuery] string? mediaSourceId = null)
+    {
+        SessionInfo? session = await ResolveCurrentSessionAsync();
+        if (session is null)
+        {
+            _logger.LogInformation("Couldn't find a valid session for this user");
+            return NotFound("Couldn't find a valid session for this user");
+        }
+
+        BaseItem? item = _libraryManager.GetItemById(id);
+        if (item is null)
+        {
+            const string message = "Couldn't find item to play";
+            _logger.LogInformation(message);
+            return NotFound(message);
+        }
+
+        await _sessionManager.SendPlayCommand(session.Id, session.Id,
+            new PlayRequest
+            {
+                ItemIds = [item.Id],
+                StartPositionTicks = ticks,
+                PlayCommand = PlayCommand.PlayNow,
+                MediaSourceId = string.IsNullOrEmpty(mediaSourceId) ? null : mediaSourceId,
+            }, CancellationToken.None);
+
+        return NoContent();
+    }
+
+    /// <summary>
+    /// Returns the id of the item of  the current session.
+    /// This is experimental and will maybe be used in future releases
+    /// </summary>
+    [HttpGet("NowPlayingItem")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> GetNowPlayingItem()
+    {
+        BaseItem? nowPlayingItem = (await ResolveCurrentSessionAsync())?.FullNowPlayingItem;
+        if (nowPlayingItem is null)
+            return NotFound("No item currently playing for this session");
+
+        return Ok(nowPlayingItem.Id);
+    }
+
+    /// <summary>
+    /// Resolves the session for the current request by using the AuthorizationToken from the request
+    /// </summary>
+    private async Task<SessionInfo?> ResolveCurrentSessionAsync()
+    {
+        AuthorizationInfo authorizationInfo = await _authorizationContext.GetAuthorizationInfo(HttpContext);
+        if (string.IsNullOrEmpty(authorizationInfo.Token))
+        {
+            _logger.LogWarning("Couldn't resolve an auth token for the current request");
+            return null;
+        }
+
+        var remoteEndpoint = HttpContext.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
+        return await _sessionManager.GetSessionByAuthenticationToken(authorizationInfo.Token, authorizationInfo.DeviceId, remoteEndpoint);
+    }
+
+    /// <summary>
+    /// This controller returns the description of the given item.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [Obsolete("Unused since GroupItems now includes each item's description directly (see PreviewDtoOptions). Kept only until the next major release.")]
+    [HttpGet("Items/{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetMediaDescription([FromRoute] Guid id)
+    {
+        BaseItem? item = _libraryManager.GetItemById(id);
+        if (item is not null)
+            return new OkObjectResult(new ItemDescriptionDto(item.Overview));
+
+        // Error case
+        const string message = "Couldn't find item to play";
+        _logger.LogInformation(message);
+        return NotFound(message);
+    }
+
+    /// <summary>
+    /// This controller returns some values from the server configuration which are needed in the frontend.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("ServerSettings")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetMediaDescription()
+    {
+        var serverSettings = new ServerSettingsDto(
+            _configurationManager.Configuration.MinResumePct,
+            _configurationManager.Configuration.MaxResumePct,
+            _configurationManager.Configuration.MinResumeDurationSeconds
+        );
+        return new OkObjectResult(serverSettings);
+    }
+
+    /// <summary>
+    /// Returns just the item's type (Episode/BoxSet/Playlist/Folder/etc.)
+    /// </summary>
+    [HttpGet("Users/{userId}/{deviceId}/Items/{itemId}/PreviewItemType")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetItemPreviewType([FromRoute] Guid userId, [FromRoute] string deviceId, [FromRoute] Guid itemId)
+    {
+        var user = _userManager.GetUserById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("GetItemPreviewType: user {0} not found", userId);
+            return NotFound();
+        }
+
+        var item = _libraryManager.GetItemById(itemId);
+        if (item is null)
+        {
+            _logger.LogInformation("GetItemPreviewType: item {0} not found", itemId);
+            return NotFound();
+        }
+
+        if (IsPreRollIntro(item))
+            return Ok(IntroPreviewType);
+
+        // If this item was navigated into from a Playlist/BoxSet details page,
+        // GetItemPreviewData reports it as Playlist/BoxSet rather than e.g. Movie
+        if (SourceCollectionByDevice.TryGetValue($"{userId}:{deviceId}", out var sourceId)
+            && _libraryManager.GetItemById(sourceId) is Folder source and (Playlist or BoxSet))
+        {
+            if (source.LinkedChildren.Any(c => c.ItemId == itemId))
+                return Ok(source is Playlist ? BaseItemKind.Playlist : BaseItemKind.BoxSet);
+
+            SourceCollectionByDevice.TryRemove($"{userId}:{deviceId}", out _);
+        }
+
+        if (item is Episode)
+            return Ok(BaseItemKind.Episode);
+
+        if (item.GetBaseItemKind() == BaseItemKind.Video && item.GetParent() is Folder)
+            return Ok(BaseItemKind.Folder);
+
+        return Ok(item.GetBaseItemKind());
+    }
+
+    /// <summary>
+    /// Returns preview data for the given item
+    /// </summary>
+    [HttpGet("Users/{userId}/{deviceId}/Items/{itemId}/PreviewData")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetItemPreviewData([FromRoute] Guid userId, [FromRoute] string deviceId, [FromRoute] Guid itemId)
+    {
+        var user = _userManager.GetUserById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("GetItemPreviewData: user {0} not found", userId);
+            return NotFound();
+        }
+
+        var item = _libraryManager.GetItemById(itemId);
+        if (item is null)
+        {
+            _logger.LogInformation("GetItemPreviewData: item {0} not found", itemId);
+            return NotFound();
+        }
+
+        if (SourceCollectionByDevice.TryGetValue($"{userId}:{deviceId}", out var sourceId)
+            && _libraryManager.GetItemById(sourceId) is Folder source and (Playlist or BoxSet))
+        {
+            var children = _folderPreviewService.GetCachedFolderChildren(source, user);
+            var memberIndex = children.FindIndex(c => c.Id == itemId);
+
+            switch (memberIndex)
+            {
+                case >= 0 when source is Playlist playlist:
+                {
+                    var stats = _folderPreviewService.GetWatchStats(children, user);
+                    var playlistGroup = new PreviewGroup(playlist.Id, playlist.Name, 0, stats.PlayedItemCount, stats.TotalItemCount, stats.PlayedRuntimeTicks, stats.TotalRuntimeTicks);
+                    return Ok(new ItemPreviewDataResult(BaseItemKind.Playlist, playlist.Name, [playlistGroup], playlist.Id, memberIndex));
+                }
+                case >= 0 when source is BoxSet boxSet:
+                {
+                    var stats = _folderPreviewService.GetWatchStats(children, user);
+                    var boxSetGroup = new PreviewGroup(boxSet.Id, boxSet.Name, 0, stats.PlayedItemCount, stats.TotalItemCount, stats.PlayedRuntimeTicks, stats.TotalRuntimeTicks);
+                    return Ok(new ItemPreviewDataResult(BaseItemKind.BoxSet, boxSet.Name, [boxSetGroup], boxSet.Id, memberIndex));
+                }
+                default:
+                    SourceCollectionByDevice.TryRemove($"{userId}:{deviceId}", out _);
+                    break;
+            }
+        }
+
+        if (item is Episode episode)
+        {
+            var seasonId = episode.SeasonId != Guid.Empty ? episode.SeasonId : episode.ParentId;
+
+            var seasons = _libraryManager.QueryItems(new InternalItemsQuery(user)
+            {
+                ParentId = episode.SeriesId,
+                IncludeItemTypes = [BaseItemKind.Season]
+            }).Items;
+
+            List<PreviewGroup> groups = [
+                .. seasons
+                    .Where(s => _config.DisplayMissingEpisodes || !s.IsVirtualItem || s.Id == seasonId)
+                    .Select(s => !_config.ShowWatchedCount
+                        ? new PreviewGroup(s.Id, s.Name, s.IndexNumber ?? 0, 0, 0)
+                        : new PreviewGroup(s.Id, s.Name, s.IndexNumber ?? 0, UnknownWatchedCount, UnknownWatchedCount, UnknownWatchedCount, UnknownWatchedCount)
+                    )
+            ];
+
+            List<Episode> episodesInSeason = _libraryManager.GetItemById(seasonId) is Folder seasonFolder
+                ? [
+                    .._folderPreviewService.GetCachedFolderChildren(seasonFolder, user)
+                    .OfType<Episode>()
+                    .OrderBy(e => e.IndexNumber ?? 0)
+                ]
+                : [];
+            var activeItemIndex = Math.Max(0, episodesInSeason.FindIndex(e => e.Id == episode.Id));
+
+            return Ok(new ItemPreviewDataResult(BaseItemKind.Episode, null, groups, seasonId, activeItemIndex));
+        }
+
+        var itemDto = _dtoService.GetBaseItemDtos([item], PreviewDtoOptions, user)[0];
+        
+        if (itemDto.Type == BaseItemKind.Video && item.GetParent() is Folder parentFolder)
+        {
+            var groups = _folderPreviewService.GetFolderGroups(parentFolder, user);
+
+            var videosInFolder = _folderPreviewService.ExpandAdditionalParts(
+                _folderPreviewService.GetCachedFolderChildren(parentFolder, user).OfType<Video>().OrderBy(v => v.SortName), user);
+            var activeVideoIndex = Math.Max(0, videosInFolder.FindIndex(v => v.Item.Id == item.Id));
+
+            return Ok(new ItemPreviewDataResult(BaseItemKind.Folder, null, groups, parentFolder.Id, activeVideoIndex));
+        }
+
+        if (_config.DisplayMovieFolderSiblings && item is Movie
+            && item.GetParent() is Folder movieFolder
+            && movieFolder is not (AggregateFolder or CollectionFolder or UserRootFolder)
+            && !movieFolder.IsTopParent)
+        {
+            var videosInFolder = _folderPreviewService.GetCachedFolderChildren(movieFolder, user).OfType<Video>().OrderBy(v => v.SortName).ToList();
+            if (videosInFolder.Count > 1)
+            {
+                var expandedVideos = _folderPreviewService.ExpandAdditionalParts(videosInFolder, user);
+                var activeVideoIndex = Math.Max(0, expandedVideos.FindIndex(v => v.Item.Id == item.Id));
+                var folderStats = _folderPreviewService.GetVideoWatchStats(videosInFolder, user);
+                var folderGroup = new PreviewGroup(movieFolder.Id, movieFolder.Name, 0, folderStats.PlayedItemCount, folderStats.TotalItemCount, folderStats.PlayedRuntimeTicks, folderStats.TotalRuntimeTicks);
+                return Ok(new ItemPreviewDataResult(BaseItemKind.Movie, null, [folderGroup], movieFolder.Id, activeVideoIndex));
+            }
+        }
+
+        var itemStats = _folderPreviewService.GetWatchStats([item], user);
+        var itemGroup = new PreviewGroup(item.Id, null, 0, itemStats.PlayedItemCount, itemStats.TotalItemCount, itemStats.PlayedRuntimeTicks, itemStats.TotalRuntimeTicks);
+        return Ok(new ItemPreviewDataResult(itemDto.Type, null, [itemGroup], item.Id, 0));
+    }
+
+    /// <summary>
+    /// Returns a page of items for a given group id
+    /// </summary>
+    [HttpGet("Users/{userId}/Groups/{groupId}/Items")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetGroupItems([FromRoute] Guid userId, [FromRoute] Guid groupId,
+        [FromQuery] int startIndex = 0, [FromQuery] int limit = 10)
+    {
+        var user = _userManager.GetUserById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("GetGroupItems: user {0} not found", userId);
+            return NotFound();
+        }
+
+        var groupItem = _libraryManager.GetItemById(groupId);
+        if (groupItem is null)
+        {
+            _logger.LogInformation("GetGroupItems: group {0} not found", groupId);
+            return NotFound();
+        }
+
+        if (groupItem is Season seasonGroup)
+        {
+            List<Episode> episodesInSeason = [.._folderPreviewService.GetCachedFolderChildren(seasonGroup, user)
+                .OfType<Episode>()
+                .OrderBy(e => e.IndexNumber ?? 0)];
+            List<Episode> page = [..episodesInSeason.Skip(startIndex).Take(limit)];
+
+            var episodeDtos = _dtoService.GetBaseItemDtos([..page], PreviewDtoOptions, user);
+            return Ok(new GroupItemsResult([..episodeDtos.Select(d => d.ToPreviewItemDto())], episodesInSeason.Count));
+        }
+
+        if (groupItem is Playlist or BoxSet)
+        {
+            var allChildren = _folderPreviewService.GetCachedFolderChildren((Folder)groupItem, user);
+            List<BaseItem> page = [..allChildren.Skip(startIndex).Take(limit)];
+            var pageDtos = _dtoService.GetBaseItemDtos(page, PreviewDtoOptions, user);
+            return Ok(new GroupItemsResult([..pageDtos.Select(d => d.ToPreviewItemDto())], allChildren.Count));
+        }
+
+        if (groupItem is Folder folderGroup)
+        {
+            var videosInFolder = _folderPreviewService.ExpandAdditionalParts(
+                _folderPreviewService.GetCachedFolderChildren(folderGroup, user).OfType<Video>().OrderBy(v => v.SortName), user);
+            var page = videosInFolder.Skip(startIndex).Take(limit);
+
+            // A part's DTO needs its own stack's primary video as "owner" (e.g. to inherit its image),
+            // so unlike other item kinds above this can't share one GetBaseItemDtos call for the whole page.
+            var videoDtos = page.Select(p => _dtoService.GetBaseItemDto(p.Item, PreviewDtoOptions, user, p.Owner));
+            return Ok(new GroupItemsResult([..videoDtos.Select(d => d.ToPreviewItemDto())], videosInFolder.Count));
+        }
+
+        if (startIndex > 0)
+            return Ok(new GroupItemsResult([], 1));
+
+        var itemDto = _dtoService.GetBaseItemDtos([groupItem], PreviewDtoOptions, user)[0];
+        return Ok(new GroupItemsResult([itemDto.ToPreviewItemDto()], 1));
+    }
+
+    /// <summary>
+    /// Returns the watched count for a single group
+    /// </summary>
+    [HttpGet("Users/{userId}/Groups/{groupId}/WatchedCount")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetGroupWatchedCount([FromRoute] Guid userId, [FromRoute] Guid groupId)
+    {
+        var user = _userManager.GetUserById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("GetGroupWatchedCount: user {0} not found", userId);
+            return NotFound();
+        }
+
+        var groupItem = _libraryManager.GetItemById(groupId);
+        if (groupItem is null)
+        {
+            _logger.LogInformation("GetGroupWatchedCount: group {0} not found", groupId);
+            return NotFound();
+        }
+
+        List<BaseItem> children = groupItem switch
+        {
+            Season season => [.._folderPreviewService.GetCachedFolderChildren(season, user).OfType<Episode>()],
+            Playlist or BoxSet => _folderPreviewService.GetCachedFolderChildren((Folder)groupItem, user),
+            Folder folder => [.._folderPreviewService.GetCachedFolderChildren(folder, user).OfType<Video>()],
+            _ => [groupItem]
+        };
+
+        var stats = groupItem is Folder and not (Season or Playlist or BoxSet)
+            ? _folderPreviewService.GetVideoWatchStats(children.OfType<Video>(), user)
+            : _folderPreviewService.GetWatchStats(children, user);
+        return Ok(new WatchedCountResult(stats.PlayedItemCount, stats.TotalItemCount, stats.PlayedRuntimeTicks, stats.TotalRuntimeTicks));
+    }
+
+    /// <summary>
+    /// Returns a group for every Collection/Playlist that contains the given item.
+    /// </summary>
+    [HttpGet("Users/{userId}/Items/{itemId}/ContainingCollections")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetContainingCollections([FromRoute] Guid userId, [FromRoute] Guid itemId)
+    {
+        var user = _userManager.GetUserById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("GetContainingCollections: user {0} not found", userId);
+            return NotFound();
+        }
+
+        var item = _libraryManager.GetItemById(itemId);
+        if (item is null)
+        {
+            _logger.LogInformation("GetContainingCollections: item {0} not found", itemId);
+            return NotFound();
+        }
+
+        return Ok(_folderPreviewService.GetContainingCollectionGroups(item, user));
+    }
+
+    /// <summary>
+    /// Returns all alternate versions of the given item, and which one the current session is playing.
+    /// </summary>
+    [HttpGet("Users/{userId}/Items/{itemId}/Versions")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult> GetItemVersions([FromRoute] Guid userId, [FromRoute] Guid itemId)
+    {
+        var user = _userManager.GetUserById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("GetItemVersions: user {0} not found", userId);
+            return NotFound();
+        }
+
+        var item = _libraryManager.GetItemById(itemId);
+        if (item is null)
+        {
+            _logger.LogInformation("GetItemVersions: item {0} not found", itemId);
+            return NotFound();
+        }
+
+        // Only videos have alternate versions. GetStaticMediaSources throws for items without media sources.
+        if (item is not Video)
+            return Ok(new ItemVersionsResult([], null, VersionProgressHelper.HasUserDataPerVersion));
+
+        List<ItemVersionDto> versions = [];
+        foreach (var source in _mediaSourceManager.GetStaticMediaSources(item, false, user))
+        {
+            if (!Guid.TryParse(source.Id, out var versionId))
+                continue;
+
+            var versionItem = versionId == item.Id ? item : _libraryManager.GetItemById(versionId) ?? item;
+            var progressItem = VersionProgressHelper.GetProgressItem(item, versionItem);
+            var userData = _userDataManager.GetUserDataDto(progressItem, user);
+
+            var versionDto = _dtoService.GetBaseItemDto(versionItem, PreviewDtoOptions, user).ToPreviewItemDto();
+            versions.Add(new ItemVersionDto(
+                versionId.ToString("N"),
+                source.Name,
+                versionDto with
+                {
+                    RunTimeTicks = versionDto.RunTimeTicks ?? source.RunTimeTicks,
+                    UserData = new PreviewItemUserDataDto(
+                        userData?.PlayedPercentage,
+                        userData?.PlaybackPositionTicks ?? 0,
+                        userData?.IsFavorite ?? false,
+                        userData?.Played ?? false)
+                }));
+        }
+
+        // Displayed (primary) item = NowPlayingItem
+        // Played version = MediaSourceId.
+        string? activeVersionId = null;
+        var session = await ResolveCurrentSessionAsync();
+        if (session?.FullNowPlayingItem?.Id == item.Id && Guid.TryParse(session.PlayState?.MediaSourceId, out var playingVersionId))
+            activeVersionId = playingVersionId.ToString("N");
+
+        return Ok(new ItemVersionsResult(versions, activeVersionId, VersionProgressHelper.HasUserDataPerVersion));
+    }
+
+    /// <summary>
+    /// Records which collection/playlist a play action originated from for a user/device.
+    /// </summary>
+    [HttpGet("Users/{userId}/{deviceId}/SourceCollection/{collectionId}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public ActionResult SetSourceCollection([FromRoute] Guid userId, [FromRoute] string deviceId, [FromRoute] Guid collectionId)
+    {
+        if (collectionId == Guid.Empty)
+            SourceCollectionByDevice.TryRemove($"{userId}:{deviceId}", out _);
+        else
+            SourceCollectionByDevice[$"{userId}:{deviceId}"] = collectionId;
+
+        return NoContent();
+    }
+
+    /// <summary>
+    /// Returns the collection/playlist id previously recorded for a user/device, if any.
+    /// </summary>
+    [HttpGet("Users/{userId}/{deviceId}/SourceCollection")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public ActionResult GetSourceCollection([FromRoute] Guid userId, [FromRoute] string deviceId)
+    {
+        if (SourceCollectionByDevice.TryGetValue($"{userId}:{deviceId}", out var collectionId))
+            return Ok(collectionId);
+
+        return NotFound();
+    }
+
+    /// <summary>
+    /// This controller returns the plugin configuration which is needed in the frontend.
+    /// Jellyfin's own /Plugins endpoints require elevation, so reading the configuration through
+    /// them fails with 403 for every non-admin user, leaving them on the frontend defaults.
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("PluginSettings")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult GetPluginSettings()
+    {
+        return new OkObjectResult(_config);
+    }
+}

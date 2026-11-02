@@ -1,0 +1,85 @@
+name: "Bug report"
+description: "Create a report to help us improve"
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: checkboxes
+    id: requirements
+    attributes:
+      label: Self service debugging
+      description: |
+        Jellyfin 12 is actively updated. Please make sure you are using the [latest](https://github.com/jellyfin/jellyfin/releases/latest) release.
+
+        If you are unable to skip segments, please see [Troubleshooting](https://github.com/intro-skipper/intro-skipper/wiki/Troubleshooting) before reporting.
+
+        If a segment is detected at the wrong time, not at all, or where there is none, use the **Detection report** form instead.
+      options:
+        - label: I use Jellyfin 12.0.0 (or newer) and my filesystem permissions are correct
+          required: true
+        - label: I installed the Plugin using `https://intro-skipper.org/manifest.json` or `https://manifest.intro-skipper.org/manifest.json`
+          required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        > [!IMPORTANT]  
+        > Please do not revise the form, but you may omit sections that do not apply.
+
+  - type: input
+    attributes:
+      label: Jellyfin version or container image/tag
+      description: The Jellyfin version or container for Docker
+      placeholder: 12.0.0, jellyfin/jellyfin:12.0.z, etc.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: operating-systems
+    attributes:
+      label: What type of installtion is this?
+      description: Select how you installed Jellyfin
+      options:
+        - label: Docker
+          required: false
+        - label: Installer
+          required: false
+        - label: Portable
+          required: false
+
+  - type: input
+    attributes:
+      label: Operating System
+      description: The operating system of the Jellyfin / Docker host computer
+      placeholder: Debian 11, Windows 11, etc.
+    validations:
+      required: true
+  
+  - type: textarea
+    attributes:
+      label: Describe the bug
+      description: Also tell us, what did you expect to happen?
+      placeholder: |
+        The more information that you are able to provide, the better. Did you do anything before this happened? Did you upgrade or change anything? Any screenshots or logs you can provide will be helpful.
+
+        This is my issue.
+
+        Steps to Reproduce
+          1. In this environment...
+          2. With this config...
+          3. Run '...'
+          4. See error...
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Intro Skipper Support Log
+      placeholder: Go to Dashboard -> Plugins -> Intro Skipper -> Settings -> Information. Click the Copy to Clipboard button and paste the contents here
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Jellyfin logs
+      placeholder: Paste any relevant logs here
+      render: shell
