@@ -1,0 +1,43 @@
+[
+  {
+    "name": "File Transformation",
+    "guid": "5e87cc92-571a-4d8d-8d98-d2d4147f9f90",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of File Transformation 3.0.0 (upstream: IAmParadox27/jellyfin-plugin-file-transformation).",
+    "description": "Allows other plugins to intercept and change the delivered web content of jellyfin-web. This build targets Jellyfin 12.4 (net10.0); source changes are limited to the JellyfinVersion bump (csproj property + assembly attribute).",
+    "owner": "mcy2015 (upstream: IAmParadox27)",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/FileTransformation/src/logo.png",
+    "versions": [
+      {
+        "version": "3.0.0.0",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 packages (net10.0). No functional changes vs upstream 3.0.0.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/FileTransformation_3.0.0_jf124.zip",
+        "checksum": "EB2808ACBEE5379CA8B311334220A1AD",
+        "timestamp": "2026-11-02T00:30:00Z"
+      }
+    ]
+  },
+  {
+    "name": "Jellyframe",
+    "guid": "d4e5f6a7-b8c9-0123-defa-456789012345",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of JellyFrame 1.5.3 (upstream: Jellyfin-PG/JellyFrame).",
+    "description": "A complete customization and extension framework for Jellyfin: community mods and themes from the dashboard, plus a server-side JavaScript API. Requires the File Transformation plugin. This build targets Jellyfin 12.4 (net10.0, Jellyfin.Controller/Model 12.4.0) and fixes the three 12.4 API breaks (IPlaylistManager.AddItemToPlaylistAsync signature, IUserManager.ResetPassword(Guid), IUserManager.Users removed).",
+    "owner": "mcy2015 (upstream: Jellyfin-PG)",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/JellyFrame/assets/jellyframe.png",
+    "versions": [
+      {
+        "version": "1.5.3.1",
+        "changelog": "Jellyfin 12.4 adaptation: net10.0 + Jellyfin.Controller/Model 12.4.0 + Microsoft.Data.Sqlite 10.0.12; fixed AddItemToPlaylistAsync/ResetPassword/GetUsers API breaks in JellyfinSurface.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/JellyFrame_1.5.3.1_jf124.zip",
+        "checksum": "8B6489484B65AD1E4C9EA093A5448075",
+        "timestamp": "2026-11-02T00:40:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
+  }
+]
