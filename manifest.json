@@ -159,12 +159,12 @@
     "owner": "mcy2015 (upstream: lachlandcp)",
     "versions": [
       {
-        "version": "1.6.2.1",
-        "changelog": "Rebuilt against Jellyfin 12.4.0 packages (net10.0); config page localized to zh-CN.",
+        "version": "1.6.3.0",
+        "changelog": "NEW: library scope picker on the config page (was missing upstream: the LibraryList container was never rendered and only movies/tvshows libraries were listed). Now lists all library types incl. mixed, applies to all modes. Rebuilt against Jellyfin 12.4.0 (net10.0); zh-CN config page.",
         "targetAbi": "12.4.0.0",
-        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/EditorsChoice_1.6.2.1_jf124.zip",
-        "checksum": "7FD0D381A4A7D045C04FF2FF1C9B65F9",
-        "timestamp": "2026-11-02T03:10:00Z",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/EditorsChoice_1.6.3.0_jf124.zip",
+        "checksum": "2F1BEAE3A53D97761785DABA21754F70",
+        "timestamp": "2026-11-02T09:20:00Z",
         "dependencies": [
           "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
         ]

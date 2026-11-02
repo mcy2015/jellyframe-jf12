@@ -238,6 +238,12 @@
                         <p>轮播中一次仅显示一个合集。如果下方勾选了多个合集，每次加载时会随机选择其中一个。</p>
                     </div>
 
+                    <div id="LibraryList-container">
+                        <h3 class="checkboxListLabel">仅显示以下媒体库中的条目：</h3>
+                        <div id="LibraryList" class="checkboxList"></div>
+                        <p>不勾选任何媒体库时，默认使用全部媒体库。该范围对所有模式（收藏/随机/合集/最新）均生效。</p>
+                    </div>
+
                     <hr />
                     <h2>自动播放</h2>
 
@@ -501,11 +507,10 @@
                         });
 
                         // Populate libraries and collections checkboxes
-                        const libraryTypes = ["tvshows", "movies"];
                         $('#LibraryList label, #CollectionsList label').remove();
                         ApiClient.getItems().then(function (data) {
                             for (var item of data.Items) {
-                                if (libraryTypes.includes(item.CollectionType)) {
+                                if (item.CollectionType !== 'boxsets' && item.CollectionType !== 'playlists') {
                                     var checked = config.FilteredLibraries.includes(item.Id) ? 'checked' : '';
                                     var checkboxItem = '<label class="emby-checkbox-label"><input is="emby-checkbox" type="checkbox" data-id="'+item.Id+'" '+checked+'><span class="checkboxLabel">'+item.Name+'</span></label>';
                                     $('#LibraryList').append(checkboxItem);
