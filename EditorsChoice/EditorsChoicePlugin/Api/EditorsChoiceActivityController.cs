@@ -24,6 +24,41 @@ public class EditorsChoiceActivityController : ControllerBase
     private readonly ILogger<EditorsChoiceActivityController> _logger;
     private readonly string _scriptPath;
 
+    /// <summary>
+    /// Per-user response cache so the banner selection stays stable for an hour
+    /// instead of reshuffling on every page load. Keyed by user + configuration
+    /// signature, so any admin setting change invalidates it immediately.
+    /// </summary>
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, (Dictionary<string, object> Response, DateTime ExpiresAt)> SelectionCache = new();
+    private static readonly TimeSpan SelectionCacheTtl = TimeSpan.FromHours(1);
+
+    private string SelectionCacheKey(Jellyfin.Database.Implementations.Entities.User user)
+    {
+        string signature = string.Join("|",
+            _config.Mode,
+            _config.RandomMediaCount,
+            _config.MinimumRating,
+            _config.MinimumCriticRating,
+            _config.MaximumParentRating,
+            _config.MaximumParentRatingSubscore,
+            _config.ShowPlayed,
+            _config.ShowDescription,
+            _config.ShowRating,
+            _config.EditorUserId,
+            string.Join(",", _config.FilteredLibraries.Order()),
+            string.Join(",", _config.SelectedCollections.Order()),
+            _config.EnableAutoplay,
+            _config.ShowAutoplayButton,
+            _config.AutoplayInterval,
+            _config.ShowPlayButton,
+            _config.PlayButtonText,
+            _config.ShowNavigationArrows,
+            _config.HideOnTvLayout,
+            _config.HeroBackdropPosition,
+            _config.Heading);
+        return user.Id + "|" + signature;
+    }
+
     public EditorsChoiceActivityController(IUserManager userManager, ILibraryManager libraryManager, ILogger<EditorsChoiceActivityController> logger)
     {
         _userManager = userManager;
@@ -93,6 +128,12 @@ public class EditorsChoiceActivityController : ControllerBase
 
             Jellyfin.Database.Implementations.Entities.User? activeUser = _userManager.GetUserByName(name);
             if (activeUser == null) return NotFound();
+
+            string selectionCacheKey = SelectionCacheKey(activeUser);
+            if (SelectionCache.TryGetValue(selectionCacheKey, out var cached) && cached.ExpiresAt > DateTime.UtcNow)
+            {
+                return Ok(cached.Response);
+            }
 
             // If the config is set to be user profile specific, then we need to set the rating to the user's max age rating.
             if (_config.MaximumParentRating == -2)
@@ -408,6 +449,7 @@ public class EditorsChoiceActivityController : ControllerBase
             {                response.Add("playButtonText", _config.PlayButtonText);
             }
 
+            SelectionCache[selectionCacheKey] = (response, DateTime.UtcNow.Add(SelectionCacheTtl));
             return Ok(response);
 
         }
