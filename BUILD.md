@@ -16,9 +16,10 @@
 | `CustomTabs_0.3.0.1_jf124.zip` | Custom Tabs 0.3.0.1（配置页汉化） | 自定义标签页，依赖 FT |
 | `PluginPages_3.0.0.1_jf124.zip` | Plugin Pages 3.0.0.1 | 插件自定义页面，依赖 FT |
 | `EditorsChoice_1.6.2.1_jf124.zip` | EditorsChoice 1.6.2.1（配置页汉化） | Netflix 式精选滑块，依赖 FT |
+| `JellyfinEnhanced_12.14.0.1_jf124.zip` | Jellyfin Enhanced 12.14.0.1（jf12 重编 + 管理配置页汉化约 1000 处；用户面板仍英文） | Web UI 增强套件，依赖 FT。⚠️ 装了本仓版本就不要再加 JE 官方源升级，否则英文版会覆盖汉化 |
 
-### Jellyfin Enhanced（不需要适配）
-官方仓库原生支持 Jellyfin 12.x（最新 v12.14，targetAbi 12.0.0.0）：添加其官方源 `https://raw.githubusercontent.com/n00bcodr/jellyfin-plugins/main/manifest.json` → 目录直装。无 i18n，界面为英文。
+### Jellyfin Enhanced 官方源（本项目已自带汉化版，仅供对照）
+官方仓库原生支持 Jellyfin 12.x：`https://raw.githubusercontent.com/n00bcodr/jellyfin-plugins/main/manifest.json`。上游周更（12.13→12.14 仅 6 天），官方新版本号 > 12.14.0.1 时若同时加了官方源会被提示升级并覆盖汉化。
 | `FileTransformation_3.0.0_official-jf120.zip` | 官方 Release-12.0.0 原包 | 手动回退件 |
 | `JellyFrame_1.5.3_official.zip` | 官方 1.5.3 原包，md5 `887fa7d8c017e8ab60e6db68193de750` 与官方 manifest 一致 | 手动回退件 |
 
@@ -42,10 +43,9 @@
 
 1. Dashboard → 插件 → 存储库 → 添加：
    ```
-   https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@7d78210/manifest.json
+   https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/manifest.json
    ```
-   ⚠️ **用 @commit-sha 版本**（2026-11-02 实测：jsDelivr 的 @main 清单在边缘节点卡在旧代际缓存且 purge 无效，@sha 是不可变 URL 首次回源必新）。后续等 @main 缓存自然收敛后可换回 `@main`（本文件顶部路径）。
-   （NAS 访问不了 jsDelivr 时改用 `https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/manifest.json`）
+   （2026-11-02 下午实测 @main 已收敛返回全部 9 插件；若某次更新后目录缺新条目，是 jsDelivr 边缘又卡旧代际——临时换 @<最新短sha> 版 URL 或用 raw.githubusercontent.com 同路径）
 2. 目录 → 先装 **File Transformation**（3.0.0.0）→ 按提示重启
 3. 再装 **Jellyframe**（**1.5.3.1**，为 12.4 编译件）→ 重启
 4. 走下面验证清单
