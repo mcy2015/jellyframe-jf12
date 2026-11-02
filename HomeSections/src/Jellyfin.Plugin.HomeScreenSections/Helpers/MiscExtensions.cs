@@ -100,4 +100,30 @@ public static class MiscExtensions
             .Where(x => libraryManager.GetItemById<BaseItem>(Guid.Parse(x.ItemId), user) != null)
             .ToArray();
     }
+
+    /// <summary>
+    /// Filters folders down to only those selected in the global library scope
+    /// (plugin configuration "FilteredLibraries"). When no libraries are selected
+    /// the scope is inactive and every folder is kept.
+    /// </summary>
+    public static IEnumerable<VirtualFolderInfo> FilterToGlobalScope(this IEnumerable<VirtualFolderInfo> folders)
+    {
+        string[]? scope = HomeScreenSectionsPlugin.Instance?.Configuration?.FilteredLibraries;
+        if (scope == null || scope.Length == 0)
+        {
+            return folders;
+        }
+
+        HashSet<Guid> allowed = new HashSet<Guid>();
+        foreach (string id in scope)
+        {
+            if (Guid.TryParse(id, out Guid parsed))
+            {
+                allowed.Add(parsed);
+            }
+        }
+
+        return folders.Where(x => Guid.TryParse(x.ItemId, out Guid id) && allowed.Contains(id));
+    }
+
 }

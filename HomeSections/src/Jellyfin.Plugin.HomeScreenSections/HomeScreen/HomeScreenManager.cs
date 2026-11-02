@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Jellyfin.Plugin.HomeScreenSections.Configuration;
+using MediaBrowser.Controller.Entities;
 using Jellyfin.Plugin.HomeScreenSections.HomeScreen.Sections;
 using Jellyfin.Plugin.HomeScreenSections.HomeScreen.Sections.Latest;
 using Jellyfin.Plugin.HomeScreenSections.HomeScreen.Sections.Persons;
@@ -115,14 +116,89 @@ namespace Jellyfin.Plugin.HomeScreenSections.HomeScreen
         }
 
         /// <inheritdoc/>
+        // Sections whose results must bypass the global library scope:
+        // user-activity driven or backed by external/virtual sources.
+        private static readonly HashSet<string> GlobalScopeExemptSections = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "ContinueWatching",
+            "ContinueWatchingNextUp",
+            "NextUp",
+            "MyList",
+            "LiveTV",
+            "MyJellyseerrRequests",
+            "UpcomingMovies",
+            "UpcomingMusic",
+            "UpcomingBooks",
+            "UpcomingShows",
+            "CollectionsSection",
+            "FinishTheseCollections"
+        };
+
         public QueryResult<BaseItemDto> InvokeResultsDelegate(string key, HomeScreenSectionPayload payload, IQueryCollection queryCollection)
         {
             if (m_delegates.ContainsKey(key))
             {
-                return m_delegates[key].GetResults(payload, queryCollection);
+                QueryResult<BaseItemDto> result = m_delegates[key].GetResults(payload, queryCollection);
+                return ApplyGlobalLibraryScope(key, result);
             }
 
             return new QueryResult<BaseItemDto>(Array.Empty<BaseItemDto>());
+        }
+
+        /// <summary>
+        /// Global library scope catch-all: drops items that do not belong to any
+        /// library selected in the plugin configuration. Library roots themselves
+        /// (e.g. My Media entries) pass when they are in the scope. Sections in
+        /// <see cref="GlobalScopeExemptSections"/> are returned untouched.
+        /// </summary>
+        private QueryResult<BaseItemDto> ApplyGlobalLibraryScope(string key, QueryResult<BaseItemDto> result)
+        {
+            string[]? scope = HomeScreenSectionsPlugin.Instance?.Configuration?.FilteredLibraries;
+            if (scope == null || scope.Length == 0 || GlobalScopeExemptSections.Contains(key))
+            {
+                return result;
+            }
+
+            HashSet<Guid> allowed = new HashSet<Guid>();
+            foreach (string id in scope)
+            {
+                if (Guid.TryParse(id, out Guid parsed))
+                {
+                    allowed.Add(parsed);
+                }
+            }
+
+            MediaBrowser.Controller.Library.ILibraryManager libraryManager = m_serviceProvider.GetRequiredService<MediaBrowser.Controller.Library.ILibraryManager>();
+            List<BaseItemDto> filtered = new List<BaseItemDto>(result.Items.Count);
+            foreach (BaseItemDto dto in result.Items)
+            {
+                if (dto == null)
+                {
+                    continue;
+                }
+
+                Guid itemId = dto.Id;
+
+                if (allowed.Contains(itemId))
+                {
+                    filtered.Add(dto); // The item IS a scoped library root (e.g. My Media)
+                    continue;
+                }
+
+                BaseItem? item = libraryManager.GetItemById(itemId);
+                if (item == null)
+                {
+                    filtered.Add(dto); // Virtual/unknown items are kept (upcoming-style placeholders)
+                    continue;
+                }
+
+                if (item.GetAncestorIds().Any(allowed.Contains))
+                {
+                    filtered.Add(dto);
+                }
+            }
+
+            return new QueryResult<BaseItemDto>(result.StartIndex, filtered.Count, filtered);
         }
 
         /// <inheritdoc/>

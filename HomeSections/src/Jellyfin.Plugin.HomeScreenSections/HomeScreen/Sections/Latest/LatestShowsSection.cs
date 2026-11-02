@@ -67,7 +67,7 @@ namespace Jellyfin.Plugin.HomeScreenSections.HomeScreen.Sections.Latest
 
             VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
                 .Where(x => x.CollectionType == CollectionTypeOptions)
-                .FilterToUserPermitted(m_libraryManager, user);
+                .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
             List<(Series Series, DateTime? LatestPremiereDate)> selectedSeries = new List<(Series, DateTime?)>();
             int dayIncrement = 30;

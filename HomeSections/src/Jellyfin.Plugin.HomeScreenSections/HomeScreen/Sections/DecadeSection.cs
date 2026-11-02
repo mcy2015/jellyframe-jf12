@@ -66,7 +66,7 @@ public class DecadeSection : IHomeScreenSection
 
         VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
             .Where(x => x.CollectionType == CollectionTypeOptions.movies || x.CollectionType == CollectionTypeOptions.tvshows || x.IsMixedFolder(m_libraryManager))
-            .FilterToUserPermitted(m_libraryManager, user);
+            .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
         int[] decadeYears = Enumerable.Range(decadeStart, 10).ToArray();
 
@@ -110,7 +110,7 @@ public class DecadeSection : IHomeScreenSection
         }
 
         VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
-            .FilterToUserPermitted(m_libraryManager, user);
+            .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
         Guid[] folderIds = folders
             .Select(x => Guid.Parse(x.ItemId ?? Guid.Empty.ToString()))

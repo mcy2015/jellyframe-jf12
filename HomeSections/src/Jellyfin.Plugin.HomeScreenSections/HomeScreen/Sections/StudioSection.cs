@@ -71,7 +71,7 @@ public class StudioSection : IHomeScreenSection
         bool? isPlayed = sectionSettings?.HideWatchedItems == true ? false : null;
 
         VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
-            .FilterToUserPermitted(m_libraryManager, user);
+            .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
         List<BaseItem> items = folders.SelectMany(x =>
         {
@@ -187,7 +187,7 @@ public class StudioSection : IHomeScreenSection
         const int scorePerPlay = 1;
 
         VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
-            .FilterToUserPermitted(m_libraryManager, user);
+            .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
         Guid[] folderIds = folders
             .Select(x => Guid.Parse(x.ItemId ?? Guid.Empty.ToString()))

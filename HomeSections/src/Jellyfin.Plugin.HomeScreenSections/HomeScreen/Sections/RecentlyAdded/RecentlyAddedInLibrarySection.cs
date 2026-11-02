@@ -95,7 +95,7 @@ namespace Jellyfin.Plugin.HomeScreenSections.HomeScreen.Sections.RecentlyAdded
                 if (folder != null)
                 {
                     VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
-                        .FilterToUserPermitted(m_libraryManager, user);
+                        .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
                     PluginConfiguration? config = HomeScreenSectionsPlugin.Instance?.Configuration;
                     SectionSettings? sectionSettings = config?.SectionSettings.FirstOrDefault(x => x.SectionId == Section);

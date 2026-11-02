@@ -72,12 +72,12 @@
     "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/HomeSections/src/Jellyfin.Plugin.HomeScreenSections/logo.png",
     "versions": [
       {
-        "version": "3.0.0.1",
-        "changelog": "Rebuilt against Jellyfin 12.4.0 (net10.0); added _Localization/zh.json (224 keys); admin config page localized to zh-CN.",
+        "version": "3.1.0.0",
+        "changelog": "NEW: global library scope - a checkbox list under Global Settings limits item-based sections (Latest, Discover, Genre, Decade, Studio, Because You Watched, Hidden Gems, Watch Again, Recently Added in Library...) to the selected libraries. User-activity and external sections (Continue Watching, Next Up, My List, Collections, Upcoming, Requests, Live TV) are exempt by design. Empty selection = all libraries.",
         "targetAbi": "12.4.0.0",
-        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/HomeScreenSections_3.0.0.1_jf124.zip",
-        "checksum": "C980A3A95FD6A79404B9C87E1D249EE4",
-        "timestamp": "2026-11-02T03:10:00Z",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/HomeScreenSections_3.1.0.0_jf124.zip",
+        "checksum": "7DC9B3EA6DBC3459C62B73DD38A2A599",
+        "timestamp": "2026-11-02T11:30:00Z",
         "dependencies": [
           "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
         ]

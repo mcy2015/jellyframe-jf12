@@ -76,7 +76,7 @@ public class GenreSection : IHomeScreenSection
 
         VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
             .Where(x => x.CollectionType == CollectionTypeOptions.movies)
-            .FilterToUserPermitted(m_libraryManager, user);
+            .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
         var movies = folders.SelectMany(x =>
         {
@@ -211,7 +211,7 @@ public class GenreSection : IHomeScreenSection
 
         VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
             .Where(x => x.CollectionType == CollectionTypeOptions.movies || x.IsMixedFolder(m_libraryManager))
-            .FilterToUserPermitted(m_libraryManager, user);
+            .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
         // Build a list of parent folder IDs for querying
         Guid[] folderIds = folders

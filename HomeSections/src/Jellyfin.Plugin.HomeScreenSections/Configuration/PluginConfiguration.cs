@@ -7,6 +7,12 @@ namespace Jellyfin.Plugin.HomeScreenSections.Configuration
     {
         public bool Enabled { get; set; } = false;
 
+        /// <summary>
+        /// Global library scope: item-based home sections only pull content from
+        /// these libraries. Empty (default) = all libraries.
+        /// </summary>
+        public string[] FilteredLibraries { get; set; } = [];
+
         public bool LazyLoadEnabled { get; set; } = false;
 
         public int NumSectionsPerPage { get; set; } = 10;

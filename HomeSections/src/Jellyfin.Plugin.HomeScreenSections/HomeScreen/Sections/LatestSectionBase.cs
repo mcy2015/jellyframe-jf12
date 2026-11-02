@@ -80,7 +80,7 @@ namespace Jellyfin.Plugin.HomeScreenSections.HomeScreen.Sections
 
             VirtualFolderInfo[] folders = m_libraryManager.GetVirtualFolders()
                 .Where(x => x.CollectionType == CollectionTypeOptions || x.IsMixedFolder(m_libraryManager))
-                .FilterToUserPermitted(m_libraryManager, user);
+                .FilterToUserPermitted(m_libraryManager, user).FilterToGlobalScope().ToArray();
 
             List<(BaseItem Item, DateTime? PremiereDate)> selectedItems = new List<(BaseItem, DateTime?)>();
             int dayIncrement = 30;

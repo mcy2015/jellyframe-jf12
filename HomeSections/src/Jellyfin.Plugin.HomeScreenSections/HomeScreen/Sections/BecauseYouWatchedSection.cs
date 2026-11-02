@@ -73,7 +73,7 @@ namespace Jellyfin.Plugin.HomeScreenSections.HomeScreen.Sections
 
 			VirtualFolderInfo[] folders = LibraryManager.GetVirtualFolders()
 				.Where(x => x.CollectionType == CollectionTypeOptions.movies)
-				.FilterToUserPermitted(LibraryManager, user);
+				.FilterToUserPermitted(LibraryManager, user).FilterToGlobalScope().ToArray();
 
 			List<BaseItem>? recentlyPlayedMovies = folders.SelectMany(x =>
 			{

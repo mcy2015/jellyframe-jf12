@@ -228,6 +228,13 @@
                             </div>
                         </details>
                         <details style="margin-bottom: 1em;">
+                            <summary style="cursor: pointer; font-weight: bold;">全局媒体库筛选</summary>
+                            <div style="padding-top: 1em;">
+                                <div class="fieldDescription" style="margin-bottom: 0.75em;">仅从勾选的媒体库中获取板块内容（最新添加、探索、流派、年代、制片公司、因为你看过、隐藏宝藏、再看一遍等）。不勾选任何媒体库 = 使用全部媒体库。不影响：继续观看、下一集、我的片单、合集、即将上线与请求（外部来源）。</div>
+                                <div id="globalLibraryScopeList" class="checkboxList" style="max-height: 220px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 0.75em;"></div>
+                            </div>
+                        </details>
+                        <details>
                             <summary data-i18n="AdminDefaultLibraries" style="cursor: pointer; font-weight: bold;">默认媒体库</summary>
                             <div style="padding-top: 1em;">
                                 <div class="inputContainer">
@@ -1449,6 +1456,33 @@
                     const booksSelect = document.querySelector('#defaultBooksLibrary');
                     const musicVideosSelect = document.querySelector('#defaultMusicVideosLibrary');
 
+                    const scopeList = document.querySelector('#globalLibraryScopeList');
+                    if (scopeList) {
+                        scopeList.innerHTML = '';
+                        result.forEach(function (folder) {
+                            if (folder.CollectionType === 'boxsets' || folder.CollectionType === 'playlists') {
+                                return;
+                            }
+                            const itemId = folder.ItemId || '';
+                            const label = document.createElement('label');
+                            label.className = 'emby-checkbox-label';
+                            label.style.display = 'flex';
+                            label.style.alignItems = 'center';
+                            label.style.gap = '0.5em';
+                            label.style.marginBottom = '0.35em';
+                            const cb = document.createElement('input');
+                            cb.setAttribute('is', 'emby-checkbox');
+                            cb.type = 'checkbox';
+                            cb.setAttribute('data-library-id', itemId);
+                            const span = document.createElement('span');
+                            span.className = 'checkboxLabel';
+                            span.textContent = folder.Name;
+                            label.appendChild(cb);
+                            label.appendChild(span);
+                            scopeList.appendChild(label);
+                        });
+                    }
+
                     var defaultLabel = escapeHtml(pageTranslations['AdminDefault'] || 'Default');
                     moviesSelect.innerHTML = '<option value="">' + defaultLabel + '</option>';
                     tvShowsSelect.innerHTML = '<option value="">' + defaultLabel + '</option>';
@@ -1516,6 +1550,7 @@
                     DateFormat: document.querySelector('#dateFormat').value,
                     DateDelimiter: document.querySelector('#dateDelimiter').value,
                     FilterUpcomingByLibraryAccess: document.querySelector('#filterUpcomingByLibraryAccess').checked,
+                    FilteredLibraries: Array.from(document.querySelectorAll('#globalLibraryScopeList input[data-library-id]:checked')).map(cb => cb.getAttribute('data-library-id')),
                     DeveloperMode: document.querySelector('#globalDeveloperMode').checked,
                     CacheTimeoutSeconds: document.querySelector('[data-id=txtCacheTimeoutSeconds]').value || 86400,
                     MaxImageCacheEntries: parseInt(document.querySelector('[data-id=txtMaxImageCacheEntries]').value) || 10000,
@@ -1561,6 +1596,15 @@
                         document.querySelector('#dateFormat').value = config.DateFormat || 'YYYY/MM/DD';
                         document.querySelector('#dateDelimiter').value = config.DateDelimiter || '/';
                         document.querySelector('#filterUpcomingByLibraryAccess').checked = config.FilterUpcomingByLibraryAccess !== false;
+
+                        const savedScope = config.FilteredLibraries || [];
+                        setTimeout(function () {
+                            document.querySelectorAll('#globalLibraryScopeList input[data-library-id]').forEach(function (cb) {
+                                const id = cb.getAttribute('data-library-id') || '';
+                                const dashed = id.includes('-') ? id : id.replace(/(.{8})(.{4})(.{4})(.{4})(.{12})/, '$1-$2-$3-$4-$5');
+                                cb.checked = savedScope.indexOf(id) !== -1 || savedScope.indexOf(dashed) !== -1;
+                            });
+                        }, 0);
 
                         document.querySelector('#globalStreamyfinHomeOverride').checked = config.OverrideStreamyfinHome;
                         document.querySelector('#globalDeveloperMode').checked = config.DeveloperMode;
