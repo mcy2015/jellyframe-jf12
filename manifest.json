@@ -159,12 +159,12 @@
     "owner": "mcy2015 (upstream: lachlandcp)",
     "versions": [
       {
-        "version": "1.6.3.1",
-        "changelog": "Selection stability: the banner selection is now cached per user for 1 hour instead of reshuffling on every page load. Any admin configuration change invalidates the cache immediately.",
+        "version": "1.6.4.0",
+        "changelog": "NEW setting: \"Selection refresh interval (minutes)\" - configurable per-user selection cache TTL. Default 60, set 0 to disable caching (reshuffle every load).",
         "targetAbi": "12.4.0.0",
-        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/EditorsChoice_1.6.3.1_jf124.zip",
-        "checksum": "28B55375D83D6AF5ABE80E0B9AA80D71",
-        "timestamp": "2026-11-02T12:20:00Z",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/EditorsChoice_1.6.4.0_jf124.zip",
+        "checksum": "11F83DAFB4E9099D73D4CC1F8279F358",
+        "timestamp": "2026-11-02T12:50:00Z",
         "dependencies": [
           "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
         ]

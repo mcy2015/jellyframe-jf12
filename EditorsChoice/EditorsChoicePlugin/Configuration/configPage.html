@@ -278,6 +278,12 @@
                     </div>
 
                     <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="SelectionRefreshMinutes">抽选内容刷新间隔（分钟）</label>
+                        <input is="emby-input" type="number" id="SelectionRefreshMinutes" name="SelectionRefreshMinutes" min="0" />
+                        <div class="fieldDescription">横幅抽选内容的缓存时长：间隔内刷新页面内容保持不变，到期后换一批。默认 60（1 小时）。设为 0 = 不缓存，每次刷新都重新抽选。</div>
+                    </div>
+
+                    <div class="inputContainer">
                         <label class="inputLabel inputLabelUnfocused" for="MinimumRating">最低社区评分</label>
                         <input is="emby-input" type="number" id="MinimumRating" name="MinimumRating" min="0" max="10" step="0.1" />
                         <div class="fieldDescription">仅显示社区评分不低于此数值的剧集或电影（0.0 至 10.0）。设为 0 表示忽略评分。</div>
@@ -449,6 +455,7 @@
                         $('#CollectionsMode').first().prop('checked', config.Mode == 'COLLECTIONS');
                         $('#NewMode').first().prop('checked', config.Mode == 'NEW');
                         $('#RandomMediaCount').val(config.RandomMediaCount);
+                        $('#SelectionRefreshMinutes').val(config.SelectionRefreshMinutes != null ? config.SelectionRefreshMinutes : 60);
                         $('#MinimumRating').val(config.MinimumRating);
                         $('#MinimumCriticRating').val(config.MinimumCriticRating);
                         $('#EnableAutoplay').first().prop('checked', config.EnableAutoplay);
@@ -630,6 +637,13 @@
                             config.RandomMediaCount = 5;
                         } else {
                             config.RandomMediaCount = randomMediaCount;
+                        }
+
+                        let selectionRefreshMinutes = $('#SelectionRefreshMinutes').first().val();
+                        if (selectionRefreshMinutes === '' || selectionRefreshMinutes < 0 || isNaN(selectionRefreshMinutes)) {
+                            config.SelectionRefreshMinutes = 60;
+                        } else {
+                            config.SelectionRefreshMinutes = parseInt(selectionRefreshMinutes, 10);
                         }
 
                         let minimumRating = $('#MinimumRating').first().val();

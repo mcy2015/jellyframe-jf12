@@ -22,6 +22,12 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public int RandomMediaCount { get; set; } = 5;
 
+    /// <summary>
+    /// How long (in minutes) the banner selection stays stable per user.
+    /// 0 = no caching (reshuffle on every request). Default 60.
+    /// </summary>
+    public int SelectionRefreshMinutes { get; set; } = 60;
+
     public float MinimumRating { get; set; } = 0.0f;
 
     public int MinimumCriticRating { get; set; } = 0;

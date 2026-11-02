@@ -30,13 +30,15 @@ public class EditorsChoiceActivityController : ControllerBase
     /// signature, so any admin setting change invalidates it immediately.
     /// </summary>
     private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, (Dictionary<string, object> Response, DateTime ExpiresAt)> SelectionCache = new();
-    private static readonly TimeSpan SelectionCacheTtl = TimeSpan.FromHours(1);
+
+    private TimeSpan SelectionCacheTtl => TimeSpan.FromMinutes(Math.Max(0, _config.SelectionRefreshMinutes));
 
     private string SelectionCacheKey(Jellyfin.Database.Implementations.Entities.User user)
     {
         string signature = string.Join("|",
             _config.Mode,
             _config.RandomMediaCount,
+            _config.SelectionRefreshMinutes,
             _config.MinimumRating,
             _config.MinimumCriticRating,
             _config.MaximumParentRating,
@@ -130,7 +132,7 @@ public class EditorsChoiceActivityController : ControllerBase
             if (activeUser == null) return NotFound();
 
             string selectionCacheKey = SelectionCacheKey(activeUser);
-            if (SelectionCache.TryGetValue(selectionCacheKey, out var cached) && cached.ExpiresAt > DateTime.UtcNow)
+            if (SelectionCacheTtl > TimeSpan.Zero && SelectionCache.TryGetValue(selectionCacheKey, out var cached) && cached.ExpiresAt > DateTime.UtcNow)
             {
                 return Ok(cached.Response);
             }
@@ -449,7 +451,10 @@ public class EditorsChoiceActivityController : ControllerBase
             {                response.Add("playButtonText", _config.PlayButtonText);
             }
 
-            SelectionCache[selectionCacheKey] = (response, DateTime.UtcNow.Add(SelectionCacheTtl));
+            if (SelectionCacheTtl > TimeSpan.Zero)
+            {
+                SelectionCache[selectionCacheKey] = (response, DateTime.UtcNow.Add(SelectionCacheTtl));
+            }
             return Ok(response);
 
         }
