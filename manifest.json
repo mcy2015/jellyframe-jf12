@@ -170,5 +170,26 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Jellyfin Enhanced",
+    "guid": "f69e946a-4b3c-4e9a-8f0a-8d7c1b2c4d9b",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Jellyfin Enhanced 12.14 (upstream: n00bcodr/Jellyfin-Enhanced), admin settings page localized to zh-CN.",
+    "description": "A comprehensive enhancement layer for the Jellyfin web UI: poster quality tags, richer detail pages, better player, shortcuts, spoiler guard, requests, calendar and admin tools. This build is rebuilt for Jellyfin 12.4 (net10.0) with the admin configuration page localized to Simplified Chinese. Note: the user-facing Enhanced panel (? key) remains in English. Requires the File Transformation plugin.",
+    "owner": "mcy2015 (upstream: n00bcodr)",
+    "versions": [
+      {
+        "version": "12.14.0.1",
+        "changelog": "Rebuilt against Jellyfin 12.4 (net10.0, AssemblyVersion 12.14.0.1); admin config page (~1000 strings) localized to zh-CN; no functional changes vs upstream 12.14.0.0.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/JellyfinEnhanced_12.14.0.1_jf124.zip",
+        "checksum": "281E854D56A5AD52D759E5E4CD4B7C77",
+        "timestamp": "2026-11-02T05:30:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
   }
 ]
