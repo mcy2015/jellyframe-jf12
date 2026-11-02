@@ -1,0 +1,92 @@
+# JellyFrame × File Transformation → Jellyfin 12.4 适配构建
+
+构建日期：2026-11-02 · 构建机：macOS / dotnet 10.0.403 · 目标：NAS `jellyfin/jellyfin` 12.4.0（`/share/Container/jellyfin/config`）
+
+## dist/ 产物（4 件）
+
+| 文件 | 内容 | 用途 |
+|---|---|---|
+| `FileTransformation_3.0.0_jf124.zip` | FT 3.0.0 重编（`JellyfinVersion=12.4.0`/net10.0），4 文件（dll+deps.json+pdb+logo.png，镜像官方 zip 布局） | **首选注入层** |
+| `FileTransformation_3.0.0_official-jf120.zip` | 官方 Release-12.0.0 原包 | 备选（12.1 社区实锤） |
+| `JellyFrame_1.5.3_official.zip` | 官方 1.5.3 原包，md5 `887fa7d8c017e8ab60e6db68193de750` 与 manifest 一致 | **首选框架层（方案 A）** |
+| `JellyFrame_1.5.3_jf124.zip` | JellyFrame 1.5.3 重编（net10.0 + Controller/Model 12.4.0 + Sqlite 10.0.12），3 dll 镜像官方布局 | **方案 B（A 加载失败才用）** |
+
+## 源码改动（本仓库，相对上游 main）
+
+### FileTransformation（2 行，纯版本对齐）
+- `csproj`: `<JellyfinVersion>12.0.0</JellyfinVersion>` → `12.4.0`（联动 net10.0 + 4 个 Jellyfin NuGet 包）
+- `Properties/AssemblyInfo.cs`: `[assembly: JellyfinVersion("12.0.0")]` → `"12.4.0"`（该特性运行时无消费方，纯自描述）
+
+### JellyFrame（csproj 3 处 + JellyfinSurface.cs 3 处 API 断裂修复）
+- `csproj`: `net9.0→net10.0`、`Controller/Model 10.11.0→12.4.0`、`Microsoft.Data.Sqlite 9.0.0→10.0.12`
+  - Sqlite 选 10.0.12 而非最新 10.0.14：必须 ≤ 宿主自带版本，低版本会向上滚动（官方 1.5.3 引 9.0.0 在 12.1 跑通 = 同机制实证）
+- `Runtime/JellyfinSurface.cs`：
+  1. `AddToPlaylist`: `AddItemToPlaylistAsync(pid, ids, uid)` → `(pid, ids, null, uid)`（12.4 新增 `int? newPosition` 参数）
+  2. `ResetUserPassword`: `ResetPassword(user)` → `ResetPassword(uid)`（12.4 签名 `Guid`）
+  3. `GetUsers`: `_users.Users` → `_users.GetUsers()`（12.4 移除 `Users` 属性）
+
+## NAS 部署步骤（用户执行）
+
+```bash
+# 0. 若装过旧版：跨大版本官方指引是先卸载（Jellyfin 停机状态下操作）
+sudo docker stop jellyfin
+sudo rm -rf /share/Container/jellyfin/config/plugins/FileTransformation
+sudo rm -rf /share/Container/jellyfin/config/plugins/JellyFrame
+
+# 1. 放入本 dist/ 的 zip 解压产物
+sudo mkdir -p /share/Container/jellyfin/config/plugins/FileTransformation /share/Container/jellyfin/config/plugins/JellyFrame
+#    FileTransformation_3.0.0_jf124.zip 内容 → plugins/FileTransformation/
+#    JellyFrame_1.5.3_official.zip   内容 → plugins/JellyFrame/        （方案 A）
+
+# 2. 重启
+sudo docker start jellyfin
+```
+
+无 meta.json 时 Jellyfin 自动生成（targetAbi=服务器版本、AutoUpdate=false）→ **不受目录安装 targetAbi 门禁，也不会被自动更新覆盖**（MetaTube 先例实锤）。
+
+## 验证清单（按序）
+
+1. **日志加载**（`docker logs jellyfin` 或 log/ 目录 latest.log）：
+   ```
+   grep -iE "filetrans|jellyframe|malfunction|notsupported" log_*.txt | tail -30
+   ```
+   期望：`Loaded plugin: File Transformation 3.0.0.0` + `Loaded plugin: JellyFrame 1.5.3.0`，无 NotSupported/Malfunctioned。
+   JellyFrame 侧期望看到 `[JellyFrame] Probing for File Transformation plugin injection...` 且无 "not found"。
+2. **注入链路**：Dashboard 左侧出现 **Mods** / **Themes** 两个菜单 = JellyFrame 配置页活着。
+3. **主题生效**：Themes → Marketplace → 默认官方源（themes.v2.json）→ Apply 任一主题（如 Ultrachromic）→ **Ctrl+Shift+R 强刷**。
+4. 若主题加载但无背景图：检查 显示设置 里背景图/Backdrop 开关（FT issue #20 的假故障先例）。
+
+## 方案 B 切换（仅当 JellyFrame 1.5.3 官方包 Malfunctioned/NotSupported）
+
+```bash
+sudo docker stop jellyfin
+sudo rm -rf /share/Container/jellyfin/config/plugins/JellyFrame/*
+# JellyFrame_1.5.3_jf124.zip 内容 → plugins/JellyFrame/
+sudo docker start jellyfin
+```
+FT 不用动（对接是反射式的，与 JellyFrame 版本无关）。
+
+## 回滚
+
+```bash
+sudo docker stop jellyfin
+sudo rm -rf /share/Container/jellyfin/config/plugins/{FileTransformation,JellyFrame}
+sudo docker start jellyfin
+# 配置残留在 config/plugins/configurations/，可顺手删对应 xml
+```
+
+## 已知风险（如实）
+
+- JellyFrame 官方 net9.0 dll 在 12.4/.NET10 host 上的加载是**推断**（12.1 实锤 + .NET 库程序集向上兼容），方案 A 失败即切方案 B，两包都备好了。
+- 运行时 API 断裂只修了**编译期暴露的 3 处**；Plugin.cs 注入的 15+ Controller 服务面在 12.4 的运行时行为（事件面、Dto、LiveTv 等）编译器不保证，真机冒烟时盯 `[JellyFrame]` 日志。
+- FT 仓库 10 月有 open 边缘 bug：#90 页面缓存致注入静默失败（强刷可破）、#93/#94 HEAD/Range 请求拿不到转换后内容（影响个别客户端缓存行为）。
+- 主题 CSS 视觉适配（选择器 vs 12.4 DOM）是另一层：本包只保证「装得上、注入得出」，长得对不对要看真机。
+
+## 重新构建
+
+```bash
+cd FileTransformation/src/Jellyfin.Plugin.FileTransformation && dotnet build -c Release
+cd ../../JellyFrame && dotnet build -c Release
+# JellyFrame 输出目录含宿主程序集（CopyLocalLockFileAssemblies=true），部署只取
+# Jellyfin.Plugin.JellyFrame.dll + Jint.dll + Acornima.dll 三个文件（镜像官方 zip）
+```

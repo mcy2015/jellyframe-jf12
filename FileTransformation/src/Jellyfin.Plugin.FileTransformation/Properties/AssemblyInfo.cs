@@ -9,4 +9,4 @@ using Jellyfin.Plugin.FileTransformation.Attributes;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyTitle("Jellyfin.Plugin.FileTransformation")]
 [assembly: AssemblyVersion("3.0.0.0")]
-[assembly: JellyfinVersion("12.0.0")]
+[assembly: JellyfinVersion("12.4.0")]

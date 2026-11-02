@@ -1249,7 +1249,7 @@ namespace Jellyfin.Plugin.JellyFrame.Runtime
             if (ids.Count == 0) return false;
             Guid uid = Guid.Empty;
             if (!string.IsNullOrEmpty(userId)) Guid.TryParse(userId, out uid);
-            _playlists.AddItemToPlaylistAsync(pid, ids, uid).GetAwaiter().GetResult();
+            _playlists.AddItemToPlaylistAsync(pid, ids, null, uid).GetAwaiter().GetResult();
             return true;
         }
 
@@ -1361,7 +1361,7 @@ namespace Jellyfin.Plugin.JellyFrame.Runtime
             if (!Guid.TryParse(userId, out var uid)) return false;
             var user = _users.GetUserById(uid);
             if (user == null) return false;
-            _users.ResetPassword(user).GetAwaiter().GetResult();
+            _users.ResetPassword(uid).GetAwaiter().GetResult();
             _logger.LogInformation("[JellyFrame] ResetUserPassword: reset password for user {Id}", userId);
             return true;
         }
@@ -1862,7 +1862,7 @@ namespace Jellyfin.Plugin.JellyFrame.Runtime
         }
 
         public object[] GetUsers()
-            => _users.Users.Select(u => (object)new
+            => _users.GetUsers().Select(u => (object)new
             {
                 id = u.Id.ToString("N"),
                 name = u.Username,
