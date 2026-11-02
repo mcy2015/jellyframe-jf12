@@ -9,6 +9,7 @@
 | `FileTransformation_3.0.0_jf124.zip` | FT 3.0.0 重编（`JellyfinVersion=12.4.0`/net10.0），4 文件（dll+deps.json+pdb+logo.png，镜像官方 zip 布局） | **首选注入层（manifest 指向）** |
 | `JellyFrame_1.5.3.1_jf124.zip` | JellyFrame 重编（net10.0 + Controller/Model 12.4.0 + Sqlite 10.0.12，AssemblyVersion 1.5.3.1），3 dll 镜像官方布局 | **首选框架层（manifest 指向）** |
 | `manifest.json` | 自托管插件仓库清单（jsDelivr sourceUrl，targetAbi 全钉 12.4.0.0，md5 校验齐全） | 供仓库 URL 添加 |
+| `Jellyfin.Plugin.MediaBarEnhanced_v3.12.0.1_jf124.zip` | Media Bar Enhanced 3.12.0.1 重编（net10.0 + Controller/Model 12.4.0，0 错 0 警，无源码改动），依赖 FT | 首页大横幅（按库勾选/排除流派标签/预告片） |
 | `FileTransformation_3.0.0_official-jf120.zip` | 官方 Release-12.0.0 原包 | 手动回退件 |
 | `JellyFrame_1.5.3_official.zip` | 官方 1.5.3 原包，md5 `887fa7d8c017e8ab60e6db68193de750` 与官方 manifest 一致 | 手动回退件 |
 
