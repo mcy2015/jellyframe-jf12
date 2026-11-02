@@ -2,14 +2,15 @@
 
 构建日期：2026-11-02 · 构建机：macOS / dotnet 10.0.403 · 目标：NAS `jellyfin/jellyfin` 12.4.0（`/share/Container/jellyfin/config`）
 
-## dist/ 产物（4 件）
+## dist/ 产物（5 件）
 
 | 文件 | 内容 | 用途 |
 |---|---|---|
-| `FileTransformation_3.0.0_jf124.zip` | FT 3.0.0 重编（`JellyfinVersion=12.4.0`/net10.0），4 文件（dll+deps.json+pdb+logo.png，镜像官方 zip 布局） | **首选注入层** |
-| `FileTransformation_3.0.0_official-jf120.zip` | 官方 Release-12.0.0 原包 | 备选（12.1 社区实锤） |
-| `JellyFrame_1.5.3_official.zip` | 官方 1.5.3 原包，md5 `887fa7d8c017e8ab60e6db68193de750` 与 manifest 一致 | **首选框架层（方案 A）** |
-| `JellyFrame_1.5.3_jf124.zip` | JellyFrame 1.5.3 重编（net10.0 + Controller/Model 12.4.0 + Sqlite 10.0.12），3 dll 镜像官方布局 | **方案 B（A 加载失败才用）** |
+| `FileTransformation_3.0.0_jf124.zip` | FT 3.0.0 重编（`JellyfinVersion=12.4.0`/net10.0），4 文件（dll+deps.json+pdb+logo.png，镜像官方 zip 布局） | **首选注入层（manifest 指向）** |
+| `JellyFrame_1.5.3.1_jf124.zip` | JellyFrame 重编（net10.0 + Controller/Model 12.4.0 + Sqlite 10.0.12，AssemblyVersion 1.5.3.1），3 dll 镜像官方布局 | **首选框架层（manifest 指向）** |
+| `manifest.json` | 自托管插件仓库清单（jsDelivr sourceUrl，targetAbi 全钉 12.4.0.0，md5 校验齐全） | 供仓库 URL 添加 |
+| `FileTransformation_3.0.0_official-jf120.zip` | 官方 Release-12.0.0 原包 | 手动回退件 |
+| `JellyFrame_1.5.3_official.zip` | 官方 1.5.3 原包，md5 `887fa7d8c017e8ab60e6db68193de750` 与官方 manifest 一致 | 手动回退件 |
 
 ## 源码改动（本仓库，相对上游 main）
 
@@ -25,7 +26,22 @@
   2. `ResetUserPassword`: `ResetPassword(user)` → `ResetPassword(uid)`（12.4 签名 `Guid`）
   3. `GetUsers`: `_users.Users` → `_users.GetUsers()`（12.4 移除 `Users` 属性）
 
-## NAS 部署步骤（用户执行）
+## NAS 部署·方式一（推荐）：仓库 URL 安装，原版流程
+
+已发布自托管插件仓库：**https://github.com/mcy2015/jellyframe-jf12**（公开仓，manifest + dist 全在仓内；jsDelivr/raw 双通道 + 回下 md5 全部验证通过）。
+
+1. Dashboard → 插件 → 存储库 → 添加：
+   ```
+   https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/manifest.json
+   ```
+   （NAS 访问不了 jsDelivr 时改用 `https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/manifest.json`）
+2. 目录 → 先装 **File Transformation**（3.0.0.0）→ 按提示重启
+3. 再装 **Jellyframe**（**1.5.3.1**，为 12.4 编译件）→ 重启
+4. 走下面验证清单
+
+manifest 的 targetAbi 全部钉 12.4.0.0：12.0–12.3 服务器在目录看不到（防止装上解析不了的高版本引用）；后续官方仓库发新版本时同 GUID 走正常升级路径。
+
+## NAS 部署·方式二（手动，备用）
 
 ```bash
 # 0. 若装过旧版：跨大版本官方指引是先卸载（Jellyfin 停机状态下操作）
@@ -36,7 +52,7 @@ sudo rm -rf /share/Container/jellyfin/config/plugins/JellyFrame
 # 1. 放入本 dist/ 的 zip 解压产物
 sudo mkdir -p /share/Container/jellyfin/config/plugins/FileTransformation /share/Container/jellyfin/config/plugins/JellyFrame
 #    FileTransformation_3.0.0_jf124.zip 内容 → plugins/FileTransformation/
-#    JellyFrame_1.5.3_official.zip   内容 → plugins/JellyFrame/        （方案 A）
+#    JellyFrame_1.5.3.1_jf124.zip   内容 → plugins/JellyFrame/
 
 # 2. 重启
 sudo docker start jellyfin
@@ -50,21 +66,21 @@ sudo docker start jellyfin
    ```
    grep -iE "filetrans|jellyframe|malfunction|notsupported" log_*.txt | tail -30
    ```
-   期望：`Loaded plugin: File Transformation 3.0.0.0` + `Loaded plugin: JellyFrame 1.5.3.0`，无 NotSupported/Malfunctioned。
+   期望：`Loaded plugin: File Transformation 3.0.0.0` + `Loaded plugin: Jellyframe 1.5.3.1`，无 NotSupported/Malfunctioned。
    JellyFrame 侧期望看到 `[JellyFrame] Probing for File Transformation plugin injection...` 且无 "not found"。
 2. **注入链路**：Dashboard 左侧出现 **Mods** / **Themes** 两个菜单 = JellyFrame 配置页活着。
 3. **主题生效**：Themes → Marketplace → 默认官方源（themes.v2.json）→ Apply 任一主题（如 Ultrachromic）→ **Ctrl+Shift+R 强刷**。
 4. 若主题加载但无背景图：检查 显示设置 里背景图/Backdrop 开关（FT issue #20 的假故障先例）。
 
-## 方案 B 切换（仅当 JellyFrame 1.5.3 官方包 Malfunctioned/NotSupported）
+## 回退到官方包（仅当 1.5.3.1 加载失败）
 
 ```bash
 sudo docker stop jellyfin
 sudo rm -rf /share/Container/jellyfin/config/plugins/JellyFrame/*
-# JellyFrame_1.5.3_jf124.zip 内容 → plugins/JellyFrame/
+# JellyFrame_1.5.3_official.zip 内容 → plugins/JellyFrame/
 sudo docker start jellyfin
 ```
-FT 不用动（对接是反射式的，与 JellyFrame 版本无关）。
+FT 不用动（对接是反射式的，与 JellyFrame 版本无关）。若手动回退件也不行，反向再试 `FileTransformation_3.0.0_official-jf120.zip`。
 
 ## 回滚
 
@@ -89,4 +105,6 @@ cd FileTransformation/src/Jellyfin.Plugin.FileTransformation && dotnet build -c 
 cd ../../JellyFrame && dotnet build -c Release
 # JellyFrame 输出目录含宿主程序集（CopyLocalLockFileAssemblies=true），部署只取
 # Jellyfin.Plugin.JellyFrame.dll + Jint.dll + Acornima.dll 三个文件（镜像官方 zip）
+# 重打包后：更新 manifest.json 的 version/checksum/sourceUrl → push GitHub（jsDelivr 有缓存，
+# 急时可打 https://purge.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/manifest.json 或 sourceUrl 钉 @<sha>）
 ```
