@@ -1,0 +1,752 @@
+
+[
+    {
+        "guid": "4a7b8c2d-1e3f-4a5b-9c6d-7e8f9a0b1c2d",
+        "name": "WaybackFin",
+        "description": "Curation tool and plugin for accessing content from archive.org.",
+        "overview": "Curation tool and plugin for accessing content from archive.org.",
+        "owner": "Jellyfin-PG",
+        "category": "General",
+        "imageUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/WaybackFin@master/assets/WaybackFin.svg",
+        "versions": [
+            {
+                "version": "1.0.1.0",
+                "changelog": "Parent folder field per entry for movies.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/WaybackFin/releases/download/v1.0.1/WaybackFin_1.0.1.0.zip",
+                "checksum": "23e70b0023ea0d4e7f9f9b5f5822d503",
+                "timestamp": "2026-07-15T00:10:00Z",
+                "dependencies": []
+            },
+            {
+                "version": "1.0.0.0",
+                "changelog": "Initial Release.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/WaybackFin/releases/download/v1.0.0/WaybackFin_1.0.0.0.zip",
+                "checksum": "62c5a485d3604463a0967b27f1634148",
+                "timestamp": "2026-07-14T00:10:00Z",
+                "dependencies": []
+            }
+        ]
+    },
+    {
+        "guid": "3f8c8d8b-5a6b-4c28-98e6-e575a7bc2cd4",
+        "name": "Loom",
+        "description": "A plugin for modifying the frontend ui, and a thoughtful remake of file transformation plugin.",
+        "overview": "A plugin for modifying the frontend ui, and a thoughtful remake of file transformation plugin.",
+        "owner": "Jellyfin-PG",
+        "category": "General",
+        "imageUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/Loom@master/assets/Loom.svg",
+        "versions": [
+            {
+                "version": "1.0.1.0",
+                "changelog": "Fix for empty file patterns, and directories.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Loom/releases/download/v1.0.1/Loom_1.0.1.0.zip",
+                "checksum": "15bb0da7610c687e11b33a03b9c99127",
+                "timestamp": "2026-07-18T00:10:00Z",
+                "dependencies": []
+            },
+            {
+                "version": "1.0.0.0",
+                "changelog": "Initial Release.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Loom/releases/download/v1.0.0/Loom_1.0.0.0.zip",
+                "checksum": "60280a84515b891cad933d4b9d3c882f",
+                "timestamp": "2026-07-14T00:10:00Z",
+                "dependencies": []
+            }
+        ]
+    },
+    {
+        "guid": "f9c8d5c4-4b5c-4d5c-9c5d-4f5b5c5d5e5f",
+        "name": "JellyCMS",
+        "description": "A visual page builder plugin for jellyfin",
+        "overview": "A visual page builder plugin for jellyfin.",
+        "owner": "Jellyfin-PG",
+        "category": "General",
+        "imageUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyCMS@main/assets/jellycms.svg",
+        "versions": [
+            {
+                "version": "1.0.0.0",
+                "changelog": "Config page overhaul, gog provider, support for recognizing windows install files.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyCMS/releases/download/v1.0.0/JellyCMS_1.0.0.zip",
+                "checksum": "04344e4a7a2925623dc56a2e1d943835",
+                "timestamp": "2026-05-26T00:10:00Z",
+                "dependencies": []
+            }
+        ]
+    },
+    {
+        "guid": "9bab105e-9af0-4e25-a87d-876713b60962",
+        "name": "JellyEmu",
+        "description": "Share your emulation library in jellyfin with your users.",
+        "overview": "Browse and play retro games with your friends.",
+        "owner": "Jellyfin-PG",
+        "category": "General",
+        "imageUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyEmu@main/assets/jellyemu.png",
+        "versions": [
+            {
+                "version": "0.9.2.4",
+                "changelog": "Fixes for local rom provider scanning other item types.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.9.2.4/JellyEmu_0.9.2.4.zip",
+                "checksum": "aac9aee0035b02b87b19be81174c0ba6",
+                "timestamp": "2026-09-25T17:50:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.9.2.3",
+                "changelog": "Fixes for gamepad input.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.9.2.3/JellyEmu_0.9.2.3.zip",
+                "checksum": "5645e8b960bc536f0425f6067b952a29",
+                "timestamp": "2026-09-23T03:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.9.2.2",
+                "changelog": "Full changelog here. https://github.com/Jellyfin-PG/JellyEmu/pull/228.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.9.2.2/JellyEmu_0.9.2.2.zip",
+                "checksum": "06152f4cbc71c3caf9031f8915d934df",
+                "timestamp": "2026-09-23T03:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.9.2.1",
+                "changelog": "Full changelog here. https://github.com/Jellyfin-PG/JellyEmu/pull/218.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.9.2.1/JellyEmu_0.9.2.1.zip",
+                "checksum": "852d70e0b724bdd9149ccc3cc36d59cd",
+                "timestamp": "2026-09-15T20:30:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.9.2.0",
+                "changelog": "Full changelog here. https://github.com/Jellyfin-PG/JellyEmu/pull/210.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.9.2/JellyEmu_0.9.2.0.zip",
+                "checksum": "5fc2b4dc8587243b17d29505503038f4",
+                "timestamp": "2026-09-11T14:30:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.9.1.0",
+                "changelog": "Full changelog here. https://github.com/Jellyfin-PG/JellyEmu/pull/203.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.9.1/JellyEmu_0.9.1.0.zip",
+                "checksum": "2b9064384576ac5efdf822c502814818",
+                "timestamp": "2026-09-05T12:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.9.0.0",
+                "changelog": "Fixes for missing save slot on details page, fixes for using wikipedia default image, new metadata provider, overhaul of settings tab, cache clear for emulatorjs downloaded roms.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.9.0/JellyEmu_0.9.0.0.zip",
+                "checksum": "f6d3bcf29630c89dc7274e4e77a01af9",
+                "timestamp": "2026-09-04T11:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.9.1",
+                "changelog": "Fixes in rare cases for undefined values.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.9.1/JellyEmu_0.8.9.1.zip",
+                "checksum": "5ed3737eb852f3b82d550d555563385f",
+                "timestamp": "2026-09-03T21:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.9.0",
+                "changelog": "Overhaul for input system.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.9/JellyEmu_0.8.9.0.zip",
+                "checksum": "9f0ca463129a6c864392e68bedcaf15f",
+                "timestamp": "2026-09-03T15:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.8.0",
+                "changelog": "Overhaul for frontend injection, settings (page, panel, storage, endpoints).",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.8/JellyEmu_0.8.8.0.zip",
+                "checksum": "d721b9938e94c34548e3063301926409",
+                "timestamp": "2026-08-26T18:30:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.7.0",
+                "changelog": "Fix for http over local area, fix for firefox fetching js assets, assets server for retroarch, and log display during loading, display controller connected in input, move community from github to cloudflare worker.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.7/JellyEmu_0.8.7.0.zip",
+                "checksum": "0026add0f1fbc5967d7f9cbd20219817",
+                "timestamp": "2026-08-22T15:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.6.1",
+                "changelog": "Scriban update, ui render improvements, default fixes for cores, and fixes for invalid cores in core selection.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.6.1/JellyEmu_0.8.6.1.zip",
+                "checksum": "da741db127e7af29689a4290a2ec300c",
+                "timestamp": "2026-08-19T15:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.5.0",
+                "changelog": "Bios support, community tab, provider fixes.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.5/JellyEmu_0.8.5.0.zip",
+                "checksum": "a2a0ddc90548e2d9ade501f56fb2d5de",
+                "timestamp": "2026-08-17T18:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.4.0",
+                "changelog": "EJS channel option (force redownload), 3DS support (EJS nightly), fixes for n64 joystick, core option in settings where applicable.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.4/JellyEmu_0.8.4.0.zip",
+                "checksum": "9e89288506b482b13c8238ecc35cf987",
+                "timestamp": "2026-08-11T02:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.3.0",
+                "changelog": "Integration of Loom, Fixes for audiobooks, zip recognition, AR fixes.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.3/JellyEmu_0.8.3.0.zip",
+                "checksum": "b058e6ee0bc57e4b512f1f29ee033b27",
+                "timestamp": "2026-07-14T02:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.1.1",
+                "changelog": "Fixes for movies and gamepad.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.1.1/JellyEmu_0.8.1.1.zip",
+                "checksum": "74588fe3202b9c31424f878d61df9826",
+                "timestamp": "2026-06-07T02:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.8.1.0",
+                "changelog": "Config page overhaul, gog provider, support for recognizing windows install files.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.8.1/JellyEmu_0.8.1.0.zip",
+                "checksum": "ac361aee420de595c41a36c773cc34a4",
+                "timestamp": "2026-06-03T19:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.7.0",
+                "changelog": "Config page overhaul, gog provider, support for recognizing windows install files.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.7/JellyEmu_0.7.7.0.zip",
+                "checksum": "886e622e41f02d673526d1b0099a9276",
+                "timestamp": "2026-05-25T02:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.6.0",
+                "changelog": "Multi-disc playlists.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.6/JellyEmu_0.7.6.0.zip",
+                "checksum": "085ef8a101e6fc639bd0f0ee2fd5c29a",
+                "timestamp": "2026-05-24T12:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.5.0",
+                "changelog": "Save overhaul, fixes for RA, input map sync.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.5/JellyEmu_0.7.5.0.zip",
+                "checksum": "8f31afe4c7312858e3c68ec04a7adfb7",
+                "timestamp": "2026-05-23T03:45:27Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.4.2",
+                "changelog": "Fixes for cloud save authentication.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.4.2/JellyEmu_0.7.4.2.zip",
+                "checksum": "cfe3ae40fcb85daa0220f670fce56c49",
+                "timestamp": "2026-05-20T12:11:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.4.0",
+                "changelog": "Security overhaul, new logistic endpoints, sqlite for scaling, better folder resolution, fixes for ra.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.4/JellyEmu_0.7.4.zip",
+                "checksum": "7915cac3bd20f8fca934d8c320fe829e",
+                "timestamp": "2026-05-17T12:11:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.3.0",
+                "changelog": "RetroAchievements Login, Time to Beat, Fixes for rawg people identity, open with vantage.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.3/JellyEmu_0.7.3.zip",
+                "checksum": "2af9ab70264508cd584d54d73a3381e8",
+                "timestamp": "2026-05-15T12:11:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.2.0",
+                "changelog": "Hasheous, SteamGridDB providers, retro achievement viewing, fixes for badges/misc info, multi region, more regions.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.2/JellyEmu_0.7.2.zip",
+                "checksum": "441E687721D3253978BD60EA15334C09",
+                "timestamp": "2026-05-14T12:11:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.1.0",
+                "changelog": "Clean name with multiple tags, mame2003_plus core, last modified for save state, topbar hidden when ui minimized.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.1/JellyEmu_0.7.1.zip",
+                "checksum": "b88e06cbc703e063babce20c151c8e51",
+                "timestamp": "2026-05-13T12:11:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "0.7.0.0",
+                "changelog": "Fixes for tag conflicts (please refresh metadata), fixes for keyboard popping up ui, and improvements for metadata matching.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyEmu/releases/download/v0.7.0/JellyEmu_0.7.0.zip",
+                "checksum": "1881dd25c3c46175a1b480fc7faa755a",
+                "timestamp": "2026-05-12T12:11:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            }
+        ]
+    },
+    {
+        "guid": "d4e5f6a7-b8c9-0123-defa-456789012345",
+        "name": "Jellyframe",
+        "description": "A modification framework for jellyfin.",
+        "overview": "Browse and apply community mods to your Jellyfin server.",
+        "owner": "Jellyfin-PG",
+        "category": "General",
+        "imageUrl": "https://cdn.jsdelivr.net/gh/Jellyfin-PG/JellyFrame@main/assets/jellyframe.png",
+        "versions": [
+            {
+                "version": "1.5.3.0",
+                "changelog": "For full changelog visit https://github.com/Jellyfin-PG/JellyFrame/pull/19",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame/releases/download/v1.5.3/JellyFrame_1.5.3.zip",
+                "checksum": "887fa7d8c017e8ab60e6db68193de750",
+                "timestamp": "2026-09-24T12:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.5.2.0",
+                "changelog": "Fixes for mods or themes, not updating with loom.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame/releases/download/v1.5.2/JellyFrame_1.5.2.zip",
+                "checksum": "03ba46634d3f055c594eaf8c54cdcc69",
+                "timestamp": "2026-08-16T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.5.1.0",
+                "changelog": "New config page and loom integration (for frontend optimized injection).",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame/releases/download/v1.5.1/JellyFrame_1.5.1.zip",
+                "checksum": "453e1ea04c4cb102f7c3b65849232ed3",
+                "timestamp": "2026-08-13T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.5.0.0",
+                "changelog": "Performance improvements, new metadata api's, cache lifetime, db migrate, crash count, auto restart, non blocking http, http middleware, better logging, more health data.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame/releases/download/v1.5.0/JellyFrame_1.5.0.zip",
+                "checksum": "de928a2ed96c88083e60c464a73bd595",
+                "timestamp": "2026-04-24T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.4.1.0",
+                "changelog": "New SQLite api, with shared and secular access, for larger scale data.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame/releases/download/v1.4.1/JellyFrame_1.4.1.zip",
+                "checksum": "c1fcb4302feab80016028bb1d8833cc9",
+                "timestamp": "2026-04-23T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.0.0",
+                "changelog": "Fixes for teardown, memory limits, live editor and improvements for ui.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame/releases/download/v1.3.0/JellyFrame_1.3.0.zip",
+                "checksum": "575fe6b54884958bea0b96593b6bf8f3",
+                "timestamp": "2026-04-16T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.2.0.0",
+                "changelog": "Expanded access for mods with new scopes/permissions, as well as optional screenshots for mods and themes.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/JellyFrame/releases/download/v1.2.0/JellyFrame_1.2.0.zip",
+                "checksum": "7bab1357a1195142fa8ca00db2c6e608",
+                "timestamp": "2026-04-15T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            }
+        ]
+    },
+    {
+        "guid": "c3d4e5f6-a7b8-9012-cdef-345678901234",
+        "name": "ModManager",
+        "description": "A mod store for Jellyfin. Browse and apply community mods directly from the dashboard via the File Transformation plugin. No file editing required.",
+        "overview": "Browse and apply community mods to your Jellyfin server.",
+        "owner": "Jellyfin-PG",
+        "category": "General",
+        "imageUrl": "https://raw.githubusercontent.com/Jellyfin-PG/Mod-Manager/refs/heads/master/assets/modmanager.svg",
+        "versions": [
+            {
+                "version": "1.0.0.0",
+                "changelog": "Initial release.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Mod-Manager/releases/download/v1.0.0/ModManager_1.0.0.zip",
+                "checksum": "f1e2c18f2d729658526b63adf97951ad",
+                "timestamp": "2026-03-20T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            }
+        ]
+    },
+    {
+        "guid": "e10fb9d4-c941-4c6e-8260-2641031c2618",
+        "name": "SkinManager",
+        "description": "A theme store for Jellyfin. Browse and apply community CSS themes directly from the dashboard via the File Transformation plugin. No file editing required.",
+        "overview": "Browse and apply community CSS themes to your Jellyfin server.",
+        "owner": "Jellyfin-PG",
+        "category": "General",
+        "imageUrl": "https://raw.githubusercontent.com/Jellyfin-PG/Skin-Manager/refs/heads/main/assets/skinmanager.svg",
+        "versions": [
+            {
+                "version": "1.5.3.0",
+                "changelog": "UI Stability & Fallback Reliability",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.5.3/SkinManager_1.5.3.zip",
+                "checksum": "6b5bf304ee048e0817179b109ea584f0",
+                "timestamp": "2026-03-28T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.5.2.0",
+                "changelog": "Preload Cross-Origin Normalization",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.5.2/SkinManager_1.5.2.zip",
+                "checksum": "4841d9617bc2b38d2ab7c765d2f85be5",
+                "timestamp": "2026-03-27T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.5.1.0",
+                "changelog": "Version-Bound Cache Matrix",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.5.1/SkinManager_1.5.1.zip",
+                "checksum": "c1d909562fbeb6271d24fb3496f8942d",
+                "timestamp": "2026-03-27T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.5.0.0",
+                "changelog": "Offline Disk Proxy & Dynamic Networking",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.5.0/SkinManager_1.5.0.zip",
+                "checksum": "6382d2caa053cdca46a1c43b80593b3b",
+                "timestamp": "2026-03-26T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.4.2.0",
+                "changelog": "Resource Preconnecting",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.4.2/SkinManager_1.4.2.zip",
+                "checksum": "4c9c23990aade873030994ddcb9d8285",
+                "timestamp": "2026-03-26T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.4.1.0",
+                "changelog": "Preload Optimizations and Per User Themes",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.4.1/SkinManager_1.4.1.zip",
+                "checksum": "93afab4be9adfac20d97f4898803acd0",
+                "timestamp": "2026-03-26T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.7.0",
+                "changelog": "Fixes for rendering on some browsers, and variables, and casing for maximum consistency.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.3.7/SkinManager_1.3.7.zip",
+                "checksum": "f802327c226fb0aedbdf11a71097bc18",
+                "timestamp": "2026-03-24T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.5.0",
+                "changelog": "Fixes and Variable Change, variable structure change for maximum support along with inconsistencies.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.3.5/SkinManager_1.3.5.zip",
+                "checksum": "9bb0236298b5f9338f587f5219c75c59",
+                "timestamp": "2026-03-23T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.4.0",
+                "changelog": "Cache Improvements and Previews, now preview images are clickable, and cache was improved only for stylesheets.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.3.4/SkinManager_1.3.4.zip",
+                "checksum": "642711db1150466a6ba0d9b51e8b4b73",
+                "timestamp": "2026-03-23T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.3.0",
+                "changelog": "Update with cdn for themes, changes for gradient support, with theme creators having control over what should or shouldn't be a gradient.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.3.3/SkinManager_1.3.3.zip",
+                "checksum": "468db7b84cb2cc209e279abc27be9b35",
+                "timestamp": "2026-03-23T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.2.0",
+                "changelog": "Fixes for cache not evicting on skin/theme change.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.3.2/SkinManager_1.3.2.zip",
+                "checksum": "d70b5495d88d6680502308fdea091de3",
+                "timestamp": "2026-03-21T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.1.0",
+                "changelog": "Fixes and improvements for injection method and url checks.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.3.1/SkinManager_1.3.1.zip",
+                "checksum": "8b37b1bef3df27e9093cdcc1cd5756b9",
+                "timestamp": "2026-03-21T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.3.0.0",
+                "changelog": "Browser side cache with versioning for themes, and css theme addons via vars.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.3.0/SkinManager_1.3.0.zip",
+                "checksum": "5126506c1384ed7ec2ff677e7c842939",
+                "timestamp": "2026-03-21T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.2.1.0",
+                "changelog": "Fixes for versioning and configuration.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.2.1/SkinManager_1.2.1.zip",
+                "checksum": "6620ba0b135be435c9f19df819b704b4",
+                "timestamp": "2026-03-21T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.2.0.0",
+                "changelog": "Theme Variables, now you can customize themes using the gear icon with the selected theme.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.2.0/SkinManager_1.2.0.zip",
+                "checksum": "01619a6c945028d8d86e0df29ccf3c39",
+                "timestamp": "2026-03-21T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            },
+            {
+                "version": "1.0.0.0",
+                "changelog": "Initial release.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/Jellyfin-PG/Skin-Manager/releases/download/v1.0.0/SkinManager_1.0.0.zip",
+                "checksum": "a062ed2045ee1139c28ae932ae96cf1d",
+                "timestamp": "2026-03-20T00:00:00Z",
+                "dependencies": [
+                    "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+            }
+        ]
+    },
+    {
+        "guid": "5e87cc92-571a-4d8d-8d98-d2d4147f9f90",
+        "name": "File Transformation",
+        "overview": null,
+        "description": "Adds support for plugins to change jellyfin-web content without actually modifying the files directly but intercepts the requests for the served data.",
+        "owner": "IAmParadox27",
+        "category": "General",
+        "imageUrl": "https://raw.githubusercontent.com/IAmParadox27/jellyfin-plugin-file-transformation/main/src/logo.png",
+        "versions": [
+            {
+                "version": "3.0.0.0",
+                "changelog": "# 🚀 A New Foundation for File Transformation\r\n\r\nFile Transformation **3.0.0.0** is a major overhaul of how the plugin integrates with Jellyfin. The transformation system has been rebuilt around standard ASP.NET Core middleware, removing much of the version-specific runtime patching that File Transformation previously relied on.\r\n\r\nAlongside **Jellyfin 12 support**, this release drops support for **Jellyfin 10.10.7** and lays a much more maintainable foundation for future Jellyfin releases.\r\n\r\n> ## 🙌 Huge thanks to @4eh5xitv6787h645ebv\r\n>\r\n> A massive part of this release is thanks to **@4eh5xitv6787h645ebv**, who took on the major overhaul of File Transformation's core architecture in PR #58.\r\n>\r\n> The move away from the old Harmony/MonoMod-based interception system to standard ASP.NET Core middleware is a significant piece of work. It not only makes File Transformation substantially easier to maintain, but also resolves an entire class of compatibility problems that caused the plugin to malfunction or be disabled on certain Jellyfin versions and platforms (#20, #35, #62, #64, #70, #71).\r\n>\r\n> This is far more than a small patch or isolated feature - it fundamentally improves the foundation the plugin is built on. A huge thank you for the time and effort that went into it.\r\n\r\n## ✨ New Features\r\n\r\n* Added support for **Jellyfin 12** and the newer Jellyfin server architecture (#34).\r\n* Replaced the previous Harmony/MonoMod-based web interception system with standard ASP.NET Core `IStartupFilter` middleware (PR #58, @4eh5xitv6787h645ebv).\r\n* Added support for unregistering transformations through `PluginInterface.RemoveTransformation(Guid)`, allowing dependent plugins to cleanly remove transformations when required.\r\n* Added support for synthesising virtual files for registered transformation paths, restoring support for plugins such as Plugin Pages where the underlying file doesn't physically exist.\r\n* Added ETag generation and `304 Not Modified` support for transformed content.\r\n* Added Brotli and gzip recompression of transformed responses for remote clients.\r\n* Added automatic MIME type detection for virtual transformed files.\r\n\r\n## 🛠️ Improvements\r\n\r\n* Removed platform-specific DLL extraction and version-specific Jellyfin shims.\r\n* Removed dependencies on Harmony, MonoMod and Prometheus from the core transformation pipeline.\r\n* Improved compatibility across Jellyfin versions and platforms by moving the transformation system onto standard ASP.NET Core APIs (#20, #35, #62, #64).\r\n* Added per-transformation error isolation so a failure in one plugin's transformation won't prevent other transformations from running.\r\n* Made transformation registration, removal and execution thread-safe.\r\n* Added regex caching and timeout protection for transformation matching.\r\n* Improved handling of `Accept-Encoding`, including proper quality-value (`q`) parsing.\r\n* Improved LAN detection for IPv6-mapped IPv4 addresses.\r\n* Improved proxy caching behaviour by correctly setting `Vary: Accept-Encoding`.\r\n* Reworked HTTP handling to use a shared `HttpClient` with appropriate timeouts.\r\n* Hardened named-pipe transformations with timeouts, size limits, EOF handling and improved resource cleanup.\r\n\r\n## 🪲 Bug Fixes\r\n\r\n* Fixed a class of failures where Harmony/MonoMod runtime patching could cause File Transformation to malfunction or be automatically disabled on startup (#20, #35, #62, #64, #71).\r\n* Fixed #70 where transformations could attempt to use a disposed `IServiceProvider` after Jellyfin restarted, resulting in `500` responses across the web UI.\r\n* Fixed transformed content potentially retaining stale trailing bytes when a transformation produced a shorter result than the original response.\r\n* Fixed failures in one transformation potentially breaking the entire transformation pipeline.\r\n* Fixed potential `HttpClient` resource leaks.\r\n* Fixed named-pipe transformations being able to hang indefinitely or loop on zero-byte reads.\r\n* Fixed incorrect handling of disabled compression encodings such as `gzip;q=0`.\r\n* Fixed failed virtual-file transformations returning an empty successful response instead of reverting to the original `404`.\r\n* Improved middleware failure handling so the original response is served if transformation or recompression fails.\r\n\r\n## 💻 Developer Compatibility\r\n\r\nThe existing `PluginInterface.RegisterTransformation` API and registration payload remain compatible with previous releases, so plugins using a standard transformation callback **should not need to change how they register transformations**.\r\n\r\nThere are, however, some changes to transformation execution that plugin developers should be aware of:\r\n\r\n* Added `PluginInterface.RemoveTransformation(Guid)`, allowing plugins to explicitly unregister a previously registered transformation.\r\n* Assembly callbacks still receive the same payload and are expected to return the transformed content as a `string`.\r\n* Invalid or failed assembly callbacks now **fail safely rather than falling through to another configured callback mechanism**. Plugins should ensure their callback assembly, class and method names are valid.\r\n* HTTP transformation callbacks must now return a **successful HTTP status code**. Non-success responses are treated as a failed transformation rather than using the response body as transformed content.\r\n* HTTP callbacks now have a **15 second timeout**.\r\n* Named-pipe callbacks now have connection/error handling and a **50 MB maximum response size**.\r\n* Failed transformations now leave the original response untouched rather than potentially replacing it with invalid or partial output.\r\n\r\nThese changes are intended to make transformations significantly safer and more predictable, but plugins relying on the previous fallback or error behaviour should review their integrations when updating.\r\n\r\n## ⚠️ Compatibility\r\n\r\n* **Jellyfin 10.10.7 is no longer supported.**\r\n* Added support for **Jellyfin 12** and its newer server architecture (#34).\r\n* Users remaining on Jellyfin 10.10.7 will need to stay on an earlier File Transformation release until they upgrade Jellyfin.\r\n* Removed legacy Harmony/MonoMod runtime patching and version-specific Jellyfin shims.\r\n* File Transformation now relies on standard ASP.NET Core middleware rather than patching Jellyfin internals, providing a much more stable base for future Jellyfin versions.\r\n\r\n## Contributors\r\n\r\n* 4eh5xitv6787h645ebv\r\n\r\n## ❤️ Support\r\n\r\nIf you enjoy using my Jellyfin plugins and want to support the time that goes into building, maintaining, and improving them, you can do so on [Ko-fi](https://ko-fi.com/IAmParadox27).\r\n\r\nThank you for using the plugins and being part of the community.\r\n\r\n<a href='https://ko-fi.com/iamparadox27' target='_blank'><img height='32' style='border:0px;height:32px;' src='https://storage.ko-fi.com/cdn/kofi4.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>",
+                "targetAbi": "10.11.10.0",
+                "sourceUrl": "https://github.com/IAmParadox27/jellyfin-plugin-file-transformation/releases/download/3.0.0.0/Release-10.11.10.zip",
+                "checksum": "8DA086877EFBC8D91F476847EB558583",
+                "timestamp": "2026-09-08T09:02:53",
+                "dependencies": [
+                  "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+              },
+              {
+                "version": "3.0.0.0",
+                "changelog": "# 🚀 A New Foundation for File Transformation\r\n\r\nFile Transformation **3.0.0.0** is a major overhaul of how the plugin integrates with Jellyfin. The transformation system has been rebuilt around standard ASP.NET Core middleware, removing much of the version-specific runtime patching that File Transformation previously relied on.\r\n\r\nAlongside **Jellyfin 12 support**, this release drops support for **Jellyfin 10.10.7** and lays a much more maintainable foundation for future Jellyfin releases.\r\n\r\n> ## 🙌 Huge thanks to @4eh5xitv6787h645ebv\r\n>\r\n> A massive part of this release is thanks to **@4eh5xitv6787h645ebv**, who took on the major overhaul of File Transformation's core architecture in PR #58.\r\n>\r\n> The move away from the old Harmony/MonoMod-based interception system to standard ASP.NET Core middleware is a significant piece of work. It not only makes File Transformation substantially easier to maintain, but also resolves an entire class of compatibility problems that caused the plugin to malfunction or be disabled on certain Jellyfin versions and platforms (#20, #35, #62, #64, #70, #71).\r\n>\r\n> This is far more than a small patch or isolated feature - it fundamentally improves the foundation the plugin is built on. A huge thank you for the time and effort that went into it.\r\n\r\n## ✨ New Features\r\n\r\n* Added support for **Jellyfin 12** and the newer Jellyfin server architecture (#34).\r\n* Replaced the previous Harmony/MonoMod-based web interception system with standard ASP.NET Core `IStartupFilter` middleware (PR #58, @4eh5xitv6787h645ebv).\r\n* Added support for unregistering transformations through `PluginInterface.RemoveTransformation(Guid)`, allowing dependent plugins to cleanly remove transformations when required.\r\n* Added support for synthesising virtual files for registered transformation paths, restoring support for plugins such as Plugin Pages where the underlying file doesn't physically exist.\r\n* Added ETag generation and `304 Not Modified` support for transformed content.\r\n* Added Brotli and gzip recompression of transformed responses for remote clients.\r\n* Added automatic MIME type detection for virtual transformed files.\r\n\r\n## 🛠️ Improvements\r\n\r\n* Removed platform-specific DLL extraction and version-specific Jellyfin shims.\r\n* Removed dependencies on Harmony, MonoMod and Prometheus from the core transformation pipeline.\r\n* Improved compatibility across Jellyfin versions and platforms by moving the transformation system onto standard ASP.NET Core APIs (#20, #35, #62, #64).\r\n* Added per-transformation error isolation so a failure in one plugin's transformation won't prevent other transformations from running.\r\n* Made transformation registration, removal and execution thread-safe.\r\n* Added regex caching and timeout protection for transformation matching.\r\n* Improved handling of `Accept-Encoding`, including proper quality-value (`q`) parsing.\r\n* Improved LAN detection for IPv6-mapped IPv4 addresses.\r\n* Improved proxy caching behaviour by correctly setting `Vary: Accept-Encoding`.\r\n* Reworked HTTP handling to use a shared `HttpClient` with appropriate timeouts.\r\n* Hardened named-pipe transformations with timeouts, size limits, EOF handling and improved resource cleanup.\r\n\r\n## 🪲 Bug Fixes\r\n\r\n* Fixed a class of failures where Harmony/MonoMod runtime patching could cause File Transformation to malfunction or be automatically disabled on startup (#20, #35, #62, #64, #71).\r\n* Fixed #70 where transformations could attempt to use a disposed `IServiceProvider` after Jellyfin restarted, resulting in `500` responses across the web UI.\r\n* Fixed transformed content potentially retaining stale trailing bytes when a transformation produced a shorter result than the original response.\r\n* Fixed failures in one transformation potentially breaking the entire transformation pipeline.\r\n* Fixed potential `HttpClient` resource leaks.\r\n* Fixed named-pipe transformations being able to hang indefinitely or loop on zero-byte reads.\r\n* Fixed incorrect handling of disabled compression encodings such as `gzip;q=0`.\r\n* Fixed failed virtual-file transformations returning an empty successful response instead of reverting to the original `404`.\r\n* Improved middleware failure handling so the original response is served if transformation or recompression fails.\r\n\r\n## 💻 Developer Compatibility\r\n\r\nThe existing `PluginInterface.RegisterTransformation` API and registration payload remain compatible with previous releases, so plugins using a standard transformation callback **should not need to change how they register transformations**.\r\n\r\nThere are, however, some changes to transformation execution that plugin developers should be aware of:\r\n\r\n* Added `PluginInterface.RemoveTransformation(Guid)`, allowing plugins to explicitly unregister a previously registered transformation.\r\n* Assembly callbacks still receive the same payload and are expected to return the transformed content as a `string`.\r\n* Invalid or failed assembly callbacks now **fail safely rather than falling through to another configured callback mechanism**. Plugins should ensure their callback assembly, class and method names are valid.\r\n* HTTP transformation callbacks must now return a **successful HTTP status code**. Non-success responses are treated as a failed transformation rather than using the response body as transformed content.\r\n* HTTP callbacks now have a **15 second timeout**.\r\n* Named-pipe callbacks now have connection/error handling and a **50 MB maximum response size**.\r\n* Failed transformations now leave the original response untouched rather than potentially replacing it with invalid or partial output.\r\n\r\nThese changes are intended to make transformations significantly safer and more predictable, but plugins relying on the previous fallback or error behaviour should review their integrations when updating.\r\n\r\n## ⚠️ Compatibility\r\n\r\n* **Jellyfin 10.10.7 is no longer supported.**\r\n* Added support for **Jellyfin 12** and its newer server architecture (#34).\r\n* Users remaining on Jellyfin 10.10.7 will need to stay on an earlier File Transformation release until they upgrade Jellyfin.\r\n* Removed legacy Harmony/MonoMod runtime patching and version-specific Jellyfin shims.\r\n* File Transformation now relies on standard ASP.NET Core middleware rather than patching Jellyfin internals, providing a much more stable base for future Jellyfin versions.\r\n\r\n## Contributors\r\n\r\n* 4eh5xitv6787h645ebv\r\n\r\n## ❤️ Support\r\n\r\nIf you enjoy using my Jellyfin plugins and want to support the time that goes into building, maintaining, and improving them, you can do so on [Ko-fi](https://ko-fi.com/IAmParadox27).\r\n\r\nThank you for using the plugins and being part of the community.\r\n\r\n<a href='https://ko-fi.com/iamparadox27' target='_blank'><img height='32' style='border:0px;height:32px;' src='https://storage.ko-fi.com/cdn/kofi4.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>",
+                "targetAbi": "10.11.11.0",
+                "sourceUrl": "https://github.com/IAmParadox27/jellyfin-plugin-file-transformation/releases/download/3.0.0.0/Release-10.11.11.zip",
+                "checksum": "690E7CB4CF45C6984F02AD0D97E1DDDC",
+                "timestamp": "2026-09-08T09:02:53",
+                "dependencies": [
+                  "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+              },
+              {
+                "version": "3.0.0.0",
+                "changelog": "# 🚀 A New Foundation for File Transformation\r\n\r\nFile Transformation **3.0.0.0** is a major overhaul of how the plugin integrates with Jellyfin. The transformation system has been rebuilt around standard ASP.NET Core middleware, removing much of the version-specific runtime patching that File Transformation previously relied on.\r\n\r\nAlongside **Jellyfin 12 support**, this release drops support for **Jellyfin 10.10.7** and lays a much more maintainable foundation for future Jellyfin releases.\r\n\r\n> ## 🙌 Huge thanks to @4eh5xitv6787h645ebv\r\n>\r\n> A massive part of this release is thanks to **@4eh5xitv6787h645ebv**, who took on the major overhaul of File Transformation's core architecture in PR #58.\r\n>\r\n> The move away from the old Harmony/MonoMod-based interception system to standard ASP.NET Core middleware is a significant piece of work. It not only makes File Transformation substantially easier to maintain, but also resolves an entire class of compatibility problems that caused the plugin to malfunction or be disabled on certain Jellyfin versions and platforms (#20, #35, #62, #64, #70, #71).\r\n>\r\n> This is far more than a small patch or isolated feature - it fundamentally improves the foundation the plugin is built on. A huge thank you for the time and effort that went into it.\r\n\r\n## ✨ New Features\r\n\r\n* Added support for **Jellyfin 12** and the newer Jellyfin server architecture (#34).\r\n* Replaced the previous Harmony/MonoMod-based web interception system with standard ASP.NET Core `IStartupFilter` middleware (PR #58, @4eh5xitv6787h645ebv).\r\n* Added support for unregistering transformations through `PluginInterface.RemoveTransformation(Guid)`, allowing dependent plugins to cleanly remove transformations when required.\r\n* Added support for synthesising virtual files for registered transformation paths, restoring support for plugins such as Plugin Pages where the underlying file doesn't physically exist.\r\n* Added ETag generation and `304 Not Modified` support for transformed content.\r\n* Added Brotli and gzip recompression of transformed responses for remote clients.\r\n* Added automatic MIME type detection for virtual transformed files.\r\n\r\n## 🛠️ Improvements\r\n\r\n* Removed platform-specific DLL extraction and version-specific Jellyfin shims.\r\n* Removed dependencies on Harmony, MonoMod and Prometheus from the core transformation pipeline.\r\n* Improved compatibility across Jellyfin versions and platforms by moving the transformation system onto standard ASP.NET Core APIs (#20, #35, #62, #64).\r\n* Added per-transformation error isolation so a failure in one plugin's transformation won't prevent other transformations from running.\r\n* Made transformation registration, removal and execution thread-safe.\r\n* Added regex caching and timeout protection for transformation matching.\r\n* Improved handling of `Accept-Encoding`, including proper quality-value (`q`) parsing.\r\n* Improved LAN detection for IPv6-mapped IPv4 addresses.\r\n* Improved proxy caching behaviour by correctly setting `Vary: Accept-Encoding`.\r\n* Reworked HTTP handling to use a shared `HttpClient` with appropriate timeouts.\r\n* Hardened named-pipe transformations with timeouts, size limits, EOF handling and improved resource cleanup.\r\n\r\n## 🪲 Bug Fixes\r\n\r\n* Fixed a class of failures where Harmony/MonoMod runtime patching could cause File Transformation to malfunction or be automatically disabled on startup (#20, #35, #62, #64, #71).\r\n* Fixed #70 where transformations could attempt to use a disposed `IServiceProvider` after Jellyfin restarted, resulting in `500` responses across the web UI.\r\n* Fixed transformed content potentially retaining stale trailing bytes when a transformation produced a shorter result than the original response.\r\n* Fixed failures in one transformation potentially breaking the entire transformation pipeline.\r\n* Fixed potential `HttpClient` resource leaks.\r\n* Fixed named-pipe transformations being able to hang indefinitely or loop on zero-byte reads.\r\n* Fixed incorrect handling of disabled compression encodings such as `gzip;q=0`.\r\n* Fixed failed virtual-file transformations returning an empty successful response instead of reverting to the original `404`.\r\n* Improved middleware failure handling so the original response is served if transformation or recompression fails.\r\n\r\n## 💻 Developer Compatibility\r\n\r\nThe existing `PluginInterface.RegisterTransformation` API and registration payload remain compatible with previous releases, so plugins using a standard transformation callback **should not need to change how they register transformations**.\r\n\r\nThere are, however, some changes to transformation execution that plugin developers should be aware of:\r\n\r\n* Added `PluginInterface.RemoveTransformation(Guid)`, allowing plugins to explicitly unregister a previously registered transformation.\r\n* Assembly callbacks still receive the same payload and are expected to return the transformed content as a `string`.\r\n* Invalid or failed assembly callbacks now **fail safely rather than falling through to another configured callback mechanism**. Plugins should ensure their callback assembly, class and method names are valid.\r\n* HTTP transformation callbacks must now return a **successful HTTP status code**. Non-success responses are treated as a failed transformation rather than using the response body as transformed content.\r\n* HTTP callbacks now have a **15 second timeout**.\r\n* Named-pipe callbacks now have connection/error handling and a **50 MB maximum response size**.\r\n* Failed transformations now leave the original response untouched rather than potentially replacing it with invalid or partial output.\r\n\r\nThese changes are intended to make transformations significantly safer and more predictable, but plugins relying on the previous fallback or error behaviour should review their integrations when updating.\r\n\r\n## ⚠️ Compatibility\r\n\r\n* **Jellyfin 10.10.7 is no longer supported.**\r\n* Added support for **Jellyfin 12** and its newer server architecture (#34).\r\n* Users remaining on Jellyfin 10.10.7 will need to stay on an earlier File Transformation release until they upgrade Jellyfin.\r\n* Removed legacy Harmony/MonoMod runtime patching and version-specific Jellyfin shims.\r\n* File Transformation now relies on standard ASP.NET Core middleware rather than patching Jellyfin internals, providing a much more stable base for future Jellyfin versions.\r\n\r\n## Contributors\r\n\r\n* 4eh5xitv6787h645ebv\r\n\r\n## ❤️ Support\r\n\r\nIf you enjoy using my Jellyfin plugins and want to support the time that goes into building, maintaining, and improving them, you can do so on [Ko-fi](https://ko-fi.com/IAmParadox27).\r\n\r\nThank you for using the plugins and being part of the community.\r\n\r\n<a href='https://ko-fi.com/iamparadox27' target='_blank'><img height='32' style='border:0px;height:32px;' src='https://storage.ko-fi.com/cdn/kofi4.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>",
+                "targetAbi": "10.11.7.0",
+                "sourceUrl": "https://github.com/IAmParadox27/jellyfin-plugin-file-transformation/releases/download/3.0.0.0/Release-10.11.7.zip",
+                "checksum": "6753DC76B635A4C3B4557ADA2AD07AAA",
+                "timestamp": "2026-09-08T09:02:53",
+                "dependencies": [
+                  "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+              },
+              {
+                "version": "3.0.0.0",
+                "changelog": "# 🚀 A New Foundation for File Transformation\r\n\r\nFile Transformation **3.0.0.0** is a major overhaul of how the plugin integrates with Jellyfin. The transformation system has been rebuilt around standard ASP.NET Core middleware, removing much of the version-specific runtime patching that File Transformation previously relied on.\r\n\r\nAlongside **Jellyfin 12 support**, this release drops support for **Jellyfin 10.10.7** and lays a much more maintainable foundation for future Jellyfin releases.\r\n\r\n> ## 🙌 Huge thanks to @4eh5xitv6787h645ebv\r\n>\r\n> A massive part of this release is thanks to **@4eh5xitv6787h645ebv**, who took on the major overhaul of File Transformation's core architecture in PR #58.\r\n>\r\n> The move away from the old Harmony/MonoMod-based interception system to standard ASP.NET Core middleware is a significant piece of work. It not only makes File Transformation substantially easier to maintain, but also resolves an entire class of compatibility problems that caused the plugin to malfunction or be disabled on certain Jellyfin versions and platforms (#20, #35, #62, #64, #70, #71).\r\n>\r\n> This is far more than a small patch or isolated feature - it fundamentally improves the foundation the plugin is built on. A huge thank you for the time and effort that went into it.\r\n\r\n## ✨ New Features\r\n\r\n* Added support for **Jellyfin 12** and the newer Jellyfin server architecture (#34).\r\n* Replaced the previous Harmony/MonoMod-based web interception system with standard ASP.NET Core `IStartupFilter` middleware (PR #58, @4eh5xitv6787h645ebv).\r\n* Added support for unregistering transformations through `PluginInterface.RemoveTransformation(Guid)`, allowing dependent plugins to cleanly remove transformations when required.\r\n* Added support for synthesising virtual files for registered transformation paths, restoring support for plugins such as Plugin Pages where the underlying file doesn't physically exist.\r\n* Added ETag generation and `304 Not Modified` support for transformed content.\r\n* Added Brotli and gzip recompression of transformed responses for remote clients.\r\n* Added automatic MIME type detection for virtual transformed files.\r\n\r\n## 🛠️ Improvements\r\n\r\n* Removed platform-specific DLL extraction and version-specific Jellyfin shims.\r\n* Removed dependencies on Harmony, MonoMod and Prometheus from the core transformation pipeline.\r\n* Improved compatibility across Jellyfin versions and platforms by moving the transformation system onto standard ASP.NET Core APIs (#20, #35, #62, #64).\r\n* Added per-transformation error isolation so a failure in one plugin's transformation won't prevent other transformations from running.\r\n* Made transformation registration, removal and execution thread-safe.\r\n* Added regex caching and timeout protection for transformation matching.\r\n* Improved handling of `Accept-Encoding`, including proper quality-value (`q`) parsing.\r\n* Improved LAN detection for IPv6-mapped IPv4 addresses.\r\n* Improved proxy caching behaviour by correctly setting `Vary: Accept-Encoding`.\r\n* Reworked HTTP handling to use a shared `HttpClient` with appropriate timeouts.\r\n* Hardened named-pipe transformations with timeouts, size limits, EOF handling and improved resource cleanup.\r\n\r\n## 🪲 Bug Fixes\r\n\r\n* Fixed a class of failures where Harmony/MonoMod runtime patching could cause File Transformation to malfunction or be automatically disabled on startup (#20, #35, #62, #64, #71).\r\n* Fixed #70 where transformations could attempt to use a disposed `IServiceProvider` after Jellyfin restarted, resulting in `500` responses across the web UI.\r\n* Fixed transformed content potentially retaining stale trailing bytes when a transformation produced a shorter result than the original response.\r\n* Fixed failures in one transformation potentially breaking the entire transformation pipeline.\r\n* Fixed potential `HttpClient` resource leaks.\r\n* Fixed named-pipe transformations being able to hang indefinitely or loop on zero-byte reads.\r\n* Fixed incorrect handling of disabled compression encodings such as `gzip;q=0`.\r\n* Fixed failed virtual-file transformations returning an empty successful response instead of reverting to the original `404`.\r\n* Improved middleware failure handling so the original response is served if transformation or recompression fails.\r\n\r\n## 💻 Developer Compatibility\r\n\r\nThe existing `PluginInterface.RegisterTransformation` API and registration payload remain compatible with previous releases, so plugins using a standard transformation callback **should not need to change how they register transformations**.\r\n\r\nThere are, however, some changes to transformation execution that plugin developers should be aware of:\r\n\r\n* Added `PluginInterface.RemoveTransformation(Guid)`, allowing plugins to explicitly unregister a previously registered transformation.\r\n* Assembly callbacks still receive the same payload and are expected to return the transformed content as a `string`.\r\n* Invalid or failed assembly callbacks now **fail safely rather than falling through to another configured callback mechanism**. Plugins should ensure their callback assembly, class and method names are valid.\r\n* HTTP transformation callbacks must now return a **successful HTTP status code**. Non-success responses are treated as a failed transformation rather than using the response body as transformed content.\r\n* HTTP callbacks now have a **15 second timeout**.\r\n* Named-pipe callbacks now have connection/error handling and a **50 MB maximum response size**.\r\n* Failed transformations now leave the original response untouched rather than potentially replacing it with invalid or partial output.\r\n\r\nThese changes are intended to make transformations significantly safer and more predictable, but plugins relying on the previous fallback or error behaviour should review their integrations when updating.\r\n\r\n## ⚠️ Compatibility\r\n\r\n* **Jellyfin 10.10.7 is no longer supported.**\r\n* Added support for **Jellyfin 12** and its newer server architecture (#34).\r\n* Users remaining on Jellyfin 10.10.7 will need to stay on an earlier File Transformation release until they upgrade Jellyfin.\r\n* Removed legacy Harmony/MonoMod runtime patching and version-specific Jellyfin shims.\r\n* File Transformation now relies on standard ASP.NET Core middleware rather than patching Jellyfin internals, providing a much more stable base for future Jellyfin versions.\r\n\r\n## Contributors\r\n\r\n* 4eh5xitv6787h645ebv\r\n\r\n## ❤️ Support\r\n\r\nIf you enjoy using my Jellyfin plugins and want to support the time that goes into building, maintaining, and improving them, you can do so on [Ko-fi](https://ko-fi.com/IAmParadox27).\r\n\r\nThank you for using the plugins and being part of the community.\r\n\r\n<a href='https://ko-fi.com/iamparadox27' target='_blank'><img height='32' style='border:0px;height:32px;' src='https://storage.ko-fi.com/cdn/kofi4.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>",
+                "targetAbi": "10.11.8.0",
+                "sourceUrl": "https://github.com/IAmParadox27/jellyfin-plugin-file-transformation/releases/download/3.0.0.0/Release-10.11.8.zip",
+                "checksum": "6907A353748E4C20E6A49CF5082A6A8A",
+                "timestamp": "2026-09-08T09:02:53",
+                "dependencies": [
+                  "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+              },
+              {
+                "version": "3.0.0.0",
+                "changelog": "# 🚀 A New Foundation for File Transformation\r\n\r\nFile Transformation **3.0.0.0** is a major overhaul of how the plugin integrates with Jellyfin. The transformation system has been rebuilt around standard ASP.NET Core middleware, removing much of the version-specific runtime patching that File Transformation previously relied on.\r\n\r\nAlongside **Jellyfin 12 support**, this release drops support for **Jellyfin 10.10.7** and lays a much more maintainable foundation for future Jellyfin releases.\r\n\r\n> ## 🙌 Huge thanks to @4eh5xitv6787h645ebv\r\n>\r\n> A massive part of this release is thanks to **@4eh5xitv6787h645ebv**, who took on the major overhaul of File Transformation's core architecture in PR #58.\r\n>\r\n> The move away from the old Harmony/MonoMod-based interception system to standard ASP.NET Core middleware is a significant piece of work. It not only makes File Transformation substantially easier to maintain, but also resolves an entire class of compatibility problems that caused the plugin to malfunction or be disabled on certain Jellyfin versions and platforms (#20, #35, #62, #64, #70, #71).\r\n>\r\n> This is far more than a small patch or isolated feature - it fundamentally improves the foundation the plugin is built on. A huge thank you for the time and effort that went into it.\r\n\r\n## ✨ New Features\r\n\r\n* Added support for **Jellyfin 12** and the newer Jellyfin server architecture (#34).\r\n* Replaced the previous Harmony/MonoMod-based web interception system with standard ASP.NET Core `IStartupFilter` middleware (PR #58, @4eh5xitv6787h645ebv).\r\n* Added support for unregistering transformations through `PluginInterface.RemoveTransformation(Guid)`, allowing dependent plugins to cleanly remove transformations when required.\r\n* Added support for synthesising virtual files for registered transformation paths, restoring support for plugins such as Plugin Pages where the underlying file doesn't physically exist.\r\n* Added ETag generation and `304 Not Modified` support for transformed content.\r\n* Added Brotli and gzip recompression of transformed responses for remote clients.\r\n* Added automatic MIME type detection for virtual transformed files.\r\n\r\n## 🛠️ Improvements\r\n\r\n* Removed platform-specific DLL extraction and version-specific Jellyfin shims.\r\n* Removed dependencies on Harmony, MonoMod and Prometheus from the core transformation pipeline.\r\n* Improved compatibility across Jellyfin versions and platforms by moving the transformation system onto standard ASP.NET Core APIs (#20, #35, #62, #64).\r\n* Added per-transformation error isolation so a failure in one plugin's transformation won't prevent other transformations from running.\r\n* Made transformation registration, removal and execution thread-safe.\r\n* Added regex caching and timeout protection for transformation matching.\r\n* Improved handling of `Accept-Encoding`, including proper quality-value (`q`) parsing.\r\n* Improved LAN detection for IPv6-mapped IPv4 addresses.\r\n* Improved proxy caching behaviour by correctly setting `Vary: Accept-Encoding`.\r\n* Reworked HTTP handling to use a shared `HttpClient` with appropriate timeouts.\r\n* Hardened named-pipe transformations with timeouts, size limits, EOF handling and improved resource cleanup.\r\n\r\n## 🪲 Bug Fixes\r\n\r\n* Fixed a class of failures where Harmony/MonoMod runtime patching could cause File Transformation to malfunction or be automatically disabled on startup (#20, #35, #62, #64, #71).\r\n* Fixed #70 where transformations could attempt to use a disposed `IServiceProvider` after Jellyfin restarted, resulting in `500` responses across the web UI.\r\n* Fixed transformed content potentially retaining stale trailing bytes when a transformation produced a shorter result than the original response.\r\n* Fixed failures in one transformation potentially breaking the entire transformation pipeline.\r\n* Fixed potential `HttpClient` resource leaks.\r\n* Fixed named-pipe transformations being able to hang indefinitely or loop on zero-byte reads.\r\n* Fixed incorrect handling of disabled compression encodings such as `gzip;q=0`.\r\n* Fixed failed virtual-file transformations returning an empty successful response instead of reverting to the original `404`.\r\n* Improved middleware failure handling so the original response is served if transformation or recompression fails.\r\n\r\n## 💻 Developer Compatibility\r\n\r\nThe existing `PluginInterface.RegisterTransformation` API and registration payload remain compatible with previous releases, so plugins using a standard transformation callback **should not need to change how they register transformations**.\r\n\r\nThere are, however, some changes to transformation execution that plugin developers should be aware of:\r\n\r\n* Added `PluginInterface.RemoveTransformation(Guid)`, allowing plugins to explicitly unregister a previously registered transformation.\r\n* Assembly callbacks still receive the same payload and are expected to return the transformed content as a `string`.\r\n* Invalid or failed assembly callbacks now **fail safely rather than falling through to another configured callback mechanism**. Plugins should ensure their callback assembly, class and method names are valid.\r\n* HTTP transformation callbacks must now return a **successful HTTP status code**. Non-success responses are treated as a failed transformation rather than using the response body as transformed content.\r\n* HTTP callbacks now have a **15 second timeout**.\r\n* Named-pipe callbacks now have connection/error handling and a **50 MB maximum response size**.\r\n* Failed transformations now leave the original response untouched rather than potentially replacing it with invalid or partial output.\r\n\r\nThese changes are intended to make transformations significantly safer and more predictable, but plugins relying on the previous fallback or error behaviour should review their integrations when updating.\r\n\r\n## ⚠️ Compatibility\r\n\r\n* **Jellyfin 10.10.7 is no longer supported.**\r\n* Added support for **Jellyfin 12** and its newer server architecture (#34).\r\n* Users remaining on Jellyfin 10.10.7 will need to stay on an earlier File Transformation release until they upgrade Jellyfin.\r\n* Removed legacy Harmony/MonoMod runtime patching and version-specific Jellyfin shims.\r\n* File Transformation now relies on standard ASP.NET Core middleware rather than patching Jellyfin internals, providing a much more stable base for future Jellyfin versions.\r\n\r\n## Contributors\r\n\r\n* 4eh5xitv6787h645ebv\r\n\r\n## ❤️ Support\r\n\r\nIf you enjoy using my Jellyfin plugins and want to support the time that goes into building, maintaining, and improving them, you can do so on [Ko-fi](https://ko-fi.com/IAmParadox27).\r\n\r\nThank you for using the plugins and being part of the community.\r\n\r\n<a href='https://ko-fi.com/iamparadox27' target='_blank'><img height='32' style='border:0px;height:32px;' src='https://storage.ko-fi.com/cdn/kofi4.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>",
+                "targetAbi": "10.11.9.0",
+                "sourceUrl": "https://github.com/IAmParadox27/jellyfin-plugin-file-transformation/releases/download/3.0.0.0/Release-10.11.9.zip",
+                "checksum": "276479DFEF93C91DD4C47B0E6F217128",
+                "timestamp": "2026-09-08T09:02:53",
+                "dependencies": [
+                  "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+              },
+              {
+                "version": "3.0.0.0",
+                "changelog": "# 🚀 A New Foundation for File Transformation\r\n\r\nFile Transformation **3.0.0.0** is a major overhaul of how the plugin integrates with Jellyfin. The transformation system has been rebuilt around standard ASP.NET Core middleware, removing much of the version-specific runtime patching that File Transformation previously relied on.\r\n\r\nAlongside **Jellyfin 12 support**, this release drops support for **Jellyfin 10.10.7** and lays a much more maintainable foundation for future Jellyfin releases.\r\n\r\n> ## 🙌 Huge thanks to @4eh5xitv6787h645ebv\r\n>\r\n> A massive part of this release is thanks to **@4eh5xitv6787h645ebv**, who took on the major overhaul of File Transformation's core architecture in PR #58.\r\n>\r\n> The move away from the old Harmony/MonoMod-based interception system to standard ASP.NET Core middleware is a significant piece of work. It not only makes File Transformation substantially easier to maintain, but also resolves an entire class of compatibility problems that caused the plugin to malfunction or be disabled on certain Jellyfin versions and platforms (#20, #35, #62, #64, #70, #71).\r\n>\r\n> This is far more than a small patch or isolated feature - it fundamentally improves the foundation the plugin is built on. A huge thank you for the time and effort that went into it.\r\n\r\n## ✨ New Features\r\n\r\n* Added support for **Jellyfin 12** and the newer Jellyfin server architecture (#34).\r\n* Replaced the previous Harmony/MonoMod-based web interception system with standard ASP.NET Core `IStartupFilter` middleware (PR #58, @4eh5xitv6787h645ebv).\r\n* Added support for unregistering transformations through `PluginInterface.RemoveTransformation(Guid)`, allowing dependent plugins to cleanly remove transformations when required.\r\n* Added support for synthesising virtual files for registered transformation paths, restoring support for plugins such as Plugin Pages where the underlying file doesn't physically exist.\r\n* Added ETag generation and `304 Not Modified` support for transformed content.\r\n* Added Brotli and gzip recompression of transformed responses for remote clients.\r\n* Added automatic MIME type detection for virtual transformed files.\r\n\r\n## 🛠️ Improvements\r\n\r\n* Removed platform-specific DLL extraction and version-specific Jellyfin shims.\r\n* Removed dependencies on Harmony, MonoMod and Prometheus from the core transformation pipeline.\r\n* Improved compatibility across Jellyfin versions and platforms by moving the transformation system onto standard ASP.NET Core APIs (#20, #35, #62, #64).\r\n* Added per-transformation error isolation so a failure in one plugin's transformation won't prevent other transformations from running.\r\n* Made transformation registration, removal and execution thread-safe.\r\n* Added regex caching and timeout protection for transformation matching.\r\n* Improved handling of `Accept-Encoding`, including proper quality-value (`q`) parsing.\r\n* Improved LAN detection for IPv6-mapped IPv4 addresses.\r\n* Improved proxy caching behaviour by correctly setting `Vary: Accept-Encoding`.\r\n* Reworked HTTP handling to use a shared `HttpClient` with appropriate timeouts.\r\n* Hardened named-pipe transformations with timeouts, size limits, EOF handling and improved resource cleanup.\r\n\r\n## 🪲 Bug Fixes\r\n\r\n* Fixed a class of failures where Harmony/MonoMod runtime patching could cause File Transformation to malfunction or be automatically disabled on startup (#20, #35, #62, #64, #71).\r\n* Fixed #70 where transformations could attempt to use a disposed `IServiceProvider` after Jellyfin restarted, resulting in `500` responses across the web UI.\r\n* Fixed transformed content potentially retaining stale trailing bytes when a transformation produced a shorter result than the original response.\r\n* Fixed failures in one transformation potentially breaking the entire transformation pipeline.\r\n* Fixed potential `HttpClient` resource leaks.\r\n* Fixed named-pipe transformations being able to hang indefinitely or loop on zero-byte reads.\r\n* Fixed incorrect handling of disabled compression encodings such as `gzip;q=0`.\r\n* Fixed failed virtual-file transformations returning an empty successful response instead of reverting to the original `404`.\r\n* Improved middleware failure handling so the original response is served if transformation or recompression fails.\r\n\r\n## 💻 Developer Compatibility\r\n\r\nThe existing `PluginInterface.RegisterTransformation` API and registration payload remain compatible with previous releases, so plugins using a standard transformation callback **should not need to change how they register transformations**.\r\n\r\nThere are, however, some changes to transformation execution that plugin developers should be aware of:\r\n\r\n* Added `PluginInterface.RemoveTransformation(Guid)`, allowing plugins to explicitly unregister a previously registered transformation.\r\n* Assembly callbacks still receive the same payload and are expected to return the transformed content as a `string`.\r\n* Invalid or failed assembly callbacks now **fail safely rather than falling through to another configured callback mechanism**. Plugins should ensure their callback assembly, class and method names are valid.\r\n* HTTP transformation callbacks must now return a **successful HTTP status code**. Non-success responses are treated as a failed transformation rather than using the response body as transformed content.\r\n* HTTP callbacks now have a **15 second timeout**.\r\n* Named-pipe callbacks now have connection/error handling and a **50 MB maximum response size**.\r\n* Failed transformations now leave the original response untouched rather than potentially replacing it with invalid or partial output.\r\n\r\nThese changes are intended to make transformations significantly safer and more predictable, but plugins relying on the previous fallback or error behaviour should review their integrations when updating.\r\n\r\n## ⚠️ Compatibility\r\n\r\n* **Jellyfin 10.10.7 is no longer supported.**\r\n* Added support for **Jellyfin 12** and its newer server architecture (#34).\r\n* Users remaining on Jellyfin 10.10.7 will need to stay on an earlier File Transformation release until they upgrade Jellyfin.\r\n* Removed legacy Harmony/MonoMod runtime patching and version-specific Jellyfin shims.\r\n* File Transformation now relies on standard ASP.NET Core middleware rather than patching Jellyfin internals, providing a much more stable base for future Jellyfin versions.\r\n\r\n## Contributors\r\n\r\n* 4eh5xitv6787h645ebv\r\n\r\n## ❤️ Support\r\n\r\nIf you enjoy using my Jellyfin plugins and want to support the time that goes into building, maintaining, and improving them, you can do so on [Ko-fi](https://ko-fi.com/IAmParadox27).\r\n\r\nThank you for using the plugins and being part of the community.\r\n\r\n<a href='https://ko-fi.com/iamparadox27' target='_blank'><img height='32' style='border:0px;height:32px;' src='https://storage.ko-fi.com/cdn/kofi4.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>",
+                "targetAbi": "12.0.0.0",
+                "sourceUrl": "https://github.com/IAmParadox27/jellyfin-plugin-file-transformation/releases/download/3.0.0.0/Release-12.0.0.zip",
+                "checksum": "6F03451BBA1C19A9A49E8ECCD80ECD97",
+                "timestamp": "2026-09-08T09:02:53",
+                "dependencies": [
+                  "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+                ]
+              }
+        ]
+    }
+]

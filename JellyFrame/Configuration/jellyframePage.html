@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>JellyFrame - Settings</title>
+</head>
+
+<body>
+    <div id="JellyFramePage" data-role="page" class="page type-interior pluginConfigurationPage jfConfigPage"
+        data-require="emby-input,emby-button,emby-select">
+
+        <style>
+            :root {
+                --mui-palette-primary-main: #90caf9;
+                --mui-palette-primary-dark: #42a5f5;
+                --mui-palette-primary-contrast: rgba(0, 0, 0, 0.87);
+                --mui-palette-secondary-main: #ce93d8;
+                --mui-palette-success-main: #66bb6a;
+                --mui-palette-warning-main: #ffa726;
+                --mui-palette-error-main: #f44336;
+                --mui-palette-info-main: #29b6f6;
+                --mui-palette-bg-paper: #1e1e1e;
+                --mui-palette-bg-elevated: #262626;
+                --mui-palette-text-primary: rgba(255, 255, 255, 0.87);
+                --mui-palette-text-secondary: rgba(255, 255, 255, 0.60);
+                --mui-palette-divider: rgba(255, 255, 255, 0.12);
+                --mui-shape-radius-sm: 4px;
+                --mui-shape-radius-md: 8px;
+                --mui-shape-radius-lg: 12px;
+                --mui-shadow-elevation-1: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+                --mui-shadow-elevation-2: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+                --mui-shadow-elevation-4: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+                --mui-shadow-elevation-8: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+            }
+
+            .jfConfigPage {
+                font-family: "Roboto", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+                color: var(--mui-palette-text-primary);
+                padding: 16px 24px;
+                max-width: 900px;
+                margin: 0 auto;
+                box-sizing: border-box;
+            }
+
+            .jfConfigPage h2 {
+                font-size: 2.0rem;
+                font-weight: 600;
+                line-height: 1.25;
+                letter-spacing: -0.00833em;
+                margin: 0 0 24px 0;
+                color: var(--mui-palette-text-primary);
+            }
+
+            .jfConfigPage .mui-card {
+                background-color: var(--mui-palette-bg-paper);
+                border-radius: var(--mui-shape-radius-lg);
+                box-shadow: var(--mui-shadow-elevation-1);
+                border: 1px solid var(--mui-palette-divider);
+                padding: 24px;
+                margin-bottom: 24px;
+                transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+                    border-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            }
+
+            .jfConfigPage .mui-card:hover {
+                border-color: rgba(144, 202, 249, 0.35);
+                box-shadow: var(--mui-shadow-elevation-2);
+            }
+
+            .jfConfigPage .mui-card-header {
+                margin-bottom: 24px;
+                padding-bottom: 16px;
+                border-bottom: 1px solid var(--mui-palette-divider);
+            }
+
+            .jfConfigPage .mui-card-title {
+                font-size: 1.25rem;
+                font-weight: 500;
+                line-height: 1.4;
+                letter-spacing: 0em;
+                margin: 0;
+                color: var(--mui-palette-text-primary);
+            }
+
+            .jfConfigPage .mui-card-subtitle {
+                font-size: 0.875rem;
+                font-weight: 400;
+                line-height: 1.57;
+                letter-spacing: 0.00714em;
+                color: var(--mui-palette-text-secondary);
+                margin: 6px 0 0 0;
+            }
+
+            .jfConfigPage .mui-form-group {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 18px 20px;
+                border-radius: var(--mui-shape-radius-md);
+                background-color: rgba(255, 255, 255, 0.02);
+                border: 1px solid var(--mui-palette-divider);
+                margin-bottom: 24px;
+                transition: background-color 150ms ease, border-color 150ms ease;
+            }
+
+            .jfConfigPage .mui-form-group:hover {
+                background-color: rgba(255, 255, 255, 0.04);
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .jfConfigPage .mui-switch-container {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                cursor: pointer;
+                user-select: none;
+                padding: 8px;
+                border-radius: 50%;
+            }
+
+            .jfConfigPage .mui-switch-track {
+                position: relative;
+                width: 44px;
+                height: 22px;
+                background-color: rgba(255, 255, 255, 0.3);
+                border-radius: 11px;
+                transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+            }
+
+            .jfConfigPage .mui-switch-thumb {
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                width: 26px;
+                height: 26px;
+                border-radius: 50%;
+                background-color: #bdbdbd;
+                box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+                    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+                    0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+                transition: left 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+                    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+                    box-shadow 150ms ease;
+            }
+
+            .jfConfigPage .mui-switch-container:hover .mui-switch-thumb {
+                box-shadow: 0px 0px 0px 8px rgba(255, 255, 255, 0.08),
+                    0px 2px 1px -1px rgba(0, 0, 0, 0.2);
+            }
+
+            .jfConfigPage .mui-switch-container.checked .mui-switch-track {
+                background-color: rgba(144, 202, 249, 0.5);
+            }
+
+            .jfConfigPage .mui-switch-container.checked .mui-switch-thumb {
+                left: 20px;
+                background-color: var(--mui-palette-primary-main);
+            }
+
+            .jfConfigPage .mui-switch-container.checked:hover .mui-switch-thumb {
+                box-shadow: 0px 0px 0px 8px rgba(144, 202, 249, 0.16),
+                    0px 2px 1px -1px rgba(0, 0, 0, 0.2);
+            }
+
+            .jfConfigPage .mui-label {
+                font-size: 1.0rem;
+                font-weight: 500;
+                line-height: 1.5;
+                color: var(--mui-palette-text-primary);
+            }
+
+            .jfConfigPage .mui-description {
+                font-size: 0.875rem;
+                color: var(--mui-palette-text-secondary);
+                line-height: 1.43;
+                margin-top: 4px;
+                max-width: 85%;
+            }
+
+            .jfConfigPage .mui-btn-primary,
+            button.mui-btn-primary {
+                all: unset !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                background-color: var(--mui-palette-primary-main) !important;
+                color: var(--mui-palette-primary-contrast) !important;
+                font-family: inherit !important;
+                font-weight: 600 !important;
+                padding: 8px 24px !important;
+                font-size: 0.875rem !important;
+                line-height: 1.75 !important;
+                letter-spacing: 0.02857em !important;
+                text-transform: uppercase !important;
+                border-radius: var(--mui-shape-radius-md) !important;
+                border: none !important;
+                cursor: pointer !important;
+                box-shadow: var(--mui-shadow-elevation-2) !important;
+                transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+                    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+                    transform 100ms ease !important;
+                user-select: none !important;
+                box-sizing: border-box !important;
+            }
+
+            .jfConfigPage .mui-btn-primary:hover:not(:disabled),
+            button.mui-btn-primary:hover:not(:disabled) {
+                background-color: var(--mui-palette-primary-dark) !important;
+                box-shadow: var(--mui-shadow-elevation-4) !important;
+            }
+
+            .jfConfigPage .mui-btn-primary:active:not(:disabled) {
+                transform: scale(0.98) !important;
+            }
+
+            .jfConfigPage .mui-btn-primary:disabled,
+            button.mui-btn-primary:disabled {
+                background-color: rgba(255, 255, 255, 0.12) !important;
+                color: rgba(255, 255, 255, 0.3) !important;
+                box-shadow: none !important;
+                cursor: default !important;
+                pointer-events: none !important;
+                transform: none !important;
+            }
+
+            .jfConfigPage .mui-btn-primary:focus-visible {
+                outline: 2px solid var(--mui-palette-primary-main) !important;
+                outline-offset: 2px !important;
+            }
+
+            .jfConfigPage .mui-alert {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                padding: 14px 18px;
+                border-radius: var(--mui-shape-radius-md);
+                font-size: 0.875rem;
+                margin-top: 24px;
+                opacity: 0;
+                transform: translateY(8px);
+                transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+                    transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+                pointer-events: none;
+            }
+
+            .jfConfigPage .mui-alert.show {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .jfConfigPage .mui-alert-warning {
+                background-color: rgba(255, 167, 38, 0.12);
+                color: #ffe0b2;
+                border: 1px solid rgba(255, 167, 38, 0.35);
+            }
+
+            .jfConfigPage .mui-alert-icon {
+                display: flex;
+                font-size: 20px;
+                flex-shrink: 0;
+            }
+
+            .jfConfigPage .mui-alert-message {
+                flex-grow: 1;
+                line-height: 1.5;
+            }
+        </style>
+
+        <div data-role="content">
+            <div class="content-primary">
+                <h2>JellyFrame Settings</h2>
+
+                <!-- Main Configuration Card -->
+                <div class="mui-card">
+                    <div class="mui-card-header">
+                        <h3 class="mui-card-title">Frontend Injection Hook</h3>
+                        <p class="mui-card-subtitle">Configure how JellyFrame injects mods and themes into the Jellyfin
+                            interface.</p>
+                    </div>
+
+                    <!-- Switch Control Group -->
+                    <div class="mui-form-group">
+                        <div>
+                            <div class="mui-label">Use Loom Injector</div>
+                            <div class="mui-description">
+                                Memory-based injection system (requires Loom plugin). When turned OFF, defaults to
+                                standard File Transformation plugin injector.
+                            </div>
+                        </div>
+
+                        <!-- Toggle Switch -->
+                        <div id="loomToggle" class="mui-switch-container" role="switch" aria-checked="false"
+                            tabindex="0">
+                            <div class="mui-switch-track">
+                                <div class="mui-switch-thumb"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save & Apply Button -->
+                    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                        <button type="button" id="btnSaveConfig" class="mui-btn-primary">Save & Apply</button>
+                        <span id="saveStatus" style="font-size: 0.875rem; font-weight: 500;"></span>
+                    </div>
+
+                    <!-- Warning & Feedback Alert -->
+                    <div id="feedbackAlert" class="mui-alert mui-alert-warning" role="alert">
+                        <div class="mui-alert-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 5.99L19.53 19H4.47L12 5.99M12 2L1 21h22L12 2zm1 14h-2v2h2v-2zm0-6h-2v4h2v-4z" />
+                            </svg>
+                        </div>
+                        <div id="alertMessage" class="mui-alert-message">
+                            Configuration saved. A restart of the Jellyfin server is required to apply the injection
+                            change.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var PLUGIN_ID = 'd4e5f6a7-b8c9-0123-defa-456789012345';
+
+var CHIP_OFF = 'display:inline-flex;align-items:center;padding:4px 12px;border-radius:9999px;border:1px solid rgba(255,255,255,0.23);background:transparent;color:rgba(255,255,255,0.7);font-size:12px;font-weight:500;line-height:1.4;cursor:pointer;user-select:none;box-sizing:border-box;transition:all 150ms cubic-bezier(0.4,0,0.2,1);';
+var CHIP_ON = 'display:inline-flex;align-items:center;padding:4px 12px;border-radius:9999px;border:1px solid #90caf9;background:rgba(144,202,249,0.16);color:#90caf9;font-size:12px;font-weight:600;line-height:1.4;cursor:pointer;user-select:none;box-sizing:border-box;transition:all 150ms cubic-bezier(0.4,0,0.2,1);box-shadow:0 0 0 1px #90caf9;';
+
+function el(id) {
+    return document.getElementById(id);
+}
+
+function escHtml(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function safeParseJson(str, fallback) {
+    try {
+        return JSON.parse(str || '{}') || fallback;
+    } catch (e) {
+        return fallback;
+    }
+}
+
+/**
+ * Resolve a localised string field.
+ * Accepts either a plain string (legacy) or a locale-keyed object:
+ *   { "en": "Hello", "fr": "Bonjour", "de": "Hallo" }
+ */
+function getLocalized(raw) {
+    if (!raw) return '';
+    if (typeof raw === 'string') return raw;
+    if (typeof raw !== 'object') return '';
+    var lang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    var langBase = lang.split('-')[0];
+    var keys = Object.keys(raw);
+    function pick(target) {
+        for (var i = 0; i < keys.length; i++) {
+            if (keys[i].toLowerCase() === target) return raw[keys[i]];
+        }
+        return null;
+    }
+    return pick(lang) || pick(langBase) || pick('en') || raw[keys[0]] || '';
+}
+
+function getLocalizedTitle(item) {
+    return getLocalized(item.title || item.name) || '';
+}
+
+function getLocalizedDescription(item) {
+    return getLocalized(item.description) || '';
+}
+
+function formatDate(dateStr) {
+    if (!dateStr) return '';
+    try {
+        var d = new Date(dateStr);
+        if (isNaN(d.getTime())) return '';
+        return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    } catch (e) {
+        return '';
+    }
+}
+
+function sortItems(list, sortBy) {
+    return list.slice().sort(function (a, b) {
+        if (sortBy === 'name') {
+            return getLocalizedTitle(a).localeCompare(getLocalizedTitle(b), undefined, { sensitivity: 'base' });
+        }
+        if (sortBy === 'name-desc') {
+            return getLocalizedTitle(b).localeCompare(getLocalizedTitle(a), undefined, { sensitivity: 'base' });
+        }
+        if (sortBy === 'newest') {
+            var dateA = new Date(a.createdAt || a.date || (a.files && a.files[0] && a.files[0].date) || 0).getTime();
+            var dateB = new Date(b.createdAt || b.date || (b.files && b.files[0] && b.files[0].date) || 0).getTime();
+            if (dateB !== dateA) return dateB - dateA;
+            return getLocalizedTitle(a).localeCompare(getLocalizedTitle(b));
+        }
+        // Default: recently-updated
+        var updateA = new Date(a.updatedAt || a.date || a.createdAt || (a.files && a.files[0] && a.files[0].date) || 0).getTime();
+        var updateB = new Date(b.updatedAt || b.date || b.createdAt || (b.files && b.files[0] && b.files[0].date) || 0).getTime();
+        if (updateB !== updateA) return updateB - updateA;
+        return getLocalizedTitle(a).localeCompare(getLocalizedTitle(b));
+    });
+}
+
+function parseCleanVersion(vStr) {
+    if (!vStr || typeof vStr !== 'string') return null;
+    var m = vStr.trim().match(/^v?(\d+(\.\d+)*)/i);
+    if (!m) return null;
+    var parts = m[1].split('.');
+    return {
+        major: parseInt(parts[0] || '0', 10),
+        minor: parseInt(parts[1] || '0', 10),
+        build: parseInt(parts[2] || '0', 10),
+        rev: parseInt(parts[3] || '0', 10)
+    };
+}
+
+function compareVersions(a, b) {
+    if (!a && !b) return 0;
+    if (!a) return -1;
+    if (!b) return 1;
+    if (a.major !== b.major) return a.major - b.major;
+    if (a.minor !== b.minor) return a.minor - b.minor;
+    if (a.build !== b.build) return a.build - b.build;
+    return a.rev - b.rev;
+}
+
+function evaluateSingleCondition(cond, cur) {
+    if (!cond) return true;
+    cond = cond.trim();
+    if (cond === '*' || cond.toLowerCase() === 'any') return true;
+
+    if (cond.charAt(cond.length - 1) === '+') {
+        var baseVer = parseCleanVersion(cond.slice(0, -1).trim());
+        if (!baseVer) return true;
+        return compareVersions(cur, baseVer) >= 0;
+    }
+    if (cond.charAt(0) === '^') {
+        var baseVer = parseCleanVersion(cond.slice(1).trim());
+        if (!baseVer) return true;
+        if (compareVersions(cur, baseVer) < 0) return false;
+        var upperVer = {
+            major: baseVer.major > 0 ? baseVer.major + 1 : 0,
+            minor: baseVer.major === 0 ? baseVer.minor + 1 : 0,
+            build: 0,
+            rev: 0
+        };
+        return compareVersions(cur, upperVer) < 0;
+    }
+    if (cond.charAt(0) === '~') {
+        var baseVer = parseCleanVersion(cond.slice(1).trim());
+        if (!baseVer) return true;
+        if (compareVersions(cur, baseVer) < 0) return false;
+        var upperVer = { major: baseVer.major, minor: baseVer.minor + 1, build: 0, rev: 0 };
+        return compareVersions(cur, upperVer) < 0;
+    }
+    if (cond.indexOf('>=') === 0) {
+        var v = parseCleanVersion(cond.slice(2));
+        return v ? compareVersions(cur, v) >= 0 : true;
+    }
+    if (cond.indexOf('<=') === 0) {
+        var v = parseCleanVersion(cond.slice(2));
+        return v ? compareVersions(cur, v) <= 0 : true;
+    }
+    if (cond.indexOf('>') === 0) {
+        var v = parseCleanVersion(cond.slice(1));
+        return v ? compareVersions(cur, v) > 0 : true;
+    }
+    if (cond.indexOf('<') === 0) {
+        var v = parseCleanVersion(cond.slice(1));
+        return v ? compareVersions(cur, v) < 0 : true;
+    }
+    if (cond.indexOf('==') === 0) {
+        var v = parseCleanVersion(cond.slice(2));
+        return v ? compareVersions(cur, v) === 0 : true;
+    }
+    if (cond.indexOf('=') === 0) {
+        var v = parseCleanVersion(cond.slice(1));
+        return v ? compareVersions(cur, v) === 0 : true;
+    }
+    if (cond.indexOf('*') !== -1 || cond.toLowerCase().indexOf('x') !== -1) {
+        var parts = cond.split('.');
+        if (parts.length >= 1 && parts[0] !== '*' && parts[0].toLowerCase() !== 'x') {
+            if (cur.major !== parseInt(parts[0], 10)) return false;
+        }
+        if (parts.length >= 2 && parts[1] !== '*' && parts[1].toLowerCase() !== 'x') {
+            if (cur.minor !== parseInt(parts[1], 10)) return false;
+        }
+        if (parts.length >= 3 && parts[2] !== '*' && parts[2].toLowerCase() !== 'x') {
+            if (cur.build !== parseInt(parts[2], 10)) return false;
+        }
+        return true;
+    }
+    var plainParts = cond.split('.');
+    if (plainParts.length === 2 && !isNaN(parseInt(plainParts[0], 10)) && !isNaN(parseInt(plainParts[1], 10))) {
+        if (cur.major !== parseInt(plainParts[0], 10)) return false;
+        if (cur.minor !== parseInt(plainParts[1], 10)) return false;
+        return true;
+    }
+    var exact = parseCleanVersion(cond);
+    if (exact) return compareVersions(cur, exact) === 0;
+    return true;
+}
+
+function isCompatibleSingleClause(clause, cur) {
+    if (!clause) return true;
+    var normalized = clause.replace(/,/g, ' ').trim();
+    var rawTokens = normalized.split(/\s+/);
+    var tokens = [];
+    for (var i = 0; i < rawTokens.length; i++) {
+        var p = rawTokens[i].trim();
+        if (!p) continue;
+        if ((p === '>=' || p === '<=' || p === '>' || p === '<' || p === '==' || p === '=') && i + 1 < rawTokens.length) {
+            tokens.push(p + rawTokens[i + 1].trim());
+            i++;
+        } else {
+            tokens.push(p);
+        }
+    }
+    for (var j = 0; j < tokens.length; j++) {
+        if (!evaluateSingleCondition(tokens[j], cur)) return false;
+    }
+    return true;
+}
+
+function isVersionCompatible(constraint, currentVer) {
+    if (!currentVer) return true;
+    if (!constraint || constraint === '*' || constraint.toLowerCase() === 'any') return true;
+    var cur = typeof currentVer === 'string' ? parseCleanVersion(currentVer) : currentVer;
+    if (!cur) return true;
+
+    var trimmed = constraint.trim();
+    if (trimmed.indexOf('||') !== -1) {
+        var orParts = trimmed.split('||');
+        for (var i = 0; i < orParts.length; i++) {
+            if (isCompatibleSingleClause(orParts[i].trim(), cur)) return true;
+        }
+        return false;
+    }
+    return isCompatibleSingleClause(trimmed, cur);
+}
+
+function fetchServerVersion() {
+    if (window.ApiClient) {
+        if (typeof ApiClient.serverVersion === 'function') {
+            var v = ApiClient.serverVersion();
+            if (v) return Promise.resolve(v);
+        }
+        if (typeof ApiClient.getPublicSystemInfo === 'function') {
+            return ApiClient.getPublicSystemInfo().then(function (info) {
+                return (info && (info.Version || info.version)) || '';
+            }).catch(function () { return ''; });
+        }
+    }
+    return Promise.resolve('');
+}
+
+            (function () {
+    var currentConfig = null;
+
+    function initPage() {
+        el('saveStatus').textContent = '';
+        el('feedbackAlert').classList.remove('show');
+        el('btnSaveConfig').disabled = true;
+
+        ApiClient.getPluginConfiguration(PLUGIN_ID).then(function (config) {
+            currentConfig = config;
+
+            var switchContainer = el('loomToggle');
+            if (config.UseLoomInjector) {
+                switchContainer.classList.add('checked');
+            } else {
+                switchContainer.classList.remove('checked');
+            }
+
+            el('btnSaveConfig').disabled = false;
+        }).catch(function () {
+            el('saveStatus').textContent = 'Failed to load configuration.';
+            el('saveStatus').style.color = '#ef5350';
+        });
+    }
+
+    // Bind Toggle Event
+    el('loomToggle').addEventListener('click', function () {
+        this.classList.toggle('checked');
+    });
+
+    // Bind Save Event
+    el('btnSaveConfig').addEventListener('click', function () {
+        if (!currentConfig) return;
+
+        var btn = this;
+        btn.disabled = true;
+        el('saveStatus').textContent = 'Saving...';
+        el('saveStatus').style.color = '';
+        el('feedbackAlert').classList.remove('show');
+
+        var isLoomChecked = el('loomToggle').classList.contains('checked');
+
+        var updatedConfig = Object.assign({}, currentConfig, {
+            UseLoomInjector: isLoomChecked
+        });
+
+        ApiClient.updatePluginConfiguration(PLUGIN_ID, updatedConfig).then(function () {
+            currentConfig = updatedConfig;
+            btn.disabled = false;
+            el('saveStatus').textContent = 'Saved successfully.';
+            el('saveStatus').style.color = '#66bb6a';
+
+            // Show MUI Alert notifying about restart
+            var alertEl = el('feedbackAlert');
+            alertEl.className = 'mui-alert mui-alert-warning show';
+            el('alertMessage').textContent = 'Configuration saved successfully! A restart of the Jellyfin server is required to swap the frontend injection method.';
+
+            Dashboard.processPluginConfigurationUpdateResult();
+        }).catch(function () {
+            btn.disabled = false;
+            el('saveStatus').textContent = 'Failed to save configuration.';
+            el('saveStatus').style.color = '#ef5350';
+        });
+    });
+
+    // Bind page initialization to viewshow
+    var pageEl = document.querySelector('.jfConfigPage');
+    if (pageEl) {
+        pageEl.addEventListener('viewshow', initPage);
+    }
+})();
+
+        </script>
+
+    </div>
+</body>
+
+</html>
