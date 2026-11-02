@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Editors Choice Plugin</title>
+    <title>编辑精选插件</title>
 </head>
 <body>
     <div data-role="page" class="page type-interior pluginConfigurationPage editorsChoiceConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox,emby-linkbutton,emby-radio">
@@ -143,10 +143,10 @@
         <div data-role="content">
             <div class="content-primary">
                 <form class="editorsChoiceConfigurationForm">
-                    <h1>EditorsChoice settings</h1>
+                    <h1>编辑精选设置</h1>
 
                     <hr />
-                    <h2>Mode</h2>
+                    <h2>模式</h2>
                     <div class="inputContainer">
                         <label class="radio-label-block mdl-radio show-focus">
                             <input type="radio" is="emby-radio" id="FavouritesMode" name="mode" value="FavouritesMode" class="mdl-radio__button" />
@@ -160,8 +160,8 @@
                                 </svg>
                                 <div class="mdl-radio__focus-circle"></div>
                             </div>
-                            <span class="radioButtonLabel mdl-radio__label">Favourites</span>
-                            <div class="fieldDescription">Shows items from the specified user's favourites</div>
+                            <span class="radioButtonLabel mdl-radio__label">收藏</span>
+                            <div class="fieldDescription">显示指定用户收藏列表中的条目</div>
                         </label>
 
                         <label class="radio-label-block mdl-radio show-focus">
@@ -176,8 +176,8 @@
                                 </svg>
                                 <div class="mdl-radio__focus-circle"></div>
                             </div>
-                            <span class="radioButtonLabel mdl-radio__label">Random</span>
-                            <div class="fieldDescription">Shows a random selection of items from your library</div>
+                            <span class="radioButtonLabel mdl-radio__label">随机</span>
+                            <div class="fieldDescription">从您的媒体库中随机展示一批条目</div>
                         </label>
 
                         <label class="radio-label-block mdl-radio show-focus">
@@ -192,8 +192,8 @@
                                 </svg>
                                 <div class="mdl-radio__focus-circle"></div>
                             </div>
-                            <span class="radioButtonLabel mdl-radio__label">Collections</span>
-                            <div class="fieldDescription">Shows items from the specified collections</div>
+                            <span class="radioButtonLabel mdl-radio__label">合集</span>
+                            <div class="fieldDescription">显示指定合集内的条目</div>
                         </label>
 
                         <label class="radio-label-block mdl-radio show-focus">
@@ -208,211 +208,211 @@
                                 </svg>
                                 <div class="mdl-radio__focus-circle"></div>
                             </div>
-                            <span class="radioButtonLabel mdl-radio__label">New</span>
-                            <div class="fieldDescription">Shows only movies and shows with episodes that premiered recently</div>
+                            <span class="radioButtonLabel mdl-radio__label">最新</span>
+                            <div class="fieldDescription">仅显示近期首播的电影和剧集</div>
                         </label>
                     </div>
 
                     <div id="EditorUserId-container" class="selectContainer" style="display:none;">
-                        <label class="selectLabel" for="EditorUserId">User's favourites list</label>
+                        <label class="selectLabel" for="EditorUserId">用户收藏列表</label>
                         <select is="emby-select" id="EditorUserId" name="EditorUserId" class="emby-select-withcolor emby-select">
-                            <option value="none">None</option>
+                            <option value="none">无</option>
                         </select>
                     </div>
 
                     <div id="NewTimeLimit-container" class="selectContainer" style="display:none;">
-                        <label class="selectLabel" for="NewTimeLimitSelect">Show items released in the last:</label>
+                        <label class="selectLabel" for="NewTimeLimitSelect">显示以下时间内发行的条目：</label>
                         <select is="emby-select" id="NewTimeLimitSelect" name="NewTimeLimit" class="emby-select-withcolor emby-select">
-                            <option value="1month">1 month</option>
-                            <option value="2month">2 months</option>
-                            <option value="6month">6 months</option>
-                            <option value="1year">1 year</option>
-                            <option value="2year">2 years</option>
-                            <option value="5year">5 years</option>
+                            <option value="1month">1 个月</option>
+                            <option value="2month">2 个月</option>
+                            <option value="6month">6 个月</option>
+                            <option value="1year">1 年</option>
+                            <option value="2year">2 年</option>
+                            <option value="5year">5 年</option>
                         </select>
                     </div>
 
                     <div id="CollectionsList-container" style="display:none;">
-                        <h3 class="checkboxListLabel">Show items from these collections:</h3>
+                        <h3 class="checkboxListLabel">显示以下合集内的条目：</h3>
                         <div id="CollectionsList" class="checkboxList"></div>
-                        <p>One collection will be shown at a time across the slider. If multiple are checked below, one of them will be randomly chosen each time it loads.</p>
+                        <p>轮播中一次仅显示一个合集。如果下方勾选了多个合集，每次加载时会随机选择其中一个。</p>
                     </div>
 
                     <hr />
-                    <h2>Autoplay</h2>
+                    <h2>自动播放</h2>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="EnableAutoplay" name="EnableAutoplay" />
-                            <span class="checkboxLabel">Enable autoplay</span>
+                            <span class="checkboxLabel">启用自动播放</span>
                         </label>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="ShowAutoplayButton" name="ShowAutoplayButton" />
-                            <span class="checkboxLabel">Show autoplay button</span>
+                            <span class="checkboxLabel">显示自动播放按钮</span>
                         </label>
-                        <div class="fieldDescription">Show the play/pause control when autoplay is enabled.</div>
+                        <div class="fieldDescription">启用自动播放时显示播放/暂停控件。</div>
                     </div>
 
                     <div id="AutoplayInterval-container" class="inputContainer" style="display:none;">
-                        <label class="inputLabel inputLabelUnfocused" for="AutoplayInterval">Autoplay interval</label>
+                        <label class="inputLabel inputLabelUnfocused" for="AutoplayInterval">自动播放间隔</label>
                         <input is="emby-input" type="number" id="AutoplayInterval" name="AutoplayInterval" min="1" step="1" />
-                        <div class="fieldDescription">How often, in seconds, the slider moves to the next item. Default is 10 seconds.</div>
+                        <div class="fieldDescription">轮播切换到下一个条目的时间间隔（秒）。默认为 10 秒。</div>
                     </div>
 
                     <hr />
-                    <h2>Filtering</h2>
+                    <h2>筛选</h2>
 
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="RandomMediaCount">Maximum items shown</label>
+                        <label class="inputLabel inputLabelUnfocused" for="RandomMediaCount">最多显示条目数</label>
                         <input is="emby-input" type="number" id="RandomMediaCount" name="RandomMediaCount" min="1" />
-                        <div class="fieldDescription">This sets how many items to show in the banner, whether random or from the favourites list. Set to a massive number if you want to show all of your favourited items.</div>
+                        <div class="fieldDescription">设置横幅中显示的条目数量（无论随机模式还是收藏列表）。若想显示所有已收藏的条目，可设置为一个极大的数字。</div>
                     </div>
 
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="MinimumRating">Minimum community rating</label>
+                        <label class="inputLabel inputLabelUnfocused" for="MinimumRating">最低社区评分</label>
                         <input is="emby-input" type="number" id="MinimumRating" name="MinimumRating" min="0" max="10" step="0.1" />
-                        <div class="fieldDescription">Only show shows or films that have a community rating at least this number (0.0 to 10.0). Set to 0 to ignore rating.</div>
+                        <div class="fieldDescription">仅显示社区评分不低于此数值的剧集或电影（0.0 至 10.0）。设为 0 表示忽略评分。</div>
                     </div>
 
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="MinimumCriticRating">Minimum critic rating</label>
+                        <label class="inputLabel inputLabelUnfocused" for="MinimumCriticRating">最低影评人评分</label>
                         <input is="emby-input" type="number" id="MinimumCriticRating" name="MinimumCriticRating" min="0" max="100" step="1" />
-                        <div class="fieldDescription">Only show shows or films that have a critic rating at least this number (0 to 100). Set to 0 to ignore rating.</div>
+                        <div class="fieldDescription">仅显示影评人评分不低于此数值的剧集或电影（0 至 100）。设为 0 表示忽略评分。</div>
                     </div>
 
                     <div id="MaximumParentRating-container" class="selectContainer">
-                        <label class="selectLabel" for="MaximumParentRating">Maximum parental rating</label>
+                        <label class="selectLabel" for="MaximumParentRating">最高家长分级</label>
                         <select is="emby-select" id="MaximumParentRating" name="MaximumParentRating" class="emby-select-withcolor emby-select">
-                            <option value="-2">User profile</option>
+                            <option value="-2">用户配置</option>
                         </select>
-                        <div class="fieldDescription">Items with a parental rating higher than this will not be shown. Set to 'User profile' to limit to a user's specific parental access controls (default).</div>
+                        <div class="fieldDescription">家长分级高于此级别的条目将不会显示。设为“用户配置”可按用户的家长控制权限进行限制（默认）。</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="ShowPlayed" name="ShowPlayed" />
-                            <span class="checkboxLabel">Show played items</span>
+                            <span class="checkboxLabel">显示已播放的条目</span>
                         </label>
                     </div>
 
                     <hr />
-                    <h2>Display</h2>
+                    <h2>显示</h2>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="ShowNavigationArrows" name="ShowNavigationArrows" />
-                            <span class="checkboxLabel">Show navigation arrows</span>
+                            <span class="checkboxLabel">显示导航箭头</span>
                         </label>
                     </div>
 
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="Heading">Banner heading</label>
+                        <label class="inputLabel inputLabelUnfocused" for="Heading">横幅标题</label>
                         <input is="emby-input" type="text" id="Heading" name="Heading" />
-                        <div class="fieldDescription">Add a heading above the banner. Leave empty for no heading.</div>
+                        <div class="fieldDescription">在横幅上方添加标题。留空则不显示标题。</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="ShowPlayButton" name="ShowPlayButton" />
-                            <span class="checkboxLabel">Show Play Button</span>
+                            <span class="checkboxLabel">显示播放按钮</span>
                         </label>
                     </div>
 
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="PlayButtonText">Custom Play Button Text</label>
+                        <label class="inputLabel inputLabelUnfocused" for="PlayButtonText">自定义播放按钮文字</label>
                         <input is="emby-input" type="text" id="PlayButtonText" name="PlayButtonText" />
-                        <div class="fieldDescription">Change the default Play Button Text. Leave empty for default.</div>
+                        <div class="fieldDescription">更改默认的播放按钮文字。留空则使用默认值。</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="ShowRating" name="ShowRating" />
-                            <span class="checkboxLabel">Show community rating</span>
+                            <span class="checkboxLabel">显示社区评分</span>
                         </label>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="ShowDesc" name="ShowDesc" />
-                            <span class="checkboxLabel">Show description</span>
+                            <span class="checkboxLabel">显示简介</span>
                         </label>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="HideOnTvLayout" name="HideOnTvLayout" />
-                            <span class="checkboxLabel">Hide on TVs</span>
+                            <span class="checkboxLabel">在电视端隐藏</span>
                         </label>
-                        <div class="fieldDescription">When enabled, the Editors Choice banner will not be injected on TV interfaces.</div>
+                        <div class="fieldDescription">启用后，编辑精选横幅将不会注入到电视端界面。</div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="UseHeroLayout" name="UseHeroLayout" />
-                            <span class="checkboxLabel">Use Hero Display Style</span>
+                            <span class="checkboxLabel">使用主视觉（Hero）显示样式</span>
                         </label>
-                        <div class="fieldDescription">Changes the banner layout to a hero-style display. Recommended banner height: Large or higher.</div>
+                        <div class="fieldDescription">将横幅布局改为主视觉（Hero）样式。建议横幅高度选择“大”或更高。</div>
                     </div>
 
                     <div id="HeroBackdropPosition-container" class="selectContainer">
-                        <label class="selectLabel" for="HeroBackdropPositionSelect">Image Position (Hero Style):</label>
+                        <label class="selectLabel" for="HeroBackdropPositionSelect">图片位置（主视觉样式）：</label>
                         <select is="emby-select" id="HeroBackdropPositionSelect" name="HeroBackdropPositionSelect" class="emby-select-withcolor emby-select">
-                            <option value="center">Center (Default)</option>
-                            <option value="top">Top</option>
-                            <option value="bottom">Bottom</option>
+                            <option value="center">居中（默认）</option>
+                            <option value="top">顶部</option>
+                            <option value="bottom">底部</option>
                         </select>
                     </div>
 
                     <div id="effect-container" class="selectContainer">
-                        <label class="selectLabel" for="TransitionEffectSelect">Transition Effect:</label>
+                        <label class="selectLabel" for="TransitionEffectSelect">切换效果：</label>
                         <select is="emby-select" id="TransitionEffectSelect" name="TransitionEffectSelect" class="emby-select-withcolor emby-select">
-                            <option value="loop">Slide (Default)</option>
-                            <option value="fade">Fade</option>
+                            <option value="loop">滑动（默认）</option>
+                            <option value="fade">淡入淡出</option>
                         </select>
                     </div>
 
                     <div id="BannerHeight-container" class="selectContainer">
-                        <label class="selectLabel" for="BannerHeightSelect">Height of banner:</label>
+                        <label class="selectLabel" for="BannerHeightSelect">横幅高度：</label>
                         <select is="emby-select" id="BannerHeightSelect" name="BannerHeight" class="emby-select-withcolor emby-select">
-                            <option value="360">Slim (Default)</option>
-                            <option value="400">Thick</option>
-                            <option value="500">Large</option>
-                            <option value="600">Huge</option>
+                            <option value="360">纤细（默认）</option>
+                            <option value="400">加厚</option>
+                            <option value="500">大</option>
+                            <option value="600">特大</option>
                         </select>
                     </div>
 
                     <hr />
-                    <h2>Technical settings</h2>
+                    <h2>技术设置</h2>
 
                     <div class="selectContainer">
-                        <label class="selectLabel" for="FrontendInjectionMethod">Frontend injection method:</label>
+                        <label class="selectLabel" for="FrontendInjectionMethod">前端注入方式：</label>
                         <select is="emby-select" id="FrontendInjectionMethod" name="FrontendInjectionMethod" class="emby-select-withcolor emby-select">
-                            <option value="automatic">Automatic (recommended)</option>
-                            <option value="file-transformation">File Transformation only</option>
-                            <option value="javascript-injector">JavaScript Injector only</option>
-                            <option value="direct">Direct index.html injection only</option>
-                            <option value="disabled">Disabled / manual injection</option>
+                            <option value="automatic">自动（推荐）</option>
+                            <option value="file-transformation">仅文件转换（File Transformation）</option>
+                            <option value="javascript-injector">仅 JavaScript 注入器（JavaScript Injector）</option>
+                            <option value="direct">仅直接注入 index.html</option>
+                            <option value="disabled">禁用 / 手动注入</option>
                         </select>
                         <div class="fieldDescription">
-                            Automatic prefers File Transformation, then JavaScript Injector, and only writes directly to jellyfin-web/index.html as a final fallback. Changes take effect after the next restart.
+                            自动模式优先使用文件转换，其次使用 JavaScript 注入器，仅在最后万不得已时才直接写入 jellyfin-web/index.html。更改将在下次重启后生效。
                         </div>
                     </div>
 
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input is="emby-checkbox" type="checkbox" id="ReduceImageSize" name="ReduceImageSize" />
-                            <span class="checkboxLabel">Reduce image sizes</span>
+                            <span class="checkboxLabel">减小图片尺寸</span>
                         </label>
-                        <div class="fieldDescription">This will make banner and logo images load faster for users and reduce network usage, but increase processing demand on your media server. Turn off if plugin is having a significant performance impact.</div>
+                        <div class="fieldDescription">这可让横幅和徽标图片加载更快并减少网络占用，但会增加媒体服务器的处理负担。如果插件对性能影响明显，请关闭此选项。</div>
                     </div>
 
                     <hr />
                     <div>
                         <button is="emby-button" type="submit" class="raised button-submit block emby-button">
-                            <span>Save</span>
+                            <span>保存</span>
                         </button>
                     </div>
                 </form>

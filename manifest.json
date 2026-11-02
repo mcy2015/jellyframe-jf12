@@ -50,12 +50,121 @@
     "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/MediaBarEnhanced/logo.png",
     "versions": [
       {
-        "version": "3.12.0.1",
-        "changelog": "Rebuilt against Jellyfin 12.4.0 packages (net10.0). No functional changes vs upstream 3.12.0.0.",
+        "version": "3.12.0.2",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 packages (net10.0). Configuration page localized to Simplified Chinese (zh-CN).",
         "targetAbi": "12.4.0.0",
-        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/Jellyfin.Plugin.MediaBarEnhanced_v3.12.0.1_jf124.zip",
-        "checksum": "762B8D7E5EC5A1FD446B6A3C4DD14EE6",
-        "timestamp": "2026-11-02T02:10:00Z",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/Jellyfin.Plugin.MediaBarEnhanced_v3.12.0.2_jf124.zip",
+        "checksum": "936EBA9138E9CDD087CD247408ABCCAB",
+        "timestamp": "2026-11-02T03:10:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Home Screen Sections",
+    "guid": "b8298e01-2697-407a-b44d-aa8dc795e850",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Home Screen Sections 3.0.0 (upstream: IAmParadox27/jellyfin-plugin-home-sections), with zh-CN localization pack added.",
+    "description": "Adds server-provided dynamic home screen sections (Because You Watched, Latest, Discover, Upcoming with *arr integration...). This build targets Jellyfin 12.4 (net10.0) and adds a complete Simplified Chinese translation pack (224 keys). Requires the File Transformation plugin.",
+    "owner": "mcy2015 (upstream: IAmParadox27)",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/HomeSections/src/Jellyfin.Plugin.HomeScreenSections/logo.png",
+    "versions": [
+      {
+        "version": "3.0.0.1",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 (net10.0); added _Localization/zh.json (224 keys); admin config page localized to zh-CN.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/HomeScreenSections_3.0.0.1_jf124.zip",
+        "checksum": "C980A3A95FD6A79404B9C87E1D249EE4",
+        "timestamp": "2026-11-02T03:10:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Collection Sections",
+    "guid": "043b2c48-b3e0-4610-b398-8217b146d1a4",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Collection Sections 3.0.0 (upstream: IAmParadox27/jellyfin-plugin-collection-sections), config page localized to zh-CN.",
+    "description": "Adds collection/playlist sections to the home screen via the Home Screen Sections plugin. Requires Home Screen Sections.",
+    "owner": "mcy2015 (upstream: IAmParadox27)",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/CollectionSections/src/Jellyfin.Plugin.CollectionSections/logo.png",
+    "versions": [
+      {
+        "version": "3.0.0.1",
+        "changelog": "Rebuilt (upstream csproj already targets 12.4.0/net10.0); config page localized to zh-CN.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/CollectionSections_3.0.0.1_jf124.zip",
+        "checksum": "D0FC5012FD2101BF38D6622F3780F7EB",
+        "timestamp": "2026-11-02T03:10:00Z",
+        "dependencies": [
+          "b8298e01-2697-407a-b44d-aa8dc795e850"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Custom Tabs",
+    "guid": "fbacd0b6-fd46-4a05-b0a4-2045d6a135b0",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Custom Tabs 0.3.0 (upstream: IAmParadox27/jellyfin-plugin-custom-tabs), config page localized to zh-CN.",
+    "description": "Adds custom tabs to the jellyfin-web title bar. Requires the File Transformation plugin.",
+    "owner": "mcy2015 (upstream: IAmParadox27)",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/CustomTabs/src/Jellyfin.Plugin.CustomTabs/logo.png",
+    "versions": [
+      {
+        "version": "0.3.0.1",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 (net10.0); config page localized to zh-CN.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/CustomTabs_0.3.0.1_jf124.zip",
+        "checksum": "D599F4DF7D4BBD078017A9C5F8B1CF5F",
+        "timestamp": "2026-11-02T03:10:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Plugin Pages",
+    "guid": "5b6550fa-a014-4f4c-8a2c-59a43680ac6d",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Plugin Pages 3.0.0 (upstream: IAmParadox27/jellyfin-plugin-pages).",
+    "description": "Allows plugins to add pages to the main UI that match the native look. Requires the File Transformation plugin.",
+    "owner": "mcy2015 (upstream: IAmParadox27)",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/PluginPages/src/Jellyfin.Plugin.PluginPages/logo.png",
+    "versions": [
+      {
+        "version": "3.0.0.1",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 (net10.0).",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/PluginPages_3.0.0.1_jf124.zip",
+        "checksum": "A82B2F08B27B9A0EA0D87486FEBA9303",
+        "timestamp": "2026-11-02T03:10:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "EditorsChoice",
+    "guid": "70bb2ec1-f19e-46b5-b49a-942e6b96ebae",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Editors Choice 1.6.2 (upstream: lachlandcp/jellyfin-editors-choice-plugin), config page localized to zh-CN.",
+    "description": "Adds a Netflix-style full-width featured content slider to the home screen. Requires the File Transformation plugin.",
+    "owner": "mcy2015 (upstream: lachlandcp)",
+    "versions": [
+      {
+        "version": "1.6.2.1",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 packages (net10.0); config page localized to zh-CN.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/EditorsChoice_1.6.2.1_jf124.zip",
+        "checksum": "7FD0D381A4A7D045C04FF2FF1C9B65F9",
+        "timestamp": "2026-11-02T03:10:00Z",
         "dependencies": [
           "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
         ]

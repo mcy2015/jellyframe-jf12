@@ -1,105 +1,105 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Home Screen Sections</title>
+    <title>主屏幕板块</title>
 </head>
 <body>
 <div data-role="page" id="homeScreenSectionsConfigurationPage" class="page type-interior pluginConfigurationPage fullWidthContent">
     <div class="content-primary">
         <div class="verticalSection">
             <div class="sectionTitleContainer">
-                <h2 class="sectionTitle">Home Screen Sections</h2>
+                <h2 class="sectionTitle">主屏幕板块</h2>
                 <a is="emby-linkbutton" class="raised raised-mini emby-button" style="margin-left: 2em;" target="_blank" href="https://github.com/IAmParadox27/jellyfin-plugin-home-sections">
                     <i class="md-icon button-icon button-icon-left secondaryText"></i>
-                    <span data-i18n="AdminHelp">Help</span>
+                    <span data-i18n="AdminHelp">帮助</span>
                 </a>
             </div>
         </div>
         <hr class="solid" style="margin-bottom: 1.5em;">
         <div style="margin-bottom: 1.5em;">
-            <button class="jellyfin-tab-button active" data-tab="global" style="background: none; border: none; color: #fff; cursor: pointer; transition: color 0.3s, border-bottom 0.3s; border-bottom: 2px solid #fff; padding: 0.5em 1em;"><h3 data-i18n="AdminGlobalSettings">Global Settings</h3></button>
-            <button class="jellyfin-tab-button" data-tab="sections" style="background: none; border: none; color: #ccc; cursor: pointer; transition: color 0.3s, border-bottom 0.3s; border-bottom: 2px solid transparent; padding: 0.5em 1em;"><h3 data-i18n="AdminSectionSettings">Section Settings</h3></button>
+            <button class="jellyfin-tab-button active" data-tab="global" style="background: none; border: none; color: #fff; cursor: pointer; transition: color 0.3s, border-bottom 0.3s; border-bottom: 2px solid #fff; padding: 0.5em 1em;"><h3 data-i18n="AdminGlobalSettings">全局设置</h3></button>
+            <button class="jellyfin-tab-button" data-tab="sections" style="background: none; border: none; color: #ccc; cursor: pointer; transition: color 0.3s, border-bottom 0.3s; border-bottom: 2px solid transparent; padding: 0.5em 1em;"><h3 data-i18n="AdminSectionSettings">板块设置</h3></button>
         </div>
 
         <form class="artworkConfigurationForm">
             <div id="global" class="jellyfin-tab-content active" style="display: block;">
             <fieldset class="verticalSection-extrabottompadding">
-                <legend data-i18n="AdminDefaultSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">Default Settings</legend>
+                <legend data-i18n="AdminDefaultSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">默认设置</legend>
                 <div style="padding-left: .5em;">
                     <div class="checkboxContainer checkboxContainer-withDescription" style="margin-bottom: 1.5em;">
                         <label class="emby-checkbox-label">
                             <input id="globalEnabledDefault" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                            <span data-i18n="AdminEnabledByDefault">Enabled by Default</span>
+                            <span data-i18n="AdminEnabledByDefault">默认启用</span>
                         </label>
-                        <div class="fieldDescription" data-i18n="AdminEnabledByDefaultDesc">Enable Home Screen Sections by default for all users?</div>
+                        <div class="fieldDescription" data-i18n="AdminEnabledByDefaultDesc">是否为所有用户默认启用主屏幕板块？</div>
                     </div>
                     <div class="checkboxContainer checkboxContainer-withDescription">
                         <label class="emby-checkbox-label">
                             <input id="globalAllowUserOverride" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                            <span data-i18n="AdminAllowUserOverride">Allow User Override</span>
+                            <span data-i18n="AdminAllowUserOverride">允许用户覆盖</span>
                         </label>
-                        <div class="fieldDescription" data-i18n="AdminAllowUserOverrideDesc">Can users enable/disable this plugin for their own view?</div>
+                        <div class="fieldDescription" data-i18n="AdminAllowUserOverrideDesc">用户能否在自己的视图中启用/禁用此插件？</div>
                     </div>
                 </div>
             </fieldset>
 
             <fieldset class="verticalSection-extrabottompadding">
-                <legend data-i18n="AdminUpcomingSectionSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">Upcoming Section Settings</legend>
+                <legend data-i18n="AdminUpcomingSectionSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">即将推出板块设置</legend>
                 <div style="padding-left: .5em;">
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="upcomingShowsTimeframeValue" data-i18n="AdminUpcomingShowsTimeframe">Upcoming Shows Timeframe</label>
+                        <label class="inputLabel inputLabelUnfocused" for="upcomingShowsTimeframeValue" data-i18n="AdminUpcomingShowsTimeframe">即将播出剧集时间范围</label>
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <input is="emby-input" type="number" id="upcomingShowsTimeframeValue" min="1" max="999" style="flex: 0 0 100px;" />
                             <select is="emby-select" id="upcomingShowsTimeframeUnit" class="emby-select-withcolor emby-select" style="flex: 0 0 120px;">
-                                <option value="Days" data-i18n="AdminDays">Days</option>
-                                <option value="Weeks" data-i18n="AdminWeeks">Weeks</option>
-                                <option value="Months" data-i18n="AdminMonths">Months</option>
-                                <option value="Years" data-i18n="AdminYears">Years</option>
+                                <option value="Days" data-i18n="AdminDays">天</option>
+                                <option value="Weeks" data-i18n="AdminWeeks">周</option>
+                                <option value="Months" data-i18n="AdminMonths">月</option>
+                                <option value="Years" data-i18n="AdminYears">年</option>
                             </select>
                         </div>
-                        <div class="fieldDescription" data-i18n="AdminUpcomingShowsDesc">How far in the future should we look for upcoming episodes?</div>
+                        <div class="fieldDescription" data-i18n="AdminUpcomingShowsDesc">查找即将播出的剧集时应展望多远的未来？</div>
                     </div>
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="upcomingMoviesTimeframeValue" data-i18n="AdminUpcomingMoviesTimeframe">Upcoming Movies Timeframe</label>
+                        <label class="inputLabel inputLabelUnfocused" for="upcomingMoviesTimeframeValue" data-i18n="AdminUpcomingMoviesTimeframe">即将上映电影时间范围</label>
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <input is="emby-input" type="number" id="upcomingMoviesTimeframeValue" min="1" max="999" style="flex: 0 0 100px;" />
                             <select is="emby-select" id="upcomingMoviesTimeframeUnit" class="emby-select-withcolor emby-select" style="flex: 0 0 120px;">
-                                <option value="Days" data-i18n="AdminDays">Days</option>
-                                <option value="Weeks" data-i18n="AdminWeeks">Weeks</option>
-                                <option value="Months" data-i18n="AdminMonths">Months</option>
-                                <option value="Years" data-i18n="AdminYears">Years</option>
+                                <option value="Days" data-i18n="AdminDays">天</option>
+                                <option value="Weeks" data-i18n="AdminWeeks">周</option>
+                                <option value="Months" data-i18n="AdminMonths">月</option>
+                                <option value="Years" data-i18n="AdminYears">年</option>
                             </select>
                         </div>
-                        <div class="fieldDescription" data-i18n="AdminUpcomingMoviesDesc">How far in the future should we look for upcoming movies?</div>
+                        <div class="fieldDescription" data-i18n="AdminUpcomingMoviesDesc">查找即将上映的电影时应展望多远的未来？</div>
                     </div>
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="upcomingMusicTimeframeValue" data-i18n="AdminUpcomingMusicTimeframe">Upcoming Music Timeframe</label>
+                        <label class="inputLabel inputLabelUnfocused" for="upcomingMusicTimeframeValue" data-i18n="AdminUpcomingMusicTimeframe">即将发行音乐时间范围</label>
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <input is="emby-input" type="number" id="upcomingMusicTimeframeValue" min="1" max="999" style="flex: 0 0 100px;" />
                             <select is="emby-select" id="upcomingMusicTimeframeUnit" class="emby-select-withcolor emby-select" style="flex: 0 0 120px;">
-                                <option value="Days" data-i18n="AdminDays">Days</option>
-                                <option value="Weeks" data-i18n="AdminWeeks">Weeks</option>
-                                <option value="Months" data-i18n="AdminMonths">Months</option>
-                                <option value="Years" data-i18n="AdminYears">Years</option>
+                                <option value="Days" data-i18n="AdminDays">天</option>
+                                <option value="Weeks" data-i18n="AdminWeeks">周</option>
+                                <option value="Months" data-i18n="AdminMonths">月</option>
+                                <option value="Years" data-i18n="AdminYears">年</option>
                             </select>
                         </div>
-                        <div class="fieldDescription" data-i18n="AdminUpcomingMusicDesc">How far in the future should we look for upcoming music releases?</div>
+                        <div class="fieldDescription" data-i18n="AdminUpcomingMusicDesc">查找即将发行的音乐时应展望多远的未来？</div>
                     </div>
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="upcomingBooksTimeframeValue" data-i18n="AdminUpcomingBooksTimeframe">Upcoming Books Timeframe</label>
+                        <label class="inputLabel inputLabelUnfocused" for="upcomingBooksTimeframeValue" data-i18n="AdminUpcomingBooksTimeframe">即将发行图书时间范围</label>
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <input is="emby-input" type="number" id="upcomingBooksTimeframeValue" min="1" max="999" style="flex: 0 0 100px;" />
                             <select is="emby-select" id="upcomingBooksTimeframeUnit" class="emby-select-withcolor emby-select" style="flex: 0 0 120px;">
-                                <option value="Days" data-i18n="AdminDays">Days</option>
-                                <option value="Weeks" data-i18n="AdminWeeks">Weeks</option>
-                                <option value="Months" data-i18n="AdminMonths">Months</option>
-                                <option value="Years" data-i18n="AdminYears">Years</option>
+                                <option value="Days" data-i18n="AdminDays">天</option>
+                                <option value="Weeks" data-i18n="AdminWeeks">周</option>
+                                <option value="Months" data-i18n="AdminMonths">月</option>
+                                <option value="Years" data-i18n="AdminYears">年</option>
                             </select>
                         </div>
-                        <div class="fieldDescription" data-i18n="AdminUpcomingBooksDesc">How far in the future should we look for upcoming book releases?</div>
+                        <div class="fieldDescription" data-i18n="AdminUpcomingBooksDesc">查找即将发行的图书时应展望多远的未来？</div>
                     </div>
                     <div class="inputContainer">
-                        <label class="inputLabel inputLabelUnfocused" for="dateFormat" data-i18n="AdminDateFormat">Date Format</label>
+                        <label class="inputLabel inputLabelUnfocused" for="dateFormat" data-i18n="AdminDateFormat">日期格式</label>
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <select is="emby-select" id="dateFormat" class="emby-select-withcolor emby-select" style="flex: 0 0 150px;">
                                 <option value="YYYY/MM/DD">YYYY/MM/DD</option>
@@ -110,86 +110,86 @@
                             </select>
                             <input is="emby-input" type="text" id="dateDelimiter" maxlength="3" style="flex: 0 0 60px;" placeholder="/" />
                         </div>
-                        <div class="fieldDescription" data-i18n="AdminDateFormatDesc">How should dates be displayed?</div>
+                        <div class="fieldDescription" data-i18n="AdminDateFormatDesc">日期应如何显示？</div>
                     </div>
                 </div>
             </fieldset>
 
                 <fieldset class="verticalSection-extrabottompadding">
-                    <legend data-i18n="AdminAdvancedSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">Advanced Settings</legend>
+                    <legend data-i18n="AdminAdvancedSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">高级设置</legend>
                     <div style="padding-left: .5em;">
                         <details style="margin-bottom: 1em;">
-                            <summary data-i18n="AdminLazyLoadSettings" style="cursor: pointer; font-weight: bold;">Lazy Load Settings</summary>
+                            <summary data-i18n="AdminLazyLoadSettings" style="cursor: pointer; font-weight: bold;">懒加载设置</summary>
                             <div style="padding-top: 1em;">
                                 <label class="emby-checkbox-label">
                                     <input id="chkLazyLoadEnabled" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                                    <span data-i18n="AdminLazyLoadEnabled">Lazy Load Enabled</span>
+                                    <span data-i18n="AdminLazyLoadEnabled">启用懒加载</span>
                                 </label>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="number" data-id="numLazyLoadSections" data-i18n-label="AdminLazyLoadSectionsLabel" label="Number of sections to load per page" />
-                                    <div class="fieldDescription" data-i18n="AdminLazyLoadSectionsDesc">The number of sections that should be loaded per page.</div>
+                                    <input is="emby-input" type="number" data-id="numLazyLoadSections" data-i18n-label="AdminLazyLoadSectionsLabel" label="每页加载的板块数量" />
+                                    <div class="fieldDescription" data-i18n="AdminLazyLoadSectionsDesc">每页应加载的板块数量。</div>
                                 </div>
                             </div>
                         </details>
                         <details style="margin-bottom: 1em;">
-                            <summary data-i18n="AdminArrApiSettings" style="cursor: pointer; font-weight: bold;">*arr API Settings</summary>
+                            <summary data-i18n="AdminArrApiSettings" style="cursor: pointer; font-weight: bold;">*arr API 设置</summary>
                             <div style="padding-top: 1em;">
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtSonarrUrl" data-i18n-label="AdminSonarrUrl" label="Sonarr URL" />
-                                    <div class="fieldDescription" data-i18n="AdminSonarrUrlDesc">Complete URL for Sonarr to use for upcoming shows sections.</div>
+                                    <input is="emby-input" type="text" data-id="txtSonarrUrl" data-i18n-label="AdminSonarrUrl" label="Sonarr 地址" />
+                                    <div class="fieldDescription" data-i18n="AdminSonarrUrlDesc">用于“即将播出剧集”板块的 Sonarr 完整地址。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="password" data-id="txtSonarrApiKey" data-i18n-label="AdminSonarrApiKey" label="Sonarr API Key" />
-                                    <div class="fieldDescription" data-i18n="AdminSonarrApiKeyDesc">API Key for Sonarr instance.</div>
+                                    <input is="emby-input" type="password" data-id="txtSonarrApiKey" data-i18n-label="AdminSonarrApiKey" label="Sonarr API 密钥" />
+                                    <div class="fieldDescription" data-i18n="AdminSonarrApiKeyDesc">Sonarr 实例的 API 密钥。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtRadarrUrl" data-i18n-label="AdminRadarrUrl" label="Radarr URL" />
-                                    <div class="fieldDescription" data-i18n="AdminRadarrUrlDesc">Complete URL for Radarr to use for upcoming movies sections.</div>
+                                    <input is="emby-input" type="text" data-id="txtRadarrUrl" data-i18n-label="AdminRadarrUrl" label="Radarr 地址" />
+                                    <div class="fieldDescription" data-i18n="AdminRadarrUrlDesc">用于“即将上映电影”板块的 Radarr 完整地址。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="password" data-id="txtRadarrApiKey" data-i18n-label="AdminRadarrApiKey" label="Radarr API Key" />
-                                    <div class="fieldDescription" data-i18n="AdminRadarrApiKeyDesc">API Key for Radarr instance.</div>
+                                    <input is="emby-input" type="password" data-id="txtRadarrApiKey" data-i18n-label="AdminRadarrApiKey" label="Radarr API 密钥" />
+                                    <div class="fieldDescription" data-i18n="AdminRadarrApiKeyDesc">Radarr 实例的 API 密钥。</div>
                                 </div>
                                 <div class="inputContainer" style="padding-left: 1em;">
-                                    <label class="inputLabel inputLabelUnfocused" data-i18n="AdminRadarrReleaseTypes">Radarr Release Types</label>
+                                    <label class="inputLabel inputLabelUnfocused" data-i18n="AdminRadarrReleaseTypes">Radarr 发行类型</label>
                                     <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
                                         <label class="emby-checkbox-label">
                                             <input id="radarrConsiderCinemaRelease" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                                            <span data-i18n="AdminConsiderCinemaRelease">Consider Cinema Release</span>
+                                            <span data-i18n="AdminConsiderCinemaRelease">包含影院上映</span>
                                         </label>
                                         <label class="emby-checkbox-label">
                                             <input id="radarrConsiderPhysicalRelease" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                                            <span data-i18n="AdminConsiderPhysicalRelease">Consider Physical Release</span>
+                                            <span data-i18n="AdminConsiderPhysicalRelease">包含实体发行</span>
                                         </label>
                                         <label class="emby-checkbox-label">
                                             <input id="radarrConsiderDigitalRelease" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                                            <span data-i18n="AdminConsiderDigitalRelease">Consider Digital Release</span>
+                                            <span data-i18n="AdminConsiderDigitalRelease">包含数字发行</span>
                                         </label>
                                     </div>
-                                    <div class="fieldDescription" data-i18n="AdminRadarrReleaseTypesDesc">Which release types should be considered for upcoming movies? At least one must be selected.</div>
+                                    <div class="fieldDescription" data-i18n="AdminRadarrReleaseTypesDesc">即将上映的电影应考虑哪些发行类型？至少须选择一项。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtLidarrUrl" data-i18n-label="AdminLidarrUrl" label="Lidarr URL" />
-                                    <div class="fieldDescription" data-i18n="AdminLidarrUrlDesc">Complete URL for Lidarr to use for upcoming music sections.</div>
+                                    <input is="emby-input" type="text" data-id="txtLidarrUrl" data-i18n-label="AdminLidarrUrl" label="Lidarr 地址" />
+                                    <div class="fieldDescription" data-i18n="AdminLidarrUrlDesc">用于“即将发行音乐”板块的 Lidarr 完整地址。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="password" data-id="txtLidarrApiKey" data-i18n-label="AdminLidarrApiKey" label="Lidarr API Key" />
-                                    <div class="fieldDescription" data-i18n="AdminLidarrApiKeyDesc">API Key for Lidarr instance.</div>
+                                    <input is="emby-input" type="password" data-id="txtLidarrApiKey" data-i18n-label="AdminLidarrApiKey" label="Lidarr API 密钥" />
+                                    <div class="fieldDescription" data-i18n="AdminLidarrApiKeyDesc">Lidarr 实例的 API 密钥。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtReadarrUrl" data-i18n-label="AdminReadarrUrl" label="Readarr URL" />
-                                    <div class="fieldDescription" data-i18n="AdminReadarrUrlDesc">Complete URL for Readarr to use for upcoming books sections.</div>
+                                    <input is="emby-input" type="text" data-id="txtReadarrUrl" data-i18n-label="AdminReadarrUrl" label="Readarr 地址" />
+                                    <div class="fieldDescription" data-i18n="AdminReadarrUrlDesc">用于“即将发行图书”板块的 Readarr 完整地址。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="password" data-id="txtReadarrApiKey" data-i18n-label="AdminReadarrApiKey" label="Readarr API Key" />
-                                    <div class="fieldDescription" data-i18n="AdminReadarrApiKeyDesc">API Key for Readarr instance.</div>
+                                    <input is="emby-input" type="password" data-id="txtReadarrApiKey" data-i18n-label="AdminReadarrApiKey" label="Readarr API 密钥" />
+                                    <div class="fieldDescription" data-i18n="AdminReadarrApiKeyDesc">Readarr 实例的 API 密钥。</div>
                                 </div>
                                 <div class="checkboxContainer checkboxContainer-withDescription" style="margin-top: 1em;">
                                     <label class="emby-checkbox-label">
                                         <input id="filterUpcomingByLibraryAccess" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                                        <span data-i18n="AdminFilterUpcomingByLibraryAccess">Filter Upcoming Sections by Library Access</span>
+                                        <span data-i18n="AdminFilterUpcomingByLibraryAccess">按媒体库访问权限筛选即将推出板块</span>
                                     </label>
-                                    <div class="fieldDescription" data-i18n="AdminFilterUpcomingByLibraryAccessDesc">When enabled, upcoming items are hidden from users who don't have access to the library the items belong to. Relies on matching the *arr root folder path against your Jellyfin library paths, so this only works if Jellyfin and your *arr instances use the same paths.</div>
+                                    <div class="fieldDescription" data-i18n="AdminFilterUpcomingByLibraryAccessDesc">启用后，即将推出的条目将对无权访问其所属媒体库的用户隐藏。此项依赖将 *arr 根目录路径与 Jellyfin 媒体库路径进行匹配，因此仅当 Jellyfin 与 *arr 实例使用相同路径时才能生效。</div>
                                 </div>
                             </div>
                         </details>
@@ -197,12 +197,12 @@
                             <summary data-i18n="AdminLibreTranslate" style="cursor: pointer; font-weight: bold;">LibreTranslate</summary>
                             <div style="padding-top: 1em;">
                                  <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtLibreTranslateUrl" data-i18n-label="AdminLibreTranslateUrl" label="LibreTranslate URL" />
-                                    <div class="fieldDescription" data-i18n="AdminLibreTranslateUrlDesc">URL for LibreTranslate instance to use for translations.</div>
+                                    <input is="emby-input" type="text" data-id="txtLibreTranslateUrl" data-i18n-label="AdminLibreTranslateUrl" label="LibreTranslate 地址" />
+                                    <div class="fieldDescription" data-i18n="AdminLibreTranslateUrlDesc">用于翻译的 LibreTranslate 实例地址。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtLibreTranslateApiKey" required="required" data-i18n-label="AdminLibreTranslateApiKey" label="LibreTranslate API Key" />
-                                    <div class="fieldDescription" data-i18n="AdminLibreTranslateApiKeyDesc">API Key for LibreTranslate instance.</div>
+                                    <input is="emby-input" type="text" data-id="txtLibreTranslateApiKey" required="required" data-i18n-label="AdminLibreTranslateApiKey" label="LibreTranslate API 密钥" />
+                                    <div class="fieldDescription" data-i18n="AdminLibreTranslateApiKeyDesc">LibreTranslate 实例的 API 密钥。</div>
                                 </div>
                             </div>
                         </details>
@@ -210,93 +210,93 @@
                             <summary data-i18n="AdminJellyseerr" style="cursor: pointer; font-weight: bold;">Jellyseerr</summary>
                              <div style="padding-top: 1em;">
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtJellyseerrUrl" data-i18n-label="AdminJellyseerrInternalUrl" label="Jellyseerr URL (Internal)" />
-                                    <div class="fieldDescription" data-i18n="AdminJellyseerrInternalUrlDesc">Internal URL for Jellyseerr to use for API requests from the plugin backend.</div>
+                                    <input is="emby-input" type="text" data-id="txtJellyseerrUrl" data-i18n-label="AdminJellyseerrInternalUrl" label="Jellyseerr 地址（内部）" />
+                                    <div class="fieldDescription" data-i18n="AdminJellyseerrInternalUrlDesc">插件后端发起 API 请求时使用的 Jellyseerr 内部地址。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtJellyseerrExternalUrl" data-i18n-label="AdminJellyseerrExternalUrl" label="Jellyseerr URL (External)" />
-                                    <div class="fieldDescription" data-i18n="AdminJellyseerrExternalUrlDesc">External URL for Jellyseerr links in the frontend. Leave empty to use the internal URL.</div>
+                                    <input is="emby-input" type="text" data-id="txtJellyseerrExternalUrl" data-i18n-label="AdminJellyseerrExternalUrl" label="Jellyseerr 地址（外部）" />
+                                    <div class="fieldDescription" data-i18n="AdminJellyseerrExternalUrlDesc">前端中 Jellyseerr 链接使用的外部地址。留空则使用内部地址。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="password" data-id="txtJellyseerrApiKey" required="required" data-i18n-label="AdminJellyseerrApiKey" label="Jellyseerr API Key" />
-                                    <div class="fieldDescription" data-i18n="AdminJellyseerrApiKeyDesc">API Key for Jellyseerr instance.</div>
+                                    <input is="emby-input" type="password" data-id="txtJellyseerrApiKey" required="required" data-i18n-label="AdminJellyseerrApiKey" label="Jellyseerr API 密钥" />
+                                    <div class="fieldDescription" data-i18n="AdminJellyseerrApiKeyDesc">Jellyseerr 实例的 API 密钥。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="text" data-id="txtJellyseerrPreferredLanguages" required="required" data-i18n-label="AdminDiscoverLanguageFilter" label="Discover Sections Language Filter" />
-                                    <div class="fieldDescription" data-i18n="AdminDiscoverLanguageFilterDesc">Preferred languages to filter for Discover section. (comma delimited)</div>
+                                    <input is="emby-input" type="text" data-id="txtJellyseerrPreferredLanguages" required="required" data-i18n-label="AdminDiscoverLanguageFilter" label="Discover 板块语言筛选" />
+                                    <div class="fieldDescription" data-i18n="AdminDiscoverLanguageFilterDesc">Discover 板块的首选筛选语言（以逗号分隔）。</div>
                                 </div>
                             </div>
                         </details>
                         <details style="margin-bottom: 1em;">
-                            <summary data-i18n="AdminDefaultLibraries" style="cursor: pointer; font-weight: bold;">Default Libraries</summary>
+                            <summary data-i18n="AdminDefaultLibraries" style="cursor: pointer; font-weight: bold;">默认媒体库</summary>
                             <div style="padding-top: 1em;">
                                 <div class="inputContainer">
-                                    <label class="inputLabel inputLabelUnfocused" for="defaultMoviesLibrary" data-i18n="AdminDefaultMoviesLibrary">Default Movies Library</label>
+                                    <label class="inputLabel inputLabelUnfocused" for="defaultMoviesLibrary" data-i18n="AdminDefaultMoviesLibrary">默认电影媒体库</label>
                                     <select is="emby-select" id="defaultMoviesLibrary" class="emby-select-withcolor emby-select">
-                                        <option value="" data-i18n="AdminDefault">Default</option>
+                                        <option value="" data-i18n="AdminDefault">默认</option>
                                     </select>
-                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">Select the specific movies library to use for navigation. Lists all underlying library folders (not grouped views).<br><strong>Requires Jellyfin restart to take effect.</strong></div>
+                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">选择用于导航的特定电影媒体库。列出所有底层媒体库文件夹（而非分组视图）。<br><strong>需要重启 Jellyfin 才能生效。</strong></div>
                                 </div>
                                 <div class="inputContainer">
-                                    <label class="inputLabel inputLabelUnfocused" for="defaultTVShowsLibrary" data-i18n="AdminDefaultTVShowsLibrary">Default TV Shows Library</label>
+                                    <label class="inputLabel inputLabelUnfocused" for="defaultTVShowsLibrary" data-i18n="AdminDefaultTVShowsLibrary">默认电视剧媒体库</label>
                                     <select is="emby-select" id="defaultTVShowsLibrary" class="emby-select-withcolor emby-select">
-                                        <option value="" data-i18n="AdminDefault">Default</option>
+                                        <option value="" data-i18n="AdminDefault">默认</option>
                                     </select>
-                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">Select the specific TV shows library to use for navigation. Lists all underlying library folders (not grouped views).<br><strong>Requires Jellyfin restart to take effect.</strong></div>
+                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">选择用于导航的特定电视剧媒体库。列出所有底层媒体库文件夹（而非分组视图）。<br><strong>需要重启 Jellyfin 才能生效。</strong></div>
                                 </div>
                                 <div class="inputContainer">
-                                    <label class="inputLabel inputLabelUnfocused" for="defaultMusicLibrary" data-i18n="AdminDefaultMusicLibrary">Default Music Library</label>
+                                    <label class="inputLabel inputLabelUnfocused" for="defaultMusicLibrary" data-i18n="AdminDefaultMusicLibrary">默认音乐媒体库</label>
                                     <select is="emby-select" id="defaultMusicLibrary" class="emby-select-withcolor emby-select">
-                                        <option value="" data-i18n="AdminDefault">Default</option>
+                                        <option value="" data-i18n="AdminDefault">默认</option>
                                     </select>
-                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">Select the specific music library to use for navigation. Lists all underlying library folders (not grouped views).<br><strong>Requires Jellyfin restart to take effect.</strong></div>
+                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">选择用于导航的特定音乐媒体库。列出所有底层媒体库文件夹（而非分组视图）。<br><strong>需要重启 Jellyfin 才能生效。</strong></div>
                                 </div>
                                 <div class="inputContainer">
-                                    <label class="inputLabel inputLabelUnfocused" for="defaultBooksLibrary" data-i18n="AdminDefaultBooksLibrary">Default Books Library</label>
+                                    <label class="inputLabel inputLabelUnfocused" for="defaultBooksLibrary" data-i18n="AdminDefaultBooksLibrary">默认图书媒体库</label>
                                     <select is="emby-select" id="defaultBooksLibrary" class="emby-select-withcolor emby-select">
-                                        <option value="" data-i18n="AdminDefault">Default</option>
+                                        <option value="" data-i18n="AdminDefault">默认</option>
                                     </select>
-                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">Select the specific books library to use for navigation. Lists all underlying library folders (not grouped views).<br><strong>Requires Jellyfin restart to take effect.</strong></div>
+                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">选择用于导航的特定图书媒体库。列出所有底层媒体库文件夹（而非分组视图）。<br><strong>需要重启 Jellyfin 才能生效。</strong></div>
                                 </div>
                                 <div class="inputContainer">
-                                    <label class="inputLabel inputLabelUnfocused" for="defaultMusicVideosLibrary" data-i18n="AdminDefaultMusicVideosLibrary">Default Music Videos Library</label>
+                                    <label class="inputLabel inputLabelUnfocused" for="defaultMusicVideosLibrary" data-i18n="AdminDefaultMusicVideosLibrary">默认音乐视频媒体库</label>
                                     <select is="emby-select" id="defaultMusicVideosLibrary" class="emby-select-withcolor emby-select">
-                                        <option value="" data-i18n="AdminDefault">Default</option>
+                                        <option value="" data-i18n="AdminDefault">默认</option>
                                     </select>
-                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">Select the specific music videos library to use for navigation. Lists all underlying library folders (not grouped views).<br><strong>Requires Jellyfin restart to take effect.</strong></div>
+                                    <div class="fieldDescription" data-i18n-html="AdminLibraryDescRestart">选择用于导航的特定音乐视频媒体库。列出所有底层媒体库文件夹（而非分组视图）。<br><strong>需要重启 Jellyfin 才能生效。</strong></div>
                                 </div>
                             </div>
                         </details>
                         <details style="margin-bottom: 1em;">
-                            <summary data-i18n="AdminCache" style="cursor: pointer; font-weight: bold;">Cache</summary>
+                            <summary data-i18n="AdminCache" style="cursor: pointer; font-weight: bold;">缓存</summary>
                             <div style="padding-top: 1em;">
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="number" data-id="txtCacheTimeoutSeconds" data-i18n-label="AdminCacheTimeout" label="Cache Timeout (seconds)" min="0" max="604800" />
-                                    <div class="fieldDescription" data-i18n="AdminCacheTimeoutDesc">How long browsers should cache plugin resources (default: 86400 = 24 hours). Set to 0 to disable caching.</div>
+                                    <input is="emby-input" type="number" data-id="txtCacheTimeoutSeconds" data-i18n-label="AdminCacheTimeout" label="缓存超时（秒）" min="0" max="604800" />
+                                    <div class="fieldDescription" data-i18n="AdminCacheTimeoutDesc">浏览器缓存插件资源的时长（默认：86400 = 24 小时）。设为 0 可禁用缓存。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="number" data-id="txtMaxImageCacheEntries" data-i18n-label="AdminMaxImageCacheEntries" label="Max Image Cache Entries" min="1" max="100000" />
-                                    <div class="fieldDescription" data-i18n="AdminMaxImageCacheEntriesDesc">Maximum number of images to cache (default: 10000). Higher values use more memory but reduce re-downloads.</div>
+                                    <input is="emby-input" type="number" data-id="txtMaxImageCacheEntries" data-i18n-label="AdminMaxImageCacheEntries" label="图片缓存最大条目数" min="1" max="100000" />
+                                    <div class="fieldDescription" data-i18n="AdminMaxImageCacheEntriesDesc">可缓存的图片最大数量（默认：10000）。数值越大占用内存越多，但可减少重复下载。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="number" data-id="txtMaxImageWidth" data-i18n-label="AdminMaxImageWidth" label="Max Image Width (px)" min="100" max="10000" />
-                                    <div class="fieldDescription" data-i18n="AdminMaxImageWidthDesc">Maximum width for cached images in pixels (default: 600). Images larger than this will be resized to save storage and bandwidth.</div>
+                                    <input is="emby-input" type="number" data-id="txtMaxImageWidth" data-i18n-label="AdminMaxImageWidth" label="图片最大宽度（像素）" min="100" max="10000" />
+                                    <div class="fieldDescription" data-i18n="AdminMaxImageWidthDesc">缓存图片的最大宽度（像素）（默认：600）。超过此尺寸的图片将被缩放，以节省存储空间和带宽。</div>
                                 </div>
                                 <div class="inputContainer">
-                                    <input is="emby-input" type="number" data-id="txtImageJpegQuality" data-i18n-label="AdminImageJpegQuality" label="Image JPEG Quality" min="1" max="100" />
-                                    <div class="fieldDescription" data-i18n="AdminImageJpegQualityDesc">JPEG compression quality for cached images (default: 85). Higher percentage means better quality but larger files.</div>
+                                    <input is="emby-input" type="number" data-id="txtImageJpegQuality" data-i18n-label="AdminImageJpegQuality" label="图片 JPEG 质量" min="1" max="100" />
+                                    <div class="fieldDescription" data-i18n="AdminImageJpegQualityDesc">缓存图片的 JPEG 压缩质量（默认：85）。百分比越高质量越好，但文件也越大。</div>
                                 </div>
                             </div>
                         </details>
                         <details>
-                            <summary data-i18n="AdminThirdPartyIntegrations" style="cursor: pointer; font-weight: bold;">Third-Party Integrations</summary>
+                            <summary data-i18n="AdminThirdPartyIntegrations" style="cursor: pointer; font-weight: bold;">第三方集成</summary>
                             <div style="padding-top: 1em;">
                                 <div class="checkboxContainer checkboxContainer-withDescription" style="margin-bottom: 1.5em;">
                                     <label class="emby-checkbox-label">
                                         <input id="globalStreamyfinHomeOverride" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                                        <span data-i18n="AdminOverrideStreamyfinHome">Override Streamyfin Home</span>
+                                        <span data-i18n="AdminOverrideStreamyfinHome">覆盖 Streamyfin 主屏幕</span>
                                     </label>
-                                    <div class="fieldDescription" data-i18n-html="AdminStreamyfinDesc">Should requests for the Streamyfin config overwrite the home section with a Home Screen Sections generation.<br /><br/><i>Please Note: This functionality behind this setting is currently highly experimental and more work is likely needed before this is finalised.</i></div>
+                                    <div class="fieldDescription" data-i18n-html="AdminStreamyfinDesc">Streamyfin 配置请求是否使用主屏幕板块生成的内容来覆盖主屏幕板块？<br /><br/><i>请注意：此设置背后的功能目前处于高度实验阶段，在最终定稿前可能还需要进一步完善。</i></div>
                                 </div>
                             </div>
                         </details>
@@ -304,28 +304,28 @@
                 </fieldset>
 
                 <fieldset class="verticalSection-extrabottompadding">
-                    <legend data-i18n="AdminDeveloperSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">Developer Settings</legend>
+                    <legend data-i18n="AdminDeveloperSettings" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">开发者设置</legend>
                     <div style="padding-left: .5em;">
                         <div class="checkboxContainer checkboxContainer-withDescription" style="margin-bottom: 1.5em;">
                             <label class="emby-checkbox-label">
                                 <input id="globalDeveloperMode" type="checkbox" is="emby-checkbox" class="emby-checkbox">
-                                <span data-i18n="AdminDeveloperMode">Developer Mode</span>
+                                <span data-i18n="AdminDeveloperMode">开发者模式</span>
                             </label>
-                            <div class="fieldDescription" data-i18n="AdminDeveloperModeDesc">Disable browser caching for plugin resources during development.</div>
+                            <div class="fieldDescription" data-i18n="AdminDeveloperModeDesc">开发期间禁用浏览器对插件资源的缓存。</div>
                         </div>
 <!--                        <div style="margin-top: 1em;">-->
 <!--                            <div style="display: flex; gap: 1em; align-items: center; flex-wrap: wrap;">-->
 <!--                                <button type="button" id="btnBustHomeSectionsCache" class="raised button-submit emby-button">-->
-<!--                                    <span data-i18n="AdminBustStaticCache">Bust Static Assets Cache</span>-->
+<!--                                    <span data-i18n="AdminBustStaticCache">清除静态资源缓存</span>-->
 <!--                                </button>-->
 <!--                                <button type="button" id="btnBustAllCaches" class="raised emby-button" style="background-color: #2196F3;">-->
-<!--                                    <span data-i18n="AdminBustAllCaches">Bust All Caches (Assets + Index)</span>-->
+<!--                                    <span data-i18n="AdminBustAllCaches">清除所有缓存（资源 + 索引）</span>-->
 <!--                                </button>-->
 <!--                                <span id="cacheBustStatus" style="color: #52b54b; display: none; font-weight: bold;"></span>-->
 <!--                            </div>-->
 <!--                            <div style="margin-top: 0.5em; font-size: 0.9em; color: #ccc;" data-i18n-html="AdminCacheDescriptions">-->
-<!--                                <strong>Static Assets Cache:</strong> Clears browser cache for CSS/JS files only.<br>-->
-<!--                                <strong>All Caches:</strong> Clears both static assets and index.html transformation cache.-->
+<!--                                <strong>静态资源缓存：</strong>仅清除 CSS/JS 文件的浏览器缓存。<br>-->
+<!--                                <strong>所有缓存：</strong>同时清除静态资源和 index.html 转换缓存。-->
 <!--                            </div>-->
 <!--                        </div>-->
                     </div>
@@ -333,26 +333,26 @@
 
                 <br>
                 <button id="btnSaveConfigGlobal" is="emby-button" type="submit" class="raised button-submit block emby-button hssFloatingSaveButton">
-                    <span data-i18n="AdminSave">Save</span>
+                    <span data-i18n="AdminSave">保存</span>
                 </button>
             </div>
 
             <div id="sections" class="jellyfin-tab-content hssSectionsTab" style="display: none;">
                 <fieldset class="verticalSection-extrabottompadding">
-                     <legend data-i18n="AdminFieldDescriptions" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">Field Descriptions</legend>
+                     <legend data-i18n="AdminFieldDescriptions" style="padding-bottom:10px; font-weight: bolder; font-size: 1.2em;">字段说明</legend>
                     <ul id="fieldDescriptionsList" style="margin: 0; padding-left: 1.5em;">
-                        <li><strong data-i18n="AdminOrder">Order</strong>: <span data-i18n="AdminOrderDesc">Sets the display order for this section in Jellyfin. Lower numbers appear first.</span> <i data-i18n="AdminOrderNote">Note: Sections with the same number are shown in random order among themselves, and are bunched together in this table with a bar you can drag to move the whole group at once</i></li>
-                        <li><span data-i18n="AdminAddRemoveDesc">Only sections listed in the table below are enabled and shown on the home screen. Use "Add Section" to bring back a removed one; use the</span> <span class="material-icons" style="font-size: 1em; vertical-align: middle;" aria-hidden="true">close</span> <span data-i18n="AdminAddRemoveDesc2">button on a row to remove it.</span></li>
-                        <li><strong data-i18n="AdminUserOverride">User Override</strong>: <span data-i18n="AdminUserOverrideDesc">Let the user override this section</span></li>
-                        <li><strong data-i18n="AdminMin">Min</strong>: <span data-i18n="AdminLowerLimitDesc">The minimum number of times this section should appear</span></li>
-                        <li><strong data-i18n="AdminMax">Max</strong>: <span data-i18n="AdminUpperLimitDesc">The maximum number of times this section can appear</span></li>
-                        <li><strong data-i18n="AdminViewMode">View Mode</strong>: <span data-i18n="AdminViewModeDesc">Defines the card layout used when displaying results.</span> <i data-i18n="AdminViewModeNote">If disabled, the section only supports the displayed layout.</i></li>
+                        <li><strong data-i18n="AdminOrder">排序</strong>: <span data-i18n="AdminOrderDesc">设置此板块在 Jellyfin 中的显示排序。数字越小越靠前。</span> <i data-i18n="AdminOrderNote">注意：编号相同的板块彼此之间以随机顺序显示，并在本表格中归拢为一组，组上有一根可拖动的横杆，可一次性移动整组</i></li>
+                        <li><span data-i18n="AdminAddRemoveDesc">只有下方表格中列出的板块才会启用并显示在主屏幕上。使用“添加板块”可恢复已移除的板块；点击行上的</span> <span class="material-icons" style="font-size: 1em; vertical-align: middle;" aria-hidden="true">close</span> <span data-i18n="AdminAddRemoveDesc2">按钮即可将其移除。</span></li>
+                        <li><strong data-i18n="AdminUserOverride">用户覆盖</strong>: <span data-i18n="AdminUserOverrideDesc">允许用户覆盖此板块</span></li>
+                        <li><strong data-i18n="AdminMin">最小</strong>: <span data-i18n="AdminLowerLimitDesc">此板块应出现的最少次数</span></li>
+                        <li><strong data-i18n="AdminMax">最大</strong>: <span data-i18n="AdminUpperLimitDesc">此板块可出现的最多次数</span></li>
+                        <li><strong data-i18n="AdminViewMode">视图模式</strong>: <span data-i18n="AdminViewModeDesc">定义显示结果时所使用的卡片布局。</span> <i data-i18n="AdminViewModeNote">若被禁用，则此板块仅支持当前显示的布局。</i></li>
                     </ul>
                 </fieldset>
                 <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 1em;">
                     <select is="emby-select" id="addSectionSelect" class="emby-select-withcolor emby-select" style="flex: 1;"></select>
                     <button type="button" id="btnAddSection" is="emby-button" class="raised raised-mini emby-button">
-                        <span data-i18n="AdminAddSection">Add Section</span>
+                        <span data-i18n="AdminAddSection">添加板块</span>
                     </button>
                 </div>
                 <div class="hssTableScroll">
@@ -360,15 +360,15 @@
                     <thead>
                         <tr>
                             <th style="width: 32px;"></th>
-                            <th data-i18n="AdminSection" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold; width: 220px;">Section</th>
-                            <th data-i18n="AdminOrder" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">Order</th>
-                            <th data-i18n="AdminUserOverride" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">User Override</th>
-                            <th data-i18n="AdminHideWatched" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">Hide Watched</th>
-                            <th data-i18n="AdminMin" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">Min</th>
-                            <th data-i18n="AdminMax" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">Max</th>
-                            <th data-i18n="AdminViewMode" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">View Mode</th>
-                            <th data-i18n="AdminPreview" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">Preview</th>
-                            <th data-i18n="AdminRemove" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">Remove</th>
+                            <th data-i18n="AdminSection" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold; width: 220px;">板块</th>
+                            <th data-i18n="AdminOrder" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">排序</th>
+                            <th data-i18n="AdminUserOverride" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">用户覆盖</th>
+                            <th data-i18n="AdminHideWatched" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">隐藏已观看</th>
+                            <th data-i18n="AdminMin" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">最小</th>
+                            <th data-i18n="AdminMax" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">最大</th>
+                            <th data-i18n="AdminViewMode" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">视图模式</th>
+                            <th data-i18n="AdminPreview" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">预览</th>
+                            <th data-i18n="AdminRemove" style="text-align: center; vertical-align: middle; padding: 8px 12px; font-weight: bold;">删除</th>
                         </tr>
                     </thead>
                     <tbody id="sectionWrapper">
@@ -378,7 +378,7 @@
 
                 <br>
                 <button id="btnSaveConfigSections" is="emby-button" type="submit" class="raised button-submit block emby-button hssFloatingSaveButton">
-                    <span data-i18n="AdminSave">Save</span>
+                    <span data-i18n="AdminSave">保存</span>
                 </button>
             </div>
         </form>
@@ -425,19 +425,19 @@
             </td>
             <td style="text-align: center; vertical-align: middle; padding: 8px 12px;">
                 <select is="emby-select" class="emby-select-withcolor emby-select" data-id="viewModeSelect" style="width: fit-content; text-align: center;">
-                    <option value="Portrait" data-i18n="AdminPortrait">Portrait</option>
-                    <option value="Landscape" data-i18n="AdminLandscape">Landscape</option>
-                    <option value="Square" data-i18n="AdminSquare">Square</option>
-                    <option value="Small" data-i18n="AdminSmall">Small</option>
+                    <option value="Portrait" data-i18n="AdminPortrait">纵向</option>
+                    <option value="Landscape" data-i18n="AdminLandscape">横向</option>
+                    <option value="Square" data-i18n="AdminSquare">方形</option>
+                    <option value="Small" data-i18n="AdminSmall">小图</option>
                 </select>
             </td>
             <td class="hssPreviewCell">
                 <button type="button" is="emby-button" class="raised raised-mini emby-button hssPreviewButton" data-id="btnPreviewSection">
-                    <span data-i18n="AdminPreview">Preview</span>
+                    <span data-i18n="AdminPreview">预览</span>
                 </button>
             </td>
             <td style="text-align: center; vertical-align: middle; padding: 8px 12px;">
-                <button type="button" is="emby-button" class="raised raised-mini emby-button" data-id="btnRemoveSection" title="Remove">
+                <button type="button" is="emby-button" class="raised raised-mini emby-button" data-id="btnRemoveSection" title="删除">
                     <span class="material-icons" aria-hidden="true">close</span>
                 </button>
             </td>
