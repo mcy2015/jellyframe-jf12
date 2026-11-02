@@ -1,0 +1,45 @@
+[
+    {
+        "guid": "70bb2ec1-f19e-46b5-b49a-942e6b96ebae",
+        "name": "Editor's Choice",
+        "overview": "Create a Netflix-style featured content slider on the main page.",
+        "description": "Create a Netflix-style featured content slider on the main page.",
+        "owner": "lachlandcp",
+        "category": "General",
+        "imageUrl": "https://raw.githubusercontent.com/lachlandcp/jellyfin-editors-choice-plugin/main/logo.png",
+        "versions": [
+            {
+                "version": "1.6.2.0",
+                "changelog": "Fix incorrect offset on initiail slide, and versioning issue.",
+                "targetAbi": "12.1.0.0",
+                "sourceUrl": "https://github.com/lachlandcp/jellyfin-editors-choice-plugin/releases/download/1.6.2/EditorsChoicePlugin-v1.6.2.zip",
+                "checksum": "f39a783d9aa3027d17fcd6caba225273",
+                "timestamp": "2026-10-13 07:35:00"
+            },
+            {
+                "version": "1.6.0.0",
+                "changelog": "Support for Jellyfin 12., adds options to hide slider controls, adds automatic injection fallback for script initialisation.",
+                "targetAbi": "12.1.0.0",
+                "sourceUrl": "https://github.com/lachlandcp/jellyfin-editors-choice-plugin/releases/download/1.6.0/EditorsChoicePlugin-v1.6.0.zip",
+                "checksum": "fe1d632532ff50b799b281d30d05bf6b",
+                "timestamp": "2026-09-17 10:57:00"
+            },
+             {
+                "version": "1.5.2.0",
+                "changelog": "Restores intended 'new' mode behaviour to filter recent movies and series with episodes released within a selected time period..",
+                "targetAbi": "10.11.8.0",
+                "sourceUrl": "https://github.com/lachlandcp/jellyfin-editors-choice-plugin/releases/download/1.5.2/EditorsChoicePlugin.v1.5.2.zip",
+                "checksum": "65a7ff92fadf18ef8c336af8b2426ffc",
+                "timestamp": "2026-04-10 20:43:00"
+            },
+            {
+                "version": "1.5.0.0",
+                "changelog": "Adds hero mode, improved consistency and predictability of new mode, and added gentle animation to banner images.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/lachlandcp/jellyfin-editors-choice-plugin/releases/download/1.5.0/EditorsChoicePlugin.v1.5.0.zip",
+                "checksum": "974f78464bdd79823a44fbb748f424b5",
+                "timestamp": "2026-03-11 17:33:00"
+            }
+        ]
+    }
+]

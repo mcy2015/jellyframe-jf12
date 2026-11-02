@@ -1,0 +1,117 @@
+.top-ten .card:before {
+    content: var(--card-number);
+    position:fixed;
+    margin-left: 20px;
+    font-size:75px;
+    width:50px;
+    text-align:right;
+    height: 100px;
+    vertical-align: middle;
+    --card-number: attr(data-number);
+    bottom: calc(50% - 50px);
+    font-weight: bold;
+    -webkit-text-stroke: 3px var(--borderColor);
+    color: var(--darkerGradientPoint);
+    text-shadow: 0 0 10px var(--borderColor);
+}
+
+.top-ten .card .cardBox {
+    margin-left: 4.2em !important;
+}
+
+.top-ten .cardFooter {
+    display:none;
+}
+
+.discoverCard-movie:before {
+    position: absolute;
+    content: 'Movie';
+    z-index: 1386;
+    color: white;
+    text-transform: uppercase;
+    background-color: rgb(37 99 235 / 0.9);
+    margin-top: 7px;
+    margin-left: 7px;
+    padding: 4px 12px 4px 15px;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    border-radius: 999px;
+    border-color: rgb(59 130 246);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+
+.discoverCard-tv:before {
+    position: absolute;
+    content: 'Series';
+    z-index: 1386;
+    color: white;
+    text-transform: uppercase;
+    background-color: rgb(147 51 234 / 0.9);
+    margin-top: 7px;
+    margin-left: 7px;
+    padding: 4px 12px 4px 15px;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    border-radius: 999px;
+    border-color: rgb(168 85 247 / 0.9);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+
+@media (min-width:100em) {
+    .top-ten .card:before {
+        margin-left: 12px;
+        font-size:6vw;
+        height: 120px;
+        bottom: calc(50% - 60px);
+    }
+}
+
+[class*="upcoming-"][class*="-section"] .cardText-tertiary {
+    font-size: 0.9em;
+    color: var(--secondaryTextColor);
+    opacity: 0.8;
+}
+
+.upcomingShowCard .cardImageContainer,
+.upcomingMovieCard .cardImageContainer,
+.upcomingMusicCard .cardImageContainer,
+.upcomingBookCard .cardImageContainer {
+    cursor: default;
+}
+
+[class*="upcoming-"][class*="-section"] {
+    cursor: default;
+}
+
+[class*="upcoming-"][class*="-section"] .textActionButton:hover {
+    background-color: var(--hoverBackgroundColor);
+    color: var(--primaryTextColor);
+    text-decoration: none;
+    cursor: default;
+}
+
+.upcomingShowCard:before,
+.upcomingMovieCard:before,
+.upcomingMusicCard:before,
+.upcomingBookCard:before {
+    position: absolute;
+    content: 'Upcoming';
+    z-index: 1386;
+    cursor: default;
+    color: white;
+    text-transform: uppercase;
+    background-color: rgb(13 108 48 / 0.9);
+    margin-top: 7px;
+    margin-left: 7px;
+    padding: 4px 12px 4px 15px;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    border-radius: 999px;
+    border-color: rgb(74 222 128);
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+}
+
+.sections.homeSectionsContainer {
+    display: flex;
+    flex-direction: column;
+}

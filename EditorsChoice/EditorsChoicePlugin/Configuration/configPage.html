@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editors Choice Plugin</title>
+</head>
+<body>
+    <div data-role="page" class="page type-interior pluginConfigurationPage editorsChoiceConfigurationPage" data-require="emby-input,emby-button,emby-select,emby-checkbox,emby-linkbutton,emby-radio">
+        <style>
+            .mdl-radio {
+                box-sizing: border-box;
+                display: inline-block;
+                line-height: 24px;
+                margin: 0;
+                position: relative;
+            }
+
+            .radio-label-block {
+                align-items: center;
+                display: flex;
+                margin-bottom: 0.5em;
+                margin-top: 0.5em;
+            }
+
+            .mdl-radio__button {
+                appearance: none;
+                border: none;
+                height: 1px;
+                line-height: 24px;
+                margin: 0;
+                opacity: 0;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+
+            .mdl-radio__circles {
+                border-radius: 50%;
+                cursor: pointer;
+                height: 1.08em;
+                position: relative;
+                width: 1.08em;
+            }
+
+            [dir="ltr"] .mdl-radio__circles {
+                margin-right: 0.54em;
+            }
+
+            [dir="rtl"] .mdl-radio__circles {
+                margin-left: 0.54em;
+            }
+
+            .mdl-radio__circles svg {
+                height: 100%;
+                overflow: visible;
+                position: absolute;
+                top: 0;
+                width: 100%;
+                z-index: 1;
+            }
+
+            [dir="ltr"] .mdl-radio__circles svg {
+                left: 0;
+            }
+
+            [dir="rtl"] .mdl-radio__circles svg {
+                right: 0;
+            }
+
+            .mdl-radio__button:disabled + .mdl-radio__circles {
+                cursor: auto;
+            }
+
+            .mdl-radio__button:disabled + .mdl-radio__circles .mdl-radio__outer-circle {
+                color: rgba(0, 0, 0, 0.26);
+            }
+
+            .mdl-radio.show-focus .mdl-radio__button:focus + .mdl-radio__circles .mdl-radio__outer-circle {
+                color: rgb(0, 164, 220);
+            }
+
+            .mdl-radio__inner-circle {
+                transform: scale(0);
+                transform-origin: 50% 50%;
+                transition-duration: 0.2s;
+                transition-property: transform, -webkit-transform;
+            }
+
+            .mdl-radio__button:checked + .mdl-radio__circles .mdl-radio__inner-circle {
+                transform: scale(1);
+            }
+
+            .mdl-radio__button:disabled + .mdl-radio__circles .mdl-radio__inner-circle {
+                color: rgba(0, 0, 0, 0.26);
+            }
+
+            .mdl-radio.show-focus .mdl-radio__button:focus + .mdl-radio__circles .mdl-radio__inner-circle {
+                color: rgb(0, 164, 220);
+            }
+
+            .mdl-radio__focus-circle {
+                background: rgb(0, 164, 220);
+                border-radius: 50%;
+                box-sizing: border-box;
+                height: 100%;
+                left: 0;
+                margin: 0;
+                opacity: 0.26;
+                position: absolute;
+                top: 0;
+                transform: scale(0);
+                transition-duration: 0.2s;
+                transition-property: transform, -webkit-transform;
+                width: 100%;
+            }
+
+            .mdl-radio.show-focus .mdl-radio__button:focus + .mdl-radio__circles .mdl-radio__focus-circle {
+                transform: scale(1.75);
+            }
+
+            .mdl-radio__label {
+                cursor: pointer;
+            }
+
+            .mdl-radio__button:disabled + .mdl-radio__label {
+                color: rgba(0, 0, 0, 0.26);
+                cursor: auto;
+            }
+
+            .radio-label-block .fieldDescription {
+                margin-left: 1em;
+            }
+
+            .checkboxContainer .fieldDescription {
+                width: 100%;
+            }
+
+            .editorsChoiceConfigurationForm hr {
+                border-color: #292929c2;
+            }
+
+        </style>
+
+        <div data-role="content">
+            <div class="content-primary">
+                <form class="editorsChoiceConfigurationForm">
+                    <h1>EditorsChoice settings</h1>
+
+                    <hr />
+                    <h2>Mode</h2>
+                    <div class="inputContainer">
+                        <label class="radio-label-block mdl-radio show-focus">
+                            <input type="radio" is="emby-radio" id="FavouritesMode" name="mode" value="FavouritesMode" class="mdl-radio__button" />
+                            <div class="mdl-radio__circles">
+                                <svg>
+                                    <defs>
+                                        <clipPath id="cutoff-fav"><circle cx="50%" cy="50%" r="50%"></circle></clipPath>
+                                    </defs>
+                                    <circle class="mdl-radio__outer-circle" cx="50%" cy="50%" r="50%" fill="none" stroke="currentcolor" stroke-width="0.26em" clip-path="url(#cutoff-fav)"></circle>
+                                    <circle class="mdl-radio__inner-circle" cx="50%" cy="50%" r="25%" fill="currentcolor"></circle>
+                                </svg>
+                                <div class="mdl-radio__focus-circle"></div>
+                            </div>
+                            <span class="radioButtonLabel mdl-radio__label">Favourites</span>
+                            <div class="fieldDescription">Shows items from the specified user's favourites</div>
+                        </label>
+
+                        <label class="radio-label-block mdl-radio show-focus">
+                            <input type="radio" is="emby-radio" id="RandomMode" name="mode" value="RandomMode" class="mdl-radio__button" />
+                            <div class="mdl-radio__circles">
+                                <svg>
+                                    <defs>
+                                        <clipPath id="cutoff-rand"><circle cx="50%" cy="50%" r="50%"></circle></clipPath>
+                                    </defs>
+                                    <circle class="mdl-radio__outer-circle" cx="50%" cy="50%" r="50%" fill="none" stroke="currentcolor" stroke-width="0.26em" clip-path="url(#cutoff-rand)"></circle>
+                                    <circle class="mdl-radio__inner-circle" cx="50%" cy="50%" r="25%" fill="currentcolor"></circle>
+                                </svg>
+                                <div class="mdl-radio__focus-circle"></div>
+                            </div>
+                            <span class="radioButtonLabel mdl-radio__label">Random</span>
+                            <div class="fieldDescription">Shows a random selection of items from your library</div>
+                        </label>
+
+                        <label class="radio-label-block mdl-radio show-focus">
+                            <input type="radio" is="emby-radio" id="CollectionsMode" name="mode" value="CollectionsMode" class="mdl-radio__button" />
+                            <div class="mdl-radio__circles">
+                                <svg>
+                                    <defs>
+                                        <clipPath id="cutoff-col"><circle cx="50%" cy="50%" r="50%"></circle></clipPath>
+                                    </defs>
+                                    <circle class="mdl-radio__outer-circle" cx="50%" cy="50%" r="50%" fill="none" stroke="currentcolor" stroke-width="0.26em" clip-path="url(#cutoff-col)"></circle>
+                                    <circle class="mdl-radio__inner-circle" cx="50%" cy="50%" r="25%" fill="currentcolor"></circle>
+                                </svg>
+                                <div class="mdl-radio__focus-circle"></div>
+                            </div>
+                            <span class="radioButtonLabel mdl-radio__label">Collections</span>
+                            <div class="fieldDescription">Shows items from the specified collections</div>
+                        </label>
+
+                        <label class="radio-label-block mdl-radio show-focus">
+                            <input type="radio" is="emby-radio" id="NewMode" name="mode" value="NewMode" class="mdl-radio__button" />
+                            <div class="mdl-radio__circles">
+                                <svg>
+                                    <defs>
+                                        <clipPath id="cutoff-new"><circle cx="50%" cy="50%" r="50%"></circle></clipPath>
+                                    </defs>
+                                    <circle class="mdl-radio__outer-circle" cx="50%" cy="50%" r="50%" fill="none" stroke="currentcolor" stroke-width="0.26em" clip-path="url(#cutoff-new)"></circle>
+                                    <circle class="mdl-radio__inner-circle" cx="50%" cy="50%" r="25%" fill="currentcolor"></circle>
+                                </svg>
+                                <div class="mdl-radio__focus-circle"></div>
+                            </div>
+                            <span class="radioButtonLabel mdl-radio__label">New</span>
+                            <div class="fieldDescription">Shows only movies and shows with episodes that premiered recently</div>
+                        </label>
+                    </div>
+
+                    <div id="EditorUserId-container" class="selectContainer" style="display:none;">
+                        <label class="selectLabel" for="EditorUserId">User's favourites list</label>
+                        <select is="emby-select" id="EditorUserId" name="EditorUserId" class="emby-select-withcolor emby-select">
+                            <option value="none">None</option>
+                        </select>
+                    </div>
+
+                    <div id="NewTimeLimit-container" class="selectContainer" style="display:none;">
+                        <label class="selectLabel" for="NewTimeLimitSelect">Show items released in the last:</label>
+                        <select is="emby-select" id="NewTimeLimitSelect" name="NewTimeLimit" class="emby-select-withcolor emby-select">
+                            <option value="1month">1 month</option>
+                            <option value="2month">2 months</option>
+                            <option value="6month">6 months</option>
+                            <option value="1year">1 year</option>
+                            <option value="2year">2 years</option>
+                            <option value="5year">5 years</option>
+                        </select>
+                    </div>
+
+                    <div id="CollectionsList-container" style="display:none;">
+                        <h3 class="checkboxListLabel">Show items from these collections:</h3>
+                        <div id="CollectionsList" class="checkboxList"></div>
+                        <p>One collection will be shown at a time across the slider. If multiple are checked below, one of them will be randomly chosen each time it loads.</p>
+                    </div>
+
+                    <hr />
+                    <h2>Autoplay</h2>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="EnableAutoplay" name="EnableAutoplay" />
+                            <span class="checkboxLabel">Enable autoplay</span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="ShowAutoplayButton" name="ShowAutoplayButton" />
+                            <span class="checkboxLabel">Show autoplay button</span>
+                        </label>
+                        <div class="fieldDescription">Show the play/pause control when autoplay is enabled.</div>
+                    </div>
+
+                    <div id="AutoplayInterval-container" class="inputContainer" style="display:none;">
+                        <label class="inputLabel inputLabelUnfocused" for="AutoplayInterval">Autoplay interval</label>
+                        <input is="emby-input" type="number" id="AutoplayInterval" name="AutoplayInterval" min="1" step="1" />
+                        <div class="fieldDescription">How often, in seconds, the slider moves to the next item. Default is 10 seconds.</div>
+                    </div>
+
+                    <hr />
+                    <h2>Filtering</h2>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="RandomMediaCount">Maximum items shown</label>
+                        <input is="emby-input" type="number" id="RandomMediaCount" name="RandomMediaCount" min="1" />
+                        <div class="fieldDescription">This sets how many items to show in the banner, whether random or from the favourites list. Set to a massive number if you want to show all of your favourited items.</div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="MinimumRating">Minimum community rating</label>
+                        <input is="emby-input" type="number" id="MinimumRating" name="MinimumRating" min="0" max="10" step="0.1" />
+                        <div class="fieldDescription">Only show shows or films that have a community rating at least this number (0.0 to 10.0). Set to 0 to ignore rating.</div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="MinimumCriticRating">Minimum critic rating</label>
+                        <input is="emby-input" type="number" id="MinimumCriticRating" name="MinimumCriticRating" min="0" max="100" step="1" />
+                        <div class="fieldDescription">Only show shows or films that have a critic rating at least this number (0 to 100). Set to 0 to ignore rating.</div>
+                    </div>
+
+                    <div id="MaximumParentRating-container" class="selectContainer">
+                        <label class="selectLabel" for="MaximumParentRating">Maximum parental rating</label>
+                        <select is="emby-select" id="MaximumParentRating" name="MaximumParentRating" class="emby-select-withcolor emby-select">
+                            <option value="-2">User profile</option>
+                        </select>
+                        <div class="fieldDescription">Items with a parental rating higher than this will not be shown. Set to 'User profile' to limit to a user's specific parental access controls (default).</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="ShowPlayed" name="ShowPlayed" />
+                            <span class="checkboxLabel">Show played items</span>
+                        </label>
+                    </div>
+
+                    <hr />
+                    <h2>Display</h2>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="ShowNavigationArrows" name="ShowNavigationArrows" />
+                            <span class="checkboxLabel">Show navigation arrows</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="Heading">Banner heading</label>
+                        <input is="emby-input" type="text" id="Heading" name="Heading" />
+                        <div class="fieldDescription">Add a heading above the banner. Leave empty for no heading.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="ShowPlayButton" name="ShowPlayButton" />
+                            <span class="checkboxLabel">Show Play Button</span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel inputLabelUnfocused" for="PlayButtonText">Custom Play Button Text</label>
+                        <input is="emby-input" type="text" id="PlayButtonText" name="PlayButtonText" />
+                        <div class="fieldDescription">Change the default Play Button Text. Leave empty for default.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="ShowRating" name="ShowRating" />
+                            <span class="checkboxLabel">Show community rating</span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="ShowDesc" name="ShowDesc" />
+                            <span class="checkboxLabel">Show description</span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="HideOnTvLayout" name="HideOnTvLayout" />
+                            <span class="checkboxLabel">Hide on TVs</span>
+                        </label>
+                        <div class="fieldDescription">When enabled, the Editors Choice banner will not be injected on TV interfaces.</div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="UseHeroLayout" name="UseHeroLayout" />
+                            <span class="checkboxLabel">Use Hero Display Style</span>
+                        </label>
+                        <div class="fieldDescription">Changes the banner layout to a hero-style display. Recommended banner height: Large or higher.</div>
+                    </div>
+
+                    <div id="HeroBackdropPosition-container" class="selectContainer">
+                        <label class="selectLabel" for="HeroBackdropPositionSelect">Image Position (Hero Style):</label>
+                        <select is="emby-select" id="HeroBackdropPositionSelect" name="HeroBackdropPositionSelect" class="emby-select-withcolor emby-select">
+                            <option value="center">Center (Default)</option>
+                            <option value="top">Top</option>
+                            <option value="bottom">Bottom</option>
+                        </select>
+                    </div>
+
+                    <div id="effect-container" class="selectContainer">
+                        <label class="selectLabel" for="TransitionEffectSelect">Transition Effect:</label>
+                        <select is="emby-select" id="TransitionEffectSelect" name="TransitionEffectSelect" class="emby-select-withcolor emby-select">
+                            <option value="loop">Slide (Default)</option>
+                            <option value="fade">Fade</option>
+                        </select>
+                    </div>
+
+                    <div id="BannerHeight-container" class="selectContainer">
+                        <label class="selectLabel" for="BannerHeightSelect">Height of banner:</label>
+                        <select is="emby-select" id="BannerHeightSelect" name="BannerHeight" class="emby-select-withcolor emby-select">
+                            <option value="360">Slim (Default)</option>
+                            <option value="400">Thick</option>
+                            <option value="500">Large</option>
+                            <option value="600">Huge</option>
+                        </select>
+                    </div>
+
+                    <hr />
+                    <h2>Technical settings</h2>
+
+                    <div class="selectContainer">
+                        <label class="selectLabel" for="FrontendInjectionMethod">Frontend injection method:</label>
+                        <select is="emby-select" id="FrontendInjectionMethod" name="FrontendInjectionMethod" class="emby-select-withcolor emby-select">
+                            <option value="automatic">Automatic (recommended)</option>
+                            <option value="file-transformation">File Transformation only</option>
+                            <option value="javascript-injector">JavaScript Injector only</option>
+                            <option value="direct">Direct index.html injection only</option>
+                            <option value="disabled">Disabled / manual injection</option>
+                        </select>
+                        <div class="fieldDescription">
+                            Automatic prefers File Transformation, then JavaScript Injector, and only writes directly to jellyfin-web/index.html as a final fallback. Changes take effect after the next restart.
+                        </div>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label class="emby-checkbox-label">
+                            <input is="emby-checkbox" type="checkbox" id="ReduceImageSize" name="ReduceImageSize" />
+                            <span class="checkboxLabel">Reduce image sizes</span>
+                        </label>
+                        <div class="fieldDescription">This will make banner and logo images load faster for users and reduce network usage, but increase processing demand on your media server. Turn off if plugin is having a significant performance impact.</div>
+                    </div>
+
+                    <hr />
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                            <span>Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <script type="text/javascript">
+
+            (function () {
+
+                var pluginId = "70bb2ec1-f19e-46b5-b49a-942e6b96ebae";
+
+                $('.editorsChoiceConfigurationPage').on('pageshow', function (event) {
+
+                    var page = this;
+                    var selectedUserId;
+
+                    Dashboard.showLoadingMsg();
+
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+                        selectedUserId = config.EditorUserId;
+                        //$('#EditorUserId').first().val(config.EditorUserId);
+                        $('#FrontendInjectionMethod').val(config.FrontendInjectionMethod || 'automatic');
+                        $('#ShowRandomMedia').first().prop('checked', config.ShowRandomMedia);
+                        $('#FavouritesMode').first().prop('checked', config.Mode == 'FAVOURITES');
+                        $('#RandomMode').first().prop('checked', config.Mode == 'RANDOM');
+                        $('#CollectionsMode').first().prop('checked', config.Mode == 'COLLECTIONS');
+                        $('#NewMode').first().prop('checked', config.Mode == 'NEW');
+                        $('#RandomMediaCount').val(config.RandomMediaCount);
+                        $('#MinimumRating').val(config.MinimumRating);
+                        $('#MinimumCriticRating').val(config.MinimumCriticRating);
+                        $('#EnableAutoplay').first().prop('checked', config.EnableAutoplay);
+                        $('#ShowAutoplayButton').first().prop('checked', config.ShowAutoplayButton);
+                        $('#AutoplayInterval').first().val(config.AutoplayInterval);
+                        $("#NewTimeLimitSelect").val(config.NewTimeLimit);
+                        $('#ShowRating').first().prop('checked', config.ShowRating);
+                        $('#ShowDesc').first().prop('checked', config.ShowDescription);
+                        $('#ShowPlayButton').first().prop('checked', config.ShowPlayButton);
+                        $('#ShowNavigationArrows').first().prop('checked', config.ShowNavigationArrows);
+                        $('#ReduceImageSize').first().prop('checked', config.ReduceImageSize);
+                        $("#BannerHeightSelect").val(config.BannerHeight);
+                        $("#TransitionEffectSelect").val(config.TransitionEffect);
+                        $("#HeroBackdropPositionSelect").val(config.HeroBackdropPosition);
+                        $("#UseHeroLayout").first().prop('checked', config.UseHeroLayout);
+
+                        $('#ShowPlayed').first().prop('checked', config.ShowPlayed);
+                        $("#Heading").val(config.Heading);
+                        $("#PlayButtonText").val(config.PlayButtonText);
+                        $('#HideOnTvLayout').first().prop('checked', config.HideOnTvLayout);
+
+                        if (config.Mode == 'FAVOURITES') {
+                            $('#EditorUserId-container').show();
+                        } else if (config.Mode == 'COLLECTIONS') {
+                            $('#CollectionsList-container').show();
+                        } else if (config.Mode == "NEW") {
+                            $('#NewTimeLimit-container').show();
+                        }
+
+                        // Only show interval selection if autoplay is enabled
+                        if (config.EnableAutoplay) {
+                            $('#AutoplayInterval-container').show();
+                        }
+
+                        Dashboard.hideLoadingMsg();
+
+                        // populate users drop down
+                        ApiClient.getUsers().then(function (users) {
+                            console.log(users);
+
+                            for (var user of users) {
+                                console.log(user);
+                                if (!user.Policy.IsDisabled) {
+                                    $('#EditorUserId').first().append($('<option>', {
+                                        value: user.Id,
+                                        text: user.Name
+                                    }));
+                                }
+                            }
+
+                            if (config.EditorUserId) {
+                                $('#EditorUserId').val(config.EditorUserId);
+                            } else {
+                                $('#EditorUserId').val("none");
+                            }
+                        });
+
+                        // Populate libraries and collections checkboxes
+                        const libraryTypes = ["tvshows", "movies"];
+                        $('#LibraryList label, #CollectionsList label').remove();
+                        ApiClient.getItems().then(function (data) {
+                            for (var item of data.Items) {
+                                if (libraryTypes.includes(item.CollectionType)) {
+                                    var checked = config.FilteredLibraries.includes(item.Id) ? 'checked' : '';
+                                    var checkboxItem = '<label class="emby-checkbox-label"><input is="emby-checkbox" type="checkbox" data-id="'+item.Id+'" '+checked+'><span class="checkboxLabel">'+item.Name+'</span></label>';
+                                    $('#LibraryList').append(checkboxItem);
+
+                                } else if (item.CollectionType == 'boxsets') {
+                                    var collectionsParentId = item.Id;
+
+                                    // There may be a tidier way to fetch items with a query
+                                    ApiClient.fetch({url: ApiClient.getUrl('/Items?parentId=' + collectionsParentId), type: 'GET'}).then(function(response) {
+                                        response.json().then(function(data) {
+                                            console.log(data);
+
+                                            for (var item of data.Items) {
+                                                var checked = config.SelectedCollections.includes(item.Id) ? 'checked' : '';
+                                                var checkboxItem = '<label class="emby-checkbox-label"><input is="emby-checkbox" type="checkbox" data-id="'+item.Id+'" '+checked+'><span class="checkboxLabel">'+item.Name+'</span></label>';
+                                                $('#CollectionsList').append(checkboxItem);
+                                            }
+                                        })
+                                    });
+
+                                }
+                            }
+                        });
+
+                        ApiClient.getParentalRatings().then(function (allParentalRatings) {
+                            var rating;
+                            var ratings = [];
+
+                            console.log(allParentalRatings);
+
+                            for (let i = 0, length = allParentalRatings.length; i < length; i++) {
+                                rating = allParentalRatings[i];
+
+                                if (ratings.length) {
+                                    var lastRating = ratings[ratings.length - 1];
+
+                                    if (lastRating.RatingScore != null && rating.RatingScore != null) {
+                                        if (lastRating.RatingScore.score === rating.RatingScore.score && lastRating.RatingScore.subScore === rating.RatingScore.subScore) {
+                                            lastRating.Name += '/' + rating.Name;
+                                            continue;
+                                        }
+                                    }
+                                }
+
+                                ratings.push({
+                                    Name: rating.Name,
+                                    RatingScore: rating.RatingScore
+                                });
+                            }
+
+                            for (var rating of ratings) {
+                                if (rating.RatingScore != null) { // skip unrated
+                                    $('#MaximumParentRating').first().append($('<option>', {
+                                        value: rating.RatingScore.score + "," + rating.RatingScore.subScore,
+                                        text: rating.Name
+                                    }));
+                                }
+                            }
+
+                            if (config.MaximumParentRating) {
+                                $('#MaximumParentRating').val(config.MaximumParentRating);
+                            } else {
+                                $('#MaximumParentRating').val(-2);
+                            }
+                        });
+                    });
+                });
+
+                $('.editorsChoiceConfigurationForm').off('submit.plugin').on('submit.plugin', function (e) {
+
+                    Dashboard.showLoadingMsg();
+
+
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+
+                        if ($('#EditorUserId').first().val() == "none") {
+                            config.EditorUserId = null;
+                        } else {
+                            config.EditorUserId = $('#EditorUserId').first().val();
+                        }
+
+                        config.FrontendInjectionMethod = $('#FrontendInjectionMethod').val();
+                        // Keep legacy settings useful if an older Editors Choice build is restored.
+                        config.DoScriptInject = config.FrontendInjectionMethod == 'automatic' || config.FrontendInjectionMethod == 'direct';
+                        config.FileTransformation = config.FrontendInjectionMethod == 'file-transformation';
+                        config.EnableAutoplay = $('#EnableAutoplay').first().is(':checked');
+                        config.ShowAutoplayButton = $('#ShowAutoplayButton').first().is(':checked');
+                        config.AutoplayInterval = $('#AutoplayInterval').first().val();
+                        config.ShowRating = $('#ShowRating').first().is(':checked');
+                        config.ShowDescription =  $('#ShowDesc').first().is(':checked');
+                        config.ShowPlayButton = $('#ShowPlayButton').first().is(':checked');
+                        config.ShowNavigationArrows = $('#ShowNavigationArrows').first().is(':checked');
+                        config.ReduceImageSize = $('#ReduceImageSize').first().is(':checked');
+                        config.ShowPlayed = $('#ShowPlayed').first().is(':checked');
+                        config.HideOnTvLayout = $('#HideOnTvLayout').first().is(':checked');
+                        config.UseHeroLayout = $('#UseHeroLayout').first().is(':checked');
+                        config.TransitionEffect = $("#TransitionEffectSelect").val();
+                        config.HeroBackdropPosition = $("#HeroBackdropPositionSelect").val();
+
+                        if ($('#FavouritesMode').first().is(':checked')) {
+                            config.Mode = "FAVOURITES";
+                            config.ShowRandomMedia = false;
+                        } else if ($('#RandomMode').first().is(':checked')) {
+                            config.Mode = "RANDOM";
+                            config.ShowRandomMedia = true;
+                        } else if ($('#CollectionsMode').first().is(':checked')) {
+                            config.Mode = "COLLECTIONS";
+                            config.ShowRandomMedia = false;
+                        } else if ($('#NewMode').first().is(':checked')) {
+                            config.Mode = "NEW";
+                            config.ShowRandomMedia = false;
+
+                        }
+
+                        let randomMediaCount = $('#RandomMediaCount').first().val();
+                        if (randomMediaCount < 1 || randomMediaCount == '') {
+                            config.RandomMediaCount = 5;
+                        } else {
+                            config.RandomMediaCount = randomMediaCount;
+                        }
+
+                        let minimumRating = $('#MinimumRating').first().val();
+                        if (minimumRating < 0 || minimumRating == '' || minimumRating > 10) {
+                            config.MinimumRating = 0;
+                        } else {
+                            config.MinimumRating = minimumRating;
+                        }
+
+                        let minimumCriticRating = $('#MinimumCriticRating').first().val();
+                        if (minimumCriticRating < 0 || minimumCriticRating == '' || minimumCriticRating > 100) {
+                            config.MinimumCriticRating = 0;
+                        } else {
+                            config.MinimumCriticRating = minimumCriticRating;
+                        }
+
+                        config.MaximumParentRating = $('#MaximumParentRating').first().val().split(',')[0];
+                        config.MaximumParentRatingSubscore = $('#MaximumParentRating').first().val().split(',')[1];
+
+                        var filteredLibraries = [];
+                        $('#LibraryList input[is="emby-checkbox"]:checked').each(function () {
+                            filteredLibraries.push($(this).attr('data-id'));
+                        });
+                        config.FilteredLibraries = filteredLibraries;
+
+                        var selectedCollections = [];
+                        $('#CollectionsList input[is="emby-checkbox"]:checked').each(function () {
+                            selectedCollections.push($(this).attr('data-id'));
+                        });
+                        config.SelectedCollections = selectedCollections;
+
+                        config.NewTimeLimit = $("#NewTimeLimitSelect").val();
+                        config.BannerHeight = $("#BannerHeightSelect").val();
+                        config.Heading = $('#Heading').first().val();
+                        config.PlayButtonText = $('#PlayButtonText').first().val();
+
+                        ApiClient.updatePluginConfiguration(pluginId, config).then(Dashboard.processPluginConfigurationUpdateResult);
+
+                        return true;
+                    });
+
+                    return false;
+                });
+
+                $('input[name="mode"], #EnableAutoplay').on('change', function() {
+                    $('#EditorUserId-container').toggle($('#FavouritesMode').is(':checked'));
+                    $('#CollectionsList-container').toggle($('#CollectionsMode').is(':checked'));
+                    $('#NewTimeLimit-container').toggle($('#NewMode').is(':checked'));
+                    $('#AutoplayInterval-container').toggle($('#EnableAutoplay').is(':checked'));
+                });
+
+            })();
+
+        </script>
+    </div>
+</body>
+</html>
