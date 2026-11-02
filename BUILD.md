@@ -9,7 +9,16 @@
 | `FileTransformation_3.0.0_jf124.zip` | FT 3.0.0 重编（`JellyfinVersion=12.4.0`/net10.0），4 文件（dll+deps.json+pdb+logo.png，镜像官方 zip 布局） | **首选注入层（manifest 指向）** |
 | `JellyFrame_1.5.3.1_jf124.zip` | JellyFrame 重编（net10.0 + Controller/Model 12.4.0 + Sqlite 10.0.12，AssemblyVersion 1.5.3.1），3 dll 镜像官方布局 | **首选框架层（manifest 指向）** |
 | `manifest.json` | 自托管插件仓库清单（jsDelivr sourceUrl，targetAbi 全钉 12.4.0.0，md5 校验齐全） | 供仓库 URL 添加 |
-| `Jellyfin.Plugin.MediaBarEnhanced_v3.12.0.1_jf124.zip` | Media Bar Enhanced 3.12.0.1 重编（net10.0 + Controller/Model 12.4.0，0 错 0 警，无源码改动），依赖 FT | 首页大横幅（按库勾选/排除流派标签/预告片） |
+| `Jellyfin.Plugin.MediaBarEnhanced_v3.12.0.1_jf124.zip` | MBE 3.12.0.1 重编（net10.0，0 错 0 警），依赖 FT | 首页大横幅（按库勾选/排除流派标签/预告片），已被 3.12.0.2 取代 |
+| `Jellyfin.Plugin.MediaBarEnhanced_v3.12.0.2_jf124.zip` | MBE 3.12.0.2（+配置页汉化） | 同上，当前版 |
+| `HomeScreenSections_3.0.0.1_jf124.zip` | Home Screen Sections 3.0.0.1（net10.0 + **zh.json 224 键词典** + 管理页静态汉化） | 动态主屏板块，依赖 FT |
+| `CollectionSections_3.0.0.1_jf124.zip` | Collection Sections 3.0.0.1（配置页汉化） | 合集/播放列表板块，依赖 Home Screen Sections |
+| `CustomTabs_0.3.0.1_jf124.zip` | Custom Tabs 0.3.0.1（配置页汉化） | 自定义标签页，依赖 FT |
+| `PluginPages_3.0.0.1_jf124.zip` | Plugin Pages 3.0.0.1 | 插件自定义页面，依赖 FT |
+| `EditorsChoice_1.6.2.1_jf124.zip` | EditorsChoice 1.6.2.1（配置页汉化） | Netflix 式精选滑块，依赖 FT |
+
+### Jellyfin Enhanced（不需要适配）
+官方仓库原生支持 Jellyfin 12.x（最新 v12.14，targetAbi 12.0.0.0）：添加其官方源 `https://raw.githubusercontent.com/n00bcodr/jellyfin-plugins/main/manifest.json` → 目录直装。无 i18n，界面为英文。
 | `FileTransformation_3.0.0_official-jf120.zip` | 官方 Release-12.0.0 原包 | 手动回退件 |
 | `JellyFrame_1.5.3_official.zip` | 官方 1.5.3 原包，md5 `887fa7d8c017e8ab60e6db68193de750` 与官方 manifest 一致 | 手动回退件 |
 
@@ -33,8 +42,9 @@
 
 1. Dashboard → 插件 → 存储库 → 添加：
    ```
-   https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/manifest.json
+   https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@7d78210/manifest.json
    ```
+   ⚠️ **用 @commit-sha 版本**（2026-11-02 实测：jsDelivr 的 @main 清单在边缘节点卡在旧代际缓存且 purge 无效，@sha 是不可变 URL 首次回源必新）。后续等 @main 缓存自然收敛后可换回 `@main`（本文件顶部路径）。
    （NAS 访问不了 jsDelivr 时改用 `https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/manifest.json`）
 2. 目录 → 先装 **File Transformation**（3.0.0.0）→ 按提示重启
 3. 再装 **Jellyframe**（**1.5.3.1**，为 12.4 编译件）→ 重启
