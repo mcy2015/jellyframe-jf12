@@ -7,10 +7,10 @@
     const DEFAULT_QUERY_LIMIT = window.KefinHomeScreenEditorConstants?.DEFAULT_SECTION_QUERY_LIMIT ?? 16;
 
     const CATEGORIES = [
-        { id: 'default', label: 'Default', groupsKey: 'HOME_SECTION_GROUPS' },
-        { id: 'custom', label: 'Custom', groupsKey: 'CUSTOM_SECTION_GROUPS' },
-        { id: 'discovery', label: 'Discovery', groupsKey: 'DISCOVERY_SECTION_GROUPS' },
-        { id: 'seasonal', label: 'Seasonal', groupsKey: 'SEASONAL_SECTION_GROUPS' }
+        { id: 'default', label: '默认', groupsKey: 'HOME_SECTION_GROUPS' },
+        { id: 'custom', label: '自定义', groupsKey: 'CUSTOM_SECTION_GROUPS' },
+        { id: 'discovery', label: '发现', groupsKey: 'DISCOVERY_SECTION_GROUPS' },
+        { id: 'seasonal', label: '季节', groupsKey: 'SEASONAL_SECTION_GROUPS' }
     ];
 
     const MS_BANDS = [
@@ -179,7 +179,7 @@
         const userId = window.ApiClient?.getCurrentUserId?.();
         const serverUrl = window.ApiClient?.serverAddress?.();
         if (!userId || !serverUrl) {
-            throw new Error('ApiClient not ready');
+            throw new Error('ApiClient 尚未就绪');
         }
 
         const previewQuery = withBenchmarkQueryOptions(query);
@@ -191,7 +191,7 @@
         }
 
         if (!window.apiHelper?.buildQueryFromSection) {
-            throw new Error('apiHelper.buildQueryFromSection not available');
+            throw new Error('apiHelper.buildQueryFromSection 不可用');
         }
 
         const built = window.apiHelper.buildQueryFromSection(
@@ -206,7 +206,7 @@
         }
 
         if (!built || typeof built !== 'string') {
-            throw new Error('Could not build query URL');
+            throw new Error('无法构建查询 URL');
         }
 
         const { data, ms, responseBytes } = await timedFetchJson(built, signal);
@@ -226,7 +226,7 @@
 
         const resolve = window.homeScreen3?.resolveDiscoverySection;
         if (!resolve) {
-            return { section, error: 'Discovery resolver unavailable' };
+            return { section, error: '发现板块解析器不可用' };
         }
 
         try {
@@ -235,11 +235,11 @@
                 resolveViewMore: false
             });
             if (!resolved?.queries?.length) {
-                return { section, error: `Could not resolve ${section.type} source` };
+                return { section, error: `无法解析 ${section.type} 来源` };
             }
             return { section: resolved, error: null };
         } catch (e) {
-            return { section, error: `Source resolve failed: ${e?.message || e}` };
+            return { section, error: `来源解析失败：${e?.message || e}` };
         }
     }
 
@@ -262,7 +262,7 @@
                 items: [],
                 responseBytes: 0,
                 queryMetrics: [],
-                error: 'No queries',
+                error: '无查询',
                 skippedQueries: true
             };
         }
@@ -279,7 +279,7 @@
                     items: allItems,
                     responseBytes,
                     queryMetrics,
-                    error: 'Cancelled',
+                    error: '已取消',
                     cancelled: true
                 };
             }
@@ -303,7 +303,7 @@
 
     function chipHtml(on, label) {
         const cls = on ? 'kefin-bench-chip-on' : 'kefin-bench-chip-off';
-        const text = on ? 'On' : 'Off';
+        const text = on ? '开' : '关';
         return `<span class="kefin-bench-chip ${cls}" title="${label}">${label}: ${text}</span>`;
     }
 
@@ -465,7 +465,7 @@
 
     function buildPickerGridHtml(sections, checkedSet) {
         if (!sections.length) {
-            return '<p class="listItemBodyText secondary" style="padding:1em;text-align:center;">No sections in the selected categories.</p>';
+            return '<p class="listItemBodyText secondary" style="padding:1em;text-align:center;">所选类别中没有板块。</p>';
         }
         return sections
             .map((entry) => {
@@ -504,7 +504,7 @@
                             <th>500–1000ms</th>
                             <th>1000–2000ms</th>
                             <th>2000ms+</th>
-                            <th>&gt;100 items</th>
+                            <th>&gt;100 条目</th>
                             <th>&gt;5 MB</th>
                         </tr>
                     </thead>
@@ -533,13 +533,13 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th>Section</th>
-                            <th>Category</th>
-                            <th>Time (ms)</th>
-                            <th>Response size</th>
-                            <th>Items</th>
-                            <th>Fields</th>
-                            <th>Status</th>
+                            <th>板块</th>
+                            <th>类别</th>
+                            <th>耗时 (ms)</th>
+                            <th>响应大小</th>
+                            <th>条目</th>
+                            <th>字段</th>
+                            <th>状态</th>
                         </tr>
                     </thead>
                     <tbody class="kefin-bench-tbody"></tbody>
@@ -564,17 +564,17 @@
         const fields =
             status === 'done'
                 ? `<div class="kefin-bench-chips">
-                    ${chipHtml(result.hasMediaStreams, 'MediaStreams')}
-                    ${chipHtml(result.hasPeople, 'People')}
-                    ${chipHtml(result.hasStudios, 'Studios')}
+                    ${chipHtml(result.hasMediaStreams, '媒体流')}
+                    ${chipHtml(result.hasPeople, '人员')}
+                    ${chipHtml(result.hasStudios, '制片公司')}
                    </div>`
                 : '—';
 
         const statusText =
-            status === 'running' ? 'Running…' :
-            status === 'skipped' ? 'Skipped' :
-            status === 'error' ? (result.error || 'Error') :
-            status === 'done' ? (result.skippedQueries ? 'Static / no query' : 'OK') : 'Pending';
+            status === 'running' ? '运行中…' :
+            status === 'skipped' ? '已跳过' :
+            status === 'error' ? (result.error || '错误') :
+            status === 'done' ? (result.skippedQueries ? '静态 / 无查询' : '正常') : '等待中';
 
         return `
             <tr class="kefin-bench-row kefin-bench-row-${status}" data-section-id="${entry.section.id}">
@@ -660,7 +660,7 @@
             if (total) {
                 // One line per section, with a query count when a section contributes more than once
                 cell.title = tallied
-                    .map(([name, count]) => (count > 1 ? `${name} (${count} queries)` : name))
+                    .map(([name, count]) => (count > 1 ? `${name}（${count} 次查询）` : name))
                     .join('\n');
             } else {
                 cell.removeAttribute('title');
@@ -790,19 +790,19 @@
         hostEl.innerHTML = `
             <div class="kefin-bench-wrap">
                 <div class="listItemBodyText" style="font-weight:600; font-size:1.1em; margin-bottom:0.35em;">
-                    Home Screen Section Benchmarks
+                    主屏幕板块性能测试
                 </div>
                 <div class="listItemBodyText secondary" style="margin-bottom:0.5em;">
-                    Test your home sections for slow queries or otherwise unintended results.
-                    Timings reflect server round-trip per query (not full card render).
+                    测试主屏幕各板块是否存在缓慢查询或其他异常结果。
+                    耗时反映的是每次查询的服务器往返时间（并非完整的卡片渲染时间）。
                 </div>
                 <div class="kefin-bench-cats" id="kefin-bench-cats"></div>
                 <div id="kefin-bench-panel" class="kefin-bench-panel"></div>
                 <div class="kefin-bench-actions">
-                    <button type="button" class="emby-button raised button-submit kefin-bench-run-btn" id="kefin-bench-run">Run Benchmarks</button>
-                    <button type="button" class="emby-button button-flat" id="kefin-bench-stop" hidden>Stop</button>
-                    <button type="button" class="emby-button button-flat" id="kefin-bench-view-results" hidden>View Results</button>
-                    <button type="button" class="emby-button button-flat" id="kefin-bench-edit" hidden>Edit Selection</button>
+                    <button type="button" class="emby-button raised button-submit kefin-bench-run-btn" id="kefin-bench-run">运行性能测试</button>
+                    <button type="button" class="emby-button button-flat" id="kefin-bench-stop" hidden>停止</button>
+                    <button type="button" class="emby-button button-flat" id="kefin-bench-view-results" hidden>查看结果</button>
+                    <button type="button" class="emby-button button-flat" id="kefin-bench-edit" hidden>编辑选择</button>
                 </div>
                 <div id="kefin-bench-results" style="margin-top:1.25em;"></div>
             </div>
@@ -833,7 +833,7 @@
             if (!countEl) return;
             const total = panelEl.querySelectorAll('.kefin-bench-pick').length;
             const checked = panelEl.querySelectorAll('.kefin-bench-pick:checked').length;
-            countEl.textContent = `${checked} of ${total} selected`;
+            countEl.textContent = `已选 ${checked} / ${total}`;
         }
 
         function bindPickerToolbar() {
@@ -862,9 +862,9 @@
 
             panelEl.innerHTML = `
                 <div class="kefin-bench-picker-toolbar">
-                    <button type="button" class="emby-button raised button-submit kefin-bench-run-btn" id="kefin-bench-run-top">Run Benchmarks</button>
-                    <button type="button" class="emby-button button-flat" id="kefin-bench-select-all">Select all</button>
-                    <button type="button" class="emby-button button-flat" id="kefin-bench-deselect-all">Deselect all</button>
+                    <button type="button" class="emby-button raised button-submit kefin-bench-run-btn" id="kefin-bench-run-top">运行性能测试</button>
+                    <button type="button" class="emby-button button-flat" id="kefin-bench-select-all">全选</button>
+                    <button type="button" class="emby-button button-flat" id="kefin-bench-deselect-all">取消全选</button>
                     <span class="kefin-bench-picker-count"></span>
                 </div>
                 <div class="kefin-bench-picker-grid" id="kefin-bench-picker-grid">
@@ -909,13 +909,13 @@
 
             const sections = getCurrentSections();
             if (!sections.length) {
-                window.KefinTweaksToaster?.toast?.('No sections in the selected categories.');
+                window.KefinTweaksToaster?.toast?.('所选类别中没有板块。');
                 return;
             }
 
             const selectedIds = getCheckedIdsFromPanel();
             if (!selectedIds.length) {
-                window.KefinTweaksToaster?.toast?.('Select at least one section to benchmark.');
+                window.KefinTweaksToaster?.toast?.('请至少选择一个要测试的板块。');
                 return;
             }
 

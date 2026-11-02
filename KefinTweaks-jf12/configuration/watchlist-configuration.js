@@ -89,44 +89,44 @@
                 ${buildToggleCard(
                     'wl-side-menu',
                     config.sideMenu,
-                    'Side menu',
-                    'Show a Watchlist link in the left navigation drawer.'
+                    '侧边菜单',
+                    '在左侧导航抽屉中显示片单链接。'
                 )}
                 ${buildToggleCard(
                     'wl-top-navigation',
                     config.topNavigation !== false && config.topNavigation !== 'none',
-                    'Top navigation',
-                    'Show Watchlist in the main top navigation bar.'
+                    '顶部导航',
+                    '在主顶部导航栏中显示片单。'
                 )}
                 ${buildToggleCard(
                     'wl-user-menu',
                     config.userMenu,
-                    'User menu',
-                    'Show a Watchlist link in the user settings menu.'
+                    '用户菜单',
+                    '在用户设置菜单中显示片单链接。'
                 )}
                 ${buildToggleCard(
                     'wl-media-bar-button',
                     config.mediaBarButton === true,
-                    'Media Bar button',
-                    'Add a watchlist button next to Play in the Media Bar hero. Off by default.'
+                    '媒体栏按钮',
+                    '在媒体栏 Hero 区域的“播放”旁添加一个片单按钮。默认关闭。'
                 )}
                 ${buildToggleCard(
                     'wl-statistics',
                     config.statistics === true,
-                    'Statistics tab',
-                    'Show the Statistics tab (charts; loads Chart.js when opened). Off by default.'
+                    '统计标签页',
+                    '显示统计标签页（图表；打开时加载 Chart.js）。默认关闭。'
                 )}
                 ${buildToggleCard(
                     'wl-auto-remove-played',
                     config.autoRemovePlayed === true,
-                    'Remove played items automatically',
-                    'When an item is marked played, take it off the watchlist on the server (writes the item\'s rating without a click). Off by default.'
+                    '自动移除已播放的项目',
+                    '当项目被标记为已播放时，在服务器上将其从片单中移除（无需点击即写入项目的评级）。默认关闭。'
                 )}
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 0.75em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Menu order</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">菜单顺序</div>
                         <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">
-                            Lower values appear earlier in the side menu and top navigation.
+                            数值越小，在侧边菜单和顶部导航中的位置越靠前。
                         </div>
                         <div class="hsae-field-wrap">
                             <input type="number" id="wl-order" class="fld emby-input"
@@ -189,13 +189,13 @@
             footer.style.gap = '0.75em';
             footer.style.justifyContent = 'flex-end';
             footer.innerHTML = `
-                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">Close</button>
-                <button class="emby-button raised block button-submit" id="save-watchlist-config-btn">Save</button>
+                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">关闭</button>
+                <button class="emby-button raised block button-submit" id="save-watchlist-config-btn">保存</button>
             `;
 
             const modalInstance = window.ModalSystem.create({
                 id: MODAL_ID,
-                title: 'Watchlist',
+                title: '片单',
                 content,
                 footer,
                 closeOnBackdrop: true,
@@ -209,10 +209,10 @@
                             const next = collectConfig();
                             const success = await saveConfig(next);
                             if (success) {
-                                window.KefinTweaksToaster?.toast?.('Watchlist configuration saved!');
+                                window.KefinTweaksToaster?.toast?.('片单配置已保存！');
                                 window.ModalSystem.close(MODAL_ID);
                             } else {
-                                alert('Error saving configuration. Please ensure the JavaScript Injector plugin is installed and you have administrator permissions.');
+                                alert('保存配置时出错。请确保已安装 JavaScript Injector 插件，并且您拥有管理员权限。');
                             }
                         });
                     }
@@ -226,7 +226,7 @@
             LOG('Watchlist configuration modal opened');
         } catch (error) {
             ERR('Error opening Watchlist config modal:', error);
-            alert('Error opening configuration: ' + error.message);
+            alert('打开配置时出错：' + error.message);
         }
     }
 

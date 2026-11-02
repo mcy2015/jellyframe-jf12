@@ -63,11 +63,11 @@
             <div style="max-width: 800px;">
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Flatten Single Season Shows</div>
-                        <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">When enabled, hides the season container section when a series has only one season, since episodes are already displayed directly.</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">折叠单季剧集的季选择</div>
+                        <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">启用后，当剧集只有一季时隐藏季选择区域，因为集已经直接显示。</div>
                         <label class="checkboxContainer" style="display: flex; align-items: center; gap: 0.5em;">
                             <input type="checkbox" id="flattenSingleSeasonShows_hideSingleSeasonContainer" ${hideSingleSeasonContainer ? 'checked' : ''}>
-                            <span class="listItemBodyText">Enabled</span>
+                            <span class="listItemBodyText">启用</span>
                         </label>
                     </div>
                 </div>
@@ -103,14 +103,14 @@
             footer.style.gap = '0.75em';
             footer.style.justifyContent = 'flex-end';
             footer.innerHTML = `
-                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">Close</button>
-                <button class="emby-button raised block button-submit" id="save-seriesepisodes-config-btn">Save</button>
+                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">关闭</button>
+                <button class="emby-button raised block button-submit" id="save-seriesepisodes-config-btn">保存</button>
             `;
 
             // Create modal
             const modalInstance = window.ModalSystem.create({
                 id: MODAL_ID,
-                title: 'Episodes On Series Page Configuration',
+                title: '剧集页面的集设置',
                 content: content,
                 footer: footer,
                 closeOnBackdrop: true,
@@ -125,11 +125,11 @@
                             const success = await saveConfig(flattenShowsConfig);
                             if (success) {
                                 if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                    window.KefinTweaksToaster.toast('Configuration saved!');
+                                    window.KefinTweaksToaster.toast('配置已保存！');
                                 }
                                 window.ModalSystem.close(MODAL_ID);
                             } else {
-                                alert('Error saving configuration. Please ensure the JavaScript Injector plugin is installed and you have administrator permissions.');
+                                alert('保存配置时出错。请确保已安装 JavaScript Injector 插件，并且您拥有管理员权限。');
                             }
                         });
                     }
@@ -145,7 +145,7 @@
             LOG('Series Episodes configuration modal opened');
         } catch (error) {
             ERR('Error opening series episodes config modal:', error);
-            alert('Error opening configuration: ' + error.message);
+            alert('打开配置时出错：' + error.message);
         }
     }
 

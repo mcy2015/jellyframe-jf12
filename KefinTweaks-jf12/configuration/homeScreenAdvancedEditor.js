@@ -4,33 +4,33 @@
     'use strict';
 
     const SECTION_VISIBILITY_OPTIONS = [
-        { value: 'normal', label: 'Normal' },
-        { value: 'seasonal', label: 'Seasonal' },
-        { value: 'discovery', label: 'Discovery' }
+        { value: 'normal', label: '常规' },
+        { value: 'seasonal', label: '季节' },
+        { value: 'discovery', label: '发现' }
     ];
 
 
     const ENDPOINT_OPTIONS = [
-        { value: 'Items', label: 'Items', path: '' },
-        { value: 'Genres', label: 'Genres', path: '/Genres' },
-        { value: 'Persons', label: 'Persons', path: '/Persons' },
-        { value: 'Studios', label: 'Studios', path: '/Studios' },
-        { value: 'Next Up', label: 'Next Up', path: '/Shows/NextUp' },
-        { value: 'Latest', label: 'Latest', path: '/Items/Latest' },
-        { value: 'Custom', label: 'Custom', path: null }
+        { value: 'Items', label: '条目', path: '' },
+        { value: 'Genres', label: '流派', path: '/Genres' },
+        { value: 'Persons', label: '人员', path: '/Persons' },
+        { value: 'Studios', label: '制片公司', path: '/Studios' },
+        { value: 'Next Up', label: '接下来播出', path: '/Shows/NextUp' },
+        { value: 'Latest', label: '最新添加', path: '/Items/Latest' },
+        { value: 'Custom', label: '自定义', path: null }
     ];
 
     const CACHE_SOURCE_OPTIONS = [
-        { value: 'MoviesCache.getImdbTop250Movies', label: 'IMDb Top 250 Movies' },
-        { value: 'StudiosCache.getPopularTVNetworks', label: 'Popular TV Networks' },
-        { value: 'PeopleCache.getTopActors', label: 'Top Actors' },
-        { value: 'PeopleCache.getTopDirectors', label: 'Top Directors' },
-        { value: 'PeopleCache.getTopWriters', label: 'Top Writers' }
+        { value: 'MoviesCache.getImdbTop250Movies', label: 'IMDb Top 250 电影' },
+        { value: 'StudiosCache.getPopularTVNetworks', label: '热门电视网' },
+        { value: 'PeopleCache.getTopActors', label: '热门演员' },
+        { value: 'PeopleCache.getTopDirectors', label: '热门导演' },
+        { value: 'PeopleCache.getTopWriters', label: '热门编剧' }
     ];
 
     const DEFAULT_SECTION_QUERY_LIMIT = window.KefinHomeScreenEditorConstants?.DEFAULT_SECTION_QUERY_LIMIT ?? 16;
     const LIMIT_ZERO_MODAL_ID = 'kefin-hsae-limit-zero';
-    const LIMIT_ZERO_MESSAGE = 'Setting the limit to 0 can result in queries requesting a lot of items from the server and may result in slow response times. This is fine to use if you know there are only a few hundred results at maximum. If you expect thousands of results, this is probably not a good idea unless you use a fairly long cache time.';
+    const LIMIT_ZERO_MESSAGE = '将上限设为 0 会导致查询向服务器请求大量条目，可能导致响应缓慢。如果你确定结果最多只有几百条，这样使用没有问题。如果你预计会有数千条结果，除非使用相当长的缓存时间，否则这可能不是一个好主意。';
 
     /** Live editor state for collectData (which only receives a dialog element). */
     let activeEditorState = null;
@@ -72,12 +72,12 @@
         const modalId = LIMIT_ZERO_MODAL_ID;
         const content = `<p class="listItemBodyText">${LIMIT_ZERO_MESSAGE}</p>`;
         const footer = `
-            <button type="button" class="emby-button raised" id="kefin-hsae-limit-zero-cancel">Cancel</button>
-            <button type="button" class="emby-button raised button-submit" id="kefin-hsae-limit-zero-confirm">OK</button>
+            <button type="button" class="emby-button raised" id="kefin-hsae-limit-zero-cancel">取消</button>
+            <button type="button" class="emby-button raised button-submit" id="kefin-hsae-limit-zero-confirm">确定</button>
         `;
         window.ModalSystem.create({
             id: modalId,
-            title: 'Limit of 0',
+            title: '上限为 0',
             content,
             footer,
             closeOnBackdrop: true,
@@ -194,40 +194,40 @@
     }
 
     const FILTER_CHIP_OPTIONS = [
-        { value: 'IsUnplayed', label: 'Unplayed' },
-        { value: 'IsPlayed', label: 'Played' },
-        { value: 'IsFavorite', label: 'Favorite' },
-        { value: 'IsResumable', label: 'Resumable' },
-        { value: 'Likes', label: 'Watchlist' },
-        { value: 'Dislikes', label: 'Not on Watchlist' },
-        { value: 'IsFavoriteOrLikes', label: 'Favorite or Watchlist' },
-        { value: 'IsFolder', label: 'Folder' },
-        { value: 'IsNotFolder', label: 'Not a Folder' }
+        { value: 'IsUnplayed', label: '未播放' },
+        { value: 'IsPlayed', label: '已播放' },
+        { value: 'IsFavorite', label: '收藏' },
+        { value: 'IsResumable', label: '可续播' },
+        { value: 'Likes', label: '待看清单' },
+        { value: 'Dislikes', label: '不在待看清单中' },
+        { value: 'IsFavoriteOrLikes', label: '收藏或待看清单' },
+        { value: 'IsFolder', label: '文件夹' },
+        { value: 'IsNotFolder', label: '非文件夹' }
     ];
 
     const PARENT_SELECTION_CARD_TYPES = [
         {
             type: 'Collection',
-            label: 'Collection',
-            description: 'Show items from a specific Collection in your library.',
+            label: '合集',
+            description: '显示媒体库中特定合集内的条目。',
             icon: 'collections_bookmark'
         },
         {
             type: 'Playlist',
-            label: 'Playlist',
-            description: 'Show items from a specific Playlist in your library.',
+            label: '播放列表',
+            description: '显示媒体库中特定播放列表内的条目。',
             icon: 'playlist_play'
         },
         {
             type: 'Library',
-            label: 'Library',
-            description: 'Show items from a specific Jellyfin Library.',
+            label: '媒体库',
+            description: '显示特定 Jellyfin 媒体库中的条目。',
             icon: 'video_library'
         },
         {
             type: 'Custom',
-            label: 'Custom',
-            description: 'Show items from any Folder in your library.',
+            label: '自定义',
+            description: '显示媒体库中任意文件夹内的条目。',
             icon: 'folder_open'
         }
     ];
@@ -235,29 +235,29 @@
     const FACET_SELECTION_CARD_TYPES = [
         {
             type: 'Genre',
-            label: 'Genres',
-            description: 'Show items that share a Genre, like Action or Comedy.',
+            label: '流派',
+            description: '显示具有相同流派（如动作或喜剧）的条目。',
             icon: 'theater_comedy',
             queryField: 'GenreIds'
         },
         {
             type: 'Tag',
-            label: 'Tags',
-            description: 'Show items that share a Tag, like Time Travel or Revenge.',
+            label: '标签',
+            description: '显示具有相同标签（如时间旅行或复仇）的条目。',
             icon: 'sell',
             queryField: 'Tags'
         },
         {
             type: 'Person',
-            label: 'Persons',
-            description: 'Show items that a specific Person has acted in or has directed, written, produced, etc.',
+            label: '人员',
+            description: '显示特定人员曾出演或曾导演、编剧、制片等的条目。',
             icon: 'person',
             queryField: 'PersonIds'
         },
         {
             type: 'Studio',
-            label: 'Studios',
-            description: 'Show items from a specific Film Studio or TV Network.',
+            label: '制片公司',
+            description: '显示来自特定电影制片公司或电视网的条目。',
             icon: 'apartment',
             queryField: 'StudioIds'
         }
@@ -274,48 +274,48 @@
     ];
 
     const BORDER_STYLE_OPTIONS = [
-        { value: '', label: 'Default' },
-        { value: 'stairstep', label: 'Single' },
-        { value: 'double', label: 'Double' },
-        { value: 'triple', label: 'Triple' },
-        { value: 'corner', label: 'Corner' },
-        { value: 'square', label: 'Square' },
-        { value: 'diamond', label: 'Diamond' },
-        { value: 'retro-poster', label: 'Retro Poster' },
-        { value: 'modern-poster', label: 'Modern Poster' },
-        { value: 'picture-frame', label: 'Picture Frame' },
-        { value: 'art-gallery', label: 'Art Gallery' },
-        { value: 'vintage', label: 'Vintage' },
-        { value: 'wood', label: 'Wood' },
-        { value: 'film-reel', label: 'Film Reel' },
-        { value: 'profile', label: 'Profile' }
+        { value: '', label: '默认' },
+        { value: 'stairstep', label: '单线' },
+        { value: 'double', label: '双线' },
+        { value: 'triple', label: '三线' },
+        { value: 'corner', label: '边角' },
+        { value: 'square', label: '方形' },
+        { value: 'diamond', label: '菱形' },
+        { value: 'retro-poster', label: '复古海报' },
+        { value: 'modern-poster', label: '现代海报' },
+        { value: 'picture-frame', label: '相框' },
+        { value: 'art-gallery', label: '艺术画廊' },
+        { value: 'vintage', label: '怀旧' },
+        { value: 'wood', label: '木质' },
+        { value: 'film-reel', label: '胶片盘' },
+        { value: 'profile', label: '侧影' }
     ];
 
     const CARD_TITLE_CAPITALIZATION_OPTIONS = [
-        { value: 'normal', label: 'Normal' },
-        { value: 'uppercase', label: 'Uppercase' },
-        { value: 'lowercase', label: 'Lowercase' },
-        { value: 'capitalize', label: 'Capitalize' }
+        { value: 'normal', label: '常规' },
+        { value: 'uppercase', label: '全部大写' },
+        { value: 'lowercase', label: '全部小写' },
+        { value: 'capitalize', label: '首字母大写' }
     ];
 
     const CARD_TITLE_POSITION_OPTIONS = [
-        { value: 'default', label: 'Default' },
-        { value: 'left', label: 'Left' },
-        { value: 'center', label: 'Center' },
-        { value: 'right', label: 'Right' },
-        { value: 'overlay-top-left', label: 'Overlay Top Left' },
-        { value: 'overlay-top-center', label: 'Overlay Top Center' },
-        { value: 'overlay-top-right', label: 'Overlay Top Right' },
-        { value: 'overlay-center-left', label: 'Overlay Center Left' },
-        { value: 'overlay-center', label: 'Overlay Center' },
-        { value: 'overlay-center-right', label: 'Overlay Center Right' },
-        { value: 'overlay-bottom-left', label: 'Overlay Bottom Left' },
-        { value: 'overlay-bottom-center', label: 'Overlay Bottom Center' },
-        { value: 'overlay-bottom-right', label: 'Overlay Bottom Right' }
+        { value: 'default', label: '默认' },
+        { value: 'left', label: '左侧' },
+        { value: 'center', label: '居中' },
+        { value: 'right', label: '右侧' },
+        { value: 'overlay-top-left', label: '悬浮 左上' },
+        { value: 'overlay-top-center', label: '悬浮 上中' },
+        { value: 'overlay-top-right', label: '悬浮 右上' },
+        { value: 'overlay-center-left', label: '悬浮 左中' },
+        { value: 'overlay-center', label: '悬浮 居中' },
+        { value: 'overlay-center-right', label: '悬浮 右中' },
+        { value: 'overlay-bottom-left', label: '悬浮 左下' },
+        { value: 'overlay-bottom-center', label: '悬浮 下中' },
+        { value: 'overlay-bottom-right', label: '悬浮 右下' }
     ];
 
     const CARD_TITLE_FONT_FAMILY_OPTIONS = [
-        { value: 'default', label: 'Default' },
+        { value: 'default', label: '默认' },
         { value: 'alfa-slab-one', label: 'Alfa Slab One' },
         { value: 'anton', label: 'Anton' },
         { value: 'changa-one', label: 'Changa One' },
@@ -331,19 +331,19 @@
     ];
 
     const CARD_TITLE_FONT_SIZE_OPTIONS = [
-        { value: 'normal', label: 'Normal' },
-        { value: 'small', label: 'Small' },
-        { value: 'large', label: 'Large' }
+        { value: 'normal', label: '常规' },
+        { value: 'small', label: '小' },
+        { value: 'large', label: '大' }
     ];
 
     const ITEMS_LAYOUT_OPTIONS = [
-        { value: 'row', label: 'Row' },
-        { value: 'grid', label: 'Grid' }
+        { value: 'row', label: '行' },
+        { value: 'grid', label: '网格' }
     ];
 
     const CARD_GAPS_OPTIONS = [
-        { value: '', label: 'Default' },
-        { value: 'none', label: 'No Gap' }
+        { value: '', label: '默认' },
+        { value: 'none', label: '无间距' }
     ];
 
     const TTL_UNIT_OPTIONS = [
@@ -353,75 +353,75 @@
         { value: 'days', ms: 24 * 60 * 60 * 1000 }
     ];
 
-    const CUSTOM_SOURCE_DESC = 'Show items with custom images, links and names.';
+    const CUSTOM_SOURCE_DESC = '显示使用自定义图片、链接和名称的条目。';
 
     const HIDE_WATCHED_TOGGLE_DESCRIPTIONS = {
-        on: 'This section will not show watched items.',
-        off: 'This section may include watched items.'
+        on: '此板块将不显示已观看的条目。',
+        off: '此板块可能包含已观看的条目。'
     };
 
     const HIDE_NAME_TOGGLE_DESCRIPTIONS = {
-        on: 'The section name will not be visible.',
-        off: 'The section name will be visible.'
+        on: '板块名称将不可见。',
+        off: '板块名称将可见。'
     };
 
     const USER_TOGGLE_TOOLTIPS = {
         userEnabledByDefault: {
-            on: 'Users will see this section enabled in their home settings.',
-            off: 'Users will see this section disabled in their home settings.'
+            on: '用户将在其主屏幕设置中看到此板块为启用状态。',
+            off: '用户将在其主屏幕设置中看到此板块为禁用状态。'
         },
         userConfigurable: {
-            on: 'Users can enable or disable this section in their home settings.',
-            off: 'Users cannot configure, and will only see this section if the Default Status is enabled.'
+            on: '用户可以在其主屏幕设置中启用或禁用此板块。',
+            off: '用户无法配置此板块，只有当默认状态为启用时才能看到它。'
         }
     };
 
     const RENDER_MODE_CARDS = [
-        { value: 'Normal', title: 'Normal', desc: 'Matches the default Jellyfin horizontal row of cards.' },
-        { value: 'Spotlight', title: 'Spotlight', desc: 'A customizable, full-width, featured slideshow carousel.' },
-        { value: 'Random', title: 'Random', desc: 'A random layout will be used when the section is loaded.' }
+        { value: 'Normal', title: '常规', desc: '与 Jellyfin 默认的水平卡片行一致。' },
+        { value: 'Spotlight', title: '聚焦轮播', desc: '可自定义的全宽特色幻灯片轮播。' },
+        { value: 'Random', title: '随机', desc: '加载板块时将随机使用一种布局。' }
     ];
 
     const SPOTLIGHT_TOGGLE_DESCRIPTIONS = {
-        'section-spotlight-panAnimation': 'Apply pan and zoom animations to each slide.',
-        'section-spotlight-showNavButtons': 'Show previous and next navigation buttons on the carousel.',
-        'section-spotlight-showClearArt': 'Display clear art logo overlay when available.',
-        'section-spotlight-cycleBackdrops': 'Cycle through multiple backdrop images per slide.',
-        'section-spotlight-autoPlay': 'Automatically advance slides after the timer interval.'
+        'section-spotlight-panAnimation': '为每张幻灯片应用平移和缩放动画。',
+        'section-spotlight-showNavButtons': '在轮播上显示上一个/下一个导航按钮。',
+        'section-spotlight-showClearArt': '在可用时显示清晰艺术图（Clear Art）叠加层。',
+        'section-spotlight-cycleBackdrops': '在每张幻灯片中轮播多张背景图。',
+        'section-spotlight-autoPlay': '在计时器间隔后自动切换幻灯片。'
     };
 
     const ADVANCED_TOGGLE_DESCRIPTIONS = {
         'section-flattenSeries': {
-            on: 'Multiple episodes from the same series will be grouped into one item in the section.',
-            off: 'Episodes from the same series appear as separate items in the section.'
+            on: '同一剧集的多集将在此板块中合并为一个条目。',
+            off: '同一剧集的各集将在此板块中显示为独立条目。'
         },
         'hsae-limit-before-sort': {
-            on: 'When enabled, the item limit is applied before section-level sort.',
-            off: 'The item limit is applied after section-level sort.'
+            on: '启用后，条目上限将在板块级排序之前应用。',
+            off: '条目上限将在板块级排序之后应用。'
         },
         'hsae-hide-card-titles': {
-            on: 'Card titles for individual items in the section will not be shown.',
-            off: 'Card titles for individual items in the section will be shown.'
+            on: '板块中各条目的卡片标题将不显示。',
+            off: '板块中各条目的卡片标题将显示。'
         },
         'hsae-use-parent-card': {
-            on: 'Items in this section will link to their Parent item where available. This means that an Episode or Season will link to the Series.',
-            off: 'Items in this section will link to the normal item.'
+            on: '板块中的条目将链接到其父级条目（如果可用）。这意味着单集或季将链接到其所属剧集。',
+            off: '板块中的条目将链接到条目本身。'
         }
     };
 
     const RANDOM_QUERY_TOGGLE_DESCRIPTIONS = {
-        on: 'Randomly picks a query from the defined queries instead of merging all query results. If Query Picker is enabled, the section will initially show a random query from the defined queries.',
-        off: 'Merge results from all defined queries while respecting the sorting criteria specified below.'
+        on: '从已定义的查询中随机选取一个，而不是合并所有查询的结果。如果启用了查询选择器，板块初始将显示已定义查询中随机的一个。',
+        off: '合并所有已定义查询的结果，并遵循下方指定的排序规则。'
     };
 
     const QUERY_PICKER_TOGGLE_DESCRIPTIONS = {
-        on: 'Show a control to pick which query the section displays from the defined queries.',
-        off: 'No control to pick which query the section displays from the defined queries.'
+        on: '显示一个控件，用于从已定义的查询中选择板块显示哪个查询。',
+        off: '不显示用于从已定义的查询中选择板块显示哪个查询的控件。'
     };
 
     const USE_QUERY_NAMES_TOGGLE_DESCRIPTIONS = {
-        on: 'Shows the name of the query in place of the section name.',
-        off: 'Does not use the name of the query in place of the section name.'
+        on: '用查询的名称代替板块名称显示。',
+        off: '不使用查询的名称代替板块名称。'
     };
 
     function humanizeSortOrderLabel(value) {
@@ -440,7 +440,7 @@
 
     function getSectionSortOrderDirectionOptions(directions) {
         return [
-            { value: '', label: 'Default' },
+            { value: '', label: '默认' },
             ...(directions || []).map((value) => ({ value, label: value }))
         ];
     }
@@ -638,14 +638,14 @@
     function getCachePresets() {
         const cache = window.KefinHomeConfig2?.CACHE || window.KefinHomeConfig2?.CACHE_CONFIG || {};
         return [
-            { key: 'FORCE_REFRESH', label: 'No Cache', ms: cache.FORCE_REFRESH_TTL ?? 0 },
-            { key: 'VERY_SHORT', label: 'Very Short (1 min)', ms: cache.VERY_SHORT_TTL ?? 60000 },
-            { key: 'SHORT', label: 'Short (5 min)', ms: cache.SHORT_TTL ?? 300000 },
-            { key: 'DEFAULT', label: 'Default (1 hour)', ms: cache.DEFAULT_TTL ?? 3600000 },
-            { key: 'LONG', label: 'Long (24 hours)', ms: cache.LONG_TTL ?? 86400000 },
-            { key: 'STATIC', label: 'Static (1 week)', ms: cache.STATIC_TTL ?? 604800000 },
-            { key: 'DISCOVERY', label: 'Discovery (6 hours)', ms: cache.DISCOVERY_TTL ?? 21600000 },
-            { key: 'CUSTOM', label: 'Custom', ms: null }
+            { key: 'FORCE_REFRESH', label: '无缓存', ms: cache.FORCE_REFRESH_TTL ?? 0 },
+            { key: 'VERY_SHORT', label: '极短（1 分钟）', ms: cache.VERY_SHORT_TTL ?? 60000 },
+            { key: 'SHORT', label: '短（5 分钟）', ms: cache.SHORT_TTL ?? 300000 },
+            { key: 'DEFAULT', label: '默认（1 小时）', ms: cache.DEFAULT_TTL ?? 3600000 },
+            { key: 'LONG', label: '长（24 小时）', ms: cache.LONG_TTL ?? 86400000 },
+            { key: 'STATIC', label: '静态（1 周）', ms: cache.STATIC_TTL ?? 604800000 },
+            { key: 'DISCOVERY', label: '发现（6 小时）', ms: cache.DISCOVERY_TTL ?? 21600000 },
+            { key: 'CUSTOM', label: '自定义', ms: null }
         ];
     }
 
@@ -702,9 +702,9 @@
     }
 
     function getQuerySourceBadgeLabel(sourceType) {
-        if (sourceType === 'cache') return 'Client Cache';
-        if (sourceType === 'static') return 'Static Items';
-        return 'Jellyfin Server';
+        if (sourceType === 'cache') return '客户端缓存';
+        if (sourceType === 'static') return '静态条目';
+        return 'Jellyfin 服务器';
     }
 
     function getQueryStaticItems(query) {
@@ -785,7 +785,7 @@
         return (items || []).map(item => `
             <span class="hsae-select-chip" data-value="${escapeHtml(item.id)}">
                 <span class="hsae-select-chip-label">${escapeHtml(item.name || item.id)}</span>
-                <button type="button" class="hsae-select-chip-remove" data-hsae-action="remove-select-chip" title="Remove">
+                <button type="button" class="hsae-select-chip-remove" data-hsae-action="remove-select-chip" title="移除">
                     <span class="material-icons">close</span>
                 </button>
             </span>
@@ -826,7 +826,7 @@
                         </div>
                         <div class="listItemBodyText secondary hsae-select-card-desc">${escapeHtml(description || '')}</div>
                     </div>
-                    <button type="button" class="hsae-select-add-btn" data-hsae-action="open-selection" data-select-kind="${escapeHtml(kind)}" data-select-type="${escapeHtml(type)}" data-query-index="${queryIndex}" title="Add">
+                    <button type="button" class="hsae-select-add-btn" data-hsae-action="open-selection" data-select-kind="${escapeHtml(kind)}" data-select-type="${escapeHtml(type)}" data-query-index="${queryIndex}" title="添加">
                         <span class="material-icons">add</span>
                     </button>
                 </div>
@@ -847,13 +847,13 @@
             <div class="hsae-include-types" data-query-index="${queryIndex}" data-show-all="${showAll ? 'true' : 'false'}">
                 <div class="hsae-include-types-header">
                     <div>
-                        <div class="listItemBodyText hsae-subsection-label">Included Item Types</div>
+                        <div class="listItemBodyText hsae-subsection-label">包含的条目类型</div>
                         <div class="listItemBodyText secondary hsae-field-hint">
-                            ${selected.size === 0 ? 'None selected - all item types will be included.' : 'Only the selected item types will be included.'}
+                            ${selected.size === 0 ? '未选择 - 将包含所有条目类型。' : '仅包含所选的条目类型。'}
                         </div>
                     </div>
                     <button type="button" class="emby-button raised hsae-include-types-toggle" data-hsae-action="toggle-include-types-all" data-query-index="${queryIndex}">
-                        ${showAll ? 'Show less' : 'Show all'}
+                        ${showAll ? '收起' : '显示全部'}
                     </button>
                 </div>
                 <div class="hsae-chip-row hsae-include-type-chips" data-hsae-chips="query-${queryIndex}-include-types">
@@ -878,8 +878,8 @@
             : [];
 
         hint.textContent = values.length === 0
-            ? 'None selected - all item types will be included.'
-            : 'Only the selected item types will be included.';
+            ? '未选择 - 将包含所有条目类型。'
+            : '仅包含所选的条目类型。';
     }
 
     function syncSelectCardUI(card) {
@@ -1233,8 +1233,8 @@
         const active = parseFiltersString(queryOptions?.Filters);
         return `
             <div class="hsae-field-row">
-                <div class="listItemBodyText hsae-subsection-label">Filters</div>
-                <div class="listItemBodyText secondary hsae-field-hint">Use these quick filters to narrow the query results.</div>
+                <div class="listItemBodyText hsae-subsection-label">筛选</div>
+                <div class="listItemBodyText secondary hsae-field-hint">使用这些快速筛选来缩小查询结果范围。</div>
                 ${buildChipRow(FILTER_CHIP_OPTIONS, active, `query-${queryIndex}-filters`)}
                 <input type="hidden" id="query-${queryIndex}-Filters" value="${escapeHtml((queryOptions?.Filters || ''))}">
             </div>
@@ -1265,11 +1265,11 @@
             <div class="query-${queryIndex}-additional-options-controls hsae-additional-controls" data-query-index="${queryIndex}">
                 <div class="hsae-additional-toolbar">
                     <select class="fld emby-select emby-select-withcolor additional-option-select" data-query-index="${queryIndex}">
-                        <option value="">Select an option to add...</option>
-                        <option value="__custom__">Custom Option</option>
+                        <option value="">选择要添加的选项…</option>
+                        <option value="__custom__">自定义选项</option>
                         ${dropdownOptions}
                     </select>
-                    <button type="button" class="emby-button raised hsae-add-additional-option" data-query-index="${queryIndex}">Add</button>
+                    <button type="button" class="emby-button raised hsae-add-additional-option" data-query-index="${queryIndex}">添加</button>
                 </div>
             </div>
         `;
@@ -1317,7 +1317,7 @@
             return `
                 <div class="${getAdditionalOptionRowClass(meta.type === 'boolean' ? 'boolean' : 'field')}">
                     ${inputField}
-                    <button type="button" class="hsae-remove-additional-option" title="Remove Option">
+                    <button type="button" class="hsae-remove-additional-option" title="移除选项">
                         <span class="material-icons">close</span>
                     </button>
                 </div>
@@ -1335,12 +1335,12 @@
 
     function buildStaticItemsListHTML(items) {
         if (!items.length) {
-            return '<p class="listItemBodyText secondary hsae-static-items-empty">No items selected yet.</p>';
+            return '<p class="listItemBodyText secondary hsae-static-items-empty">尚未选择任何条目。</p>';
         }
         return items.map(item => `
             <div class="hsae-static-item-row" data-item-id="${escapeHtml(item.id)}">
                 <span class="listItemBodyText hsae-static-item-label">${escapeHtml(item.name || item.id)}</span>
-                <button type="button" class="hsae-static-item-remove" data-hsae-action="remove-static-item" data-item-id="${escapeHtml(item.id)}" title="Remove" aria-label="Remove ${escapeHtml(item.name || item.id)}">
+                <button type="button" class="hsae-static-item-remove" data-hsae-action="remove-static-item" data-item-id="${escapeHtml(item.id)}" title="移除" aria-label="移除 ${escapeHtml(item.name || item.id)}">
                     <span class="material-icons">delete</span>
                 </button>
             </div>
@@ -1351,14 +1351,14 @@
         const selectedJson = serializeSelectionItems(items);
         return `
             <section class="hsae-static-items-section hsae-query-static-only">
-                <div class="listItemBodyText hsae-subsection-label">Select Items</div>
-                <div class="listItemBodyText secondary hsae-field-hint">Pick specific items from your library to appear in this section.</div>
+                <div class="listItemBodyText hsae-subsection-label">选择条目</div>
+                <div class="listItemBodyText secondary hsae-field-hint">从媒体库中挑选特定条目以显示在此板块中。</div>
                 <div class="hsae-static-items-list" data-query-index="${queryIndex}">
                     ${buildStaticItemsListHTML(items)}
                 </div>
-                <button type="button" class="hsae-static-item-add-btn" data-hsae-action="add-static-item" data-query-index="${queryIndex}" title="Add Item" aria-label="Add Item">
+                <button type="button" class="hsae-static-item-add-btn" data-hsae-action="add-static-item" data-query-index="${queryIndex}" title="添加条目" aria-label="添加条目">
                     <span class="material-icons">add</span>
-                    <span class="listItemBodyText">Add Item</span>
+                    <span class="listItemBodyText">添加条目</span>
                 </button>
                 <input type="hidden" class="hsae-static-items-value" id="query-${queryIndex}-staticItems" value="${escapeHtml(selectedJson)}">
             </section>
@@ -1371,7 +1371,7 @@
             `query-${index}-endpoint`,
             ENDPOINT_OPTIONS.map(o => ({ value: o.value, label: o.label })),
             selectedValue,
-            'Endpoint'
+            '端点'
         );
         if (!disabled) return html;
         return html.replace(
@@ -1415,44 +1415,44 @@
                             class="hsae-query-name-input listItemBodyText"
                             id="query-${index}-name"
                             value="${escapeHtml(query.name || '')}"
-                            placeholder="Query ${index + 1}"
-                            aria-label="Query name"
+                            placeholder="查询 ${index + 1}"
+                            aria-label="查询名称"
                         >
                     </span>
                     <span class="hsae-query-badge" data-hsae-profiles="full">${escapeHtml(getQuerySourceBadgeLabel(sourceType))}</span>
-                    ${canDelete ? `<button type="button" class="emby-button raised hsae-delete-query-btn" data-query-index="${index}" data-hsae-action="delete-query" data-hsae-profiles="full">Delete</button>` : ''}
+                    ${canDelete ? `<button type="button" class="emby-button raised hsae-delete-query-btn" data-query-index="${index}" data-hsae-action="delete-query" data-hsae-profiles="full">删除</button>` : ''}
                 </summary>
                 <div class="hsae-query-body">
                     <div class="hsae-query-divider hsae-query-header-divider" role="separator" aria-hidden="true" data-hsae-profiles="full"></div>
                     <div class="hsae-field-grid hsae-field-grid-2 hsae-query-row-a" data-hsae-profiles="full">
                         ${buildSelect(`query-${index}-sourceType`, [
-                            { value: 'jellyfin', label: 'Jellyfin Server' },
-                            { value: 'cache', label: 'Client Cache' },
-                            { value: 'static', label: 'Static Items' }
-                        ], sourceType, 'Query Type')}
+                            { value: 'jellyfin', label: 'Jellyfin 服务器' },
+                            { value: 'cache', label: '客户端缓存' },
+                            { value: 'static', label: '静态条目' }
+                        ], sourceType, '查询类型')}
                         <div class="hsae-endpoint-wrap hsae-jellyfin-endpoint-wrap" data-query-index="${index}" style="display:${endpointDisplay};">
                             ${buildEndpointSelectHTML(index, endpointValue, sourceType === 'static')}
                         </div>
                         <div class="hsae-cache-wrap" data-query-index="${index}" style="display:${cacheDisplay};">
-                            ${buildSelect(`query-${index}-dataSource`, CACHE_SOURCE_OPTIONS, query.dataSource || CACHE_SOURCE_OPTIONS[0].value, 'Cache Source')}
+                            ${buildSelect(`query-${index}-dataSource`, CACHE_SOURCE_OPTIONS, query.dataSource || CACHE_SOURCE_OPTIONS[0].value, '缓存来源')}
                         </div>
                         <div id="query-${index}-path-container" class="hsae-custom-path hsae-query-jellyfin-only" style="display:${customPathDisplay};">
-                            ${buildTextInput(`query-${index}-path`, query.path || '', 'Custom Endpoint Path', 'text', '/Shows/Upcoming, etc.')}
+                            ${buildTextInput(`query-${index}-path`, query.path || '', '自定义端点路径', 'text', '/Shows/Upcoming 等')}
                         </div>
                     </div>
 
                     <div class="hsae-field-grid hsae-query-row-sort">
                         <div class="hsae-query-sort-by" data-hsae-profiles="full normal dateCutoffs">
-                            ${buildSelect(`query-${index}-SortBy`, toSortBySelectOptions(SORT_ORDERS), queryOptions.SortBy || '', 'Sort By')}
+                            ${buildSelect(`query-${index}-SortBy`, toSortBySelectOptions(SORT_ORDERS), queryOptions.SortBy || '', '排序方式')}
                         </div>
                         <div class="hsae-query-sort-order" data-hsae-profiles="full normal dateCutoffs">
-                            ${buildSelect(`query-${index}-SortOrder`, SORT_ORDER_DIRECTIONS, queryOptions.SortOrder || '', 'Sort Order')}
+                            ${buildSelect(`query-${index}-SortOrder`, SORT_ORDER_DIRECTIONS, queryOptions.SortOrder || '', '排序顺序')}
                         </div>
                         <div class="hsae-query-limit hsae-query-sort-extras" data-hsae-profiles="full minimal postProcessing normal dateCutoffs" style="display:${sortExtrasDisplay};">
-                            ${buildTextInput(`query-${index}-Limit`, queryOptions.Limit ?? '', 'Limit', 'number', '', { min: 0, step: 1 })}
+                            ${buildTextInput(`query-${index}-Limit`, queryOptions.Limit ?? '', '上限', 'number', '', { min: 0, step: 1 })}
                         </div>
                         <div class="hsae-query-search hsae-query-sort-extras" data-hsae-profiles="full" style="display:${sortExtrasDisplay};">
-                            ${buildTextInput(`query-${index}-SearchTerm`, queryOptions.SearchTerm || '', 'Search Term')}
+                            ${buildTextInput(`query-${index}-SearchTerm`, queryOptions.SearchTerm || '', '搜索词')}
                         </div>
                     </div>
 
@@ -1471,8 +1471,8 @@
                         <div class="hsae-query-divider hsae-query-divider-before-parent" role="separator" aria-hidden="true"></div>
 
                         <div class="hsae-query-row-c">
-                            <div class="listItemBodyText hsae-subsection-label">Parent Item</div>
-                            <div class="listItemBodyText secondary hsae-field-hint">Use this to show items that are children of a specific parent item. This could be a Collection, Playlist, Library, etc.</div>
+                            <div class="listItemBodyText hsae-subsection-label">父级条目</div>
+                            <div class="listItemBodyText secondary hsae-field-hint">用于显示特定父级条目的子条目。父级可以是合集、播放列表、媒体库等。</div>
                             <div class="hsae-select-card-grid" data-select-group="parent" data-query-index="${index}">
                                 ${PARENT_SELECTION_CARD_TYPES.map(card => buildSelectCardHTML({
                                     queryIndex: index,
@@ -1510,7 +1510,7 @@
                         <details class="hsae-additional-details">
                             <summary class="hsae-details-summary">
                                 <span class="material-icons hsae-advanced-chevron">expand_more</span>
-                                <span class="listItemBodyText">Additional Options</span>
+                                <span class="listItemBodyText">附加选项</span>
                             </summary>
                             <div class="hsae-additional-body">
                                 ${buildAdditionalOptionsControls(index)}
@@ -1537,7 +1537,7 @@
         const existingGroupNames = context.existingGroupNames || [];
         const groupOptions = ['New...', ...existingGroupNames];
         const selectedGroup = state.groupSelect || groupOptions[0] || 'New...';
-        let visibilitySelectHtml = buildSelect('hsae-section-visibility', SECTION_VISIBILITY_OPTIONS, visibility, 'Type');
+        let visibilitySelectHtml = buildSelect('hsae-section-visibility', SECTION_VISIBILITY_OPTIONS, visibility, '类型');
         if (lockVisibility) {
             visibilitySelectHtml = visibilitySelectHtml.replace(
                 'id="hsae-section-visibility" class="fld emby-select emby-select-withcolor"',
@@ -1548,17 +1548,17 @@
         return `
             <section class="hsae-group hsae-basic-properties">
                 <div class="hsae-group-header">
-                    <div class="listItemBodyText hsae-group-title">Basic Properties</div>
-                    <div class="listItemBodyText secondary hsae-group-desc">General configuration for this section</div>
+                    <div class="listItemBodyText hsae-group-title">基本属性</div>
+                    <div class="listItemBodyText secondary hsae-group-desc">此板块的常规配置</div>
                 </div>
                 <div class="hsae-card">
                     <div class="hsae-field-grid hsae-field-grid-2 hsae-basic-name-caption">
-                        ${buildTextInput('section-name', section.name || state.sectionName || '', 'Section Name')}
-                        ${buildTextInput('section-caption', section.caption || state.caption || '', 'Caption', 'text', 'Displayed below the Section Name')}
+                        ${buildTextInput('section-name', section.name || state.sectionName || '', '板块名称')}
+                        ${buildTextInput('section-caption', section.caption || state.caption || '', '副标题', 'text', '显示在板块名称下方')}
                     </div>
 
                     <div class="hsae-field-grid hsae-field-grid-2 hsae-basic-group-row" data-hsae-profiles="full">
-                        ${buildSelect('section-group', groupOptions, selectedGroup, 'Section Group')}
+                        ${buildSelect('section-group', groupOptions, selectedGroup, '板块分组')}
                         ${(() => {
                             const categories = (context.config?.HOME_SETTINGS?.categories
                                 || window.KefinTweaksConfig?.homeScreenConfig?.HOME_SETTINGS?.categories
@@ -1570,9 +1570,9 @@
                             const selectedCategory = isDiscovery ? 'discovery' : (section.category || state.category || 'none');
                             const categorySelect = buildSelect(
                                 'section-category',
-                                categories.length ? categories : [{ value: 'none', label: 'Home' }],
+                                categories.length ? categories : [{ value: 'none', label: '主屏幕' }],
                                 selectedCategory,
-                                'Category'
+                                '类别'
                             );
                             return isDiscovery
                                 ? categorySelect.replace(
@@ -1582,20 +1582,20 @@
                                 : categorySelect;
                         })()}
                         <div id="section-group-new-container" class="hsae-group-new" style="display:${selectedGroup === 'New...' ? 'block' : 'none'};">
-                            ${buildTextInput('section-group-new', state.groupNew || '', 'New Group Name')}
+                            ${buildTextInput('section-group-new', state.groupNew || '', '新分组名称')}
                         </div>
                     </div>
 
                     <div class="hsae-field-grid hsae-field-grid-2 hsae-basic-dropdowns">
                         ${visibilitySelectHtml}
                         <div class="hsae-field-wrap">
-                            <label class="listItemBodyText" for="section-order" style="display: block; margin-bottom: 0.25em;">Order</label>
+                            <label class="listItemBodyText" for="section-order" style="display: block; margin-bottom: 0.25em;">排序</label>
                             <input
                                 type="${visibility === 'discovery' ? 'text' : 'number'}"
                                 id="section-order"
                                 class="fld emby-input"
                                 value="${escapeHtml(orderValue)}"
-                                placeholder="Auto"
+                                placeholder="自动"
                                 ${visibility === 'discovery' ? 'disabled' : ''}
                             >
                         </div>
@@ -1603,8 +1603,8 @@
 
                     ${showSeasonal ? `
                         <div class="hsae-field-grid hsae-seasonal-dates">
-                            ${buildTextInput('section-startDate', state.startDate || '', 'Start Date (MM-DD)', 'text')}
-                            ${buildTextInput('section-endDate', state.endDate || '', 'End Date (MM-DD)', 'text')}
+                            ${buildTextInput('section-startDate', state.startDate || '', '开始日期 (MM-DD)', 'text')}
+                            ${buildTextInput('section-endDate', state.endDate || '', '结束日期 (MM-DD)', 'text')}
                         </div>
                     ` : ''}
 
@@ -1614,14 +1614,14 @@
                         ${buildToggleCard(
                             'hsae-user-enabled-by-default',
                             state.userEnabledByDefault !== false,
-                            'Default Status',
+                            '默认状态',
                             USER_TOGGLE_TOOLTIPS.userEnabledByDefault[state.userEnabledByDefault !== false ? 'on' : 'off'],
                             { hintKey: 'userEnabledByDefault' }
                         )}
                         ${buildToggleCard(
                             'hsae-user-configurable',
                             state.userConfigurable !== false,
-                            'User Configuration',
+                            '用户配置',
                             USER_TOGGLE_TOOLTIPS.userConfigurable[state.userConfigurable !== false ? 'on' : 'off'],
                             { hintKey: 'userConfigurable' }
                         )}
@@ -1631,14 +1631,14 @@
                         ${buildToggleCard(
                             'hsae-hide-section-name',
                             state.hideName === true,
-                            'Hide Section Name',
+                            '隐藏板块名称',
                             HIDE_NAME_TOGGLE_DESCRIPTIONS[state.hideName === true ? 'on' : 'off'],
                             { hintKey: 'hideName' }
                         )}
                         ${showHideWatched ? buildToggleCard(
                             'hsae-hide-watched',
                             state.hideWatched === true,
-                            'Hide Watched Items',
+                            '隐藏已观看条目',
                             HIDE_WATCHED_TOGGLE_DESCRIPTIONS[state.hideWatched === true ? 'on' : 'off'],
                             { hintKey: 'hideWatched' }
                         ) : ''}
@@ -1653,24 +1653,24 @@
         return `
             <section class="hsae-group hsae-item-source" data-hsae-profiles="full">
                 <div class="hsae-group-header">
-                    <div class="listItemBodyText hsae-group-title">Item Source</div>
-                    <div class="listItemBodyText secondary hsae-group-desc">Choose where this section gets its items</div>
+                    <div class="listItemBodyText hsae-group-title">条目来源</div>
+                    <div class="listItemBodyText secondary hsae-group-desc">选择此板块的条目来源</div>
                 </div>
                 <div class="hsae-source-grid">
                     <button type="button" class="hsae-source-card${itemSource === 'jellyfin' ? ' hsae-active' : ''}" data-hsae-action="set-item-source" data-item-source="jellyfin">
                         <div class="hsae-source-card-text">
                             <div class="listItemBodyText hsae-source-title">
                                 <span class="material-icons hsae-source-icon">dns</span>
-                                Jellyfin Server
+                                Jellyfin 服务器
                             </div>
-                            <div class="listItemBodyText secondary hsae-source-desc">Query items from your Jellyfin library</div>
+                            <div class="listItemBodyText secondary hsae-source-desc">从你的 Jellyfin 媒体库中查询条目</div>
                         </div>
                     </button>
                     <button type="button" class="hsae-source-card${itemSource === 'custom' ? ' hsae-active' : ''}" data-hsae-action="set-item-source" data-item-source="custom">
                         <div class="hsae-source-card-text">
                             <div class="listItemBodyText hsae-source-title">
                                 <span class="material-icons hsae-source-icon">widgets</span>
-                                Custom Items
+                                自定义条目
                             </div>
                             <div class="listItemBodyText secondary hsae-source-desc">${escapeHtml(CUSTOM_SOURCE_DESC)}</div>
                         </div>
@@ -1689,22 +1689,22 @@
             || window.KefinHomeConfig2?.LIBRARY_CACHE?.mdblistApiKey
             || '';
         const warn = !String(apiKey || '').trim()
-            ? `<div class="listItemBodyText secondary" style="color: var(--error-color, #e57373); margin-bottom: 0.75em;">MDBList API key is not configured. Add it under Home Screen → General settings before using External Lists.</div>`
+            ? `<div class="listItemBodyText secondary" style="color: var(--error-color, #e57373); margin-bottom: 0.75em;">未配置 MDBList API 密钥。使用外部列表前，请在主屏幕 → 常规设置中添加。</div>`
             : '';
         const rows = urls.map((url, index) => `
             <div class="hsae-external-list-row" data-external-index="${index}" style="margin-bottom: 0.75em;">
-                ${buildTextInput(`hsae-external-list-url-${index}`, url || '', `List URL ${index + 1}`, 'url', 'https://mdblist.com/...')}
+                ${buildTextInput(`hsae-external-list-url-${index}`, url || '', `列表 URL ${index + 1}`, 'url', 'https://mdblist.com/...')}
             </div>
         `).join('');
         return `
             <section class="hsae-group hsae-external-list-group" data-hsae-profiles="full">
                 <div class="hsae-group-header">
-                    <div class="listItemBodyText hsae-group-title">External List URLs</div>
-                    <div class="listItemBodyText secondary hsae-group-desc">Items from these lists are matched to your Jellyfin library by IMDb/TMDB ids</div>
+                    <div class="listItemBodyText hsae-group-title">外部列表 URL</div>
+                    <div class="listItemBodyText secondary hsae-group-desc">这些列表中的条目将通过 IMDb/TMDB ID 匹配到你的 Jellyfin 媒体库</div>
                 </div>
                 ${warn}
                 <div class="hsae-external-list-rows">${rows}</div>
-                <button type="button" class="emby-button raised" data-hsae-action="add-external-list-url" style="margin-top: 0.75em;">Add URL</button>
+                <button type="button" class="emby-button raised" data-hsae-action="add-external-list-url" style="margin-top: 0.75em;">添加 URL</button>
             </section>
         `;
     }
@@ -1721,12 +1721,12 @@
             <section class="hsae-group hsae-queries-group">
                 <div class="hsae-group-header hsae-queries-header">
                     <div class="hsae-queries-title-wrap">
-                        <div class="listItemBodyText hsae-group-title">Queries</div>
-                        <a href="https://api.jellyfin.org/" target="_blank" rel="noopener" class="hsae-info-link" title="Jellyfin API documentation">
+                        <div class="listItemBodyText hsae-group-title">查询</div>
+                        <a href="https://api.jellyfin.org/" target="_blank" rel="noopener" class="hsae-info-link" title="Jellyfin API 文档">
                             <span class="material-icons info"></span>
                         </a>
                     </div>
-                    <div class="listItemBodyText secondary hsae-group-desc">Define what content appears in this section</div>
+                    <div class="listItemBodyText secondary hsae-group-desc">定义此板块显示的内容</div>
                 </div>
                 <div id="queries-list" class="hsae-queries-list">
                     ${queries.map((query, index) => buildQueryCard(
@@ -1736,39 +1736,39 @@
                         expandedStates ? expandedStates[index] !== false : true
                     )).join('')}
                 </div>
-                <button type="button" class="emby-button raised hsae-add-query-btn add-query-btn" data-hsae-profiles="full">Add Query</button>
+                <button type="button" class="emby-button raised hsae-add-query-btn add-query-btn" data-hsae-profiles="full">添加查询</button>
                 ${hasMultiple ? `
                     <section class="hsae-group hsae-multi-query-settings" data-hsae-profiles="full">
                         <div class="hsae-group-header">
-                            <div class="listItemBodyText hsae-group-title">Multi-Query Settings</div>
-                            <div class="listItemBodyText secondary hsae-group-desc">Control how the multiple queries are handled</div>
+                            <div class="listItemBodyText hsae-group-title">多查询设置</div>
+                            <div class="listItemBodyText secondary hsae-group-desc">控制多个查询的处理方式</div>
                         </div>
                         <div class="hsae-card">
                             <div class="hsae-toggle-card-grid hsae-multi-query-toggle-row">
                                 ${buildToggleCard(
                                     'hsae-use-random-query',
                                     useRandomQuery,
-                                    'Use Random Query',
+                                    '使用随机查询',
                                     RANDOM_QUERY_TOGGLE_DESCRIPTIONS[useRandomQuery ? 'on' : 'off'],
                                     { hintKey: 'useRandomQuery' }
                                 )}
                                 ${buildToggleCard(
                                     'hsae-use-multi-query-picker',
                                     useMultiQueryPicker,
-                                    'Query Picker',
+                                    '查询选择器',
                                     QUERY_PICKER_TOGGLE_DESCRIPTIONS[useMultiQueryPicker ? 'on' : 'off'],
                                     { hintKey: 'useMultiQueryPicker' }
                                 )}
                             </div>
                             <div id="hsae-multi-query-picker-rows" style="display:${useMultiQueryPicker ? 'block' : 'none'};">
                                 <div class="hsae-field-grid hsae-multi-query-picker-label-row">
-                                    ${buildTextInput('hsae-multi-query-picker-label', state.multiQueryPickerLabel || '', 'Label for Multi Query Picker button', 'text', 'The multi-query picker control will use this label instead of the name of the query being displayed.')}
+                                    ${buildTextInput('hsae-multi-query-picker-label', state.multiQueryPickerLabel || '', '多查询选择器按钮的标签', 'text', '多查询选择器控件将使用此标签，而不是当前显示查询的名称。')}
                                 </div>
                                 <div class="hsae-toggle-card-grid">
                                     ${buildToggleCard(
                                         'hsae-use-query-names-for-section',
                                         state.useQueryNamesForSection === true,
-                                        'Use Query Names for the Section Name',
+                                        '将查询名称用作板块名称',
                                         USE_QUERY_NAMES_TOGGLE_DESCRIPTIONS[state.useQueryNamesForSection === true ? 'on' : 'off'],
                                         { hintKey: 'useQueryNamesForSection' }
                                     )}
@@ -1785,13 +1785,13 @@
         const customEditor = getCustomItemsEditor();
         const html = customEditor
             ? customEditor.renderCustomItemsHTML(state, customEditor.getCustomItemsOptions())
-            : '<div class="listItemBodyText secondary">Custom items editor not available.</div>';
+            : '<div class="listItemBodyText secondary">自定义条目编辑器不可用。</div>';
 
         return `
             <section class="hsae-group hsae-custom-items-group" data-hsae-profiles="full">
                 <div class="hsae-group-header">
-                    <div class="listItemBodyText hsae-group-title">Custom Items</div>
-                    <div class="listItemBodyText secondary hsae-group-desc">Create cards with custom images and links</div>
+                    <div class="listItemBodyText hsae-group-title">自定义条目</div>
+                    <div class="listItemBodyText secondary hsae-group-desc">创建带自定义图片和链接的卡片</div>
                 </div>
                 <div class="hsae-custom-items-stage">${html}</div>
             </section>
@@ -1827,8 +1827,8 @@
             const ord = n === 1 ? 'First' : n === 2 ? 'Second' : 'Third';
             return `
                 <div class="hsae-field-grid hsae-field-grid-2 hsae-spotlight-anim-pair">
-                    ${buildSelect('section-spotlight-entranceAnimation' + ord, SPOTLIGHT_ENTRANCE_OPTIONS, spotlightOpts['entranceAnimation' + ord] ?? 'fadeIn', 'Entrance animation ' + n)}
-                    ${buildSelect('section-spotlight-slideAnimation' + ord, SPOTLIGHT_SLIDE_OPTIONS, spotlightOpts['slideAnimation' + ord] ?? 'kenBurnsZoomIn', 'Slide animation ' + n)}
+                    ${buildSelect('section-spotlight-entranceAnimation' + ord, SPOTLIGHT_ENTRANCE_OPTIONS, spotlightOpts['entranceAnimation' + ord] ?? 'fadeIn', '入场动画 ' + n)}
+                    ${buildSelect('section-spotlight-slideAnimation' + ord, SPOTLIGHT_SLIDE_OPTIONS, spotlightOpts['slideAnimation' + ord] ?? 'kenBurnsZoomIn', '幻灯片动画 ' + n)}
                 </div>
             `;
         }
@@ -1840,19 +1840,19 @@
         return `
             <div id="section-spotlight-options-container" class="hsae-spotlight-inner">
                 <div class="hsae-field-grid hsae-field-grid-4 hsae-spotlight-row-1">
-                    ${buildSelect('section-spotlight-spotlightLayout', SPOTLIGHT_LAYOUT_OPTIONS, spotlightLayout, 'Layout')}
-                    ${buildSelect('section-spotlight-spotlightSize', SPOTLIGHT_SIZE_OPTIONS, spotlightSize, 'Size')}
-                    ${buildSelect('section-spotlight-tileCount', SPOTLIGHT_TILE_COUNT_OPTIONS, tileCountStr, 'Tiled Backdrops')}
-                    ${buildSelect('section-spotlight-slideState', SLIDE_STATE_OPTIONS, slideStateVal, 'Slide State')}
+                    ${buildSelect('section-spotlight-spotlightLayout', SPOTLIGHT_LAYOUT_OPTIONS, spotlightLayout, '布局')}
+                    ${buildSelect('section-spotlight-spotlightSize', SPOTLIGHT_SIZE_OPTIONS, spotlightSize, '尺寸')}
+                    ${buildSelect('section-spotlight-tileCount', SPOTLIGHT_TILE_COUNT_OPTIONS, tileCountStr, '平铺背景图')}
+                    ${buildSelect('section-spotlight-slideState', SLIDE_STATE_OPTIONS, slideStateVal, '幻灯片状态')}
                 </div>
                 <div class="hsae-toggle-card-grid hsae-spotlight-row-2">
-                    ${spotlightToggle('section-spotlight-panAnimation', animateSlides, 'Animate Slides')}
-                    ${spotlightToggle('section-spotlight-showNavButtons', spotlightOpts.showNavButtons !== false, 'Show Controls')}
-                    ${spotlightToggle('section-spotlight-showClearArt', spotlightOpts.showClearArt === true, 'Show Clear Art')}
-                    ${spotlightToggle('section-spotlight-cycleBackdrops', cycleBackdropsOn, 'Cycle Backdrops')}
+                    ${spotlightToggle('section-spotlight-panAnimation', animateSlides, '幻灯片动画')}
+                    ${spotlightToggle('section-spotlight-showNavButtons', spotlightOpts.showNavButtons !== false, '显示控件')}
+                    ${spotlightToggle('section-spotlight-showClearArt', spotlightOpts.showClearArt === true, '显示清晰艺术图')}
+                    ${spotlightToggle('section-spotlight-cycleBackdrops', cycleBackdropsOn, '轮播背景图')}
                 </div>
                 <div id="section-spotlight-backdrops-row" class="hsae-spotlight-backdrops-row" style="display:${cycleBackdropsOn ? 'block' : 'none'};">
-                    ${buildTextInput('section-spotlight-backdropsCount', backdropsCount, 'Backdrops Count', 'number')}
+                    ${buildTextInput('section-spotlight-backdropsCount', backdropsCount, '背景图数量', 'number')}
                 </div>
                 <div id="section-spotlight-animation-divider" class="hsae-query-divider" role="separator" aria-hidden="true" style="display:${animateSlides ? 'block' : 'none'};"></div>
                 <div id="section-spotlight-animation-dropdowns" class="hsae-spotlight-animations hsae-spotlight-animations--${tileCount}" style="display:${animateSlides ? 'grid' : 'none'};">
@@ -1861,8 +1861,8 @@
                     <div id="section-spotlight-anim-third" class="hsae-spotlight-anim-group" style="display:${tileCount >= 3 ? 'block' : 'none'};">${animRow(3)}</div>
                 </div>
                 <div class="hsae-field-grid hsae-field-grid-2 hsae-spotlight-row-autoplay">
-                    ${spotlightToggle('section-spotlight-autoPlay', spotlightOpts.autoPlay !== false, 'Cycle Slides Automatically')}
-                    ${buildTextInput('section-spotlight-interval', intervalSeconds, 'Slide Timer (seconds)', 'number')}
+                    ${spotlightToggle('section-spotlight-autoPlay', spotlightOpts.autoPlay !== false, '自动轮播幻灯片')}
+                    ${buildTextInput('section-spotlight-interval', intervalSeconds, '幻灯片计时（秒）', 'number')}
                 </div>
             </div>
         `;
@@ -1943,7 +1943,7 @@
         const renderPreview = window.KefinHomeScreen?.renderSectionPreviewInto;
         const mergeResolved = window.KefinHomeScreen?.mergeDraftWithResolvedPreview;
         if (typeof fetchPreview !== 'function' || typeof renderPreview !== 'function') {
-            container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">Preview unavailable.</p>';
+            container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">预览不可用。</p>';
             return;
         }
 
@@ -1956,7 +1956,7 @@
 
         const draft = getDraftSection();
         if (!draft) {
-            container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">Preview unavailable.</p>';
+            container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">预览不可用。</p>';
             return;
         }
 
@@ -1969,7 +1969,7 @@
             && appearancePreviewCache.items !== null;
 
         if (!cacheHit) {
-            container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">Loading preview…</p>';
+            container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">正在加载预览…</p>';
         }
 
         try {
@@ -1985,7 +1985,7 @@
 
             const previewItems = appearancePreviewCache.items || [];
             if (previewItems.length === 0) {
-                container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">No items found for preview.</p>';
+                container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">未找到可用于预览的条目。</p>';
                 return;
             }
 
@@ -1997,7 +1997,7 @@
         } catch (err) {
             if (requestId !== appearancePreviewRequestId) return;
             appearancePreviewCache = { fetchKey: null, renderKey: null, items: null, resolvedSection: null };
-            container.innerHTML = `<p class="listItemBodyText secondary hsae-preview-placeholder">${escapeHtml(err.message || 'Preview failed')}</p>`;
+            container.innerHTML = `<p class="listItemBodyText secondary hsae-preview-placeholder">${escapeHtml(err.message || '预览失败')}</p>`;
         }
     }
 
@@ -2050,68 +2050,68 @@
                 <summary class="hsae-advanced-summary">
                     <div class="hsae-advanced-summary-left">
                         <span class="material-icons hsae-advanced-chevron">expand_more</span>
-                        <span class="listItemBodyText hsae-group-title">More appearance options</span>
+                        <span class="listItemBodyText hsae-group-title">更多外观选项</span>
                     </div>
-                    <span class="listItemBodyText secondary hsae-group-desc">Borders, titles, layout</span>
+                    <span class="listItemBodyText secondary hsae-group-desc">边框、标题、布局</span>
                 </summary>
                 <div class="hsae-appearance-advanced-body">
                     <div class="hsae-field-grid hsae-field-grid-2">
                         <div class="hsae-field-with-hint">
-                            ${buildSelectFromOptions('hsae-border-style', BORDER_STYLE_OPTIONS, section.borderStyle || '', 'Border Style')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Adds a border to the card images in this section.</div>
+                            ${buildSelectFromOptions('hsae-border-style', BORDER_STYLE_OPTIONS, section.borderStyle || '', '边框样式')}
+                            <div class="listItemBodyText secondary hsae-field-hint">为此板块的卡片图片添加边框。</div>
                         </div>
                         <div class="hsae-field-with-hint">
-                            <label class="inputLabel inputLabelUnfocused" for="hsae-border-color-text">Border Color</label>
+                            <label class="inputLabel inputLabelUnfocused" for="hsae-border-color-text">边框颜色</label>
                             <div class="hsae-color-input-row">
-                                <div id="hsae-border-color-pickr" class="hsae-color-pickr-host hsae-border-color-pickr-host" aria-label="Border Color" style="--hsae-swatch-color:${escapeHtml(borderColorDefault)}" role="button" tabindex="0"></div>
-                                <input type="text" id="hsae-border-color-text" class="emby-input" value="${escapeHtml(section.borderColor || '')}" placeholder="CSS color (optional)" aria-label="Border Color CSS" data-pickr-default="${escapeHtml(borderColorDefault)}">
+                                <div id="hsae-border-color-pickr" class="hsae-color-pickr-host hsae-border-color-pickr-host" aria-label="边框颜色" style="--hsae-swatch-color:${escapeHtml(borderColorDefault)}" role="button" tabindex="0"></div>
+                                <input type="text" id="hsae-border-color-text" class="emby-input" value="${escapeHtml(section.borderColor || '')}" placeholder="CSS 颜色（可选）" aria-label="边框颜色 CSS" data-pickr-default="${escapeHtml(borderColorDefault)}">
                             </div>
-                            <div class="listItemBodyText secondary hsae-field-hint">CSS color for card borders.</div>
+                            <div class="listItemBodyText secondary hsae-field-hint">卡片边框的 CSS 颜色。</div>
                         </div>
                     </div>
                     <div class="hsae-toggle-card-grid">
                         ${buildToggleCard(
                             'hsae-hide-card-titles',
                             hideCardTitles,
-                            'Hide Card Titles',
+                            '隐藏卡片标题',
                             ADVANCED_TOGGLE_DESCRIPTIONS['hsae-hide-card-titles'][hideCardTitles ? 'on' : 'off'],
                             { hintKey: 'hsae-hide-card-titles' }
                         )}
                     </div>
                     <div id="hsae-card-title-options-row" style="display:${hideCardTitles ? 'none' : ''};">
                         <div class="hsae-field-grid hsae-field-grid-2">
-                            ${buildSelectFromOptions('hsae-card-title-position', CARD_TITLE_POSITION_OPTIONS, cardTitlePosition, 'Card Title Position')}
-                            ${buildSelectFromOptions('hsae-card-title-capitalization', CARD_TITLE_CAPITALIZATION_OPTIONS, section.cardTitleCapitalization || 'normal', 'Card Title Capitalization')}
+                            ${buildSelectFromOptions('hsae-card-title-position', CARD_TITLE_POSITION_OPTIONS, cardTitlePosition, '卡片标题位置')}
+                            ${buildSelectFromOptions('hsae-card-title-capitalization', CARD_TITLE_CAPITALIZATION_OPTIONS, section.cardTitleCapitalization || 'normal', '卡片标题大小写')}
                         </div>
                         <div class="hsae-field-grid hsae-field-grid-2">
-                            ${buildSelectFromOptions('hsae-card-title-font-family', CARD_TITLE_FONT_FAMILY_OPTIONS, section.cardTitleFontFamily || 'default', 'Card Title Font Family')}
-                            ${buildSelectFromOptions('hsae-card-title-font-size', CARD_TITLE_FONT_SIZE_OPTIONS, section.cardTitleFontSize || 'normal', 'Card Title Font Size')}
+                            ${buildSelectFromOptions('hsae-card-title-font-family', CARD_TITLE_FONT_FAMILY_OPTIONS, section.cardTitleFontFamily || 'default', '卡片标题字体')}
+                            ${buildSelectFromOptions('hsae-card-title-font-size', CARD_TITLE_FONT_SIZE_OPTIONS, section.cardTitleFontSize || 'normal', '卡片标题字号')}
                         </div>
                     </div>
                     ${showItemsLayout ? `
                     <div class="hsae-field-grid hsae-field-grid-2">
                         <div class="hsae-field-with-hint">
-                            ${buildSelectFromOptions('hsae-items-layout', ITEMS_LAYOUT_OPTIONS, itemsLayout, 'Layout')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Default items layout for this section.</div>
+                            ${buildSelectFromOptions('hsae-items-layout', ITEMS_LAYOUT_OPTIONS, itemsLayout, '布局')}
+                            <div class="listItemBodyText secondary hsae-field-hint">此板块的默认条目布局。</div>
                         </div>
                         <div class="hsae-field-with-hint">
-                            ${buildSelectFromOptions('hsae-card-gaps', CARD_GAPS_OPTIONS, cardGaps, 'Card Gaps')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Remove spacing between cards.</div>
+                            ${buildSelectFromOptions('hsae-card-gaps', CARD_GAPS_OPTIONS, cardGaps, '卡片间距')}
+                            <div class="listItemBodyText secondary hsae-field-hint">移除卡片之间的间距。</div>
                         </div>
                     </div>
                     ` : ''}
                     <div class="hsae-field-grid hsae-field-grid-2">
                         <div class="hsae-field-with-hint">
-                            <label class="inputLabel inputLabelUnfocused" for="hsae-card-title-color-text">Card Title Color</label>
+                            <label class="inputLabel inputLabelUnfocused" for="hsae-card-title-color-text">卡片标题颜色</label>
                             <div class="hsae-color-input-row">
-                                <div id="hsae-card-title-color-pickr" class="hsae-color-pickr-host" aria-label="Card Title Color" style="--hsae-swatch-color:${escapeHtml(cardTitleColorDefault)}" role="button" tabindex="0"></div>
-                                <input type="text" id="hsae-card-title-color-text" class="emby-input" value="${escapeHtml(section.cardTitleColor || '')}" placeholder="CSS color (optional)" aria-label="Card Title Color CSS" data-pickr-default="${escapeHtml(cardTitleColorDefault)}">
+                                <div id="hsae-card-title-color-pickr" class="hsae-color-pickr-host" aria-label="卡片标题颜色" style="--hsae-swatch-color:${escapeHtml(cardTitleColorDefault)}" role="button" tabindex="0"></div>
+                                <input type="text" id="hsae-card-title-color-text" class="emby-input" value="${escapeHtml(section.cardTitleColor || '')}" placeholder="CSS 颜色（可选）" aria-label="卡片标题颜色 CSS" data-pickr-default="${escapeHtml(cardTitleColorDefault)}">
                             </div>
-                            <div class="listItemBodyText secondary hsae-field-hint">CSS color for card titles in this section.</div>
+                            <div class="listItemBodyText secondary hsae-field-hint">此板块卡片标题的 CSS 颜色。</div>
                         </div>
                         <div class="hsae-field-with-hint">
-                            ${buildTextInput('hsae-section-css-class', section.sectionCssClass || '', 'CSS Class')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Added to the section container when rendered.</div>
+                            ${buildTextInput('hsae-section-css-class', section.sectionCssClass || '', 'CSS 类名')}
+                            <div class="listItemBodyText secondary hsae-field-hint">渲染时添加到板块容器上。</div>
                         </div>
                     </div>
                 </div>
@@ -2128,8 +2128,8 @@
         return `
             <section class="hsae-group hsae-appearance-group">
                 <div class="hsae-group-header">
-                    <div class="listItemBodyText hsae-group-title">Appearance</div>
-                    <div class="listItemBodyText secondary hsae-group-desc">Choose how this section is rendered on the home screen</div>
+                    <div class="listItemBodyText hsae-group-title">外观</div>
+                    <div class="listItemBodyText secondary hsae-group-desc">选择此板块在主屏幕上的渲染方式</div>
                 </div>
                 <div class="hsae-card">
                     <div class="hsae-appearance-grid">
@@ -2144,7 +2144,7 @@
                     ${isNormal ? `
                         <div class="hsae-appearance-normal-row">
                             <div class="hsae-appearance-format-col">
-                                <div class="listItemBodyText hsae-subsection-label">Card Format</div>
+                                <div class="listItemBodyText hsae-subsection-label">卡片格式</div>
                                 <div class="hsae-card-format-grid">
                                     ${CARD_FORMATS.map(fmt => `
                                         <button type="button" class="hsae-card-format-btn${state.cardFormat === fmt ? ' hsae-active' : ''}" data-hsae-action="set-card-format" data-card-format="${escapeHtml(fmt)}">
@@ -2154,19 +2154,19 @@
                                 </div>
                             </div>
                             <div class="hsae-appearance-preview-col">
-                                <div class="listItemBodyText hsae-subsection-label">Preview</div>
+                                <div class="listItemBodyText hsae-subsection-label">预览</div>
                                 <div id="hsae-appearance-preview-container" class="hsae-appearance-preview-container">
-                                    <p class="listItemBodyText secondary hsae-preview-placeholder">Loading preview…</p>
+                                    <p class="listItemBodyText secondary hsae-preview-placeholder">正在加载预览…</p>
                                 </div>
                             </div>
                             <div class="hsae-appearance-live-preview-row">
-                                ${buildCheckbox('hsae-live-preview-updates', state.livePreviewUpdates === true, 'Live Preview Updates')}
+                                ${buildCheckbox('hsae-live-preview-updates', state.livePreviewUpdates === true, '实时预览更新')}
                             </div>
                         </div>
                     ` : ''}
                     ${isSpotlight ? `
                         <div>
-                            <div class="listItemBodyText hsae-subsection-label">Spotlight options</div>
+                            <div class="listItemBodyText hsae-subsection-label">聚焦轮播选项</div>
                             ${buildSpotlightInnerHTML(state, context)}
                         </div>
                     ` : ''}
@@ -2189,54 +2189,54 @@
                 <summary class="hsae-advanced-summary">
                     <div class="hsae-advanced-summary-left">
                         <span class="material-icons hsae-advanced-chevron">expand_more</span>
-                        <span class="listItemBodyText hsae-group-title">Advanced Options</span>
+                        <span class="listItemBodyText hsae-group-title">高级选项</span>
                     </div>
-                    <span class="listItemBodyText secondary hsae-group-desc">For "real" server admins</span>
+                    <span class="listItemBodyText secondary hsae-group-desc">面向“真正的”服务器管理员</span>
                 </summary>
                 <div class="hsae-card hsae-advanced-body">
                     <div class="hsae-advanced-cache hsae-cache-section" data-hsae-profiles="full minimal postProcessing normal dateCutoffs">
-                        <div class="listItemBodyText hsae-field-label">Cache Duration</div>
+                        <div class="listItemBodyText hsae-field-label">缓存时长</div>
                         <div class="hsae-chip-row hsae-cache-presets">
                             ${presets.map(p => `
                                 <button type="button" class="kefin-chip hsae-chip hsae-cache-preset${ttlPreset === p.key ? ' hsae-active' : ''}" data-preset-key="${escapeHtml(p.key)}">${escapeHtml(p.label)}</button>
                             `).join('')}
                         </div>
                         <div id="hsae-ttl-custom-container" class="hsae-field-grid hsae-field-grid-2 hsae-ttl-custom" style="display:${isCustomTtl ? 'grid' : 'none'};">
-                            ${buildTextInput('hsae-ttl-custom-value', state.ttlCustomValue || '', 'Custom Duration', 'number')}
+                            ${buildTextInput('hsae-ttl-custom-value', state.ttlCustomValue || '', '自定义时长', 'number')}
                             ${buildSelectFromOptions('hsae-ttl-custom-unit', TTL_UNIT_OPTIONS.map(u => ({ value: u.value, label: u.value })), state.ttlCustomUnit || 'minutes', 'Unit')}
                         </div>
                     </div>
 
                     <div class="hsae-advanced-section-sort hsae-field-grid hsae-field-grid-2 hsae-advanced-sort-row" data-hsae-profiles="full postProcessing normal dateCutoffs">
                         <div class="hsae-field-with-hint">
-                            ${buildSelect('hsae-advanced-sortBy', toSortBySelectOptions(SORT_ORDERS), state.sortBy || '', 'Sort By')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Items will be sorted in this order after they are returned from Jellyfin.</div>
+                            ${buildSelect('hsae-advanced-sortBy', toSortBySelectOptions(SORT_ORDERS), state.sortBy || '', '排序方式')}
+                            <div class="listItemBodyText secondary hsae-field-hint">条目从 Jellyfin 返回后将按此顺序排序。</div>
                         </div>
                         <div class="hsae-field-with-hint">
-                            ${buildSelect('hsae-advanced-sortOrder', getSectionSortOrderDirectionOptions(SORT_ORDER_DIRECTIONS), state.sortOrder || '', 'Sort Order')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Items will be sorted in this direction after they are returned from Jellyfin.</div>
+                            ${buildSelect('hsae-advanced-sortOrder', getSectionSortOrderDirectionOptions(SORT_ORDER_DIRECTIONS), state.sortOrder || '', '排序顺序')}
+                            <div class="listItemBodyText secondary hsae-field-hint">条目从 Jellyfin 返回后将按此方向排序。</div>
                         </div>
                     </div>
 
                     <div class="hsae-advanced-min-max-age hsae-field-grid hsae-field-grid-2 hsae-advanced-age-row" data-hsae-profiles="full dateCutoffs">
                         <div class="hsae-field-with-hint">
-                            ${buildTextInput('hsae-query-minAge', premiereAge.minAge, 'Minimum Age (Days)', 'number')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Only show items that have a Premiere Date older than this.</div>
+                            ${buildTextInput('hsae-query-minAge', premiereAge.minAge, '最小发行天数', 'number')}
+                            <div class="listItemBodyText secondary hsae-field-hint">仅显示首映日期早于该天数的条目。</div>
                         </div>
                         <div class="hsae-field-with-hint">
-                            ${buildTextInput('hsae-query-maxAge', premiereAge.maxAge, 'Maximum Age (Days)', 'number')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Only show items that have a Premiere Date newer than this.</div>
+                            ${buildTextInput('hsae-query-maxAge', premiereAge.maxAge, '最大发行天数', 'number')}
+                            <div class="listItemBodyText secondary hsae-field-hint">仅显示首映日期晚于该天数的条目。</div>
                         </div>
                     </div>
 
                     <div class="hsae-advanced-limits hsae-field-grid hsae-field-grid-2 hsae-advanced-limits-row" data-hsae-profiles="full postProcessing normal dateCutoffs">
                         <div class="hsae-field-with-hint">
-                            ${buildTextInput('section-minimumItems', section.minimumItems ?? '', 'Minimum Items', 'number')}
-                            <div class="listItemBodyText secondary hsae-field-hint">If the section has fewer items than this it will not be shown.</div>
+                            ${buildTextInput('section-minimumItems', section.minimumItems ?? '', '最少条目数', 'number')}
+                            <div class="listItemBodyText secondary hsae-field-hint">若板块条目少于此数量，则不显示该板块。</div>
                         </div>
                         <div class="hsae-field-with-hint">
-                            ${buildTextInput('hsae-section-itemLimit', state.itemLimit ?? '', 'Item Limit', 'number')}
-                            <div class="listItemBodyText secondary hsae-field-hint">Limits results from queries after they are fetched.</div>
+                            ${buildTextInput('hsae-section-itemLimit', state.itemLimit ?? '', '条目上限', 'number')}
+                            <div class="listItemBodyText secondary hsae-field-hint">在查询获取结果后限制结果数量。</div>
                         </div>
                     </div>
 
@@ -2245,7 +2245,7 @@
                             ${buildToggleCard(
                                 'section-flattenSeries',
                                 section.flattenSeries === true,
-                                'Flatten Series',
+                                '合并剧集',
                                 ADVANCED_TOGGLE_DESCRIPTIONS['section-flattenSeries'][section.flattenSeries === true ? 'on' : 'off'],
                                 { hintKey: 'section-flattenSeries' }
                             )}
@@ -2254,7 +2254,7 @@
                             ${buildToggleCard(
                                 'hsae-limit-before-sort',
                                 section.limitBeforeSort === true,
-                                'Limit Before Sort',
+                                '排序前限制',
                                 ADVANCED_TOGGLE_DESCRIPTIONS['hsae-limit-before-sort'][section.limitBeforeSort === true ? 'on' : 'off'],
                                 { hintKey: 'hsae-limit-before-sort' }
                             )}
@@ -2264,7 +2264,7 @@
                         ${buildToggleCard(
                             'hsae-use-parent-card',
                             section.useParentCard === true,
-                            'Link Parent Item',
+                            '链接父级条目',
                             ADVANCED_TOGGLE_DESCRIPTIONS['hsae-use-parent-card'][section.useParentCard === true ? 'on' : 'off'],
                             { hintKey: 'hsae-use-parent-card' }
                         )}
@@ -2879,8 +2879,8 @@
                 rowType = 'custom';
                 inputField = `
                     <div class="hsae-custom-option-grid">
-                        <input type="text" class="fld emby-input hsae-custom-option-key" placeholder="Option name" aria-label="Option name">
-                        <input type="text" id="${inputId}" class="fld emby-input additional-option-value hsae-custom-option-value" placeholder="Option value" data-type="string" aria-label="Option value">
+                        <input type="text" class="fld emby-input hsae-custom-option-key" placeholder="选项名称" aria-label="选项名称">
+                        <input type="text" id="${inputId}" class="fld emby-input additional-option-value hsae-custom-option-value" placeholder="选项值" data-type="string" aria-label="选项值">
                     </div>
                 `;
             } else {
@@ -2913,7 +2913,7 @@
             row.className = getAdditionalOptionRowClass(rowType);
             row.innerHTML = `
                 ${inputField}
-                <button type="button" class="hsae-remove-additional-option" title="Remove Option">
+                <button type="button" class="hsae-remove-additional-option" title="移除选项">
                     <span class="material-icons">close</span>
                 </button>
             `;
@@ -2998,7 +2998,7 @@
         const badge = modalInstance?.dialogHeader?.querySelector('.hsae-section-name-badge');
         const nameInput = modalInstance?.dialogContent?.querySelector('#section-name');
         if (badge && nameInput) {
-            badge.textContent = nameInput.value.trim() || 'Untitled';
+            badge.textContent = nameInput.value.trim() || '未命名';
         }
     }
 
@@ -3281,7 +3281,7 @@
             container.querySelectorAll('.hsae-include-type-extra').forEach(chip => {
                 chip.hidden = !showAll;
             });
-            actionEl.textContent = showAll ? 'Show less' : 'Show all';
+            actionEl.textContent = showAll ? '收起' : '显示全部';
             return;
         }
 
@@ -3500,7 +3500,7 @@
             } else if (state.livePreviewUpdates) {
                 scheduleAppearancePreview(modalInstance);
             } else if (container) {
-                container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">Preview outdated — refresh the section or enable Live Preview Updates.</p>';
+                container.innerHTML = '<p class="listItemBodyText secondary hsae-preview-placeholder">预览已过期——请刷新板块或启用实时预览更新。</p>';
             }
         }
     }
@@ -3527,14 +3527,14 @@
         titleWrap.className = 'hsae-header-title-wrap';
 
         if (titleEl) {
-            titleEl.textContent = options.title || 'Edit Section';
+            titleEl.textContent = options.title || '编辑板块';
             titleEl.classList.add('dialogTitle');
             titleWrap.appendChild(titleEl);
         }
 
         const badge = document.createElement('span');
         badge.className = 'hsae-section-name-badge';
-        badge.textContent = modalInstance._hsaeState?.section?.name?.trim() || 'Untitled';
+        badge.textContent = modalInstance._hsaeState?.section?.name?.trim() || '未命名';
         titleWrap.appendChild(badge);
 
         headerMain.appendChild(titleWrap);

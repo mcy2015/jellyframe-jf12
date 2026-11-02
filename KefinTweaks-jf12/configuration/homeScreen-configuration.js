@@ -36,75 +36,75 @@
 
     const GENERAL_TOGGLE_DESCRIPTIONS = {
         'userHome-inlineConfigure': {
-            on: 'Allows Home Screen sections to be configured directly from the Home Screen.',
-            off: 'Sections can only be configured from the User > Home preferences page.'
+            on: '允许直接在主屏幕上配置主屏幕板块。',
+            off: '只能从“用户 > 主屏幕”偏好设置页面配置板块。'
         },
         'userHome-pinning': {
-            on: 'Allows users to create pinned sections on their Home Screen from library items by adding a "Pin To Home" button in the item context menu.',
-            off: 'Users cannot pin items to their Home Screen.'
+            on: '允许用户通过在条目上下文菜单中添加“固定到主屏幕”按钮，将媒体库条目固定为主屏幕上的板块。',
+            off: '用户无法将条目固定到主屏幕。'
         },
         'userHome-pairNativeHomeSections': {
-            on: 'Sections with a matching Native Jellyfin section are automatically kept in sync with your KefinTweaks Home Screen.',
-            off: 'KefinTweaks will disable all native Jellyfin home screen sections in the native Jellyfin User Preferences. When pairing is disabled, the official Jellyfin Android TV and Roku clients will have no sections rendered on the home screen. You should only disable this when you do not use either of those clients. Disabling will have a performance benefit when loading the home screen.'
+            on: '与 Jellyfin 原生板块匹配的板块会自动与你的 KefinTweaks 主屏幕保持同步。',
+            off: 'KefinTweaks 将在 Jellyfin 原生用户偏好设置中禁用所有 Jellyfin 原生主屏幕板块。禁用配对后，官方 Jellyfin Android TV 和 Roku 客户端的主屏幕将不会渲染任何板块。只有在不使用这两种客户端时才应禁用此选项。禁用后加载主屏幕时会有性能提升。'
         },
         'home-fadeInSections': {
-            on: 'Sections will be hidden when they are rendered and will fade up and in as they enter the window when you scroll.',
-            off: 'Sections will be rendered normally without any fade in animation.'
+            on: '板块渲染时先隐藏，滚动进入窗口时向上淡入。',
+            off: '板块正常渲染，不带淡入动画。'
         },
         'home-showStaleDataBeforeRefresh': {
-            on: 'Sections will show stale items before being refreshed and existing items will be updated in place when new data is ready.',
-            off: 'Sections will show loading skeleton cards whenever section data is stale.'
+            on: '板块刷新前先显示过期条目，新数据就绪后就地更新现有条目。',
+            off: '板块数据过期时显示加载骨架卡片。'
         },
         'seasonal-enableSeasonalAnimations': {
-            on: 'Animated seasonal overlays will appear in the UI based on the seasonal sections that are enabled.',
-            off: 'No animated seasonal overlays will appear in the UI regardless of which seasonal sections are enabled.'
+            on: '界面中将根据已启用的季节板块显示相应的季节动画叠加层。',
+            off: '无论启用哪些季节板块，界面中都不会显示季节动画叠加层。'
         },
         'seasonal-enableSeasonalBackground': {
-            on: 'The Home Screen background will be replaced by an appropriate Seasonal Background during the corresponding season.',
-            off: 'Seasonal Backgrounds will not appear at all.'
+            on: '在相应季节期间，主屏幕背景将被合适的季节背景图替换。',
+            off: '完全不显示季节背景图。'
         },
         'home-ensureThumbsForPopularTVNetworks': {
-            on: 'Only Studios with a valid image will be rendered in Popular Studios sections.',
-            off: 'Studios without any image may be rendered in Popular Studios sections. You can enable the Optional CSS Module "Studio Thumbnails" to overlay a background with the Studio Name on items without an image.'
+            on: '热门制片厂板块中只渲染拥有有效图片的制片厂。',
+            off: '没有图片的制片厂也可能出现在热门制片厂板块中。你可以启用可选 CSS 模块“Studio Thumbnails”，为没有图片的条目叠加带有制片厂名称的背景。'
         },
         'home-loadPeopleEpisodeData': {
-            on: 'Not Recommended for larger libraries. Loads all Person appearances from all episodes in your library. This data takes much longer to cache than just the Movies/Series level data.',
-            off: 'This is recommended. Person appearance data is limited to only Movies and Series.'
+            on: '不建议在大型媒体库中使用。会从媒体库中所有单集加载全部人物出场数据。这些数据的缓存耗时远高于仅电影/剧集级别的数据。',
+            off: '推荐使用。人物出场数据仅限于电影和剧集。'
         },
         'home-showCreateSectionButtonOnHome': {
-            on: 'Adds a button to the bottom left corner of the home screen so that you can quickly create a new section directly from the Home Screen. Only admins will see this button. The button is hidden on mobile.',
-            off: 'You must use the KefinTweaks Configuration > Home Screen > New Section flow to create new Home Screen sections.'
+            on: '在主屏幕左下角添加一个按钮，方便你直接在主屏幕上快速新建板块。只有管理员能看到该按钮。移动端上会隐藏。',
+            off: '你必须使用 KefinTweaks 配置 > 主屏幕 > 新建板块流程来创建新的主屏幕板块。'
         },
         'home-showCategoryFilters': {
-            on: 'Category Filters will appear on the Home Screen to quickly navigate between Discovery, Pinned or any custom Category sections.',
-            off: 'Category Filters will not appear on the Home Screen.'
+            on: '主屏幕上将显示分类筛选器，用于在发现、已固定或任意自定义分类板块之间快速切换。',
+            off: '主屏幕上不显示分类筛选器。'
         },
         'home-renderCategoriesSeparately': {
-            on: 'Sections will only appear when their defined category is selected on the Home Screen. Discovery sections will only load when the Discovery category is selected.',
-            off: 'All sections will be visible when the default Home category is selected. Discovery sections will render at the bottom of the Home and Discovery categories.'
+            on: '板块只在主屏幕上选中其所属分类时显示。发现板块只在选中“发现”分类时加载。',
+            off: '选中默认“主屏幕”分类时显示所有板块。发现板块会渲染在“主屏幕”和“发现”分类的底部。'
         }
     };
 
     const DISCOVERY_TOGGLE_DESCRIPTIONS = {
         'discovery-enabled': {
-            on: 'Discovery Sections will be generated per-user and rendered dynamically as the user scrolls down the Home Screen.',
-            off: 'No Discovery Sections will be generated.'
+            on: '发现板块将按用户生成，并在用户向下滚动主屏幕时动态渲染。',
+            off: '不会生成发现板块。'
         },
         'discovery-infiniteScroll': {
-            on: 'Discovery Sections will render automatically when the user scrolls near the bottom of the page (one group per scroll; scroll again for more).',
-            off: 'Show “Discover More” at the bottom. Scroll again while at the bottom to load the next discovery group.'
+            on: '当用户滚动到接近页面底部时自动渲染发现板块（每次滚动一组；再次滚动加载更多）。',
+            off: '在底部显示“发现更多”。位于底部时再次滚动即可加载下一组发现板块。'
         },
         'discovery-renderSpotlightAboveMatching': {
-            on: 'Top Rated Genre/Studio and regular Genre/Studio sections will appear next to each other',
-            off: 'Top Rated Genre/Studio and regular Genre/Studio sections will not necessarily appear next to each other'
+            on: '高评分类型/制片厂板块与普通类型/制片厂板块会相邻显示',
+            off: '高评分类型/制片厂板块与普通类型/制片厂板块不一定相邻显示'
         },
         'discovery-randomizeOrder': {
-            on: 'Discovery Sections will be rendered in a random order.',
-            off: 'Discovery Sections will always appear in the same order.'
+            on: '发现板块将以随机顺序渲染。',
+            off: '发现板块始终以相同顺序显示。'
         },
         'discovery-fadeInSections': {
-            on: 'Sections will be hidden when they are rendered and will fade up and in as they enter the window when you scroll.',
-            off: 'Sections will be rendered normally without any fade in animation.'
+            on: '板块渲染时先隐藏，滚动进入窗口时向上淡入。',
+            off: '板块正常渲染，不带淡入动画。'
         }
     };
 
@@ -138,24 +138,24 @@
     const MAX_PEOPLE_COUNT_OPTIONS = [100, 250, 500, 1000, 2500, 5000];
     const RESTORE_RETAIN_TOGGLE_DESCRIPTIONS = {
         'restore-retain-status': {
-            on: 'Current Default Status and User Configuration values will be unchanged.',
-            off: 'Default Status and User Configuration will be restored to their defaults.'
+            on: '当前的默认状态和用户配置值将保持不变。',
+            off: '默认状态和用户配置将恢复为默认值。'
         },
         'restore-retain-name-caption': {
-            on: 'Current Section Name and Caption values will be unchanged.',
-            off: 'Section Name and Caption will be restored to their defaults.'
+            on: '当前的板块名称和副标题值将保持不变。',
+            off: '板块名称和副标题将恢复为默认值。'
         },
         'restore-retain-appearance': {
-            on: 'Current Section Appearance settings will be unchanged.',
-            off: 'Section Appearance settings will be restored to their defaults.'
+            on: '当前的板块外观设置将保持不变。',
+            off: '板块外观设置将恢复为默认值。'
         },
         'restore-retain-advanced': {
-            on: 'Current Section Advanced Options will be unchanged.',
-            off: 'Section Advanced Options will be restored to their defaults.'
+            on: '当前的板块高级选项将保持不变。',
+            off: '板块高级选项将恢复为默认值。'
         },
         'restore-retain-customs': {
-            on: 'Current Custom Sections will be unchanged.',
-            off: 'All custom sections will be removed.'
+            on: '当前的自定义板块将保持不变。',
+            off: '所有自定义板块将被移除。'
         }
     };
     const RESTORE_APPEARANCE_KEYS = [
@@ -273,7 +273,7 @@
                 group.sections.forEach(section => {
                     result.push({
                         section: section,
-                        groupName: group.name || 'Unnamed Group',
+                        groupName: group.name || '未命名分组',
                         groupAuthor: group.author,
                         groupDescription: group.description
                     });
@@ -294,7 +294,7 @@
      */
     function renderSectionGroupsCheckboxList(container, sectionGroups, options = {}) {
         if (!Array.isArray(sectionGroups) || sectionGroups.length === 0) {
-            container.innerHTML = '<div class="listItemBodyText secondary">No section groups found.</div>';
+            container.innerHTML = '<div class="listItemBodyText secondary">未找到板块分组。</div>';
             return;
         }
 
@@ -308,7 +308,7 @@
                 return;
             }
 
-            const groupName = group.name || 'Unnamed Group';
+            const groupName = group.name || '未命名分组';
             
             // Group checkbox row
             html += `
@@ -325,7 +325,7 @@
                 html += `
                     <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.25em 0;">
                         <input type="checkbox" class="${checkboxClass}" data-group-index="${groupIndex}" data-section-index="${sectionIndex}" checked>
-                        <span class="listItemBodyText" style="margin-left: 0.5em;">${section.name || 'Unnamed Section'}</span>
+                        <span class="listItemBodyText" style="margin-left: 0.5em;">${section.name || '未命名板块'}</span>
                     </label>
                 `;
             });
@@ -748,7 +748,7 @@
     function createBrowseByStudioSection(items) {
         return {
             id: BROWSE_BY_STUDIO_SECTION_ID,
-            name: 'Browse by Studio',
+            name: '按制片厂浏览',
             enabled: true,
             order: 11,
             cardFormat: 'Logo',
@@ -813,7 +813,7 @@
                                 }
                                 return {
                                     id: `recently-added-${library.Id}`,
-                                    name: `Recently Added ${library.Name}`,
+                                    name: `最近添加的 ${library.Name}`,
                                     viewMoreUrl: viewMoreUrl,
                                     jellyfinId: 'latestmedia',
                                     userConfigurable: true,
@@ -850,7 +850,7 @@
                                 else if (ct === 'homevideos') includeItemTypes = ['Video'];
                                 return {
                                     id: `popular-genres-${library.Id}`,
-                                    name: `Popular ${library.Name} Genres`,
+                                    name: `热门${library.Name}类型`,
                                     userConfigurable: true,
                                     queries: [{
                                         path: '/Genres',
@@ -2066,27 +2066,27 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     })}
                     <!-- Section Info -->
                     <div style="flex: 1;">
-                        <input type="text" class="listItemBodyText editable-section-name" data-section-id="${section.id}" value="${(section.name || 'Unnamed Section').replace(/"/g, '&quot;')}" size="${Math.max((section.name || 'Unnamed Section').length, 15)}" style="font-weight: 500; margin-bottom: 0.25em; cursor: text; padding: 0.25em 0.5em; border-radius: 3px; transition: background-color 0.2s; display: inline-block; border: none; outline: none; background: transparent; font-family: inherit; font-size: inherit; color: inherit;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.05)'" onmouseout="this.style.backgroundColor='transparent'" onfocus="this.style.backgroundColor='rgba(255,255,255,0.1)'" onblur="this.style.backgroundColor='transparent'" onclick="event.stopPropagation();" oninput="this.size=Math.max(this.value.length,15)" />
+                        <input type="text" class="listItemBodyText editable-section-name" data-section-id="${section.id}" value="${(section.name || '未命名板块').replace(/"/g, '&quot;')}" size="${Math.max((section.name || '未命名板块').length, 15)}" style="font-weight: 500; margin-bottom: 0.25em; cursor: text; padding: 0.25em 0.5em; border-radius: 3px; transition: background-color 0.2s; display: inline-block; border: none; outline: none; background: transparent; font-family: inherit; font-size: inherit; color: inherit;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.05)'" onmouseout="this.style.backgroundColor='transparent'" onfocus="this.style.backgroundColor='rgba(255,255,255,0.1)'" onblur="this.style.backgroundColor='transparent'" onclick="event.stopPropagation();" oninput="this.size=Math.max(this.value.length,15)" />
                         <div style="display: flex; gap: 1em; align-items: center; flex-wrap: wrap;">
                             ${groupName ? `<span class="listItemBodyText secondary" style="font-size: 0.8em; background: rgba(255,255,255,0.1); padding: 0.2em 0.5em; border-radius: 3px;">${groupName}</span>` : ''}
-                            <span class="listItemBodyText secondary" style="font-size: 0.85em;">Order: ${section.order || 0}</span>
+                            <span class="listItemBodyText secondary" style="font-size: 0.85em;">排序：${section.order || 0}</span>
                             ${section.cardFormat && !isSpotlight ? `<span class="listItemBodyText secondary" style="font-size: 0.85em;">${section.cardFormat}</span>` : ''}
-                            ${isSpotlight ? `<span class="listItemBodyText secondary spotlight-tag" style="font-size: 0.85em;">Spotlight</span>` : ''}
-                            ${isSeasonal ? `<span class="listItemBodyText secondary seasonal-tag" style="font-size: 0.85em;">Active from: ${section.startDate} - ${section.endDate}</span>` : ''}
-                            ${isDiscovery ? `<span class="listItemBodyText secondary discovery-tag" style="font-size: 0.85em;">Discovery</span>` : ''}
+                            ${isSpotlight ? `<span class="listItemBodyText secondary spotlight-tag" style="font-size: 0.85em;">聚焦展示</span>` : ''}
+                            ${isSeasonal ? `<span class="listItemBodyText secondary seasonal-tag" style="font-size: 0.85em;">生效期：${section.startDate} - ${section.endDate}</span>` : ''}
+                            ${isDiscovery ? `<span class="listItemBodyText secondary discovery-tag" style="font-size: 0.85em;">发现</span>` : ''}
                         </div>
                     </div>
                 </div>
                 <div style="display: flex; gap: 0.5em; align-items: center;">
                     <button type="button" class="emby-button section-preview-btn raised" data-section-id="${section.id}" data-section-type="${type}" style="padding: 0.5em 1em; background: rgba(0, 164, 220, 0.2); opacity: 0; transition: opacity 0.2s; pointer-events: none;">
-                        <span>Preview</span>
+                        <span>预览</span>
                     </button>
                     <button type="button" class="emby-button section-edit-btn raised" data-section-id="${section.id}" data-section-type="${type}" style="padding: 0.5em 1em; opacity: 0; transition: opacity 0.2s; pointer-events: none;">
-                        <span>Edit</span>
+                        <span>编辑</span>
                     </button>
                     ${isCustom ? `
                         <button type="button" class="emby-button section-delete-btn raised" data-section-id="${section.id}" style="padding: 0.5em 1em; background: rgba(244, 67, 54, 0.2); opacity: 0; transition: opacity 0.2s; pointer-events: none;">
-                            <span>Delete</span>
+                            <span>删除</span>
                         </button>
                     ` : ''}
                 </div>
@@ -2148,10 +2148,10 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
      */
     function buildSectionNavigationHTML(activeType = 'home') {
         const types = [
-            { id: 'home', label: 'Home Sections' },
-            { id: 'seasonal', label: 'Seasonal Sections' },
-            { id: 'discovery', label: 'Discovery Sections' },
-            { id: 'custom', label: 'Custom Sections' }
+            { id: 'home', label: '主屏幕板块' },
+            { id: 'seasonal', label: '季节板块' },
+            { id: 'discovery', label: '发现板块' },
+            { id: 'custom', label: '自定义板块' }
         ];
 
         return `
@@ -2173,11 +2173,11 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
      */
     function buildGlobalSettingsNavigationHTML(activeSubTab = 'general') {
         const tabs = [
-            { id: 'general', label: 'General Settings' },
-            { id: 'spotlight', label: 'Spotlight Settings' },
-            { id: 'discovery', label: 'Discovery Settings' },
-            { id: 'categories', label: 'Category Settings' },
-            { id: 'cache', label: 'Cache Settings' }
+            { id: 'general', label: '通用设置' },
+            { id: 'spotlight', label: '聚焦展示设置' },
+            { id: 'discovery', label: '发现设置' },
+            { id: 'categories', label: '分类设置' },
+            { id: 'cache', label: '缓存设置' }
         ];
         return `
             <div style="display: flex; flex-direction: column; gap: 0.5em;">
@@ -2224,13 +2224,13 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             <div class="section-group" data-group-id="${groupId}" data-group-name="${group.name || 'Unnamed Group'}" style="margin-bottom: 1.5em;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75em;">
                     <div>
-                        <input type="text" class="listItemBodyText editable-group-name" data-group-id="${groupId}" value="${(group.name || 'Unnamed Group').replace(/"/g, '&quot;')}" size="${Math.max((group.name || 'Unnamed Group').length, 15)}" style="font-weight: 500; font-size: 1.1em; cursor: text; padding: 0.25em 0.5em; border-radius: 3px; transition: background-color 0.2s; border: none; outline: none; background: transparent; font-family: inherit; color: inherit;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.05)'" onmouseout="this.style.backgroundColor='transparent'" onfocus="this.style.backgroundColor='rgba(255,255,255,0.1)'" onblur="this.style.backgroundColor='transparent'" oninput="this.size=Math.max(this.value.length,15)" />
+                        <input type="text" class="listItemBodyText editable-group-name" data-group-id="${groupId}" value="${(group.name || '未命名分组').replace(/"/g, '&quot;')}" size="${Math.max((group.name || '未命名分组').length, 15)}" style="font-weight: 500; font-size: 1.1em; cursor: text; padding: 0.25em 0.5em; border-radius: 3px; transition: background-color 0.2s; border: none; outline: none; background: transparent; font-family: inherit; color: inherit;" onmouseover="this.style.backgroundColor='rgba(255,255,255,0.05)'" onmouseout="this.style.backgroundColor='transparent'" onfocus="this.style.backgroundColor='rgba(255,255,255,0.1)'" onblur="this.style.backgroundColor='transparent'" oninput="this.size=Math.max(this.value.length,15)" />
                         ${group.description ? `<div class="listItemBodyText secondary" style="font-size: 0.85em; margin-top: 0.25em;">${group.description}</div>` : ''}
-                        ${group.author ? `<div class="listItemBodyText secondary" style="font-size: 0.8em; margin-top: 0.25em; color: rgba(255,255,255,0.5);">by ${group.author}</div>` : ''}
+                        ${group.author ? `<div class="listItemBodyText secondary" style="font-size: 0.8em; margin-top: 0.25em; color: rgba(255,255,255,0.5);">作者：${group.author}</div>` : ''}
                     </div>
                     ${sectionTypes.length > 1 ? `<div class="listItemBodyText secondary" style="font-size: 0.85em; margin-top: 0.25em;">${renderSectionTypeToggles(sectionTypes)}</div>` : ''}
                     <button type="button" class="emby-button group-toggle-all-btn raised" data-group-id="${groupId}" data-enabled="${allEnabled}" style="padding: 0.5em 1em; font-size: 0.9em;">
-                        <span>${allEnabled ? 'Disable All' : 'Enable All'}</span>
+                        <span>${allEnabled ? '全部禁用' : '全部启用'}</span>
                     </button>
                 </div>
                 <div class="group-sections-list" data-group-id="${groupId}">
@@ -2245,7 +2245,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
      */
     function buildSectionContentHTML(sectionType) {
         // Always use currentConfig as source of truth
-        if (!currentConfig) return '<div class="listItemBodyText secondary">No configuration loaded.</div>';
+        if (!currentConfig) return '<div class="listItemBodyText secondary">未加载配置。</div>';
 
         switch (sectionType) {
             case 'home': {
@@ -2253,8 +2253,8 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 
                 return `
                     <div>
-                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">Home Sections</div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">Customize the default Home Sections provided by KefinTweaks.</div>
+                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">主屏幕板块</div>
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">自定义 KefinTweaks 提供的默认主屏幕板块。</div>
                         <div id="home-sections-list">
                             ${homeGroups.map(g => buildGroupHTML(g, 'home')).join('')}
                         </div>
@@ -2266,8 +2266,8 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 
                 return `
                     <div>
-                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">Seasonal Sections</div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">Customize the default Seasonal Home Sections provided by KefinTweaks. These sections only appear between the specified start and end dates.</div>
+                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">季节板块</div>
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">自定义 KefinTweaks 提供的默认季节性主屏幕板块。这些板块仅在指定的起止日期之间显示。</div>
                         <div id="seasonal-sections-list">
                             ${seasonalGroups.map(g => buildGroupHTML(g, 'home')).join('')}
                         </div>
@@ -2279,8 +2279,8 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 
                 return `
                     <div>
-                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">Discovery Sections</div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">Discovery sections will appear dynamically on the home screen as the user scrolls down. They are pre-fetched and cached in the background to ensure a smooth experience. You can customize their settings here.</div>
+                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">发现板块</div>
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">发现板块会在用户向下滚动主屏幕时动态显示。它们会预先拉取并在后台缓存，以确保流畅体验。你可以在此自定义其设置。</div>
                         <div id="discovery-sections-list">
                             ${discoveryGroups.map(g => buildGroupHTML(g, 'discovery')).join('')}
                         </div>
@@ -2292,19 +2292,19 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 
                 return `
                     <div>
-                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">Custom Sections</div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">Customize your Custom Home Sections here. You can add, edit, and delete your own sections. You can also import community collections or a file you exported from the Import / Export tab.</div>
+                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 1em;">自定义板块</div>
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">在此自定义你的自定义主屏幕板块。你可以添加、编辑和删除自己的板块，也可以导入社区合集或从“导入 / 导出”标签页导出的文件。</div>
                         <div id="custom-sections-list">
                             ${customGroups.map(g => buildGroupHTML(g, 'custom')).join('')}
                         </div>
                         <button type="button" class="emby-button button-submit raised add-custom-section-btn" style="padding: 0.75em 1.5em; margin-top: 0.75em;">
-                            <span>Add Custom Section</span>
+                            <span>添加自定义板块</span>
                         </button>
                     </div>
                 `;
             }
             default:
-                return '<div class="listItemBodyText secondary">Unknown section type</div>';
+                return '<div class="listItemBodyText secondary">未知板块类型</div>';
         }
     }
 
@@ -2313,7 +2313,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
      */
     function buildMainConfigHTML() {
         // Always use currentConfig as source of truth
-        if (!currentConfig) return '<div class="listItemBodyText secondary">No configuration loaded.</div>';
+        if (!currentConfig) return '<div class="listItemBodyText secondary">未加载配置。</div>';
 
         // Use currentActiveTab to determine which tab/content should be displayed
         const activeTab = normalizeActiveTab(currentActiveTab);
@@ -2323,41 +2323,41 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             <div style="max-width: 100%; width: calc(100vw - 4em); overflow: hidden;">
                 <!-- Toolbar -->
                 <div class="hsc-config-toolbar" style="display: flex; gap: 0.5em; flex-wrap: wrap; margin-bottom: 0.75em;">
-                    <button type="button" class="emby-button raised hsc-toolbar-new-section-btn" title="Create a new section">
+                    <button type="button" class="emby-button raised hsc-toolbar-new-section-btn" title="新建板块">
                         <span class="material-icons" style="margin-right: 0.35em; font-size: 1.1em; vertical-align: middle;">add</span>
-                        <span>New Section</span>
+                        <span>新建板块</span>
                     </button>
-                    <button type="button" class="emby-button raised hsc-toolbar-update-btn" title="Save and apply these settings to all users.">
+                    <button type="button" class="emby-button raised hsc-toolbar-update-btn" title="保存并将这些设置应用到所有用户。">
                         <span class="material-icons" style="margin-right: 0.35em; font-size: 1.1em; vertical-align: middle;">sync</span>
-                        <span>Update</span>
+                        <span>更新</span>
                     </button>
-                    <button type="button" class="emby-button raised hsc-toolbar-restore-defaults-btn" title="Restore default Home Screen sections">
+                    <button type="button" class="emby-button raised hsc-toolbar-restore-defaults-btn" title="恢复默认的主屏幕板块">
                         <span class="material-icons" style="margin-right: 0.35em; font-size: 1.1em; vertical-align: middle;">restart_alt</span>
-                        <span>Restore Defaults</span>
+                        <span>恢复默认</span>
                     </button>
                 </div>
 
                 <!-- Tab Navigation -->
                 <div class="config-tab-nav">
-                    <button type="button" class="config-tab-btn ${activeTab === 'settings' ? 'active' : ''}" data-tab="settings" title="Global Settings">
+                    <button type="button" class="config-tab-btn ${activeTab === 'settings' ? 'active' : ''}" data-tab="settings" title="全局设置">
                         <span class="material-icons config-tab-icon" aria-hidden="true">settings</span>
-                        <span class="config-tab-label">Global Settings</span>
+                        <span class="config-tab-label">全局设置</span>
                     </button>
-                    <button type="button" class="config-tab-btn ${activeTab === 'sections' ? 'active' : ''}" data-tab="sections" title="Edit Sections">
+                    <button type="button" class="config-tab-btn ${activeTab === 'sections' ? 'active' : ''}" data-tab="sections" title="编辑板块">
                         <span class="material-icons config-tab-icon" aria-hidden="true">edit</span>
-                        <span class="config-tab-label">Edit Sections</span>
+                        <span class="config-tab-label">编辑板块</span>
                     </button>
-                    <button type="button" class="config-tab-btn ${activeTab === 'order' ? 'active' : ''}" data-tab="order" title="Order Sections">
+                    <button type="button" class="config-tab-btn ${activeTab === 'order' ? 'active' : ''}" data-tab="order" title="板块排序">
                         <span class="material-icons config-tab-icon" aria-hidden="true">reorder</span>
-                        <span class="config-tab-label">Order Sections</span>
+                        <span class="config-tab-label">板块排序</span>
                     </button>
-                    <button type="button" class="config-tab-btn ${activeTab === 'import-export' ? 'active' : ''}" data-tab="import-export" title="Import / Export">
+                    <button type="button" class="config-tab-btn ${activeTab === 'import-export' ? 'active' : ''}" data-tab="import-export" title="导入 / 导出">
                         <span class="material-icons config-tab-icon" aria-hidden="true">swap_horiz</span>
-                        <span class="config-tab-label">Import / Export</span>
+                        <span class="config-tab-label">导入 / 导出</span>
                     </button>
-                    <button type="button" class="config-tab-btn ${activeTab === 'troubleshoot' ? 'active' : ''}" data-tab="troubleshoot" title="Troubleshoot">
+                    <button type="button" class="config-tab-btn ${activeTab === 'troubleshoot' ? 'active' : ''}" data-tab="troubleshoot" title="故障排除">
                         <span class="material-icons config-tab-icon" aria-hidden="true">troubleshoot</span>
-                        <span class="config-tab-label">Troubleshoot</span>
+                        <span class="config-tab-label">故障排除</span>
                     </button>
                 </div>
 
@@ -2397,18 +2397,18 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
 
                 <!-- Import / Export Sections Tab (includes community collections) -->
                 <div id="tab-import-export" class="config-tab-content" style="display: ${activeTab === 'import-export' ? 'block' : 'none'};">
-                    <div class="listItemBodyText" style="margin-bottom: 1em;">Share your custom home screen sections or import configurations from others.</div>
+                    <div class="listItemBodyText" style="margin-bottom: 1em;">分享你的自定义主屏幕板块，或导入他人的配置。</div>
                     <div style="display: flex; gap: 1em; flex-wrap: wrap; margin-top: 0.5em; margin-bottom: 1.5em;">
                         <button type="button" class="emby-button button-submit raised export-sections-btn" style="padding: 0.75em 1.5em;">
-                            <span>Export Sections</span>
+                            <span>导出板块</span>
                         </button>
                         <button type="button" class="emby-button button-submit raised import-sections-btn" style="padding: 0.75em 1.5em;">
-                            <span>Import Sections</span>
+                            <span>导入板块</span>
                         </button>
                     </div>
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em; font-weight: 500;">Browse Community Sections</div>
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Browse and import curated home screen sections from the community.</div>
-                    <div class="listItemBodyText secondary" style="margin-bottom: 1em;">Submit your own Home Screen Sections <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/discussions/64" target="_blank" class="button-link">here.</a></div>
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em; font-weight: 500;">浏览社区板块</div>
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">浏览并导入社区精选的主屏幕板块。</div>
+                    <div class="listItemBodyText secondary" style="margin-bottom: 1em;">在此提交你自己的主屏幕板块 <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/discussions/64" target="_blank" class="button-link">点此提交。</a></div>
                     <div id="communityCollectionsHost">
                         <div id="communityCollectionsGrid"></div>
                     </div>
@@ -2455,49 +2455,49 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         const settingsGroupStyle = 'margin-top: 0.75em; margin-bottom: 1.5em; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 1em;';
         return `
             <div class="hsc-settings-grid hsc-settings-grid-2">
-                ${hscToggleCard('userHome-inlineConfigure', userHomeScreen.inlineConfigure !== false, 'Inline Section Configuration', D)}
-                ${hscToggleCard('userHome-pinning', userHomeScreen.pinning !== false, 'Pin To Home', D)}
+                ${hscToggleCard('userHome-inlineConfigure', userHomeScreen.inlineConfigure !== false, '内联板块配置', D)}
+                ${hscToggleCard('userHome-pinning', userHomeScreen.pinning !== false, '固定到主屏幕', D)}
                 <div class="hsc-settings-span-2">
-                    ${hscToggleCard('userHome-pairNativeHomeSections', userHomeScreen.pairNativeHomeSections !== false, 'Pair Home Sections to Native Jellyfin User Preferences', D)}
+                    ${hscToggleCard('userHome-pairNativeHomeSections', userHomeScreen.pairNativeHomeSections !== false, '将主屏幕板块与 Jellyfin 原生用户偏好设置配对', D)}
                 </div>
-                ${hscToggleCard('home-fadeInSections', homeSettings.fadeInSections === true, 'Fade In Sections', D)}
-                ${hscToggleCard('home-showStaleDataBeforeRefresh', homeSettings.showStaleDataBeforeRefresh === true, 'Show Stale Items', D)}
-                ${hscToggleCard('seasonal-enableSeasonalAnimations', seasonal.enableSeasonalAnimations !== false, 'Seasonal Animations', D)}
-                ${hscToggleCard('seasonal-enableSeasonalBackground', seasonal.enableSeasonalBackground !== false, 'Seasonal Backgrounds', D)}
+                ${hscToggleCard('home-fadeInSections', homeSettings.fadeInSections === true, '板块淡入', D)}
+                ${hscToggleCard('home-showStaleDataBeforeRefresh', homeSettings.showStaleDataBeforeRefresh === true, '显示过期条目', D)}
+                ${hscToggleCard('seasonal-enableSeasonalAnimations', seasonal.enableSeasonalAnimations !== false, '季节动画', D)}
+                ${hscToggleCard('seasonal-enableSeasonalBackground', seasonal.enableSeasonalBackground !== false, '季节背景图', D)}
                 <div class="hsc-settings-span-2">
-                    ${hscToggleCard('home-ensureThumbsForPopularTVNetworks', homeSettings.ensureThumbsForPopularTVNetworks === true, 'Require Studio Thumbs', D)}
+                    ${hscToggleCard('home-ensureThumbsForPopularTVNetworks', homeSettings.ensureThumbsForPopularTVNetworks === true, '需要制片厂缩略图', D)}
                 </div>
                 <div class="hsc-settings-span-2">
-                    ${hscToggleCard('home-showCreateSectionButtonOnHome', homeSettings.showCreateSectionButtonOnHome === true, 'Quick Create Button', D)}
+                    ${hscToggleCard('home-showCreateSectionButtonOnHome', homeSettings.showCreateSectionButtonOnHome === true, '快速创建按钮', D)}
                 </div>
                 <div class="hsc-settings-span-2">
                     <div class="kefin-toggle-card kefin-settings-input-card">
                         <div class="kefin-toggle-card-text">
-                            <label class="listItemBodyText kefin-toggle-card-label" for="home-dismissEmptySectionTimer">Empty Section Dismiss Timer (ms)</label>
+                            <label class="listItemBodyText kefin-toggle-card-label" for="home-dismissEmptySectionTimer">空板块移除计时器（毫秒）</label>
                             <div class="listItemBodyText secondary kefin-toggle-card-desc">
-                                When a section loads with no items: 0 removes it immediately. Any other value shows “No items found” for that many milliseconds, then fades the section out.
+                                当板块加载后没有条目时：0 表示立即移除该板块；其他值表示先显示“未找到条目”指定的毫秒数，然后将板块淡出。
                             </div>
                         </div>
                         <div class="kefin-settings-input-card-control">
-                            <input type="number" id="home-dismissEmptySectionTimer" class="fld emby-input" value="${homeSettings.dismissEmptySectionTimer ?? 0}" min="0" step="1" aria-label="Empty Section Dismiss Timer (ms)">
+                            <input type="number" id="home-dismissEmptySectionTimer" class="fld emby-input" value="${homeSettings.dismissEmptySectionTimer ?? 0}" min="0" step="1" aria-label="空板块移除计时器（毫秒）">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="hsc-settings-group" style="${settingsGroupStyle}">
-                <div class="listItemBodyText" style="font-weight: 500; font-size: 1.1em;">Top People</div>
+                <div class="listItemBodyText" style="font-weight: 500; font-size: 1.1em;">热门人物</div>
                 <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-top: 0.25em; margin-bottom: 0.75em;">
-                    Sections related to Top People from your library will use these values to determine which People qualify as "Top People". If a Person meets any of the minimum criteria listed below, they will be considered a Top Person. Top People will be sorted based on their total number of appearances, caching only the Top X number of people based on the Maximum Person Count.
+                    媒体库中与热门人物相关的板块将使用这些值来判断哪些人物符合“热门人物”标准。只要人物满足下列任意一项最低条件，就会被认定为热门人物。热门人物将按总出场次数排序，并根据“人物数量上限”仅缓存排名靠前的人物。
                 </div>
                 <div class="hsc-settings-span-2" style="margin-bottom: 0.75em;">
-                    ${hscToggleCard('home-loadPeopleEpisodeData', homeSettings.loadPeopleEpisodeData === true, 'Load Episode Data for People', D)}
+                    ${hscToggleCard('home-loadPeopleEpisodeData', homeSettings.loadPeopleEpisodeData === true, '加载人物的剧集数据', D)}
                 </div>
                 <div class="hsc-settings-grid hsc-settings-grid-2">
-                    ${buildTextInput('home-minPeopleAppearancesTotal', homeSettings.minPeopleAppearancesTotal ?? 10, 'Minimum Total Appearances', 'number')}
-                    ${buildTextInput('home-minPeopleAppearancesMovies', homeSettings.minPeopleAppearancesMovies ?? 10, 'Minimum Movies Appearances', 'number')}
-                    ${buildTextInput('home-minPeopleAppearancesSeries', homeSettings.minPeopleAppearancesSeries ?? 10, 'Minimum Series Appearances', 'number')}
-                    ${buildTextInput('home-minPeopleAppearancesEpisodes', homeSettings.minPeopleAppearancesEpisodes ?? 10, 'Minimum Episodes Appearances', 'number')}
-                    ${buildSelect('home-maxPeopleCount', maxPeopleOptions, String(maxPeopleCount), 'Maximum Person Count')}
+                    ${buildTextInput('home-minPeopleAppearancesTotal', homeSettings.minPeopleAppearancesTotal ?? 10, '最少总出场次数', 'number')}
+                    ${buildTextInput('home-minPeopleAppearancesMovies', homeSettings.minPeopleAppearancesMovies ?? 10, '最少电影出场次数', 'number')}
+                    ${buildTextInput('home-minPeopleAppearancesSeries', homeSettings.minPeopleAppearancesSeries ?? 10, '最少剧集出场次数', 'number')}
+                    ${buildTextInput('home-minPeopleAppearancesEpisodes', homeSettings.minPeopleAppearancesEpisodes ?? 10, '最少单集出场次数', 'number')}
+                    ${buildSelect('home-maxPeopleCount', maxPeopleOptions, String(maxPeopleCount), '人物数量上限')}
                 </div>
             </div>
         `;
@@ -2514,18 +2514,18 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         return `
             <div class="hsc-settings-panel">
                 <div class="hsc-settings-desc listItemBodyText secondary">
-                    <p>Discovery Sections are Home Screen sections that are dynamically created when a user scrolls down the Home Screen. When Discovery Sections are requested, KefinTweaks will dynamically build a Discovery Group from the list of enabled Discovery Sections. It will render the Discovery Group and then when the user reaches the bottom of the page again, a new Discovery Group will be generated and rendered.</p>
-                    <p>KefinTweaks provides many default Discovery Sections, but you may also create your own static Discovery Sections. If you create multiple Discovery Sections within the same Group, KefinTweaks will select the first unrendered section from that Group when it builds the next Discovery Group.</p>
+                    <p>发现板块是在用户向下滚动主屏幕时动态创建的主屏幕板块。当请求发现板块时，KefinTweaks 会根据已启用的发现板块列表动态构建一个发现分组，渲染该分组；当用户再次到达页面底部时，会生成并渲染一个新的发现分组。</p>
+                    <p>KefinTweaks 提供了许多默认发现板块，你也可以创建自己的静态发现板块。如果在同一分组中创建了多个发现板块，KefinTweaks 会在构建下一个发现分组时从该分组中选择第一个尚未渲染的板块。</p>
                 </div>
                 <div class="hsc-settings-grid hsc-settings-grid-2">
-                    ${hscToggleCard('discovery-enabled', discovery.enabled !== false, 'Enabled', D)}
-                    ${hscToggleCard('discovery-infiniteScroll', discovery.infiniteScroll !== false, 'Infinite Scroll', D)}
-                    ${hscToggleCard('discovery-renderSpotlightAboveMatching', discovery.renderSpotlightAboveMatching === true, 'Group Related Sections', D)}
-                    ${hscToggleCard('discovery-randomizeOrder', discovery.randomizeOrder === true, 'Randomize Order', D)}
-                    ${hscToggleCard('discovery-fadeInSections', discovery.fadeInSections === true, 'Fade In Sections', D)}
-                    ${buildTextInput('discovery-spotlightDiscoveryChance', discovery.spotlightDiscoveryChance ?? 0.5, 'Spotlight Discovery Chance (0-1)', 'number')}
-                    ${buildTextInput('discovery-minGenreMovieCount', discovery.minGenreMovieCount || 50, 'Genre Movie Count', 'number')}
-                    ${buildTextInput('discovery-minGenreSeriesCount', discovery.minGenreSeriesCount || 10, 'Genre Series Count', 'number')}
+                    ${hscToggleCard('discovery-enabled', discovery.enabled !== false, '启用', D)}
+                    ${hscToggleCard('discovery-infiniteScroll', discovery.infiniteScroll !== false, '无限滚动', D)}
+                    ${hscToggleCard('discovery-renderSpotlightAboveMatching', discovery.renderSpotlightAboveMatching === true, '分组相关板块', D)}
+                    ${hscToggleCard('discovery-randomizeOrder', discovery.randomizeOrder === true, '随机排序', D)}
+                    ${hscToggleCard('discovery-fadeInSections', discovery.fadeInSections === true, '板块淡入', D)}
+                    ${buildTextInput('discovery-spotlightDiscoveryChance', discovery.spotlightDiscoveryChance ?? 0.5, '聚焦展示发现概率 (0-1)', 'number')}
+                    ${buildTextInput('discovery-minGenreMovieCount', discovery.minGenreMovieCount || 50, '类型电影数量', 'number')}
+                    ${buildTextInput('discovery-minGenreSeriesCount', discovery.minGenreSeriesCount || 10, '类型剧集数量', 'number')}
                 </div>
             </div>
         `;
@@ -2576,16 +2576,16 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         return `
             <div class="listItem kefin-home-category-row" data-index="${index}" data-category-id="${escapeHtml(cat.id)}" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.5em 0.65em; margin-bottom: 0.4em; display: flex; align-items: center; gap: 0.5em;${isSentinel ? ' background: rgba(255,255,255,0.04);' : ''}">
                 <span class="listItemBodyText secondary" style="min-width: 1.5em; text-align: right;">${index + 1}.</span>
-                <input type="text" class="emby-input kefin-home-category-name" value="${escapeHtml(cat.name || '')}" data-index="${index}" aria-label="Category name" style="flex: 1.2; min-width: 0;" />
-                <input type="text" class="emby-input kefin-home-category-icon" value="${escapeHtml(cat.icon || '')}" data-index="${index}" aria-label="Material icon name" placeholder="icon" style="flex: 0.8; min-width: 5em;" />
-                <button type="button" class="emby-button raised kefin-home-category-up" data-index="${index}" title="Move up" style="min-width: auto; padding: 0.35em 0.5em;" ${index === 0 ? 'disabled' : ''}>
+                <input type="text" class="emby-input kefin-home-category-name" value="${escapeHtml(cat.name || '')}" data-index="${index}" aria-label="分类名称" style="flex: 1.2; min-width: 0;" />
+                <input type="text" class="emby-input kefin-home-category-icon" value="${escapeHtml(cat.icon || '')}" data-index="${index}" aria-label="Material 图标名称" placeholder="图标" style="flex: 0.8; min-width: 5em;" />
+                <button type="button" class="emby-button raised kefin-home-category-up" data-index="${index}" title="上移" style="min-width: auto; padding: 0.35em 0.5em;" ${index === 0 ? 'disabled' : ''}>
                     <span class="material-icons" style="font-size: 1.1em; vertical-align: middle;">arrow_upward</span>
                 </button>
-                <button type="button" class="emby-button raised kefin-home-category-down" data-index="${index}" title="Move down" style="min-width: auto; padding: 0.35em 0.5em;" ${index >= total - 1 ? 'disabled' : ''}>
+                <button type="button" class="emby-button raised kefin-home-category-down" data-index="${index}" title="下移" style="min-width: auto; padding: 0.35em 0.5em;" ${index >= total - 1 ? 'disabled' : ''}>
                     <span class="material-icons" style="font-size: 1.1em; vertical-align: middle;">arrow_downward</span>
                 </button>
                 ${isSentinel ? '' : `
-                <button type="button" class="emby-button raised kefin-home-category-remove" data-index="${index}" title="Remove" style="min-width: auto; padding: 0.35em 0.5em;">
+                <button type="button" class="emby-button raised kefin-home-category-remove" data-index="${index}" title="移除" style="min-width: auto; padding: 0.35em 0.5em;">
                     <span class="material-icons" style="font-size: 1.1em; vertical-align: middle;">delete</span>
                 </button>`}
             </div>
@@ -2600,23 +2600,23 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         return `
             <div class="hsc-settings-panel">
                 <div class="hsc-settings-desc listItemBodyText secondary" style="margin-bottom: 1em;">
-                    Categories control which Home Screen sections are visible from the fixed category rail. Custom sections can be assigned a category in the section editor.
+                    分类用于控制固定分类栏中哪些主屏幕板块可见。自定义板块可以在板块编辑器中指定分类。
                 </div>
                 <div class="hsc-settings-grid hsc-settings-grid-2" style="margin-bottom: 1em;">
-                    ${hscToggleCard('home-showCategoryFilters', homeSettings.showCategoryFilters !== false, 'Show Category Filters', D)}
-                    ${hscToggleCard('home-renderCategoriesSeparately', homeSettings.renderCategoriesSeparately === true, 'Render Categories Separately', D)}
+                    ${hscToggleCard('home-showCategoryFilters', homeSettings.showCategoryFilters !== false, '显示分类筛选器', D)}
+                    ${hscToggleCard('home-renderCategoriesSeparately', homeSettings.renderCategoriesSeparately === true, '分类分开渲染', D)}
                 </div>
-                <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">Categories</div>
+                <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">分类</div>
                 <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.75em;">
-                    Home, Discover, and Pinned are built-in. Their ids cannot change and they cannot be deleted. Custom categories get a stable id when created.
+                    “主屏幕”“发现”和“已固定”为内置分类。它们的 id 不可更改，也无法删除。自定义分类在创建时会获得固定 id。
                 </div>
                 <div id="kefin-home-category-list">
                     ${categories.map((cat, i) => buildCategoryRowHTML(cat, i, categories.length)).join('')}
                 </div>
                 <div style="display: flex; gap: 0.5em; margin-top: 0.65em; flex-wrap: wrap;">
-                    <input type="text" id="kefin-home-category-add-name" class="emby-input" placeholder="Category name…" style="flex: 1; min-width: 140px;" />
-                    <input type="text" id="kefin-home-category-add-icon" class="emby-input" placeholder="Material icon (e.g. movie)" style="flex: 0.8; min-width: 120px;" />
-                    <button type="button" class="emby-button raised button-submit" id="kefin-home-category-add-btn">Add</button>
+                    <input type="text" id="kefin-home-category-add-name" class="emby-input" placeholder="分类名称…" style="flex: 1; min-width: 140px;" />
+                    <input type="text" id="kefin-home-category-add-icon" class="emby-input" placeholder="Material 图标（如 movie）" style="flex: 0.8; min-width: 120px;" />
+                    <button type="button" class="emby-button raised button-submit" id="kefin-home-category-add-btn">添加</button>
                 </div>
             </div>
         `;
@@ -2746,13 +2746,13 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         }
         const cache = currentConfig?.CACHE || window.KefinHomeConfig2?.CACHE || {};
         return [
-            { key: 'VERY_SHORT', label: 'Very Short (1 min)', ms: cache.VERY_SHORT_TTL ?? 60000 },
-            { key: 'SHORT', label: 'Short (5 min)', ms: cache.SHORT_TTL ?? 300000 },
-            { key: 'DEFAULT', label: 'Default (1 hour)', ms: cache.DEFAULT_TTL ?? 3600000 },
-            { key: 'LONG', label: 'Long (24 hours)', ms: cache.LONG_TTL ?? 86400000 },
-            { key: 'STATIC', label: 'Static (1 week)', ms: cache.STATIC_TTL ?? 604800000 },
-            { key: 'DISCOVERY', label: 'Discovery (6 hours)', ms: cache.DISCOVERY_TTL ?? 21600000 },
-            { key: 'CUSTOM', label: 'Custom', ms: null }
+            { key: 'VERY_SHORT', label: '极短（1 分钟）', ms: cache.VERY_SHORT_TTL ?? 60000 },
+            { key: 'SHORT', label: '短（5 分钟）', ms: cache.SHORT_TTL ?? 300000 },
+            { key: 'DEFAULT', label: '默认（1 小时）', ms: cache.DEFAULT_TTL ?? 3600000 },
+            { key: 'LONG', label: '长（24 小时）', ms: cache.LONG_TTL ?? 86400000 },
+            { key: 'STATIC', label: '静态（1 周）', ms: cache.STATIC_TTL ?? 604800000 },
+            { key: 'DISCOVERY', label: '发现（6 小时）', ms: cache.DISCOVERY_TTL ?? 21600000 },
+            { key: 'CUSTOM', label: '自定义', ms: null }
         ];
     }
 
@@ -2802,23 +2802,23 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         return `
             <div class="hsc-settings-panel">
                 <div class="hsc-settings-desc listItemBodyText secondary">
-                    <p>Every Home Screen Section has a cache expiration time associated to it. If the section has no explicitly defined cache value, it will use the Default setting below.</p>
-                    <p>When a Section is being loaded, if the cache has not expired, the cached items will be rendered instead of requesting new data. If a Section has "No Cache" set, it will always request new data from the server.</p>
-                    <p>The Cache settings listed below will appear as options when creating or editing a Home Screen Section in the "Advanced Options" at the bottom of the editor.</p>
+                    <p>每个主屏幕板块都有对应的缓存过期时间。如果板块未显式定义缓存值，将使用下方的默认设置。</p>
+                    <p>加载板块时，如果缓存尚未过期，将直接渲染缓存的条目而不请求新数据。如果板块设置为“无缓存”，则始终从服务器请求新数据。</p>
+                    <p>下方列出的缓存设置会作为选项显示在编辑器底部“高级选项”中创建或编辑主屏幕板块时的界面里。</p>
                 </div>
                 <div class="hsc-settings-grid hsc-settings-grid-3">
                     <div class="hsc-default-ttl-field">
-                        ${buildSelect('cache-DEFAULT_TTL-preset', presetOptions, defaultMatch.preset, 'Default')}
+                        ${buildSelect('cache-DEFAULT_TTL-preset', presetOptions, defaultMatch.preset, '默认')}
                         <div id="cache-DEFAULT_TTL-custom-row" class="hsc-default-ttl-custom" style="display:${isCustomDefault ? 'grid' : 'none'}; grid-template-columns: 1fr 1fr; gap: 0.75em; margin-top: 0.75em;">
-                            ${buildTextInput('cache-DEFAULT_TTL-custom-value', defaultMatch.customValue || '', 'Custom Duration', 'number')}
-                            ${buildSelect('cache-DEFAULT_TTL-custom-unit', TTL_UNIT_OPTIONS.map((u) => ({ value: u.value, label: u.value })), defaultMatch.customUnit || 'minutes', 'Unit')}
+                            ${buildTextInput('cache-DEFAULT_TTL-custom-value', defaultMatch.customValue || '', '自定义时长', 'number')}
+                            ${buildSelect('cache-DEFAULT_TTL-custom-unit', TTL_UNIT_OPTIONS.map((u) => ({ value: u.value, label: u.value })), defaultMatch.customUnit || 'minutes', '单位')}
                         </div>
                     </div>
-                    ${buildTextInput('cache-VERY_SHORT_TTL', msToMinutes(cache.VERY_SHORT_TTL || 60000), 'Very Short (minutes)', 'number')}
-                    ${buildTextInput('cache-SHORT_TTL', msToMinutes(cache.SHORT_TTL || 300000), 'Short (minutes)', 'number')}
-                    ${buildTextInput('cache-LONG_TTL', msToMinutes(cache.LONG_TTL || 86400000), 'Long (minutes)', 'number')}
-                    ${buildTextInput('cache-STATIC_TTL', msToMinutes(cache.STATIC_TTL || 604800000), 'Static (minutes)', 'number')}
-                    ${buildTextInput('cache-DISCOVERY_TTL', msToMinutes(cache.DISCOVERY_TTL || 3600000), 'Discovery (minutes)', 'number')}
+                    ${buildTextInput('cache-VERY_SHORT_TTL', msToMinutes(cache.VERY_SHORT_TTL || 60000), '极短（分钟）', 'number')}
+                    ${buildTextInput('cache-SHORT_TTL', msToMinutes(cache.SHORT_TTL || 300000), '短（分钟）', 'number')}
+                    ${buildTextInput('cache-LONG_TTL', msToMinutes(cache.LONG_TTL || 86400000), '长（分钟）', 'number')}
+                    ${buildTextInput('cache-STATIC_TTL', msToMinutes(cache.STATIC_TTL || 604800000), '静态（分钟）', 'number')}
+                    ${buildTextInput('cache-DISCOVERY_TTL', msToMinutes(cache.DISCOVERY_TTL || 3600000), '发现（分钟）', 'number')}
                 </div>
             </div>
         `;
@@ -3033,11 +3033,11 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                         updateSectionInGroups(currentConfig[found.groupType], sectionData.id, sectionData);
                     }
                 } else {
-                    addSectionToGroup(currentConfig.CUSTOM_SECTION_GROUPS, targetGroupName || 'Custom Sections', sectionData);
+                    addSectionToGroup(currentConfig.CUSTOM_SECTION_GROUPS, targetGroupName || '自定义板块', sectionData);
                 }
 
                 await saveConfig(currentConfig);
-                showToast(found ? 'Section saved' : 'Saved new Home Screen Section');
+                showToast(found ? '板块已保存' : '已保存新的主屏幕板块');
                 refreshMainModal();
                 if (options.refreshHomeOnSave && !mainModalInstance) {
                     try {
@@ -3057,7 +3057,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         }
 
         if (!window.KefinHomeScreenSectionEditor?.openEditSection) {
-            showToast('Section editor not available');
+            showToast('板块编辑器不可用');
             return;
         }
 
@@ -3180,7 +3180,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
      */
     function renderHomeSectionsOrderEditor(sections) {
         if (!sections || !Array.isArray(sections)) {
-            return '<div class="listItemBodyText secondary">No sections found.</div>';
+            return '<div class="listItemBodyText secondary">未找到板块。</div>';
         }
 
         const filteredSections = sections.filter(s => !s.hidden);
@@ -3193,12 +3193,12 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         });
 
         if (sortedSections.length === 0) {
-            return '<div class="listItemBodyText secondary">No sections to order.</div>';
+            return '<div class="listItemBodyText secondary">没有可排序的板块。</div>';
         }
 
         // Create a dummy group with all sections to reuse buildGroupHTML
         const dummyGroup = {
-            name: 'All Home Sections',
+            name: '所有主屏幕板块',
             sections: sortedSections,
             author: ''
         };
@@ -3224,7 +3224,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 getConfig: () => currentConfig
             });
         } else {
-            root.innerHTML = '<p class="listItemBodyText secondary">Benchmark module not loaded.</p>';
+            root.innerHTML = '<p class="listItemBodyText secondary">基准测试模块未加载。</p>';
         }
     }
 
@@ -3418,7 +3418,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         const defaultTtl = Number(currentConfig?.CACHE?.DEFAULT_TTL);
         const newSection = {
             id: `custom-${Date.now()}`,
-            name: 'New Custom Section',
+            name: '新建自定义板块',
             enabled: true,
             order: 100,
             category: 'none',
@@ -3566,7 +3566,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
 
         await saveConfig(currentConfig);
         refreshMainModal();
-        showToast('Home Screen defaults restored');
+        showToast('主屏幕默认设置已恢复');
     }
 
     function confirmAndRestoreDefaults() {
@@ -3582,15 +3582,15 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         const content = document.createElement('div');
         content.innerHTML = `
             <div class="listItemBodyText" style="line-height: 1.5; margin-bottom: 1em;">
-                Restoring Defaults for KefinTweaks Home Screen will update the existing Home Screen configuration.
+                恢复 KefinTweaks 主屏幕默认设置将更新现有的主屏幕配置。
             </div>
             <div class="hsc-settings-grid hsc-settings-grid-2">
-                ${hscToggleCard('restore-retain-status', true, 'Retain Section Status', D)}
-                ${hscToggleCard('restore-retain-name-caption', true, 'Retain Section Name and Caption', D)}
-                ${hscToggleCard('restore-retain-appearance', true, 'Retain Section Appearance', D)}
-                ${hscToggleCard('restore-retain-advanced', true, 'Retain Section Advanced Options', D)}
+                ${hscToggleCard('restore-retain-status', true, '保留板块状态', D)}
+                ${hscToggleCard('restore-retain-name-caption', true, '保留板块名称与副标题', D)}
+                ${hscToggleCard('restore-retain-appearance', true, '保留板块外观', D)}
+                ${hscToggleCard('restore-retain-advanced', true, '保留板块高级选项', D)}
                 <div class="hsc-settings-span-2">
-                    ${hscToggleCard('restore-retain-customs', true, 'Retain Custom Sections', D)}
+                    ${hscToggleCard('restore-retain-customs', true, '保留自定义板块', D)}
                 </div>
             </div>
         `;
@@ -3600,13 +3600,13 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         footer.style.gap = '0.5em';
         footer.style.justifyContent = 'flex-end';
         footer.innerHTML = `
-            <button type="button" class="emby-button raised" id="hsc-restore-defaults-cancel">Cancel</button>
-            <button type="button" class="emby-button raised block button-submit" id="hsc-restore-defaults-confirm">Restore Defaults</button>
+            <button type="button" class="emby-button raised" id="hsc-restore-defaults-cancel">取消</button>
+            <button type="button" class="emby-button raised block button-submit" id="hsc-restore-defaults-confirm">恢复默认</button>
         `;
 
         window.ModalSystem.create({
             id: RESTORE_DEFAULTS_MODAL_ID,
-            title: 'Restore Defaults',
+            title: '恢复默认',
             content,
             footer,
             closeOnBackdrop: true,
@@ -3641,7 +3641,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                         window.ModalSystem.close(RESTORE_DEFAULTS_MODAL_ID);
                     } catch (e) {
                         ERR('Error restoring Home Screen defaults:', e);
-                        showToast('Error restoring defaults');
+                        showToast('恢复默认设置时出错');
                     } finally {
                         if (confirmBtn) confirmBtn.disabled = false;
                     }
@@ -3662,7 +3662,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         const content = document.createElement('div');
         content.innerHTML = `
             <div class="listItemBodyText" style="line-height: 1.5;">
-                WARNING: This will forcefully update the KefinTweaks Home Screen user preferences for all accounts on your server. Any changes those users have made to customize their home screen will be lost.
+                警告：这将强制更新服务器上所有账户的 KefinTweaks 主屏幕用户偏好设置。这些用户对主屏幕所做的任何自定义更改都将丢失。
             </div>
         `;
         const footer = document.createElement('div');
@@ -3670,13 +3670,13 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         footer.style.gap = '0.5em';
         footer.style.justifyContent = 'flex-end';
         footer.innerHTML = `
-            <button type="button" class="emby-button raised" id="hsc-update-all-cancel">Cancel</button>
-            <button type="button" class="emby-button raised block button-submit" id="hsc-update-all-confirm">Update All Users</button>
+            <button type="button" class="emby-button raised" id="hsc-update-all-cancel">取消</button>
+            <button type="button" class="emby-button raised block button-submit" id="hsc-update-all-confirm">更新所有用户</button>
         `;
 
         window.ModalSystem.create({
             id: UPDATE_ALL_CONFIRM_MODAL_ID,
-            title: 'Update All Users',
+            title: '更新所有用户',
             content,
             footer,
             closeOnBackdrop: true,
@@ -3693,11 +3693,11 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     try {
                         await collectAndSaveConfig(mainModalInstance);
                         window.ModalSystem.close(UPDATE_ALL_CONFIRM_MODAL_ID);
-                        showToast('Configuration saved. Updating users…');
+                        showToast('配置已保存。正在更新用户…');
                         await window.KefinUserHomeScreenConfig?.updateUserHomeScreenConfiguration?.();
                     } catch (e) {
                         ERR('Error updating configuration for all users:', e);
-                        showToast('Error updating users');
+                        showToast('更新用户时出错');
                     } finally {
                         if (confirmBtn) confirmBtn.disabled = false;
                     }
@@ -3751,7 +3751,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             
             // Update UI
             btn.dataset.enabled = newEnabled;
-            btn.querySelector('span').textContent = newEnabled ? 'Disable All' : 'Enable All';
+            btn.querySelector('span').textContent = newEnabled ? '全部禁用' : '全部启用';
             
             // Update all toggle switches in the group
             sectionRows.forEach(row => {
@@ -3790,7 +3790,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 
                 // Update UI
                 btn.dataset.enabled = newEnabled;
-                btn.querySelector('span').textContent = newEnabled ? 'Disable All' : 'Enable All';
+                btn.querySelector('span').textContent = newEnabled ? '全部禁用' : '全部启用';
                 
                 // Update all toggle switches in the group
                 sectionRows.forEach(row => {
@@ -3995,8 +3995,8 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             const secondarySpans = row.querySelectorAll('.listItemBodyText.secondary');
             secondarySpans.forEach(span => {
                 const text = span.textContent.trim();
-                if (text.startsWith('Order:')) {
-                    span.textContent = `Order: ${order}`;
+                if (text.startsWith('排序：')) {
+                    span.textContent = `排序：${order}`;
                 }
             });
         });
@@ -4081,11 +4081,11 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 const newName = sectionNameEl.value.trim();
                 
                 if (!newName) {
-                    showToast('Section name cannot be empty');
+                    showToast('板块名称不能为空');
                     // Restore old name
                     const found = findSectionInAllGroups(currentConfig, sectionId);
                     if (found?.section) {
-                        sectionNameEl.value = found.section.name || 'Unnamed Section';
+                        sectionNameEl.value = found.section.name || '未命名板块';
                     }
                     return;
                 }
@@ -4095,7 +4095,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 if (found?.section && found.section.name !== newName) {
                     found.section.name = newName;
                     await saveConfig(currentConfig);
-                    showToast(`Section renamed to "${newName}"`);
+                    showToast(`板块已重命名为“${newName}”`);
                 }
                 return;
             }
@@ -4109,9 +4109,9 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 const oldName = groupElement?.dataset.groupName;
                 
                 if (!newName) {
-                    showToast('Group name cannot be empty');
+                    showToast('分组名称不能为空');
                     // Restore old name
-                    groupNameEl.value = oldName || 'Unnamed Group';
+                    groupNameEl.value = oldName || '未命名分组';
                     return;
                 }
                 
@@ -4173,10 +4173,10 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     // Update data attribute
                     groupElement.dataset.groupName = newName;
                     await saveConfig(currentConfig);
-                    showToast(`Group renamed to "${newName}"`);
+                    showToast(`分组已重命名为“${newName}”`);
                 } else {
-                    showToast('Could not find group to rename');
-                    groupNameEl.value = oldName || 'Unnamed Group';
+                    showToast('找不到要重命名的分组');
+                    groupNameEl.value = oldName || '未命名分组';
                 }
             }
         }, true); // Use capture phase
@@ -4362,7 +4362,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             
             // Update UI
             btn.dataset.enabled = newEnabled;
-            btn.querySelector('span').textContent = newEnabled ? 'Disable All' : 'Enable All';
+            btn.querySelector('span').textContent = newEnabled ? '全部禁用' : '全部启用';
             
                 // Update all toggle switches in the group
                 sectionRows.forEach(row => {
@@ -4424,10 +4424,10 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             const groups = currentConfig.CUSTOM_SECTION_GROUPS || [];
             const found = findSectionInGroups(groups, sectionId);
             const sectionName = found?.section?.name || sectionId;
-            if (confirm(`Delete section "${sectionName}"?`)) {
+            if (confirm(`确定删除板块“${sectionName}”吗？`)) {
                 removeSectionFromGroups(groups, sectionId);
                 await saveConfig(currentConfig);
-                showToast(`Section "${sectionName}" deleted`);
+                showToast(`已删除板块“${sectionName}”`);
                 refreshMainModal();
             }
         });
@@ -4447,14 +4447,14 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         }
 
         if (!window.KefinCommunityConfig) {
-            host.innerHTML = '<div class="listItemBodyText" style="color: #f44336;">Community configuration not loaded. Please ensure homeScreenConfig-community.js is loaded.</div>';
+            host.innerHTML = '<div class="listItemBodyText" style="color: #f44336;">社区配置未加载。请确保已加载 homeScreenConfig-community.js。</div>';
             return;
         }
 
         const communityCollections = window.KefinCommunityConfig.collections || [];
 
         if (communityCollections.length === 0) {
-            host.innerHTML = '<div class="listItemBodyText">No community collections available.</div>';
+            host.innerHTML = '<div class="listItemBodyText">暂无可用的社区合集。</div>';
             return;
         }
 
@@ -4477,8 +4477,8 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 ">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5em;">
                         <div style="flex: 1;">
-                            <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.25em;">${collection.name || 'Unnamed Collection'}</div>
-                            <div class="listItemBodyText secondary" style="font-size: 0.85em; color: rgba(255,255,255,0.6);">by ${collection.author || 'Anonymous'}</div>
+                            <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.25em;">${collection.name || '未命名合集'}</div>
+                            <div class="listItemBodyText secondary" style="font-size: 0.85em; color: rgba(255,255,255,0.6);">作者：${collection.author || '匿名'}</div>
                         </div>
                         <button type="button" class="community-collection-info-btn" data-collection-index="${index}" style="
                             background: rgba(255,255,255,0.1);
@@ -4491,12 +4491,12 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                             display: flex;
                             align-items: center;
                             gap: 0.25em;
-                        " title="View description">
+                        " title="查看描述">
                             <span class="material-icons" style="font-size: 1.1em;">info</span>
                         </button>
                     </div>
                     <div class="listItemBodyText secondary" style="font-size: 0.8em; color: rgba(255,255,255,0.5);">
-                        ${collection.sections ? collection.sections.length : 0} section${collection.sections && collection.sections.length !== 1 ? 's' : ''}
+                        ${collection.sections ? collection.sections.length : 0} 个板块${collection.sections && collection.sections.length !== 1 ? 's' : ''}
                     </div>
                 </div>
             `;
@@ -4515,8 +4515,8 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 const collection = communityCollections[index];
-                const description = collection.description || 'No description available.';
-                showInfoPopover(btn, description, collection.name || 'Collection');
+                const description = collection.description || '暂无描述。';
+                showInfoPopover(btn, description, collection.name || '合集');
             });
         });
     }
@@ -4527,13 +4527,13 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
     function openCommunityImportModal(collection) {
         if (!collection) return;
         if (!window.ModalSystem?.create) {
-            showToast('Modal system not available');
+            showToast('模态框系统不可用');
             return;
         }
 
         const content = document.createElement('div');
         content.innerHTML = `
-            <div class="listItemBodyText secondary" style="margin-bottom: 1em;">Select sections to import from this collection.</div>
+            <div class="listItemBodyText secondary" style="margin-bottom: 1em;">选择要从此合集导入的板块。</div>
             <div id="communitySectionsContainer">
                 <div id="communitySectionsList"></div>
             </div>
@@ -4545,13 +4545,13 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         footer.style.gap = '0.5em';
         footer.style.justifyContent = 'flex-end';
         footer.innerHTML = `
-            <button type="button" class="emby-button raised" id="community-import-cancel">Cancel</button>
-            <button type="button" class="emby-button raised block button-submit" id="confirmCommunityImportBtn">Import Selected</button>
+            <button type="button" class="emby-button raised" id="community-import-cancel">取消</button>
+            <button type="button" class="emby-button raised block button-submit" id="confirmCommunityImportBtn">导入所选</button>
         `;
 
         window.ModalSystem.create({
             id: COMMUNITY_IMPORT_MODAL_ID,
-            title: collection.name || 'Import Collection',
+            title: collection.name || '导入合集',
             content,
             footer,
             closeOnBackdrop: true,
@@ -4577,7 +4577,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                         .map(c => parseInt(c.dataset.index, 10));
 
                     if (selectedIndices.length === 0) {
-                        showToast('Please select at least one section to import.');
+                        showToast('请至少选择一个要导入的板块。');
                         return;
                     }
 
@@ -4589,7 +4589,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     });
 
                     const importedGroup = {
-                        name: collection.name || 'Imported Collection',
+                        name: collection.name || '已导入合集',
                         author: collection.author,
                         description: collection.description,
                         sections: selectedSections.map(section => {
@@ -4608,11 +4608,11 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                         try {
                             await saveConfig(currentConfig);
                             window.ModalSystem.close(COMMUNITY_IMPORT_MODAL_ID);
-                            showToast(`Successfully imported ${importedCount} sections. Refreshing...`);
+                            showToast(`成功导入 ${importedCount} 个板块。正在刷新...`);
                             refreshMainModal();
                         } catch (e) {
                             ERR('Error importing community sections:', e);
-                            showToast('Error importing sections');
+                            showToast('导入板块时出错');
                             confirmBtn.disabled = false;
                         }
                     }
@@ -4628,7 +4628,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         if (!sectionsList) return;
 
         if (!collection || !collection.sections || collection.sections.length === 0) {
-            sectionsList.innerHTML = '<div class="listItemBodyText secondary">No sections found in this collection.</div>';
+            sectionsList.innerHTML = '<div class="listItemBodyText secondary">该合集中没有板块。</div>';
             if (sectionsContainer) sectionsContainer.style.display = 'block';
             if (sectionsEmpty) sectionsEmpty.style.display = 'none';
             if (confirmBtn) confirmBtn.style.display = 'none';
@@ -4640,7 +4640,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 ${collection.sections.map((s, i) => `
                     <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.5em; margin-bottom: 0.25em;">
                         <input type="checkbox" class="import-community-check" data-index="${i}" checked>
-                        <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || 'Unnamed'}</span>
+                        <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || '未命名'}</span>
                     </label>
                 `).join('')}
             </div>
@@ -4689,7 +4689,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 padding: 0.25em;
                 display: flex;
                 align-items: center;
-            " title="Close">
+            " title="关闭">
                 <span class="material-icons" style="font-size: 1.2em;">close</span>
             </button>
         `;
@@ -4787,35 +4787,35 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
     async function showCommunityImportDialog() {
         // Ensure community config is available
         if (!window.KefinCommunityConfig) {
-            showToast('Community configuration not loaded. Please ensure homeScreenConfig-community.js is loaded.');
+            showToast('社区配置未加载。请确保已加载 homeScreenConfig-community.js。');
             return;
         }
 
         const communityCollections = window.KefinCommunityConfig.collections || [];
         
         if (communityCollections.length === 0) {
-            showToast('No community collections available.');
+            showToast('暂无可用的社区合集。');
             return;
         }
 
         const content = document.createElement('div');
         content.innerHTML = `
             <div class="content-primary">
-                <div class="listItemBodyText" style="margin-bottom: 1em;">Select Home Screen Sections to import:</div>
-                <div class="listItemBodyText" style="margin-bottom: 1em;">These sections are created and submitted by community members like you!</div>
-                <div class="listItemBodyText secondary" style="margin-bottom: 1.5em;">Submit your own Home Screen Sections <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/discussions/64" target="_blank" class="button-link">here.</a></div>
+                <div class="listItemBodyText" style="margin-bottom: 1em;">选择要导入的主屏幕板块：</div>
+                <div class="listItemBodyText" style="margin-bottom: 1em;">这些板块由像你一样的社区成员创建并提交！</div>
+                <div class="listItemBodyText secondary" style="margin-bottom: 1.5em;">在此提交你自己的主屏幕板块 <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/discussions/64" target="_blank" class="button-link">点此提交。</a></div>
                 
                 <div style="margin-bottom: 1.5em;">
                     <select id="communityCollectionSelect" class="emby-select-withcolor emby-select" style="width: 100%; padding: 0.5em; background: rgba(255,255,255,0.1); color: inherit; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;">
-                        <option value="">Select a collection...</option>
-                        ${communityCollections.map((c, i) => `<option value="${i}">${c.name} by ${c.author}</option>`).join('')}
+                        <option value="">选择一个合集...</option>
+                        ${communityCollections.map((c, i) => `<option value="${i}">${c.name}（作者：${c.author}）</option>`).join('')}
                     </select>
                 </div>
                 
                 <div id="collectionDescription" style="margin-bottom: 1.5em; font-style: italic; color: #ccc; display: none; padding: 1em; background: rgba(0,0,0,0.2); border-radius: 4px;"></div>
 
                 <div id="importSelectionContainer" style="display: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1em;">
-                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">Sections in this collection:</div>
+                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">此合集包含的板块：</div>
                     <div id="importSelectionList"></div>
                 </div>
             </div>
@@ -4825,15 +4825,15 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         footer.style.display = 'flex';
         footer.style.gap = '0.75em';
         footer.innerHTML = `
-            <button class="emby-button raised block button-submit" id="confirmCommunityImportBtn" style="padding: 0.75em 2em; display: none;">Import Selected</button>
-            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinCommunityImportModal')">Cancel</button>
+            <button class="emby-button raised block button-submit" id="confirmCommunityImportBtn" style="padding: 0.75em 2em; display: none;">导入所选</button>
+            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinCommunityImportModal')">取消</button>
         `;
 
         let selectedCollection = null;
 
         window.ModalSystem.create({
             id: 'kefinCommunityImportModal',
-            title: 'Import Community Sections',
+            title: '导入社区板块',
             content: content,
             footer: footer,
             closeOnBackdrop: false,
@@ -4858,7 +4858,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     selectedCollection = communityCollections[parseInt(index)];
                     
                     // Show description
-                    descContainer.textContent = selectedCollection.description || 'No description.';
+                    descContainer.textContent = selectedCollection.description || '暂无描述。';
                     descContainer.style.display = 'block';
 
                     // Render sections list
@@ -4869,12 +4869,12 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                                 ${selectedCollection.sections.map((s, i) => `
                                     <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.5em;">
                                         <input type="checkbox" class="import-community-check" data-index="${i}" checked>
-                                        <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || 'Unnamed'}</span>
+                                        <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || '未命名'}</span>
                                     </label>
                                 `).join('')}
                             </div>`;
                     } else {
-                        html = '<div class="listItemBodyText secondary">No sections found in this collection.</div>';
+                        html = '<div class="listItemBodyText secondary">该合集中没有板块。</div>';
                     }
 
                     selectionList.innerHTML = html;
@@ -4888,7 +4888,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     const selectedIndices = Array.from(content.querySelectorAll('.import-community-check:checked')).map(c => parseInt(c.dataset.index));
                     
                     if (selectedIndices.length === 0) {
-                        showToast('Please select at least one section to import.');
+                        showToast('请至少选择一个要导入的板块。');
                         return;
                     }
 
@@ -4902,7 +4902,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     
                     // Create a group from the collection
                     const importedGroup = {
-                        name: selectedCollection.name || 'Imported Collection',
+                        name: selectedCollection.name || '已导入合集',
                         author: selectedCollection.author,
                         description: selectedCollection.description,
                         sections: selectedSections.map(section => {
@@ -4919,7 +4919,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
 
                     if (importedCount > 0) {
                         await saveConfig(currentConfig);
-                        showToast(`Successfully imported ${importedCount} sections. Refreshing...`);
+                        showToast(`成功导入 ${importedCount} 个板块。正在刷新...`);
                         refreshMainModal();
                         window.ModalSystem.close('kefinCommunityImportModal');
                     } else {
@@ -4937,7 +4937,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         const sectionGroups = currentConfig.CUSTOM_SECTION_GROUPS || [];
         
         if (sectionGroups.length === 0 || !sectionGroups.some(g => g.sections && g.sections.length > 0)) {
-            alert('No custom sections found to export.');
+            alert('没有可导出的自定义板块。');
             return;
         }
 
@@ -4946,18 +4946,18 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             <div class="content-primary">                
                 <div style="margin-bottom: 1.5em;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5em;">
-                        <button type="button" class="emby-button raised" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = true)" style="font-size: 0.9em;">Select All</button>
-                        <button type="button" class="emby-button raised" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = false)" style="font-size: 0.9em;">Deselect All</button>
+                        <button type="button" class="emby-button raised" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = true)" style="font-size: 0.9em;">全选</button>
+                        <button type="button" class="emby-button raised" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = false)" style="font-size: 0.9em;">取消全选</button>
                     </div>
                     <div id="exportSectionGroupsList"></div>
                 </div>
                 
                 <div id="exportOutputContainer" style="display: none; margin-top: 1.5em;">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Export JSON:</div>
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">导出 JSON：</div>
                     <textarea id="exportOutput" class="fld emby-textarea" readonly style="width: 100%; height: 200px; font-family: monospace;"></textarea>
                     <div style="display: flex; gap: 1em; margin-top: 0.5em;">
-                        <button type="button" class="emby-button raised" id="copyExportBtn">Copy to Clipboard</button>
-                        <button type="button" class="emby-button raised" id="downloadExportBtn">Download .json</button>
+                        <button type="button" class="emby-button raised" id="copyExportBtn">复制到剪贴板</button>
+                        <button type="button" class="emby-button raised" id="downloadExportBtn">下载 .json</button>
                     </div>
                 </div>
             </div>
@@ -4967,13 +4967,13 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         footer.style.display = 'flex';
         footer.style.gap = '0.75em';
         footer.innerHTML = `
-            <button class="emby-button raised hide" onclick="window.ModalSystem.close('kefinExportModal')">Close</button>
-            <button class="emby-button raised block button-submit" id="generateExportBtn" style="padding: 0.75em 2em;">Generate JSON</button>
+            <button class="emby-button raised hide" onclick="window.ModalSystem.close('kefinExportModal')">关闭</button>
+            <button class="emby-button raised block button-submit" id="generateExportBtn" style="padding: 0.75em 2em;">生成 JSON</button>
         `;
 
         window.ModalSystem.create({
             id: 'kefinExportModal',
-            title: 'Export Custom Sections',
+            title: '导出自定义板块',
             content: content,
             footer: footer,
             closeOnBackdrop: true,
@@ -5013,7 +5013,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     });
                     
                     if (selectedGroups.length === 0) {
-                        alert('Please select at least one section to export.');
+                        alert('请至少选择一个要导出的板块。');
                         return;
                     }
 
@@ -5030,9 +5030,9 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                         output.select();
                         document.execCommand('copy');
                         if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                            window.KefinTweaksToaster.toast('Copied to clipboard');
+                            window.KefinTweaksToaster.toast('已复制到剪贴板');
                         } else {
-                            alert('Copied to clipboard');
+                            alert('已复制到剪贴板');
                         }
                     });
                     
@@ -5059,11 +5059,11 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         const content = document.createElement('div');
         content.innerHTML = `
             <div class="content-primary">
-                <div class="listItemBodyText" style="margin-bottom: 1em;">Paste JSON content or a URL (Raw GitHub, Gist, Pastebin):</div>
-                <textarea id="importInput" class="fld emby-textarea" style="width: 100%; height: 150px; font-family: monospace;" placeholder='[{ "name": "...", "sections": [...] }, ...] or { "sectionGroups": [...] } or https://...'></textarea>
+                <div class="listItemBodyText" style="margin-bottom: 1em;">粘贴 JSON 内容或 URL（Raw GitHub、Gist、Pastebin）：</div>
+                <textarea id="importInput" class="fld emby-textarea" style="width: 100%; height: 150px; font-family: monospace;" placeholder='[{ "name": "...", "sections": [...] }, ...] 或 { "sectionGroups": [...] } 或 https://...'></textarea>
                 
                 <div id="importSelectionContainer" style="display: none; margin-top: 1.5em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1em;">
-                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">Found items to import:</div>
+                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">找到可导入的内容：</div>
                     <div id="importSelectionList"></div>
                 </div>
             </div>
@@ -5073,9 +5073,9 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         footer.style.display = 'flex';
         footer.style.gap = '0.75em';
         footer.innerHTML = `
-            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinImportModal')">Close</button>
-            <button class="emby-button raised block button-submit" id="loadImportBtn" style="padding: 0.75em 2em;">Load</button>
-            <button class="emby-button raised block button-submit" id="confirmImportBtn" style="padding: 0.75em 2em; display: none;">Import Selected</button>
+            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinImportModal')">关闭</button>
+            <button class="emby-button raised block button-submit" id="loadImportBtn" style="padding: 0.75em 2em;">加载</button>
+            <button class="emby-button raised block button-submit" id="confirmImportBtn" style="padding: 0.75em 2em; display: none;">导入所选</button>
         `;
 
         let parsedData = null;
@@ -5083,7 +5083,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
 
         window.ModalSystem.create({
             id: 'kefinImportModal',
-            title: 'Import Custom Sections',
+            title: '导入自定义板块',
             content: content,
             footer: footer,
             closeOnBackdrop: false,
@@ -5100,7 +5100,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     if (!rawInput) return;
 
                     loadBtn.disabled = true;
-                    loadBtn.textContent = 'Loading...';
+                    loadBtn.textContent = '加载中...';
 
                     try {
                         let jsonStr = rawInput;
@@ -5119,11 +5119,11 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                         } else if (parsedData.sectionGroups && Array.isArray(parsedData.sectionGroups)) {
                             sectionGroups = parsedData.sectionGroups;
                         } else {
-                            throw new Error('Invalid format: Expected array of section groups or object with sectionGroups property.');
+                            throw new Error('格式无效：应为板块分组数组，或包含 sectionGroups 属性的对象。');
                         }
 
                         if (!sectionGroups || sectionGroups.length === 0) {
-                            throw new Error('No section groups found.');
+                            throw new Error('未找到板块分组。');
                         }
 
                         // Render selection using shared helper
@@ -5135,10 +5135,10 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                         selectionContainer.style.display = 'block';
                         confirmBtn.style.display = 'inline-block';
                     } catch (error) {
-                        showToast(`Error loading data: ${error.message}`);
+                        showToast(`加载数据时出错：${error.message}`);
                     } finally {
                         loadBtn.disabled = false;
-                        loadBtn.textContent = 'Load';
+                        loadBtn.textContent = '加载';
                     }
                 });
 
@@ -5179,7 +5179,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                     });
                     
                     if (groupsToImport.length === 0) {
-                        showToast('Please select at least one section to import.');
+                        showToast('请至少选择一个要导入的板块。');
                         return;
                     }
 
@@ -5194,7 +5194,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
 
                     if (importedCount > 0) {
                         await saveConfig(currentConfig);
-                        showToast(`Successfully imported ${importedCount} sections in ${groupsToImport.length} group${groupsToImport.length !== 1 ? 's' : ''}. Refreshing...`);
+                        showToast(`成功导入 ${importedCount} 个板块，共 ${groupsToImport.length} 个分组${groupsToImport.length !== 1 ? 's' : ''}。正在刷新...`);
                         refreshMainModal();
                         window.ModalSystem.close('kefinImportModal');
                     } else {
@@ -5245,7 +5245,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             footer.style.justifyContent = 'flex-end';
 
             footer.innerHTML = `
-                <button class="emby-button raised" onclick="window.ModalSystem.close('${MAIN_MODAL_ID}')">Close</button>
+                <button class="emby-button raised" onclick="window.ModalSystem.close('${MAIN_MODAL_ID}')">关闭</button>
             `;
 
             /* footer.innerHTML = `
@@ -5257,7 +5257,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             // Create modal
             mainModalInstance = window.ModalSystem.create({
                 id: MAIN_MODAL_ID,
-                title: 'Home Screen Configuration',
+                title: '主屏幕配置',
                 content: content,
                 footer: footer,
                 closeOnBackdrop: true,
@@ -5280,10 +5280,10 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                             saveAllBtn.disabled = true;
                             try {
                                 await collectAndSaveConfig(modalInstance);
-                                showToast('Configuration saved!');
+                                showToast('配置已保存！');
                             } catch (e) {
                                 ERR('Error saving configuration:', e);
-                                showToast('Error saving configuration');
+                                showToast('保存配置时出错');
                             } finally {
                                 saveAllBtn.disabled = false;
                             }
@@ -5321,7 +5321,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             LOG('Main configuration modal opened');
         } catch (error) {
             ERR('Error opening config modal:', error);
-            showToast('Error opening configuration: ' + error.message);
+            showToast('打开配置时出错：' + error.message);
         }
     }
 
@@ -5368,7 +5368,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
     async function resolveDiscoverySectionForPreview(section) {
         const helper = window.sectionHelper;
         if (!helper?.buildDiscoverySectionInstance) {
-            throw new Error('Discovery resolver unavailable for preview');
+            throw new Error('预览所需的发现解析器不可用');
         }
         const discoveryState = helper.getDiscoveryState?.();
         const snapshot = snapshotDiscoveryDedupeState(discoveryState);
@@ -5378,7 +5378,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 resolveViewMore: false
             });
             if (!resolved?.queries?.length && !resolved?.items?.length) {
-                throw new Error('Could not resolve discovery source for preview');
+                throw new Error('无法解析预览的发现来源');
             }
             return resolved;
         } finally {
@@ -5414,14 +5414,14 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
      */
     async function fetchSectionPreviewItems(section, options = {}) {
         if (!window.ApiClient || !window.apiHelper || !window.cardBuilder) {
-            throw new Error('Required dependencies not available for preview');
+            throw new Error('预览所需的依赖不可用');
         }
 
         const userId = ApiClient.getCurrentUserId();
         const serverUrl = ApiClient.serverAddress();
 
         if (!userId || !serverUrl) {
-            throw new Error('Unable to get user ID or server URL');
+            throw new Error('无法获取用户 ID 或服务器地址');
         }
 
         let previewSection = section;
@@ -5432,7 +5432,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         const queries = previewSection.queries || [];
         if (Array.isArray(previewSection.externalListUrls) && previewSection.externalListUrls.length > 0) {
             if (!window.KefinExternalList?.resolveExternalListItems) {
-                throw new Error('External list module not available for preview');
+                throw new Error('预览所需的外部列表模块不可用');
             }
             const listResult = await window.KefinExternalList.resolveExternalListItems(previewSection);
             const items = listResult?.Items || [];
@@ -5482,7 +5482,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         }
 
         if (queries.length === 0) {
-            throw new Error('Section has no queries to preview');
+            throw new Error('该板块没有可用于预览的查询');
         }
 
         const useSpotlightFields = options.useSpotlightFields === true
@@ -5511,7 +5511,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 allItems = allItems.concat(items);
             } catch (error) {
                 console.error('[Preview] Error fetching query:', error);
-                throw new Error(`Error fetching query: ${error.message}`);
+                throw new Error(`查询数据时出错：${error.message}`);
             }
         }
 
@@ -5595,7 +5595,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 await renderSectionPreviewInto(previewSection, items, containerEl, { getDraftSection });
             } catch (err) {
                 console.error('[Preview] Refresh failed:', err);
-                containerEl.innerHTML = `<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">${err.message || 'Preview refresh failed'}</p>`;
+                containerEl.innerHTML = `<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">${err.message || '预览刷新失败'}</p>`;
             } finally {
                 if (sectionEl) delete sectionEl.dataset.refreshing;
             }
@@ -5611,7 +5611,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
         if (!window.cardBuilder) return false;
 
         if (!items || items.length === 0) {
-            containerEl.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">No items found for preview.</p>';
+            containerEl.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">未找到可用于预览的条目。</p>';
             return false;
         }
 
@@ -5620,7 +5620,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
 
         if (useSpotlight && typeof window.cardBuilder.renderSpotlightSection === 'function') {
             const spotlightCfg = section.spotlightConfig || {};
-            const previewElement = window.cardBuilder.renderSpotlightSection(items, section.name || 'Preview', {
+            const previewElement = window.cardBuilder.renderSpotlightSection(items, section.name || '预览', {
                 autoPlay: false,
                 showDots: true,
                 showNavButtons: true,
@@ -5637,12 +5637,12 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
                 return true;
             }
 
-            containerEl.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">Unable to render preview with the current configuration.</p>';
+            containerEl.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">无法使用当前配置渲染预览。</p>';
             return false;
         }
 
         if (typeof window.cardBuilder.renderProgressiveSections !== 'function') {
-            containerEl.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">Preview unavailable.</p>';
+            containerEl.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">预览不可用。</p>';
             return false;
         }
 
@@ -5667,7 +5667,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
      */
     async function previewSection(section, sectionType, btn) {
         if (!window.ApiClient || !window.apiHelper || !window.cardBuilder) {
-            showToast('Required dependencies not available for preview');
+            showToast('预览所需的依赖不可用');
             return;
         }
 
@@ -5678,16 +5678,16 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             const previewSection = mergeDraftWithResolvedPreview(section, resolvedSection);
 
             if (items.length === 0) {
-                showToast('No items found for preview');
+                showToast('未找到可用于预览的条目');
 
                 if (btn) {
-                    btn.textContent = 'No Items';
+                    btn.textContent = '无条目';
                     btn.style.border = '1px solid #ff6b6b';
                     btn.style.color = '#ff6b6b';
                 }
                 setTimeout(() => {
                     if (btn) {
-                        btn.textContent = 'Preview';
+                        btn.textContent = '预览';
                         btn.style.border = '1px solid #ccc';
                         btn.style.color = '#ccc';
                     }
@@ -5700,17 +5700,17 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
             content.style.cssText = 'padding: 1em; max-width: 1400px; width: 100%;';
             content.innerHTML = `
                 <div class="listItemBodyText" style="margin-bottom: 1em;">
-                    Preview: ${previewSection.name || 'Unnamed Section'} (${items.length} item${items.length !== 1 ? 's' : ''})
+                    预览：${previewSection.name || '未命名板块'}（${items.length} 个条目${items.length !== 1 ? 's' : ''}）
                 </div>
                 <div id="preview-container" style="min-height: 400px;"></div>
             `;
 
             const footer = document.createElement('div');
-            footer.innerHTML = `<button class="emby-button raised" onclick="window.ModalSystem.close('${previewModalId}')">Close</button>`;
+            footer.innerHTML = `<button class="emby-button raised" onclick="window.ModalSystem.close('${previewModalId}')">关闭</button>`;
 
             window.ModalSystem.create({
                 id: previewModalId,
-                title: 'Section Preview',
+                title: '板块预览',
                 content: content,
                 footer: footer,
                 size: 'large',
@@ -5725,7 +5725,7 @@ window.KefinTweaksConfig = ${JSON.stringify(configToBackup, null, 2)};`;
 
         } catch (error) {
             console.error('[Preview] Error:', error);
-            showToast(`Preview error: ${error.message}`);
+            showToast(`预览出错：${error.message}`);
         } finally {
             Dashboard.hideLoadingMsg();
         }

@@ -4,11 +4,11 @@
     'use strict';
 
     const CUSTOM_IMAGE_FIELDS = [
-        { key: 'posterUrl', label: 'Poster URL', required: true },
-        { key: 'thumbUrl', label: 'Thumb URL' },
-        { key: 'backdropUrl', label: 'Backdrop URL' },
-        { key: 'squareUrl', label: 'Square URL' },
-        { key: 'bannerUrl', label: 'Banner URL' },
+        { key: 'posterUrl', label: '海报 URL', required: true },
+        { key: 'thumbUrl', label: '缩略图 URL' },
+        { key: 'backdropUrl', label: '背景图 URL' },
+        { key: 'squareUrl', label: '方形图 URL' },
+        { key: 'bannerUrl', label: '横幅 URL' },
         { key: 'logoUrl', label: 'Logo URL' }
     ];
     const CUSTOM_POSTER_FIELD = CUSTOM_IMAGE_FIELDS[0];
@@ -218,7 +218,7 @@
         const inputId = fieldId(opts, index, field.key);
         const previewAttr = isPoster ? ' data-hsse-custom-preview="true" data-hsae-custom-preview="true"' : '';
         const posterHint = isPoster
-            ? `<p class="listItemBodyText secondary hsse-field-hint hsse-custom-image-field-hint">You can place images in your &quot;Jellyfin\\Server\\jellyfin-web&quot; folder and use the &quot;/web/image_name.png&quot; path to access them.</p>`
+            ? `<p class="listItemBodyText secondary hsse-field-hint hsse-custom-image-field-hint">你可以将图片放在 &quot;Jellyfin\\Server\\jellyfin-web&quot; 文件夹中，并通过 &quot;/web/image_name.png&quot; 路径访问它们。</p>`
             : '';
         return `
             <div class="hsse-field hsse-custom-image-field${isPoster ? '' : ' hsse-custom-image-field-compact'}">
@@ -238,16 +238,16 @@
             <div class="hsse-custom-item-main">
                 <div class="hsse-custom-item-fields">
                     <div class="hsse-field hsse-custom-field">
-                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="${fieldId(opts, index, 'name')}">Name <span class="hsse-required-mark">*</span></label>
-                        <input type="text" id="${fieldId(opts, index, 'name')}" class="fld emby-input" value="${escapeHtml(item.name)}" placeholder="Item name" aria-label="Item name">
+                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="${fieldId(opts, index, 'name')}">名称 <span class="hsse-required-mark">*</span></label>
+                        <input type="text" id="${fieldId(opts, index, 'name')}" class="fld emby-input" value="${escapeHtml(item.name)}" placeholder="条目名称" aria-label="条目名称">
                     </div>
                     <div class="hsse-field hsse-custom-field">
-                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="${fieldId(opts, index, 'cardFooter')}">Card Footer</label>
-                        <input type="text" id="${fieldId(opts, index, 'cardFooter')}" class="fld emby-input" value="${escapeHtml(item.cardFooter || '')}" placeholder="Optional footer text" aria-label="Card footer">
+                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="${fieldId(opts, index, 'cardFooter')}">卡片页脚</label>
+                        <input type="text" id="${fieldId(opts, index, 'cardFooter')}" class="fld emby-input" value="${escapeHtml(item.cardFooter || '')}" placeholder="可选的页脚文本" aria-label="卡片页脚">
                     </div>
                     <div class="hsse-field hsse-custom-field">
-                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="${fieldId(opts, index, 'cardUrl')}">Link URL</label>
-                        <input type="url" id="${fieldId(opts, index, 'cardUrl')}" class="fld emby-input" value="${escapeHtml(item.cardUrl)}" placeholder="#/movies.html or https://..." aria-label="Link URL">
+                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="${fieldId(opts, index, 'cardUrl')}">链接 URL</label>
+                        <input type="url" id="${fieldId(opts, index, 'cardUrl')}" class="fld emby-input" value="${escapeHtml(item.cardUrl)}" placeholder="#/movies.html 或 https://..." aria-label="链接 URL">
                     </div>
                     ${buildCustomImageFieldHTML(index, CUSTOM_POSTER_FIELD, item.posterUrl || '', opts, { isPoster: true })}
                 </div>
@@ -259,7 +259,7 @@
             </div>
             <div class="hsse-custom-image-toggle-wrap">
                 <button type="button" class="emby-button raised hsse-custom-image-toggle" ${actionAttr(opts, 'toggleImages')} data-item-index="${index}" aria-expanded="${additionalExpanded ? 'true' : 'false'}">
-                    ${additionalExpanded ? 'Hide Additional Image Types' : 'Configure Additional Image Types'}
+                    ${additionalExpanded ? '隐藏其他图片类型' : '配置其他图片类型'}
                 </button>
             </div>
             <div class="hsse-field-grid hsse-custom-image-grid hsse-custom-image-additional${additionalExpanded ? '' : ' hsse-collapsed'}"${additionalExpanded ? '' : ' hidden'}>
@@ -270,15 +270,15 @@
 
     function renderCustomItemTileHTML(index, item, canRemove, options) {
         const opts = getOptions(options);
-        const label = item.name?.trim() || `Item ${index + 1}`;
+        const label = item.name?.trim() || `条目 ${index + 1}`;
         return `
             <div class="hsse-custom-item-tile" data-custom-item-index="${index}">
-                <button type="button" class="hsse-custom-item-tile-image hsse-image-preview hsse-item-tile-preview" ${actionAttr(opts, 'openEditor')} data-item-index="${index}" aria-label="Edit ${escapeHtml(label)}">
+                <button type="button" class="hsse-custom-item-tile-image hsse-image-preview hsse-item-tile-preview" ${actionAttr(opts, 'openEditor')} data-item-index="${index}" aria-label="编辑 ${escapeHtml(label)}">
                     <img class="hsse-image-preview-img" alt="" data-tile-index="${index}">
                     <span class="hsse-custom-item-edit-badge">${renderMaterialIcon('edit')}</span>
                 </button>
                 <div class="listItemBodyText hsse-custom-item-tile-label">${escapeHtml(label)}</div>
-                <button type="button" class="emby-button raised hsse-custom-item-trash" ${actionAttr(opts, 'removeItem')} data-item-index="${index}"${canRemove ? '' : ' disabled'} aria-label="Remove ${escapeHtml(label)}">
+                <button type="button" class="emby-button raised hsse-custom-item-trash" ${actionAttr(opts, 'removeItem')} data-item-index="${index}"${canRemove ? '' : ' disabled'} aria-label="移除 ${escapeHtml(label)}">
                     ${renderMaterialIcon('delete', 'hsse-custom-item-trash-icon')}
                 </button>
             </div>
@@ -293,12 +293,12 @@
         if (!item) return '';
 
         const title = item.name?.trim()
-            ? `Edit: ${item.name.trim()}`
-            : `Edit Item ${editorIndex + 1}`;
+            ? `编辑：${item.name.trim()}`
+            : `编辑条目 ${editorIndex + 1}`;
 
         return `
             <div class="hsse-custom-item-editor-overlay">
-                <button type="button" class="hsse-custom-item-editor-backdrop" ${actionAttr(opts, 'closeEditor')} aria-label="Close editor"></button>
+                <button type="button" class="hsse-custom-item-editor-backdrop" ${actionAttr(opts, 'closeEditor')} aria-label="关闭编辑器"></button>
                 <div class="hsse-custom-item-editor-panel dialog" role="dialog" aria-modal="true" aria-label="${escapeHtml(title)}">
                     <div class="hsse-custom-item-editor-header">
                         <div class="listItemBodyText hsse-custom-item-editor-title">${escapeHtml(title)}</div>
@@ -307,8 +307,8 @@
                         ${renderCustomItemEditorHTML(editorIndex, item, state, opts)}
                     </div>
                     <div class="hsse-custom-item-editor-footer">
-                        <button type="button" class="emby-button raised" ${actionAttr(opts, 'closeEditor')} data-discard="true">Cancel</button>
-                        <button type="button" class="emby-button raised button-submit" ${actionAttr(opts, 'closeEditor')}>Done</button>
+                        <button type="button" class="emby-button raised" ${actionAttr(opts, 'closeEditor')} data-discard="true">取消</button>
+                        <button type="button" class="emby-button raised button-submit" ${actionAttr(opts, 'closeEditor')}>完成</button>
                     </div>
                 </div>
             </div>
@@ -325,12 +325,12 @@
             <div class="hsse-custom-items-stage">
                 ${opts.intro ? `
                 <div class="hsse-section-block hsse-custom-items-intro">
-                    <div class="listItemBodyText hsse-section-label">Custom Items</div>
-                    <p class="listItemBodyText secondary hsse-field-hint">Name and poster required. Link and other images optional.</p>
+                    <div class="listItemBodyText hsse-section-label">自定义条目</div>
+                    <p class="listItemBodyText secondary hsse-field-hint">必须填写名称和海报。链接和其他图片可选。</p>
                 </div>` : ''}
                 <div class="hsse-custom-items-grid">
                     ${items.map((item, index) => renderCustomItemTileHTML(index, item, canRemove, opts)).join('')}
-                    <button type="button" class="hsse-custom-item-add-tile" ${actionAttr(opts, 'addItem')} aria-label="Add item">
+                    <button type="button" class="hsse-custom-item-add-tile" ${actionAttr(opts, 'addItem')} aria-label="添加条目">
                         ${renderMaterialIcon('add', 'hsse-custom-item-add-icon')}
                     </button>
                 </div>
@@ -379,7 +379,7 @@
                     collectCustomItemsFromForm(root, state, opts);
                 }
                 const itemToRemove = state.customItems[removeIndex];
-                if (hasCustomItemContent(itemToRemove) && !confirm('Are you sure you want to remove this item?')) {
+                if (hasCustomItemContent(itemToRemove) && !confirm('确定要移除此条目吗？')) {
                     break;
                 }
                 state.customItems.splice(removeIndex, 1);

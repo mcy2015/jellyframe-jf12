@@ -91,11 +91,11 @@
             
             let tooltipText = '';
             if (source === 'default') {
-                tooltipText = 'This skin is included automatically by KefinTweaks';
+                tooltipText = '此皮肤由 KefinTweaks 自动包含';
             } else if (source === 'overridden') {
-                tooltipText = 'This default skin has been overridden by a custom configuration';
+                tooltipText = '此默认皮肤已被自定义配置覆盖';
             } else if (githubUrl) {
-                tooltipText = 'View on GitHub';
+                tooltipText = '在 GitHub 上查看';
             }
             
             return `
@@ -103,7 +103,7 @@
                     <div class="listItemContent" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5em;">
                         <div style="flex: 1; display: flex; align-items: center; gap: 0.5em; min-width: 0;">
                             ${githubUrl ? `
-                                <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.4em; color: inherit; text-decoration: none; opacity: 0.85; transition: opacity 0.2s; min-width: 0;" title="View on GitHub" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+                                <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.4em; color: inherit; text-decoration: none; opacity: 0.85; transition: opacity 0.2s; min-width: 0;" title="在 GitHub 上查看" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
                                     <span class="listItemBodyText" style="font-weight: 500; font-size: 0.9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${skin.name}</span>
                                     <span class="material-icons" style="font-size: 1em; flex-shrink: 0;">info</span>
                                 </a>
@@ -217,14 +217,14 @@
         if (optionalIncludes.length === 0) {
             return `
                 <div class="listItemBodyText secondary" style="padding: 1em; text-align: center; opacity: 0.7;">
-                    No optional CSS modules available for ${category === 'global' ? 'global options' : category}.
+                    ${category === 'global' ? '全局选项' : category}没有可用的可选 CSS 模块。
                 </div>
             `;
         }
         
         return `
             <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">
-                Configure which optional CSS modules are enabled by default. Users can override these settings individually.
+                配置哪些可选 CSS 模块默认启用。用户可以单独覆盖这些设置。
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.5em;">
                 ${optionalIncludes.map((include, index) => {
@@ -238,7 +238,7 @@
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5em; gap: 0.5em;">
                                     <div style="flex: 1; min-width: 0;">
                                         <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.25em;">${include.name}</div>
-                                        ${author ? `<div class="listItemBodyText secondary" style="font-size: 0.85em;">by <a href="https://github.com/${author}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; opacity: 0.8; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">${author}</a></div>` : ''}
+                                        ${author ? `<div class="listItemBodyText secondary" style="font-size: 0.85em;">作者：<a href="https://github.com/${author}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; opacity: 0.8; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">${author}</a></div>` : ''}
                                     </div>
                                     <input type="checkbox" 
                                            id="optionalInclude_${category}_${index}" 
@@ -345,23 +345,23 @@
                 <!-- Default Skin -->
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Default Skin</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">默认皮肤</div>
                         <select id="defaultSkin" class="fld emby-select-withcolor emby-select" style="width: 100%; max-width: 400px;">
                             ${allSkinNames.map(name => `<option value="${name}" ${config.defaultSkin === name ? 'selected' : ''}>${name}</option>`).join('')}
-                            ${allSkinNames.length === 0 ? '<option value="">No skins available</option>' : ''}
+                            ${allSkinNames.length === 0 ? '<option value="">暂无可用皮肤</option>' : ''}
                         </select>
-                        <div class="listItemBodyText secondary" style="margin-top: 0.5em; font-size: 0.9em;">Select a default skin for all users</div>
+                        <div class="listItemBodyText secondary" style="margin-top: 0.5em; font-size: 0.9em;">为所有用户选择默认皮肤</div>
                     </div>
                 </div>
 
                 <!-- Enable/Disable Skins -->
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                     <div class="listItemContent" style="width: 100%;">
-                        <h3 class="listItemBodyText" style="margin-bottom: 0.5em;">Enable/Disable Skins</h3>
-                        <div class="listItemBodyText secondary" style="margin-bottom: 1em; font-size: 0.9em;">Disabled skins will not appear in the appearance dropdowns for users</div>
+                        <h3 class="listItemBodyText" style="margin-bottom: 0.5em;">启用/禁用皮肤</h3>
+                        <div class="listItemBodyText secondary" style="margin-bottom: 1em; font-size: 0.9em;">已禁用的皮肤不会出现在用户的外观下拉菜单中</div>
                         <div class="listItemBodyText secondary" style="margin-bottom: 1em; font-size: 0.85em; color: rgba(255,255,255,0.7); line-height: 1.5;">
-                            All themes are created with love by community members like you. Don't forget to thank them for their work and time if you appreciate their creations.
-                            KefinTweaks has not contributed to the creation of any of the skins below and is only attempting to facilitate their accessibility.
+                            所有主题都由像您一样的社区成员用心制作。如果您喜欢他们的作品，请不要忘记感谢他们的付出与时间。
+                            KefinTweaks 并未参与制作以下任何皮肤，只是尽力让大家更方便地使用它们。
                         </div>
                         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.5em;">
                             ${buildSkinToggles(config.skins, skinSources)}
@@ -372,9 +372,9 @@
                 ${hasOverriddenSkins ? `
                     <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                         <div class="listItemContent">
-                            <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">Some default skins have been overridden by custom configurations. Click the button below to remove custom skins that override defaults.</div>
+                            <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">部分默认皮肤已被自定义配置覆盖。点击下方按钮可移除覆盖默认皮肤的自定义皮肤。</div>
                             <button type="button" id="removeDuplicateDefaultsBtn" class="emby-button raised" style="padding: 0.5em 1.5em; font-size: 0.9em;">
-                                <span>Remove Custom Skins Overriding Defaults</span>
+                                <span>移除覆盖默认皮肤的自定义皮肤</span>
                             </button>
                         </div>
                     </div>
@@ -383,11 +383,11 @@
                 <!-- Optional CSS Modules -->
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                     <div class="listItemContent">
-                        <h3 class="listItemBodyText" style="margin-bottom: 0.25em;">Optional CSS Modules</h3>
-                        <div class="listItemBodyText secondary" style="margin-bottom: 1em; font-size: 0.9em;">Configure default enabled/disabled state for optional CSS modules. These settings will be used when users haven't specified their own preferences.</div>
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Select Skin</div>
+                        <h3 class="listItemBodyText" style="margin-bottom: 0.25em;">可选 CSS 模块</h3>
+                        <div class="listItemBodyText secondary" style="margin-bottom: 1em; font-size: 0.9em;">配置可选 CSS 模块的默认启用/禁用状态。当用户未指定自己的偏好时，将使用这些设置。</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">选择皮肤</div>
                         <select id="optionalIncludesCategory" class="fld emby-select-withcolor emby-select" style="width: 100%; max-width: 400px; margin-bottom: 1em;">
-                            <option value="global">Global (applies to all skins)</option>
+                            <option value="global">全局（应用于所有皮肤）</option>
                             ${buildOptionalIncludesSkinOptions(config.skins)}
                         </select>
                         <div id="optionalIncludesEditor">
@@ -400,11 +400,11 @@
                 <details class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0; margin-bottom: 1em; display: grid;">
                     <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; padding: 0.75em; display: flex; align-items: center; gap: 0.5em; list-style: none; user-select: none;">
                         <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                        <span>Skins JSON</span>
+                        <span>皮肤 JSON</span>
                     </summary>
                     <div style="padding: 0.75em; border-top: 1px solid rgba(255,255,255,0.1);">
                         <div class="listItemContent">
-                            <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">Add additional skins that will be available to all users. Each skin can have multiple CSS files for different server versions. You can override the Default skins from KefinTweaks by specifying a custom configuration with that Skin Name in the configuration JSON below. Any skins that appear in this JSON and are named the same as the KefinTweaks default skins will override the default functionality. Default skins are not shown here as they are managed separately.</div>
+                            <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">添加可供所有用户使用的额外皮肤。每个皮肤可以包含针对不同服务器版本的多个 CSS 文件。您可以在下方配置 JSON 中使用相同的皮肤名称指定自定义配置，从而覆盖 KefinTweaks 的默认皮肤。此 JSON 中与 KefinTweaks 默认皮肤同名的皮肤将覆盖默认功能。默认皮肤不在此处显示，因为它们是单独管理的。</div>
                             <textarea id="skinsJson" class="fld emby-textarea" rows="15" placeholder='[{"name":"Skin Name","author":"Author","url":[...]}]' style="width: 100%; font-family: monospace; font-size: 0.9em; line-height: 1.5;">${JSON.stringify(config.skins.filter(s => {
                                 const defaultSkinNames = new Set((window.KefinTweaksDefaultSkinsConfig?.skins || []).map(s => s.name));
                                 return !defaultSkinNames.has(s.name);
@@ -422,11 +422,11 @@
                 <details class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0; margin-bottom: 1em; display: grid;">
                     <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; padding: 0.75em; display: flex; align-items: center; gap: 0.5em; list-style: none; user-select: none;">
                         <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                        <span>Themes JSON</span>
+                        <span>主题 JSON</span>
                     </summary>
                     <div style="padding: 0.75em; border-top: 1px solid rgba(255,255,255,0.1);">
                         <div class="listItemContent">
-                            <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">Add additional themes that will be available to all users. Each theme should have a name and URL pointing to a CSS file.</div>
+                            <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">添加可供所有用户使用的额外主题。每个主题应包含名称和指向 CSS 文件的 URL。</div>
                             <textarea id="themesJson" class="fld emby-textarea" rows="12" placeholder='[{"name":"Theme Name","url":"https://..."}]' style="width: 100%; font-family: monospace; font-size: 0.9em; line-height: 1.5;">${JSON.stringify(config.themes, null, 2)}</textarea>
                         </div>
                     </div>
@@ -567,7 +567,7 @@
         if (removeBtn) {
             removeBtn.addEventListener('click', () => {
                 // This would need to be implemented to remove overridden skins
-                alert('This feature will remove custom skins that override defaults. Implementation needed.');
+                alert('此功能将移除覆盖默认皮肤的自定义皮肤。功能尚未实现。');
             });
         }
     }
@@ -593,14 +593,14 @@
             footer.style.gap = '0.75em';
             footer.style.justifyContent = 'flex-end';
             footer.innerHTML = `
-                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">Close</button>
-                <button class="emby-button raised block button-submit" id="save-skinmanager-config-btn">Save</button>
+                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">关闭</button>
+                <button class="emby-button raised block button-submit" id="save-skinmanager-config-btn">保存</button>
             `;
 
             // Create modal
             const modalInstance = window.ModalSystem.create({
                 id: MODAL_ID,
-                title: 'Skin Manager Configuration',
+                title: '皮肤管理器设置',
                 content: content,
                 footer: footer,
                 closeOnBackdrop: true,
@@ -617,11 +617,11 @@
                             const success = await saveConfig(skinManagerConfig);
                             if (success) {
                                 if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                    window.KefinTweaksToaster.toast('Skin Manager configuration saved!');
+                                    window.KefinTweaksToaster.toast('皮肤管理器配置已保存！');
                                 }
                                 window.ModalSystem.close(MODAL_ID);
                             } else {
-                                alert('Error saving configuration. Please ensure the JavaScript Injector plugin is installed and you have administrator permissions.');
+                                alert('保存配置时出错。请确保已安装 JavaScript Injector 插件，并且您拥有管理员权限。');
                             }
                         });
                     }
@@ -637,7 +637,7 @@
             LOG('Skin Manager configuration modal opened');
         } catch (error) {
             ERR('Error opening skin manager config modal:', error);
-            alert('Error opening configuration: ' + error.message);
+            alert('打开配置时出错：' + error.message);
         }
     }
 

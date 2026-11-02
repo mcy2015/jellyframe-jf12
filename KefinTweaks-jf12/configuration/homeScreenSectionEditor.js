@@ -13,45 +13,45 @@
     const CUSTOM_WIZARD_STEPS = ['type', 'customItems', 'settings', 'appearance', 'confirm'];
     const EXTERNAL_WIZARD_STEPS = ['type', 'externalList', 'settings', 'appearance', 'confirm'];
     const WIZARD_STEP_LABELS = {
-        type: 'Type',
-        parent: 'Selection',
-        query: 'Query',
-        customItems: 'Create Items',
-        externalList: 'External List',
-        appearance: 'Appearance',
-        settings: 'Settings',
-        confirm: 'Confirm'
+        type: '类型',
+        parent: '选择',
+        query: '查询',
+        customItems: '创建条目',
+        externalList: '外部列表',
+        appearance: '外观',
+        settings: '设置',
+        confirm: '确认'
     };
 
     const CUSTOM_TYPE = {
         type: 'Custom',
-        label: 'Custom Item Section',
-        description: 'Show items with custom images, links and names. These items can link to existing Jellyfin pages or to external websites. Use this to link your other services, share client download locations, provide help information, etc.',
+        label: '自定义条目板块',
+        description: '显示具有自定义图片、链接和名称的条目。这些条目可链接到现有的 Jellyfin 页面或外部网站。可用于链接你的其他服务、分享客户端下载位置、提供帮助信息等。',
         icon: 'widgets'
     };
 
     const EXTERNAL_TYPE = {
         type: 'External',
-        label: 'External List Section',
-        description: 'Match an MDBList (or compatible) URL against your Jellyfin library by IMDb/TMDB provider IDs. Requires an MDBList API key in Home Screen General settings.',
+        label: '外部列表板块',
+        description: '通过 IMDb/TMDB 提供 ID 将 MDBList（或兼容）URL 与你的 Jellyfin 媒体库进行匹配。需要在主屏幕常规设置中配置 MDBList API 密钥。',
         icon: 'link'
     };
 
     const CUSTOM_IMAGE_FIELDS = [
-        { key: 'posterUrl', label: 'Poster URL', required: true },
-        { key: 'thumbUrl', label: 'Thumb URL' },
-        { key: 'backdropUrl', label: 'Backdrop URL' },
-        { key: 'squareUrl', label: 'Square URL' },
-        { key: 'bannerUrl', label: 'Banner URL' },
+        { key: 'posterUrl', label: '海报 URL', required: true },
+        { key: 'thumbUrl', label: '缩略图 URL' },
+        { key: 'backdropUrl', label: '背景图 URL' },
+        { key: 'squareUrl', label: '方形图 URL' },
+        { key: 'bannerUrl', label: '横幅 URL' },
         { key: 'logoUrl', label: 'Logo URL' }
     ];
     const CUSTOM_POSTER_FIELD = CUSTOM_IMAGE_FIELDS[0];
     const CUSTOM_ADDITIONAL_IMAGE_FIELDS = CUSTOM_IMAGE_FIELDS.slice(1);
 
     const SECTION_VISIBILITY_OPTIONS = [
-        { value: 'normal', title: 'Normal', desc: 'These sections are loaded every time the home page loads.' },
-        { value: 'seasonal', title: 'Seasonal', desc: 'These sections will only appear between the specified start and end date every time the home page loads.' },
-        { value: 'discovery', title: 'Discovery', desc: 'These sections will appear randomly after scrolling to the bottom of the home page when loading new sections.' }
+        { value: 'normal', title: '常规', desc: '每次加载主页时都会加载这些板块。' },
+        { value: 'seasonal', title: '季节性', desc: '每次加载主页时，这些板块仅会在指定的开始与结束日期之间显示。' },
+        { value: 'discovery', title: '探索', desc: '加载新板块时，这些板块会在滚动到主页底部后随机出现。' }
     ];
 
     const WIZARD_PARENT_DATA = {
@@ -121,12 +121,12 @@
     }
 
     const PARENT_TYPES = [
-        { type: 'Genre', label: 'Genre', plural: 'genres', description: 'Show items that share a Genre, like Action or Comedy.', icon: 'theater_comedy', queryField: 'GenreIds' },
-        { type: 'Collection', label: 'Collection', plural: 'collections', description: 'Show items from a specific Collection in your library.', icon: 'collections_bookmark', queryField: 'ParentId' },
-        { type: 'Playlist', label: 'Playlist', plural: 'playlists', description: 'Show items from a specific Playlist in your library.', icon: 'playlist_play', queryField: 'ParentId' },
-        { type: 'Studio', label: 'Studio', plural: 'studios', description: 'Show items from a specific Film Studio or TV Network.', icon: 'apartment', queryField: 'StudioIds' },
-        { type: 'Person', label: 'Person', plural: 'people', description: 'Show items that a specific Person has acted in or has directed, written, produced, etc.', icon: 'person', queryField: 'PersonIds' },
-        { type: 'Tag', label: 'Tag', plural: 'tags', description: 'Show items that share a Tag, like Time Travel or Revenge.', icon: 'sell', queryField: 'Tags' }
+        { type: 'Genre', label: '流派', plural: '流派', description: '显示共享某个流派（如动作或喜剧）的条目。', icon: 'theater_comedy', queryField: 'GenreIds' },
+        { type: 'Collection', label: '合集', plural: '合集', description: '显示你媒体库中特定合集内的条目。', icon: 'collections_bookmark', queryField: 'ParentId' },
+        { type: 'Playlist', label: '播放列表', plural: '播放列表', description: '显示你媒体库中特定播放列表内的条目。', icon: 'playlist_play', queryField: 'ParentId' },
+        { type: 'Studio', label: '制片商', plural: '制片商', description: '显示来自特定电影制片厂或电视网的条目。', icon: 'apartment', queryField: 'StudioIds' },
+        { type: 'Person', label: '人物', plural: '人物', description: '显示特定人物参演或担任导演、编剧、制片等的条目。', icon: 'person', queryField: 'PersonIds' },
+        { type: 'Tag', label: '标签', plural: '标签', description: '显示共享某个标签（如时间旅行或复仇）的条目。', icon: 'sell', queryField: 'Tags' }
     ];
 
     const MULTI_SELECT_TYPES = new Set(['Genre', 'Tag', 'Person', 'Studio']);
@@ -353,7 +353,7 @@
     function renderParentItemTypeChipsHTML(activeTypes, actionAttr, toggleAction) {
         return `
             <div class="hsse-section-block">
-                <div class="listItemBodyText hsse-section-label">Included Item Types</div>
+                <div class="listItemBodyText hsse-section-label">包含的条目类型</div>
                 <p id="hsse-item-types-hint" class="listItemBodyText secondary hsse-field-hint">${escapeHtml(getIncludedItemTypesHintText(activeTypes))}</p>
                 <div class="hsse-chip-row">
                     ${ITEM_TYPE_OPTIONS.map(type => {
@@ -368,7 +368,7 @@
     function formatItemCountMeta(count) {
         if (count == null || Number.isNaN(count)) return '';
         const n = parseInt(count, 10);
-        return n === 1 ? '1 item' : `${n} items`;
+        return n === 1 ? '1 个条目' : `${n} 个条目`;
     }
 
     /**
@@ -563,27 +563,27 @@
 
     const LIBRARY_TYPE_META = {
         type: 'Library',
-        label: 'Library',
-        plural: 'libraries',
-        description: 'Show items from a specific Library in your collection.',
+        label: '媒体库',
+        plural: '媒体库',
+        description: '显示你收藏中特定媒体库内的条目。',
         icon: 'video_library',
         queryField: 'ParentId'
     };
 
     const CUSTOM_PARENT_META = {
         type: 'Custom',
-        label: 'Custom',
-        plural: 'custom parents',
-        description: 'Show items from a custom parent item from your collection including specific folders within your libraries.',
+        label: '自定义',
+        plural: '自定义父项',
+        description: '显示你收藏中某个自定义父项的条目，包括媒体库中的特定文件夹。',
         icon: 'folder_open',
         queryField: 'ParentId'
     };
 
     const LIBRARY_ITEM_META = {
         type: 'LibraryItem',
-        label: 'Item',
-        plural: 'items',
-        description: 'Search your library for specific items.',
+        label: '条目',
+        plural: '条目',
+        description: '在你的媒体库中搜索特定条目。',
         icon: 'movie',
         queryField: 'Ids'
     };
@@ -752,18 +752,18 @@
         const selectedIds = new Set((selected || []).map(s => (typeof s === 'object' ? s.id : s)));
 
         if (status === 'loading') {
-            return `<div class="listItemBodyText secondary hsse-empty">Loading ${escapeHtml(meta?.plural || 'items')}…</div>`;
+            return `<div class="listItemBodyText secondary hsse-empty">正在加载${escapeHtml(meta?.plural || '条目')}…</div>`;
         }
         if (status === 'error') {
             return `
-                <div class="listItemBodyText secondary hsse-empty">${escapeHtml(error || 'Failed to load items.')}</div>
-                <button type="button" class="emby-button raised" ${actionAttr}="${retryAction}" style="margin-top:0.75em;">Retry</button>
+                <div class="listItemBodyText secondary hsse-empty">${escapeHtml(error || '加载条目失败。')}</div>
+                <button type="button" class="emby-button raised" ${actionAttr}="${retryAction}" style="margin-top:0.75em;">重试</button>
             `;
         }
         if (items.length === 0) {
             const emptyMsg = search
-                ? `No ${meta?.plural || 'items'} match &ldquo;${escapeHtml(search)}&rdquo;`
-                : `No ${meta?.plural || 'items'} found`;
+                ? `没有匹配“${escapeHtml(search)}”的${meta?.plural || '条目'}`
+                : `未找到${meta?.plural || '条目'}`;
             return `<div class="listItemBodyText secondary hsse-empty">${emptyMsg}</div>`;
         }
 
@@ -858,8 +858,8 @@
         footer.style.gap = '0.5em';
         footer.style.justifyContent = 'flex-end';
         footer.innerHTML = `
-            <button type="button" class="emby-button raised" data-sel-action="cancel">Cancel</button>
-            <button type="button" class="emby-button raised block button-submit" data-sel-action="confirm">Confirm</button>
+            <button type="button" class="emby-button raised" data-sel-action="cancel">取消</button>
+            <button type="button" class="emby-button raised block button-submit" data-sel-action="confirm">确认</button>
         `;
 
         function getVisibleItems() {
@@ -876,8 +876,8 @@
                 const currentGuid = draftSelected[0]?.id || '';
                 content.innerHTML = `
                     <div class="hsse-section-block">
-                        <div class="listItemBodyText hsse-section-label">Parent Item ID</div>
-                        <div class="listItemBodyText secondary hsse-field-hint" style="margin-bottom:0.5em;">Enter the GUID of a library folder or other parent item.</div>
+                        <div class="listItemBodyText hsse-section-label">父项 ID</div>
+                        <div class="listItemBodyText secondary hsse-field-hint" style="margin-bottom:0.5em;">输入媒体库文件夹或其他父项的 GUID。</div>
                         <input type="text" id="hsse-selection-guid" class="fld emby-input" value="${escapeHtml(currentGuid)}" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocomplete="off">
                     </div>
                 `;
@@ -891,7 +891,7 @@
             content.innerHTML = `
                 ${filterChips}
                 <div class="hsse-section-block">
-                    <input type="text" id="hsse-selection-search" class="fld emby-input" value="${escapeHtml(search)}" placeholder="Search..." aria-label="Search ${escapeHtml(meta?.plural || 'items')}">
+                    <input type="text" id="hsse-selection-search" class="fld emby-input" value="${escapeHtml(search)}" placeholder="搜索..." aria-label="搜索${escapeHtml(meta?.plural || '条目')}">
                 </div>
                 <div class="hsse-parent-list" id="hsse-selection-list">
                     ${renderSelectionListHTML({
@@ -936,7 +936,7 @@
             } catch (err) {
                 if (requestId !== loadRequestId) return;
                 listStatus = 'error';
-                listError = err?.message || 'Failed to load items.';
+                listError = err?.message || '加载条目失败。';
             }
             renderBody();
         }
@@ -960,7 +960,7 @@
 
         window.ModalSystem.create({
             id: modalId,
-            title: meta ? `Select ${meta.label}` : 'Select',
+            title: meta ? `选择${meta.label}` : '选择',
             content,
             footer,
             closeOnBackdrop: true,
@@ -1066,8 +1066,8 @@
         footer.style.gap = '0.5em';
         footer.style.justifyContent = 'flex-end';
         footer.innerHTML = `
-            <button type="button" class="emby-button raised" data-libpick-action="cancel">Cancel</button>
-            <button type="button" class="emby-button raised block button-submit" data-libpick-action="confirm">Confirm</button>
+            <button type="button" class="emby-button raised" data-libpick-action="cancel">取消</button>
+            <button type="button" class="emby-button raised block button-submit" data-libpick-action="confirm">确认</button>
         `;
 
         function renderTypeChipsHTML() {
@@ -1083,10 +1083,10 @@
 
             content.innerHTML = `
                 <div class="hsse-section-block">
-                    <input type="text" id="hsse-library-item-search" class="fld emby-input" value="${escapeHtml(search)}" placeholder="Search your library..." aria-label="Search library items">
+                    <input type="text" id="hsse-library-item-search" class="fld emby-input" value="${escapeHtml(search)}" placeholder="搜索媒体库..." aria-label="搜索媒体库条目">
                 </div>
                 <div class="hsse-section-block">
-                    <div class="listItemBodyText secondary hsae-field-hint">Filter by item type (optional)</div>
+                    <div class="listItemBodyText secondary hsae-field-hint">按条目类型筛选（可选）</div>
                     <div class="hsse-chip-row hsse-library-item-type-chips">
                         ${renderTypeChipsHTML()}
                     </div>
@@ -1129,7 +1129,7 @@
             } catch (err) {
                 if (requestId !== loadRequestId) return;
                 listStatus = 'error';
-                listError = err?.message || 'Failed to load items.';
+                listError = err?.message || '加载条目失败。';
             }
             renderBody();
         }
@@ -1156,7 +1156,7 @@
 
         window.ModalSystem.create({
             id: modalId,
-            title: 'Select Items',
+            title: '选择条目',
             content,
             footer,
             closeOnBackdrop: true,
@@ -1210,9 +1210,9 @@
     function renderAppearancePreviewHTML() {
         return `
             <div class="hsse-section-block hsse-appearance-preview">
-                <div class="listItemBodyText hsse-section-label">Preview</div>
+                <div class="listItemBodyText hsse-section-label">预览</div>
                 <div id="hsse-appearance-preview-container" class="hsse-appearance-preview-container">
-                    <p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">Loading preview…</p>
+                    <p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">正在加载预览…</p>
                 </div>
             </div>
         `;
@@ -1257,10 +1257,10 @@
 
     function getIncludedItemTypesHintText(includeItemTypes) {
         if (!includeItemTypes || includeItemTypes.length === 0) {
-            return 'None selected - all item types will be included.';
+            return '未选择任何类型 - 将包含所有条目类型。';
         }
         const selected = ITEM_TYPE_OPTIONS.filter(type => includeItemTypes.includes(type));
-        return `This section will display items with the following types: ${formatItemTypesLabel(selected)}`;
+        return `此板块将显示以下类型的条目：${formatItemTypesLabel(selected)}`;
     }
 
     function updateIncludedItemTypesHint(root, includeItemTypes) {
@@ -1271,8 +1271,8 @@
     const FALLBACK_SORT_ORDERS = ['Default', 'Random', 'SortName', 'DateCreated', 'CommunityRating'];
     const FALLBACK_SORT_ORDER_DIRECTIONS = ['Ascending', 'Descending'];
     const FALLBACK_CARD_FORMATS = ['Poster', 'Thumb', 'Series Thumb', 'Series Poster', 'Backdrop', 'Square', 'Random', 'Button', 'Banner', 'Logo', 'Clear Art', 'Disc'];
-    const FALLBACK_SPOTLIGHT_LAYOUT_OPTIONS = [{ value: 'Border', label: 'Border' }, { value: 'Borderless', label: 'Borderless' }];
-    const FALLBACK_SPOTLIGHT_SIZE_OPTIONS = [{ value: 'normal', label: 'Normal' }, { value: 'large', label: 'Large' }, { value: 'full', label: 'Full' }];
+    const FALLBACK_SPOTLIGHT_LAYOUT_OPTIONS = [{ value: 'Border', label: '边框' }, { value: 'Borderless', label: '无边框' }];
+    const FALLBACK_SPOTLIGHT_SIZE_OPTIONS = [{ value: 'normal', label: '标准' }, { value: 'large', label: '大' }, { value: 'full', label: '全屏' }];
     const FALLBACK_SPOTLIGHT_TILE_COUNT_OPTIONS = [{ value: '1', label: '1' }, { value: '2', label: '2' }, { value: '3', label: '3' }];
 
     function getEditorConstants() {
@@ -1408,17 +1408,17 @@
 
         return `
             <div class="hsse-section-block">
-                ${hsseBuildSelect('hsse-wizard-sectionGroup', options, selected, 'Section Group')}
+                ${hsseBuildSelect('hsse-wizard-sectionGroup', options, selected, '板块分组')}
                 <div id="hsse-wizard-sectionGroup-new-container" style="display:${showNew ? 'block' : 'none'};">
-                    ${buildFieldLabel('New Group Name')}
-                    <input type="text" id="hsse-wizard-sectionGroup-new" class="fld emby-input" value="${escapeHtml(wizardState.sectionGroupNew || '')}" aria-label="New Group Name">
+                    ${buildFieldLabel('新分组名称')}
+                    <input type="text" id="hsse-wizard-sectionGroup-new" class="fld emby-input" value="${escapeHtml(wizardState.sectionGroupNew || '')}" aria-label="新分组名称">
                 </div>
             </div>
         `;
     }
 
     function getSectionVisibilityLabel(value) {
-        return SECTION_VISIBILITY_OPTIONS.find(o => o.value === value)?.title || value || 'Normal';
+        return SECTION_VISIBILITY_OPTIONS.find(o => o.value === value)?.title || value || '常规';
     }
 
     function hasValidSeasonalDates(wizardState) {
@@ -1457,7 +1457,7 @@
 
         return `
             <div class="hsse-section-block">
-                <div class="listItemBodyText hsse-section-label">Section Type</div>
+                <div class="listItemBodyText hsse-section-label">板块类型</div>
                 <div class="hsse-appearance-grid">
                     ${SECTION_VISIBILITY_OPTIONS.map(opt => `
                         <button type="button" class="hsse-appearance-card${visibility === opt.value ? ' hsse-active' : ''}" data-hsse-action="wizard-set-section-visibility" data-visibility="${escapeHtml(opt.value)}">
@@ -1470,14 +1470,14 @@
             ${showSeasonalDates ? `
                 <div class="hsse-section-block hsse-seasonal-dates">
                     <div class="hsse-field-grid">
-                        ${hsseBuildTextInput('hsse-wizard-startDate', wizardState.startDate, 'Start Date (MM-DD)')}
-                        ${hsseBuildTextInput('hsse-wizard-endDate', wizardState.endDate, 'End Date (MM-DD)')}
+                        ${hsseBuildTextInput('hsse-wizard-startDate', wizardState.startDate, '开始日期 (MM-DD)')}
+                        ${hsseBuildTextInput('hsse-wizard-endDate', wizardState.endDate, '结束日期 (MM-DD)')}
                     </div>
                 </div>
             ` : ''}
             ${showOrder ? `
                 <div id="hsse-wizard-order-container">
-                    ${hsseBuildTextInput('hsse-wizard-order', wizardState.order, 'Order', 'number', 'Auto')}
+                    ${hsseBuildTextInput('hsse-wizard-order', wizardState.order, '排序', 'number', '自动')}
                 </div>
             ` : ''}
         `;
@@ -1537,55 +1537,55 @@
                 ? ((wizardState.externalListUrls || []).filter(Boolean).join(', ') || '—')
                 : (parents.length ? parents.map(p => p.name).join(', ') : '—'));
         const rows = [
-            ['Section Name', wizardState.sectionName || '—'],
-            ['Section Group', resolveGroupName(wizardState, config)],
-            ['Based On', meta?.label || wizardState.parentType || '—'],
-            [isCustom ? 'Items' : (isExternal ? 'List URLs' : 'Selection'), selectionLabel]
+            ['板块名称', wizardState.sectionName || '—'],
+            ['板块分组', resolveGroupName(wizardState, config)],
+            ['基于', meta?.label || wizardState.parentType || '—'],
+            [isCustom ? '条目' : (isExternal ? '列表 URL' : '选择'), selectionLabel]
         ];
 
         if (!isCustom && !isExternal) {
             rows.push(
-                ['Item Types', wizardState.includeItemTypes.length ? formatItemTypesLabel(wizardState.includeItemTypes) : 'All types'],
-                ['Sort By', wizardState.sortBy === 'Default' ? 'Default' : `${humanizeLabel(wizardState.sortBy)} (${wizardState.sortOrder})`],
-                ['Hide Watched Items', wizardState.unwatchedOnly ? 'Yes' : 'No']
+                ['条目类型', wizardState.includeItemTypes.length ? formatItemTypesLabel(wizardState.includeItemTypes) : '全部类型'],
+                ['排序依据', wizardState.sortBy === 'Default' ? '默认' : `${humanizeLabel(wizardState.sortBy)} (${wizardState.sortOrder})`],
+                ['隐藏已观看条目', wizardState.unwatchedOnly ? '是' : '否']
             );
         }
 
-        rows.push(['Render Mode', wizardState.renderMode || 'Normal']);
+        rows.push(['渲染模式', RENDER_MODE_OPTIONS.find(o => o.value === wizardState.renderMode)?.label || wizardState.renderMode || '标准']);
 
         if (wizardState.renderMode === 'Normal') {
-            rows.push(['Card Format', wizardState.cardFormat || 'Poster']);
+            rows.push(['卡片格式', wizardState.cardFormat || 'Poster']);
         }
 
         if (wizardState.renderMode === 'Spotlight') {
             const layoutLabel = getSpotlightLayoutOptions().find(o => o.value === wizardState.spotlightLayout)?.label || wizardState.spotlightLayout;
             const sizeLabel = getSpotlightSizeOptions().find(o => o.value === wizardState.spotlightSize)?.label || wizardState.spotlightSize;
-            rows.push(['Spotlight Layout', layoutLabel || '—']);
-            rows.push(['Spotlight Size', sizeLabel || '—']);
-            rows.push(['Tiled Backdrops', wizardState.tileCount || '1']);
-            rows.push(['Animated Transitions', wizardState.panAnimation ? 'Yes' : 'No']);
+            rows.push(['聚焦布局', layoutLabel || '—']);
+            rows.push(['聚焦尺寸', sizeLabel || '—']);
+            rows.push(['平铺背景图', wizardState.tileCount || '1']);
+            rows.push(['动画过渡', wizardState.panAnimation ? '是' : '否']);
         }
 
         if (wizardState.renderMode === 'Random') {
             const layoutLabel = getSpotlightLayoutOptions().find(o => o.value === wizardState.spotlightLayout)?.label || wizardState.spotlightLayout;
             const sizeLabel = getSpotlightSizeOptions().find(o => o.value === wizardState.spotlightSize)?.label || wizardState.spotlightSize;
-            rows.push(['Card Format (random)', wizardState.cardFormat || 'Poster']);
-            rows.push(['Spotlight (random)', `${layoutLabel || '—'}, ${sizeLabel || '—'}, ${wizardState.tileCount || '1'} tiles, ${wizardState.panAnimation ? 'animated' : 'static'}`]);
+            rows.push(['卡片格式（随机）', wizardState.cardFormat || 'Poster']);
+            rows.push(['聚焦（随机）', `${layoutLabel || '—'}, ${sizeLabel || '—'}, ${wizardState.tileCount || '1'} 个拼贴，${wizardState.panAnimation ? '动画' : '静态'}`]);
         }
 
         const visibility = wizardState.sectionVisibility || 'normal';
-        rows.push(['Section Type', getSectionVisibilityLabel(visibility)]);
+        rows.push(['板块类型', getSectionVisibilityLabel(visibility)]);
         if (visibility === 'seasonal') {
-            rows.push(['Start Date', wizardState.startDate?.trim() || '—']);
-            rows.push(['End Date', wizardState.endDate?.trim() || '—']);
+            rows.push(['开始日期', wizardState.startDate?.trim() || '—']);
+            rows.push(['结束日期', wizardState.endDate?.trim() || '—']);
         }
         if (visibility !== 'discovery') {
-            rows.push(['Order', wizardState.order ? wizardState.order : 'Auto']);
+            rows.push(['排序', wizardState.order ? wizardState.order : '自动']);
         }
 
         return `
             <div class="hsse-section-block">
-                <div class="listItemBodyText hsse-section-label">Section Overview</div>
+                <div class="listItemBodyText hsse-section-label">板块概览</div>
             </div>
             <dl class="hsse-confirm-list">
                 ${rows.map(([label, value]) => `
@@ -1603,12 +1603,12 @@
         if (list.length === 0) return '';
         const names = list.map(i => i.name).join(' & ');
         switch (parentType) {
-            case 'Genre': return `${names} Picks`;
+            case 'Genre': return `${names} 精选`;
             case 'Collection':
             case 'Playlist': return list[0].name;
-            case 'Studio': return `More from ${names}`;
-            case 'Person': return `Starring ${names}`;
-            case 'Tag': return `${names} Collection`;
+            case 'Studio': return `更多来自${names}`;
+            case 'Person': return `${names} 主演`;
+            case 'Tag': return `${names} 合集`;
             default: return names;
         }
     }
@@ -1640,7 +1640,7 @@
             const section = {
                 ...baseSection,
                 id: baseSection.id,
-                name: sectionName || 'Custom Section',
+                name: sectionName || '自定义板块',
                 enabled: true,
                 isCustom: true,
                 renderMode: renderMode || 'Normal',
@@ -1673,7 +1673,7 @@
             const section = {
                 ...baseSection,
                 id: baseSection.id,
-                name: sectionName || 'External List',
+                name: sectionName || '外部列表',
                 enabled: true,
                 isCustom: true,
                 renderMode: renderMode || 'Normal',
@@ -1779,33 +1779,33 @@
     function renderModeSelectHTML() {
         return `
             <div class="hsse-flow">
-                <p class="listItemBodyText secondary hsse-subtitle">Choose how you&apos;d like to get started</p>
+                <p class="listItemBodyText secondary hsse-subtitle">选择你想要的开始方式</p>
                 <div class="hsse-flow-body">
                     <div class="hsse-mode-grid">
                         <button type="button" class="hsse-mode-card hsse-wizard" data-hsse-action="select-wizard">
                             <div class="hsse-mode-card-header">
                                 <div class="hsse-mode-icon">${renderMaterialIcon('auto_fix_high')}</div>
-                                <span class="hsse-badge">Recommended</span>
+                                <span class="hsse-badge">推荐</span>
                             </div>
-                            <h2 class="listItemBodyText hsse-mode-title">Wizard</h2>
-                            <p class="listItemBodyText secondary hsse-mode-desc">Build a section from a pre-existing template with the ability to customize the general appearance and settings.</p>
+                            <h2 class="listItemBodyText hsse-mode-title">向导</h2>
+                            <p class="listItemBodyText secondary hsse-mode-desc">基于现有模板构建板块，并可自定义常规外观和设置。</p>
                             <ul class="hsse-tag-list">
-                                <li class="listItemBodyText secondary">Streamlined</li>
-                                <li class="listItemBodyText secondary">Limited Options</li>
+                                <li class="listItemBodyText secondary">流程简化</li>
+                                <li class="listItemBodyText secondary">选项有限</li>
                             </ul>
-                            <span class="hsse-mode-action">Start Wizard →</span>
+                            <span class="hsse-mode-action">开始向导 →</span>
                         </button>
                         <button type="button" class="hsse-mode-card" data-hsse-action="select-advanced">
                             <div class="hsse-mode-card-header">
                                 <div class="hsse-mode-icon">${renderMaterialIcon('tune')}</div>
                             </div>
-                            <h2 class="listItemBodyText hsse-mode-title">Advanced</h2>
-                            <p class="listItemBodyText secondary hsse-mode-desc">Use the advanced editor to build a section from scratch with complete control over queries, filters, display and cache options.</p>
+                            <h2 class="listItemBodyText hsse-mode-title">高级</h2>
+                            <p class="listItemBodyText secondary hsse-mode-desc">使用高级编辑器从零构建板块，完全掌控查询、筛选、显示和缓存选项。</p>
                             <ul class="hsse-tag-list">
-                                <li class="listItemBodyText secondary">Multi-Query</li>
-                                <li class="listItemBodyText secondary">Advanced Options</li>
+                                <li class="listItemBodyText secondary">多查询</li>
+                                <li class="listItemBodyText secondary">高级选项</li>
                             </ul>
-                            <span class="hsse-mode-action">Open Editor →</span>
+                            <span class="hsse-mode-action">打开编辑器 →</span>
                         </button>
                     </div>
                 </div>
@@ -1854,7 +1854,7 @@
         const { isPoster = false } = options;
         const requiredMark = field.required ? ' <span class="hsse-required-mark">*</span>' : '';
         const posterHint = isPoster
-            ? `<p class="listItemBodyText secondary hsse-field-hint hsse-custom-image-field-hint">You can place images in your &quot;Jellyfin\\Server\\jellyfin-web&quot; folder and use the &quot;/web/image_name.png&quot; path to access them.</p>`
+            ? `<p class="listItemBodyText secondary hsse-field-hint hsse-custom-image-field-hint">你可以将图片放在 &quot;Jellyfin\\Server\\jellyfin-web&quot; 文件夹中，并通过 &quot;/web/image_name.png&quot; 路径访问它们。</p>`
             : '';
         return `
             <div class="hsse-field hsse-custom-image-field${isPoster ? '' : ' hsse-custom-image-field-compact'}">
@@ -1873,16 +1873,16 @@
             <div class="hsse-custom-item-main">
                 <div class="hsse-custom-item-fields">
                     <div class="hsse-field hsse-custom-field">
-                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="hsse-custom-${index}-name">Name <span class="hsse-required-mark">*</span></label>
-                        <input type="text" id="hsse-custom-${index}-name" class="fld emby-input" value="${escapeHtml(item.name)}" placeholder="Item name" aria-label="Item name">
+                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="hsse-custom-${index}-name">名称 <span class="hsse-required-mark">*</span></label>
+                        <input type="text" id="hsse-custom-${index}-name" class="fld emby-input" value="${escapeHtml(item.name)}" placeholder="条目名称" aria-label="条目名称">
                     </div>
                     <div class="hsse-field hsse-custom-field">
-                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="hsse-custom-${index}-cardFooter">Card Footer</label>
-                        <input type="text" id="hsse-custom-${index}-cardFooter" class="fld emby-input" value="${escapeHtml(item.cardFooter || '')}" placeholder="Optional footer text" aria-label="Card footer">
+                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="hsse-custom-${index}-cardFooter">卡片页脚</label>
+                        <input type="text" id="hsse-custom-${index}-cardFooter" class="fld emby-input" value="${escapeHtml(item.cardFooter || '')}" placeholder="可选的页脚文本" aria-label="卡片页脚">
                     </div>
                     <div class="hsse-field hsse-custom-field">
-                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="hsse-custom-${index}-cardUrl">Link URL</label>
-                        <input type="url" id="hsse-custom-${index}-cardUrl" class="fld emby-input" value="${escapeHtml(item.cardUrl)}" placeholder="#/movies.html or https://..." aria-label="Link URL" title="Jellyfin hash routes or full external URLs">
+                        <label class="listItemBodyText hsse-section-label hsse-custom-field-label" for="hsse-custom-${index}-cardUrl">链接 URL</label>
+                        <input type="url" id="hsse-custom-${index}-cardUrl" class="fld emby-input" value="${escapeHtml(item.cardUrl)}" placeholder="#/movies.html 或 https://..." aria-label="链接 URL" title="Jellyfin hash 路由或完整外部 URL">
                     </div>
                     ${buildCustomImageFieldHTML(index, CUSTOM_POSTER_FIELD, item.posterUrl || '', { isPoster: true })}
                 </div>
@@ -1894,7 +1894,7 @@
             </div>
             <div class="hsse-custom-image-toggle-wrap">
                 <button type="button" class="emby-button raised hsse-custom-image-toggle" data-hsse-action="wizard-toggle-custom-images" data-item-index="${index}" aria-expanded="${additionalExpanded ? 'true' : 'false'}">
-                    ${additionalExpanded ? 'Hide Additional Image Types' : 'Configure Additional Image Types'}
+                    ${additionalExpanded ? '隐藏其他图片类型' : '配置其他图片类型'}
                 </button>
             </div>
             <div class="hsse-field-grid hsse-custom-image-grid hsse-custom-image-additional${additionalExpanded ? '' : ' hsse-collapsed'}"${additionalExpanded ? '' : ' hidden'}>
@@ -1904,15 +1904,15 @@
     }
 
     function renderCustomItemTileHTML(index, item, canRemove) {
-        const label = item.name?.trim() || `Item ${index + 1}`;
+        const label = item.name?.trim() || `条目 ${index + 1}`;
         return `
             <div class="hsse-custom-item-tile" data-custom-item-index="${index}">
-                <button type="button" class="hsse-custom-item-tile-image hsse-image-preview hsse-item-tile-preview" data-hsse-action="wizard-open-custom-item-editor" data-item-index="${index}" aria-label="Edit ${escapeHtml(label)}">
+                <button type="button" class="hsse-custom-item-tile-image hsse-image-preview hsse-item-tile-preview" data-hsse-action="wizard-open-custom-item-editor" data-item-index="${index}" aria-label="编辑 ${escapeHtml(label)}">
                     <img class="hsse-image-preview-img" alt="" data-tile-index="${index}">
                     <span class="hsse-custom-item-edit-badge">${renderMaterialIcon('edit')}</span>
                 </button>
                 <div class="listItemBodyText hsse-custom-item-tile-label">${escapeHtml(label)}</div>
-                <button type="button" class="emby-button raised hsse-custom-item-trash" data-hsse-action="wizard-remove-custom-item" data-item-index="${index}"${canRemove ? '' : ' disabled'} aria-label="Remove ${escapeHtml(label)}">
+                <button type="button" class="emby-button raised hsse-custom-item-trash" data-hsse-action="wizard-remove-custom-item" data-item-index="${index}"${canRemove ? '' : ' disabled'} aria-label="移除 ${escapeHtml(label)}">
                     ${renderMaterialIcon('delete', 'hsse-custom-item-trash-icon')}
                 </button>
             </div>
@@ -1926,12 +1926,12 @@
         if (!item) return '';
 
         const title = item.name?.trim()
-            ? `Edit: ${item.name.trim()}`
-            : `Edit Item ${editorIndex + 1}`;
+            ? `编辑：${item.name.trim()}`
+            : `编辑条目 ${editorIndex + 1}`;
 
         return `
             <div class="hsse-custom-item-editor-overlay">
-                <button type="button" class="hsse-custom-item-editor-backdrop" data-hsse-action="wizard-close-custom-item-editor" aria-label="Close editor"></button>
+                <button type="button" class="hsse-custom-item-editor-backdrop" data-hsse-action="wizard-close-custom-item-editor" aria-label="关闭编辑器"></button>
                 <div class="hsse-custom-item-editor-panel" role="dialog" aria-modal="true" aria-label="${escapeHtml(title)}">
                     <div class="hsse-custom-item-editor-header">
                         <div class="listItemBodyText hsse-custom-item-editor-title">${escapeHtml(title)}</div>
@@ -1940,8 +1940,8 @@
                         ${renderCustomItemEditorHTML(editorIndex, item, wizardState)}
                     </div>
                     <div class="hsse-custom-item-editor-footer">
-                        <button type="button" class="emby-button raised" data-hsse-action="wizard-close-custom-item-editor" data-discard="true">Cancel</button>
-                        <button type="button" class="emby-button raised button-submit" data-hsse-action="wizard-close-custom-item-editor">Done</button>
+                        <button type="button" class="emby-button raised" data-hsse-action="wizard-close-custom-item-editor" data-discard="true">取消</button>
+                        <button type="button" class="emby-button raised button-submit" data-hsse-action="wizard-close-custom-item-editor">完成</button>
                     </div>
                 </div>
             </div>
@@ -1960,12 +1960,12 @@
         return `
             <div class="hsse-custom-items-stage">
                 <div class="hsse-section-block hsse-custom-items-intro">
-                    <div class="listItemBodyText hsse-section-label">Custom Items</div>
-                    <p class="listItemBodyText secondary hsse-field-hint">Name and poster required. Link and other images optional.</p>
+                    <div class="listItemBodyText hsse-section-label">自定义条目</div>
+                    <p class="listItemBodyText secondary hsse-field-hint">必须填写名称和海报。链接和其他图片可选。</p>
                 </div>
                 <div class="hsse-custom-items-grid">
                     ${items.map((item, index) => renderCustomItemTileHTML(index, item, canRemove)).join('')}
-                    <button type="button" class="hsse-custom-item-add-tile" data-hsse-action="wizard-add-custom-item" aria-label="Add item">
+                    <button type="button" class="hsse-custom-item-add-tile" data-hsse-action="wizard-add-custom-item" aria-label="添加条目">
                         ${renderMaterialIcon('add', 'hsse-custom-item-add-icon')}
                     </button>
                 </div>
@@ -1982,15 +1982,15 @@
             || window.KefinHomeConfig2?.LIBRARY_CACHE?.mdblistApiKey
             || '';
         const warn = !String(apiKey || '').trim()
-            ? `<p class="listItemBodyText secondary" style="color: var(--error-color, #e57373);">MDBList API key is not configured. Add it under Home Screen → General settings before using External Lists.</p>`
+            ? `<p class="listItemBodyText secondary" style="color: var(--error-color, #e57373);">尚未配置 MDBList API 密钥。使用外部列表前，请在主屏幕 → 常规设置中添加。</p>`
             : '';
         return `
             <div class="hsse-section-block">
-                <div class="listItemBodyText hsse-section-label">External List URLs</div>
-                <p class="listItemBodyText secondary hsse-field-hint">Paste one or more MDBList URLs. Matched against your library by IMDb/TMDB ids.</p>
+                <div class="listItemBodyText hsse-section-label">外部列表 URL</div>
+                <p class="listItemBodyText secondary hsse-field-hint">粘贴一个或多个 MDBList URL。将按 IMDb/TMDB ID 与你的媒体库进行匹配。</p>
                 ${warn}
-                ${urls.map((url, index) => hsseBuildTextInput(`hsse-external-list-url-${index}`, url || '', `List URL ${index + 1}`, 'url', 'https://mdblist.com/...')).join('')}
-                <button type="button" class="emby-button raised" data-hsse-action="wizard-add-external-list-url" style="margin-top: 0.75em;">Add URL</button>
+                ${urls.map((url, index) => hsseBuildTextInput(`hsse-external-list-url-${index}`, url || '', `列表 URL ${index + 1}`, 'url', 'https://mdblist.com/...')).join('')}
+                <button type="button" class="emby-button raised" data-hsse-action="wizard-add-external-list-url" style="margin-top: 0.75em;">添加 URL</button>
             </div>
         `;
     }
@@ -2043,7 +2043,7 @@
             return `
                 ${filterChips}
                 <div class="hsse-section-block">
-                    <input type="text" id="hsse-parent-search" class="fld emby-input" value="${escapeHtml(parentSearch)}" placeholder="Search..." aria-label="Search ${escapeHtml(meta?.plural || 'items')}">
+                    <input type="text" id="hsse-parent-search" class="fld emby-input" value="${escapeHtml(parentSearch)}" placeholder="搜索..." aria-label="搜索${escapeHtml(meta?.plural || '条目')}">
                 </div>
                 <div class="hsse-parent-list" id="hsse-parent-list">
                     ${renderParentListHTML(wizardState)}
@@ -2054,7 +2054,7 @@
         if (step === 'query') {
             return `
                 <div class="hsse-section-block">
-                    <div class="listItemBodyText hsse-section-label">Included Item Types</div>
+                    <div class="listItemBodyText hsse-section-label">包含的条目类型</div>
                     <p id="hsse-item-types-hint" class="listItemBodyText secondary hsse-field-hint">${escapeHtml(getIncludedItemTypesHintText(wizardState.includeItemTypes))}</p>
                     <div class="hsse-chip-row">
                         ${ITEM_TYPE_OPTIONS.map(type => {
@@ -2065,23 +2065,23 @@
                 </div>
                 <div class="hsse-section-block">
                     <div class="hsse-field-grid">
-                        ${hsseBuildSelect('hsse-wizard-sortBy', getSortOrders(), wizardState.sortBy, 'Sort by')}
-                        ${hsseBuildSelect('hsse-wizard-sortOrder', getSortOrderDirections(), wizardState.sortOrder, 'Sort order')}
+                        ${hsseBuildSelect('hsse-wizard-sortBy', getSortOrders(), wizardState.sortBy, '排序依据')}
+                        ${hsseBuildSelect('hsse-wizard-sortOrder', getSortOrderDirections(), wizardState.sortOrder, '排序方式')}
                     </div>
                 </div>
-                ${buildToggleCard('hsse-wizard-unwatched', wizardState.unwatchedOnly === true, 'Hide Watched Items', '')}
+                ${buildToggleCard('hsse-wizard-unwatched', wizardState.unwatchedOnly === true, '隐藏已观看条目', '')}
             `;
         }
 
         if (step === 'appearance') {
             const modes = [
-                { value: 'Normal', title: 'Normal', desc: 'Matches the default Jellyfin horizontal row of cards.' },
-                { value: 'Spotlight', title: 'Spotlight', desc: 'A customizable, full-width, featured slideshow carousel.' },
-                { value: 'Random', title: 'Random', desc: 'A random layout will be used when the section is loaded.' }
+                { value: 'Normal', title: '标准', desc: '匹配 Jellyfin 默认的水平卡片行。' },
+                { value: 'Spotlight', title: '聚焦', desc: '可自定义的全宽特色幻灯片轮播。' },
+                { value: 'Random', title: '随机', desc: '板块加载时将使用随机布局。' }
             ];
             return `
                 <div class="hsse-section-block">
-                    <div class="listItemBodyText hsse-section-label">Appearance</div>
+                    <div class="listItemBodyText hsse-section-label">外观</div>
                     <div class="hsse-appearance-grid">
                         ${modes.map(m => `
                             <button type="button" class="hsse-appearance-card${wizardState.renderMode === m.value ? ' hsse-active' : ''}" data-hsse-action="wizard-set-render-mode" data-render-mode="${escapeHtml(m.value)}">
@@ -2093,7 +2093,7 @@
                 </div>
                 ${wizardState.renderMode === 'Normal' ? `
                     <div class="hsse-section-block">
-                        <div class="listItemBodyText hsse-section-label">Card format</div>
+                        <div class="listItemBodyText hsse-section-label">卡片格式</div>
                         <div class="hsse-card-format-grid">
                             ${getCardFormats().map(fmt => `
                                 <button type="button" class="hsse-card-format-btn${wizardState.cardFormat === fmt ? ' hsse-active' : ''}" data-hsse-action="wizard-set-card-format" data-card-format="${escapeHtml(fmt)}"><span class="listItemBodyText">${escapeHtml(fmt)}</span></button>
@@ -2106,10 +2106,10 @@
                         <div class="hsse-spotlight-options-grid">
                             ${hsseBuildSelect('hsse-wizard-spotlightLayout', getSpotlightLayoutOptions(), wizardState.spotlightLayout, 'Spotlight Layout')}
                             ${hsseBuildSelect('hsse-wizard-spotlightSize', getSpotlightSizeOptions(), wizardState.spotlightSize, 'Spotlight Size')}
-                            ${hsseBuildSelect('hsse-wizard-tileCount', getSpotlightTileCountOptions(), wizardState.tileCount, 'Tiled Backdrop Count', 'Set the number of backdrops that will be tiled next to each other in a single slide of the Spotlight.')}
+                            ${hsseBuildSelect('hsse-wizard-tileCount', getSpotlightTileCountOptions(), wizardState.tileCount, '平铺背景图数量', '设置聚焦板块单张幻灯片中相邻平铺的背景图数量。')}
                         </div>
                     </div>
-                    ${buildToggleCard('hsse-wizard-animated', wizardState.panAnimation !== false, 'Animated Slides', '')}
+                    ${buildToggleCard('hsse-wizard-animated', wizardState.panAnimation !== false, '幻灯片动画', '')}
                 ` : ''}
                 ${renderAppearancePreviewHTML()}
             `;
@@ -2140,28 +2140,28 @@
     }
 
     function getModalTitle(stage, wizardState) {
-        if (stage === 'mode' || stage === 'advanced') return 'Create a Section';
+        if (stage === 'mode' || stage === 'advanced') return '创建板块';
         if (stage === 'wizard') {
-            if (wizardState.step === 'confirm') return 'Review Section';
+            if (wizardState.step === 'confirm') return '确认板块';
             if (wizardState.step === 'parent' && wizardState.parentType) {
                 const meta = PARENT_TYPES.find(t => t.type === wizardState.parentType);
-                return `Choose a ${meta?.label?.toLowerCase() || 'item'}`;
+                return `选择${meta?.label?.toLowerCase() || '条目'}`;
             }
-            if (wizardState.step === 'customItems') return 'Create Items';
-            if (wizardState.step === 'externalList') return 'External List';
-            return 'Create a Home Screen Section';
+            if (wizardState.step === 'customItems') return '创建条目';
+            if (wizardState.step === 'externalList') return '外部列表';
+            return '创建主屏幕板块';
         }
-        return 'Create a Section';
+        return '创建板块';
     }
 
     function getFooterHintText(wizardState) {
         if (wizardState.step === 'type') {
-            return 'Select a type to continue';
+            return '选择一个类型以继续';
         }
         if (wizardState.step === 'parent' && !isMultiSelectType(wizardState.parentType)) {
             const meta = PARENT_TYPES.find(t => t.type === wizardState.parentType);
-            const label = (meta?.label || 'item').toLowerCase();
-            return `Select a ${label} to continue`;
+            const label = (meta?.label || '条目').toLowerCase();
+            return `选择一个${label}以继续`;
         }
         return '';
     }
@@ -2174,12 +2174,12 @@
         if (step === 'type' || (step === 'parent' && !parentUsesContinue)) {
             endContent = `<span class="listItemBodyText secondary hsse-footer-hint">${escapeHtml(getFooterHintText(wizardState))}</span>`;
         } else if (step === 'confirm') {
-            endContent = `<button type="button" class="emby-button raised button-submit" data-hsse-action="wizard-finish">Create Section</button>`;
+            endContent = `<button type="button" class="emby-button raised button-submit" data-hsse-action="wizard-finish">创建板块</button>`;
         } else {
-            endContent = `<button type="button" class="emby-button raised button-submit" data-hsse-action="wizard-continue">Continue</button>`;
+            endContent = `<button type="button" class="emby-button raised button-submit" data-hsse-action="wizard-continue">继续</button>`;
         }
 
-        const backLabel = step === 'type' ? 'Back to start' : 'Back';
+        const backLabel = step === 'type' ? '回到开头' : '返回';
 
         return `
             <div class="hsse-footer">
@@ -2192,10 +2192,10 @@
     function buildAdvancedCreateFooterHTML(sectionType = 'custom') {
         return `
             <div class="hsse-footer">
-                <button type="button" class="hsse-footer-back" data-hsse-action="advanced-back" title="Back to start" aria-label="Back to start">${renderMaterialIcon('arrow_back')}</button>
+                <button type="button" class="hsse-footer-back" data-hsse-action="advanced-back" title="回到开头" aria-label="回到开头">${renderMaterialIcon('arrow_back')}</button>
                 <div class="hsse-footer-end">
-                    <button type="button" class="emby-button raised section-preview-btn" data-section-type="${escapeHtml(sectionType)}" style="background: rgba(0, 164, 220, 0.2);">Preview</button>
-                    <button type="button" class="emby-button raised button-submit section-save-btn" data-section-type="${escapeHtml(sectionType)}">Create Section</button>
+                    <button type="button" class="emby-button raised section-preview-btn" data-section-type="${escapeHtml(sectionType)}" style="background: rgba(0, 164, 220, 0.2);">预览</button>
+                    <button type="button" class="emby-button raised button-submit section-save-btn" data-section-type="${escapeHtml(sectionType)}">创建板块</button>
                 </div>
             </div>
         `;
@@ -2203,7 +2203,7 @@
 
     function getFooterHTML(stage, wizardState, options = {}) {
         if (stage === 'mode') {
-            return `<button type="button" class="emby-button raised" data-hsse-action="cancel">Cancel</button>`;
+            return `<button type="button" class="emby-button raised" data-hsse-action="cancel">取消</button>`;
         }
 
         if (stage === 'wizard') {
@@ -2278,85 +2278,85 @@
 
     // Supported additional query options (matching configuration.js)
     const SUPPORTED_QUERY_OPTIONS = {
-        Ids: { label: 'Item IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        ParentId: { label: 'Parent ID', type: 'string', hint: 'GUID of parent item' },
-        ExcludeItemIds: { label: 'Exclude Item IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        GenreIds: { label: 'Genre IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        Person: { label: 'Person', type: 'string', hint: 'Person name' },
-        PersonIds: { label: 'Person IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        PersonTypes: { label: 'Person Types', type: 'array', hint: 'Actor, Director, Writer, etc.' },
-        ExcludePersonTypes: { label: 'Exclude Person Types', type: 'array', hint: 'Actor, Director, Writer, etc.' },
-        StudioIds: { label: 'Studio IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        Fields: { label: 'Fields', type: 'array', hint: 'Comma-separated field names' },
-        MinPremiereDate: { label: 'Min Premiere Date', type: 'date', hint: 'YYYY-MM-DD' },
-        MaxPremiereDate: { label: 'Max Premiere Date', type: 'date', hint: 'YYYY-MM-DD' },
-        MinDateLastSaved: { label: 'Min Date Last Saved', type: 'date', hint: 'YYYY-MM-DD' },
-        MinDateLastSavedForUser: { label: 'Min Date Last Saved For User', type: 'date', hint: 'YYYY-MM-DD' },
-        IndexNumber: { label: 'Index Number', type: 'number', hint: 'Episode/Season index' },
-        ParentIndexNumber: { label: 'Parent Index Number', type: 'number', hint: 'Season index' },
-        MinCommunityRating: { label: 'Min Community Rating', type: 'number', hint: '0-10' },
-        MinCriticRating: { label: 'Min Critic Rating', type: 'number', hint: '0-10' },
-        IsFavorite: { label: 'Is Favorite', type: 'boolean' },
-        IsPlayed: { label: 'Is Played', type: 'boolean' },
-        IsUnplayed: { label: 'Is Unplayed', type: 'boolean' },
-        IsMissing: { label: 'Is Missing', type: 'boolean' },
-        IsUnaired: { label: 'Is Unaired', type: 'boolean' },
-        HasThemeSong: { label: 'Has Theme Song', type: 'boolean' },
-        HasThemeVideo: { label: 'Has Theme Video', type: 'boolean' },
-        HasSubtitles: { label: 'Has Subtitles', type: 'boolean' },
-        HasSpecialFeature: { label: 'Has Special Feature', type: 'boolean' },
-        HasTrailer: { label: 'Has Trailer', type: 'boolean' },
-        HasParentalRating: { label: 'Has Parental Rating', type: 'boolean' },
-        IsHd: { label: 'Is HD', type: 'boolean' },
-        Is4K: { label: 'Is 4K', type: 'boolean' },
-        HasOverview: { label: 'Has Overview', type: 'boolean' },
-        HasOfficialRating: { label: 'Has Official Rating', type: 'boolean' },
-        Recursive: { label: 'Recursive', type: 'boolean', default: true },
-        MaxOfficialRating: { label: 'Max Official Rating', type: 'string', hint: 'e.g., PG-13, TV-MA' },
-        MinOfficialRating: { label: 'Min Official Rating', type: 'string', hint: 'e.g., PG, TV-14' },
-        NameStartsWith: { label: 'Name Starts With', type: 'string' },
-        NameStartsWithOrGreater: { label: 'Name Starts With Or Greater', type: 'string' },
-        NameLessThan: { label: 'Name Less Than', type: 'string' },
-        LocationTypes: { label: 'Location Types', type: 'array', hint: 'FileSystem, Remote, Virtual, Offline' },
-        ExcludeLocationTypes: { label: 'Exclude Location Types', type: 'array', hint: 'FileSystem, Remote, Virtual, Offline' },
-        ExcludeItemTypes: { label: 'Exclude Item Types', type: 'array', hint: 'Movie, Series, Episode, etc.' },
-        ImageTypes: { label: 'Image Types', type: 'array', hint: 'Primary, Backdrop, Thumb, Logo, etc.' },
-        OfficialRatings: { label: 'Official Ratings', type: 'array', hint: 'PG, PG-13, R, etc.' },
-        Studios: { label: 'Studios', type: 'array', hint: 'Pipe-delimited names' },
-        Artists: { label: 'Artists', type: 'array', hint: 'Pipe-delimited names' },
-        Albums: { label: 'Albums', type: 'array', hint: 'Pipe-delimited names' },
-        SeriesStatus: { label: 'Series Status', type: 'array', hint: 'Continuing, Ended, Unreleased' },
-        Years: { label: 'Years', type: 'array', hint: 'Comma-separated years' },
-        EnableResumable: { label: 'Enable Resumable', type: 'boolean' },
-        EnableRewatching: { label: 'Enable Rewatching', type: 'boolean' },
-        EnableUserData: { label: 'Enable User Data', type: 'boolean' }
+        Ids: { label: '条目 ID', type: 'array', hint: '逗号分隔的 GUID' },
+        ParentId: { label: '父项 ID', type: 'string', hint: '父条目的 GUID' },
+        ExcludeItemIds: { label: '排除条目 ID', type: 'array', hint: '逗号分隔的 GUID' },
+        GenreIds: { label: '流派 ID', type: 'array', hint: '逗号分隔的 GUID' },
+        Person: { label: '人物', type: 'string', hint: '人物姓名' },
+        PersonIds: { label: '人物 ID', type: 'array', hint: '逗号分隔的 GUID' },
+        PersonTypes: { label: '人物类型', type: 'array', hint: '演员、导演、编剧等' },
+        ExcludePersonTypes: { label: '排除人物类型', type: 'array', hint: '演员、导演、编剧等' },
+        StudioIds: { label: '制片商 ID', type: 'array', hint: '逗号分隔的 GUID' },
+        Fields: { label: '字段', type: 'array', hint: '逗号分隔的字段名' },
+        MinPremiereDate: { label: '最早发行日期', type: 'date', hint: 'YYYY-MM-DD' },
+        MaxPremiereDate: { label: '最晚发行日期', type: 'date', hint: 'YYYY-MM-DD' },
+        MinDateLastSaved: { label: '最早保存日期', type: 'date', hint: 'YYYY-MM-DD' },
+        MinDateLastSavedForUser: { label: '用户最早保存日期', type: 'date', hint: 'YYYY-MM-DD' },
+        IndexNumber: { label: '序号', type: 'number', hint: '集/季序号' },
+        ParentIndexNumber: { label: '父级序号', type: 'number', hint: '季序号' },
+        MinCommunityRating: { label: '最低社区评分', type: 'number', hint: '0-10' },
+        MinCriticRating: { label: '最低媒体评分', type: 'number', hint: '0-10' },
+        IsFavorite: { label: '是否收藏', type: 'boolean' },
+        IsPlayed: { label: '是否已播放', type: 'boolean' },
+        IsUnplayed: { label: '是否未播放', type: 'boolean' },
+        IsMissing: { label: '是否缺失', type: 'boolean' },
+        IsUnaired: { label: '是否未播出', type: 'boolean' },
+        HasThemeSong: { label: '有主题曲', type: 'boolean' },
+        HasThemeVideo: { label: '有主题视频', type: 'boolean' },
+        HasSubtitles: { label: '有字幕', type: 'boolean' },
+        HasSpecialFeature: { label: '有特别收录', type: 'boolean' },
+        HasTrailer: { label: '有预告片', type: 'boolean' },
+        HasParentalRating: { label: '有家长分级', type: 'boolean' },
+        IsHd: { label: '是否高清', type: 'boolean' },
+        Is4K: { label: '是否 4K', type: 'boolean' },
+        HasOverview: { label: '有简介', type: 'boolean' },
+        HasOfficialRating: { label: '有官方分级', type: 'boolean' },
+        Recursive: { label: '递归', type: 'boolean', default: true },
+        MaxOfficialRating: { label: '最高官方分级', type: 'string', hint: '例如 PG-13、TV-MA' },
+        MinOfficialRating: { label: '最低官方分级', type: 'string', hint: '例如 PG、TV-14' },
+        NameStartsWith: { label: '名称开头为', type: 'string' },
+        NameStartsWithOrGreater: { label: '名称开头或更大', type: 'string' },
+        NameLessThan: { label: '名称小于', type: 'string' },
+        LocationTypes: { label: '位置类型', type: 'array', hint: 'FileSystem、Remote、Virtual、Offline' },
+        ExcludeLocationTypes: { label: '排除位置类型', type: 'array', hint: 'FileSystem、Remote、Virtual、Offline' },
+        ExcludeItemTypes: { label: '排除条目类型', type: 'array', hint: '电影、剧集、集等' },
+        ImageTypes: { label: '图片类型', type: 'array', hint: 'Primary、Backdrop、Thumb、Logo 等' },
+        OfficialRatings: { label: '官方分级', type: 'array', hint: 'PG、PG-13、R 等' },
+        Studios: { label: '制片商', type: 'array', hint: '竖线分隔的名称' },
+        Artists: { label: '艺人', type: 'array', hint: '竖线分隔的名称' },
+        Albums: { label: '专辑', type: 'array', hint: '竖线分隔的名称' },
+        SeriesStatus: { label: '剧集状态', type: 'array', hint: 'Continuing、Ended、Unreleased' },
+        Years: { label: '年份', type: 'array', hint: '逗号分隔的年份' },
+        EnableResumable: { label: '启用可续播', type: 'boolean' },
+        EnableRewatching: { label: '启用重看', type: 'boolean' },
+        EnableUserData: { label: '启用用户数据', type: 'boolean' }
     };
 
     const CARD_FORMATS = ['Poster', 'Thumb', 'Backdrop', 'Square', 'Random', 'Button', 'Banner', 'Logo', 'Clear Art', 'Disc', 'Series Thumb', 'Series Poster'];
     const BADGE_FIELD_DESCRIPTIONS = {
-        IncludeItemTypes: 'Limit results to these item types.',
-        Genres: 'Filter results to items matching these genres.',
-        Tags: 'Filter results to items with these tags.',
-        Collections: 'Limit results to items in these collections.',
-        Playlists: 'Limit results to items in these playlists.'
+        IncludeItemTypes: '将结果限制为这些条目类型。',
+        Genres: '将结果筛选为匹配这些流派的条目。',
+        Tags: '将结果筛选为带有这些标签的条目。',
+        Collections: '将结果限制为这些合集内的条目。',
+        Playlists: '将结果限制为这些播放列表内的条目。'
     };
     const SORT_ORDERS = ['Default', 'Random', 'Name', 'SortName', 'DateCreated', 'PremiereDate', 'CommunityRating', 'CriticRating', 'DatePlayed', 'SortName', 'PlayCount', 'PlayedPercentage', 'StartDate', 'Runtime', 'ProductionYear', 'IsPlayed', 'IsUnplayed', 'ParentIndexNumber', 'IndexNumber', 'IsFolder', 'SimilarityScore', 'SearchScore', 'DateLastContentAdded', 'SeriesDatePlayed', 'ChildCount'];
     const SORT_ORDER_DIRECTIONS = ['Ascending', 'Descending'];
-    const RENDER_MODE_OPTIONS = [{ value: 'Normal', label: 'Normal' }, { value: 'Spotlight', label: 'Spotlight' }, { value: 'Random', label: 'Random' }];
+    const RENDER_MODE_OPTIONS = [{ value: 'Normal', label: '标准' }, { value: 'Spotlight', label: '聚焦' }, { value: 'Random', label: '随机' }];
     const SLIDE_STATE_OPTIONS = [
-        { value: 'none', label: 'None' },
-        { value: 'dots', label: 'Dots' },
-        { value: 'numeric', label: 'Numeric' }
+        { value: 'none', label: '无' },
+        { value: 'dots', label: '圆点' },
+        { value: 'numeric', label: '数字' }
     ];
 
     const SPOTLIGHT_LAYOUT_OPTIONS = [
-        { value: 'Border', label: 'Border' },
-        { value: 'Borderless', label: 'Borderless' }
+        { value: 'Border', label: '边框' },
+        { value: 'Borderless', label: '无边框' }
     ];
     const SPOTLIGHT_SIZE_OPTIONS = [
-        { value: 'normal', label: 'Normal' },
-        { value: 'large', label: 'Large' },
-        { value: 'full', label: 'Full' }
+        { value: 'normal', label: '标准' },
+        { value: 'large', label: '大' },
+        { value: 'full', label: '全屏' }
     ];
     const SPOTLIGHT_TILE_COUNT_OPTIONS = [
         { value: '1', label: '1' },
@@ -2364,27 +2364,27 @@
         { value: '3', label: '3' }
     ];
     const SPOTLIGHT_ENTRANCE_OPTIONS = [
-        { value: 'fadeIn', label: 'Fade in' },
-        { value: 'fadeInUp', label: 'Fade in up' },
-        { value: 'fadeInDown', label: 'Fade in down' }
+        { value: 'fadeIn', label: '淡入' },
+        { value: 'fadeInUp', label: '向上淡入' },
+        { value: 'fadeInDown', label: '向下淡入' }
     ];
     const SPOTLIGHT_SLIDE_OPTIONS = [
-        { value: 'kenBurnsZoomIn', label: 'Ken Burns zoom in' },
-        { value: 'kenBurnsZoomOut', label: 'Ken Burns zoom out' },
-        { value: 'kenBurnsZoomInFullscreen', label: 'Ken Burns zoom in (fullscreen)' },
-        { value: 'kenBurnsZoomOutFullscreen', label: 'Ken Burns zoom out (fullscreen)' },
-        { value: 'kenBurnsPanRight', label: 'Ken Burns pan right' },
-        { value: 'kenBurnsPanLeft', label: 'Ken Burns pan left' },
-        { value: 'kenBurnsPanUp', label: 'Ken Burns pan up' },
-        { value: 'kenBurnsDiagonal', label: 'Ken Burns diagonal' },
-        { value: 'fadeInScale', label: 'Fade in scale' },
-        { value: 'parallaxFloat', label: 'Parallax float' },
-        { value: 'depthPulse', label: 'Depth pulse' },
-        { value: 'slowRotate', label: 'Slow rotate' },
-        { value: 'breathe', label: 'Breathe' },
-        { value: 'heatHaze', label: 'Heat haze' },
-        { value: 'colorWash', label: 'Color wash' },
-        { value: 'vignetteIn', label: 'Vignette in' }
+        { value: 'kenBurnsZoomIn', label: 'Ken Burns 缩放放大' },
+        { value: 'kenBurnsZoomOut', label: 'Ken Burns 缩放缩小' },
+        { value: 'kenBurnsZoomInFullscreen', label: 'Ken Burns 缩放放大（全屏）' },
+        { value: 'kenBurnsZoomOutFullscreen', label: 'Ken Burns 缩放缩小（全屏）' },
+        { value: 'kenBurnsPanRight', label: 'Ken Burns 右移' },
+        { value: 'kenBurnsPanLeft', label: 'Ken Burns 左移' },
+        { value: 'kenBurnsPanUp', label: 'Ken Burns 上移' },
+        { value: 'kenBurnsDiagonal', label: 'Ken Burns 斜向' },
+        { value: 'fadeInScale', label: '淡入缩放' },
+        { value: 'parallaxFloat', label: '视差浮动' },
+        { value: 'depthPulse', label: '深度脉冲' },
+        { value: 'slowRotate', label: '缓慢旋转' },
+        { value: 'breathe', label: '呼吸' },
+        { value: 'heatHaze', label: '热浪扭曲' },
+        { value: 'colorWash', label: '色彩渲染' },
+        { value: 'vignetteIn', label: '暗角淡入' }
     ];
 
     let activeEditCtx = null;
@@ -2451,7 +2451,7 @@
         const isChecked = checked === true;
         return `
             <div style="margin-bottom: 1em;">
-                <label class="listItemBodyText" style="display: block; margin-bottom: 0.5em;">Hide Watched Items</label>
+                <label class="listItemBodyText" style="display: block; margin-bottom: 0.5em;">隐藏已观看条目</label>
                 <button type="button" class="filter-played-toggle" data-checked="${isChecked}" style="
                     position: relative;
                     width: 60px;
@@ -2477,7 +2477,7 @@
                         transition: opacity 0.2s ease;
                         opacity: ${isChecked ? '1' : '0'};
                         z-index: 1;
-                    ">ON</span>
+                    ">开</span>
                     <span style="
                         position: absolute;
                         right: ${isChecked ? '6px' : '8px'};
@@ -2489,7 +2489,7 @@
                         transition: opacity 0.2s ease;
                         opacity: ${isChecked ? '0' : '1'};
                         z-index: 1;
-                    ">OFF</span>
+                    ">关</span>
                     <span style="
                         position: absolute;
                         width: 22px;
@@ -2520,12 +2520,12 @@
     }
 
     const SPOTLIGHT_TOGGLE_DESCRIPTIONS = {
-        panAnimation: 'Apply pan and zoom animations to each slide.',
-        showNavButtons: 'Show previous and next navigation buttons on the carousel.',
-        showClearArt: 'Display clear art logo overlay when available.',
-        cycleBackdrops: 'Cycle through multiple backdrop images per slide.',
-        autoPlay: 'Automatically advance slides after the timer interval.',
-        pauseOnHover: 'Pause the slideshow while a mouse pointer is over it (touch screens are not affected).'
+        panAnimation: '为每张幻灯片应用平移和缩放动画。',
+        showNavButtons: '在轮播上显示上一个/下一个导航按钮。',
+        showClearArt: '在可用时显示 Clear Art 标志叠加层。',
+        cycleBackdrops: '在每张幻灯片中轮播多张背景图。',
+        autoPlay: '在计时器间隔后自动切换幻灯片。',
+        pauseOnHover: '当鼠标指针悬停时暂停幻灯片放映（触摸屏不受影响）。'
     };
 
     /**
@@ -2579,7 +2579,7 @@
         const intervalValue = useIntervalSeconds
             ? Math.round((spotlightOpts.interval ?? 10000) / 1000)
             : (spotlightOpts.interval ?? 10000);
-        const intervalLabel = useIntervalSeconds ? 'Slide Timer (seconds)' : 'Auto-play interval (ms)';
+        const intervalLabel = useIntervalSeconds ? '幻灯片计时（秒）' : '自动播放间隔（毫秒）';
         const cycleBackdropsOn = spotlightOpts.cycleBackdrops === true;
         const rawBackdropsCount = spotlightOpts.backdropsCount ?? resolveSpotlightBackdropsCount(spotlightOpts);
         const backdropsCount = cycleBackdropsOn
@@ -2591,8 +2591,8 @@
             const ord = n === 1 ? 'First' : n === 2 ? 'Second' : 'Third';
             return `
                 <div class="hsae-field-grid hsae-field-grid-2 hsae-spotlight-anim-pair">
-                    ${buildSelect(idPrefix + 'entranceAnimation' + ord, SPOTLIGHT_ENTRANCE_OPTIONS, spotlightOpts['entranceAnimation' + ord] ?? 'fadeIn', 'Entrance animation ' + n)}
-                    ${buildSelect(idPrefix + 'slideAnimation' + ord, SPOTLIGHT_SLIDE_OPTIONS, spotlightOpts['slideAnimation' + ord] ?? 'kenBurnsZoomIn', 'Slide animation ' + n)}
+                    ${buildSelect(idPrefix + 'entranceAnimation' + ord, SPOTLIGHT_ENTRANCE_OPTIONS, spotlightOpts['entranceAnimation' + ord] ?? 'fadeIn', '入场动画 ' + n)}
+                    ${buildSelect(idPrefix + 'slideAnimation' + ord, SPOTLIGHT_SLIDE_OPTIONS, spotlightOpts['slideAnimation' + ord] ?? 'kenBurnsZoomIn', '切换动画 ' + n)}
                 </div>`;
         }
 
@@ -2603,20 +2603,20 @@
         return `
             <div class="hsae-spotlight-inner">
                 <div class="hsae-field-grid hsae-field-grid-4 hsae-spotlight-row-1">
-                    ${buildSelect(idPrefix + 'spotlightLayout', SPOTLIGHT_LAYOUT_OPTIONS, spotlightLayout, 'Layout')}
-                    ${buildSelect(idPrefix + 'spotlightSize', SPOTLIGHT_SIZE_OPTIONS, spotlightSize, 'Size')}
-                    ${buildSelect(idPrefix + 'tileCount', SPOTLIGHT_TILE_COUNT_OPTIONS, tileCountStr, 'Tiled Backdrops')}
-                    ${buildSelect(idPrefix + 'slideState', SLIDE_STATE_OPTIONS, slideStateVal, 'Slide State')}
+                    ${buildSelect(idPrefix + 'spotlightLayout', SPOTLIGHT_LAYOUT_OPTIONS, spotlightLayout, '布局')}
+                    ${buildSelect(idPrefix + 'spotlightSize', SPOTLIGHT_SIZE_OPTIONS, spotlightSize, '尺寸')}
+                    ${buildSelect(idPrefix + 'tileCount', SPOTLIGHT_TILE_COUNT_OPTIONS, tileCountStr, '平铺背景图')}
+                    ${buildSelect(idPrefix + 'slideState', SLIDE_STATE_OPTIONS, slideStateVal, '幻灯片状态')}
                 </div>
                 <div class="hsae-toggle-card-grid hsae-spotlight-row-2">
-                    ${spotlightToggle('panAnimation', animateSlides, 'Animate Slides')}
-                    ${spotlightToggle('showNavButtons', spotlightOpts.showNavButtons !== false, 'Show Controls')}
-                    ${spotlightToggle('showClearArt', spotlightOpts.showClearArt === true, 'Show Clear Art')}
-                    ${spotlightToggle('cycleBackdrops', cycleBackdropsOn, 'Cycle Backdrops')}
-                    ${spotlightToggle('pauseOnHover', spotlightOpts.pauseOnHover !== false, 'Pause on Hover')}
+                    ${spotlightToggle('panAnimation', animateSlides, '幻灯片动画')}
+                    ${spotlightToggle('showNavButtons', spotlightOpts.showNavButtons !== false, '显示控件')}
+                    ${spotlightToggle('showClearArt', spotlightOpts.showClearArt === true, '显示 Clear Art')}
+                    ${spotlightToggle('cycleBackdrops', cycleBackdropsOn, '轮播背景图')}
+                    ${spotlightToggle('pauseOnHover', spotlightOpts.pauseOnHover !== false, '悬停时暂停')}
                 </div>
                 <div id="${idPrefix}backdrops-row" class="hsae-spotlight-backdrops-row" style="display:${cycleBackdropsOn ? 'block' : 'none'};">
-                    ${buildTextInput(idPrefix + 'backdropsCount', backdropsCount, 'Backdrops Count', 'number')}
+                    ${buildTextInput(idPrefix + 'backdropsCount', backdropsCount, '背景图数量', 'number')}
                 </div>
                 <div id="${idPrefix}animation-divider" class="hsae-query-divider" role="separator" aria-hidden="true" style="display:${animateSlides ? 'block' : 'none'};"></div>
                 <div id="${idPrefix}animation-dropdowns" class="hsae-spotlight-animations hsae-spotlight-animations--${tileCount}" style="display:${animateSlides ? 'grid' : 'none'};">
@@ -2625,7 +2625,7 @@
                     <div id="${idPrefix}anim-third" class="hsae-spotlight-anim-group" style="display:${tileCount >= 3 ? 'block' : 'none'};">${animRow(3)}</div>
                 </div>
                 <div class="hsae-field-grid hsae-field-grid-2 hsae-spotlight-row-autoplay">
-                    ${spotlightToggle('autoPlay', spotlightOpts.autoPlay !== false, 'Cycle Slides Automatically')}
+                    ${spotlightToggle('autoPlay', spotlightOpts.autoPlay !== false, '自动轮播幻灯片')}
                     ${buildTextInput(idPrefix + 'interval', intervalValue, intervalLabel, 'number')}
                 </div>
             </div>
@@ -2649,7 +2649,7 @@
         const fieldPrefix = idPrefix + 'spotlight-';
         return `
                 <div id="${containerId}" class="hsae-spotlight-legacy-wrap" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em; display: ${isSpotlight ? 'block' : 'none'};">
-                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.75em;">Spotlight Options</div>
+                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.75em;">聚焦选项</div>
                     ${buildSharedSpotlightFieldsHTML(spotlightOpts, fieldPrefix, { useIntervalSeconds: true })}
                 </div>
         `;
@@ -2782,7 +2782,7 @@
 
     function buildSectionEditorHTML(section) {
         if (!window.KefinHomeScreenAdvancedEditor?.buildHTML) {
-            return '<div class="listItemBodyText secondary">Advanced section editor is not available.</div>';
+            return '<div class="listItemBodyText secondary">高级板块编辑器不可用。</div>';
         }
         return window.KefinHomeScreenAdvancedEditor.buildHTML(section, resolveAdvancedEditorBuildContext(section));
     }
@@ -2795,30 +2795,30 @@
         return `
             <div class="query-editor" data-query-index="${index}" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 0.75em;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75em;">
-                    <div class="listItemBodyText" style="font-weight: 500;">Query ${index + 1}</div>
+                    <div class="listItemBodyText" style="font-weight: 500;">查询 ${index + 1}</div>
                     ${canDelete ? `
                         <button type="button" class="emby-button delete-query-btn raised" data-query-index="${index}" style="padding: 0.5em 1em; background: rgba(244, 67, 54, 0.2);">
-                            <span>Delete</span>
+                            <span>删除</span>
                         </button>
                     ` : ''}
                 </div>
                 ${buildSelect(`query-${index}-type`, [
-                    { value: 'standard', label: 'Standard Items Query' },
-                    { value: 'custom', label: 'Custom Endpoint' },
-                    { value: 'datasource', label: 'Data Source' }
-                ], queryType, 'Query Type')}
+                    { value: 'standard', label: '标准条目查询' },
+                    { value: 'custom', label: '自定义端点' },
+                    { value: 'datasource', label: '数据源' }
+                ], queryType, '查询类型')}
                 <div id="query-${index}-path-container" style="display: ${pathDisplay};">
-                    ${buildTextInput(`query-${index}-path`, query.path || '', 'Endpoint Path', 'text', '/Genres, /Persons, /Shows/NextUp, /Items/Latest, etc')}
+                    ${buildTextInput(`query-${index}-path`, query.path || '', '端点路径', 'text', '/Genres、/Persons、/Shows/NextUp、/Items/Latest 等')}
                 </div>
                 <div id="query-${index}-dataSource-container" style="display: ${dataSourceDisplay};">
-                    ${buildTextInput(`query-${index}-dataSource`, query.dataSource || '', 'Data Source (e.g., MoviesCache.getImdbTop250Movies)')}
+                    ${buildTextInput(`query-${index}-dataSource`, query.dataSource || '', '数据源（例如 MoviesCache.getImdbTop250Movies）')}
                 </div>
                 <div style="margin-top: 0.75em;">
-                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">Parent Options</div>
+                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">父项选项</div>
                     ${buildParentOptionsEditor(query, index)}
                 </div>
                 <div style="margin-top: 0.75em;">
-                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">Query Options</div>
+                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">查询选项</div>
                     ${buildQueryOptionsEditor(query.queryOptions || {}, index)}
                 </div>
             </div>
@@ -2850,17 +2850,17 @@
             <div style="display: grid; gap: 0.75em;">
                 <!-- Parent Item Dropdown -->
                 ${buildSelect(`query-${queryIndex}-parentItemType`, [
-                    { value: '', label: 'Select a Parent... (optional)' },
-                    { value: 'Collection', label: 'Collection' },
-                    { value: 'Playlist', label: 'Playlist' },
-                    { value: 'Generic Parent', label: 'Generic Parent' }
-                ], parentItemType, 'Parent Item')}
+                    { value: '', label: '选择父项...（可选）' },
+                    { value: 'Collection', label: '合集' },
+                    { value: 'Playlist', label: '播放列表' },
+                    { value: 'Generic Parent', label: '通用父项' }
+                ], parentItemType, '父项')}
                 
                 <!-- Conditional Parent Item Fields -->
                 <div id="query-${queryIndex}-Collections-container" data-query-index="${queryIndex}" data-type="Collections" style="display: ${parentItemType === 'Collection' ? 'block' : 'none'};"></div>
                 <div id="query-${queryIndex}-Playlists-container" data-query-index="${queryIndex}" data-type="Playlists" style="display: ${parentItemType === 'Playlist' ? 'block' : 'none'};"></div>
                 <div id="query-${queryIndex}-GenericParent-container" style="display: ${parentItemType === 'Generic Parent' ? 'block' : 'none'};">
-                    ${buildTextInput(`query-${queryIndex}-ParentId`, queryOptions.ParentId || '', 'Parent ID (GUID)', 'text')}
+                    ${buildTextInput(`query-${queryIndex}-ParentId`, queryOptions.ParentId || '', '父项 ID (GUID)', 'text')}
                 </div>
                 
                 <!-- Hidden field to store parent item type -->
@@ -2876,11 +2876,11 @@
 
         // Regular text/number fields
         const commonFields = [
-            { key: 'SortBy', label: 'Sort By', value: queryOptions.SortBy || '', options: SORT_ORDERS },
-            { key: 'SortOrder', label: 'Sort Order', value: queryOptions.SortOrder || '', options: SORT_ORDER_DIRECTIONS },
-            { key: 'Limit', label: 'Limit', value: queryOptions.Limit || '', type: 'number' },
-            { key: 'Filters', label: 'Filters', value: queryOptions.Filters || '', placeholder: 'IsUnplayed,IsResumable,IsNotFolder' },
-            { key: 'SearchTerm', label: 'Search Term', value: queryOptions.SearchTerm || '' }
+            { key: 'SortBy', label: '排序依据', value: queryOptions.SortBy || '', options: SORT_ORDERS },
+            { key: 'SortOrder', label: '排序方式', value: queryOptions.SortOrder || '', options: SORT_ORDER_DIRECTIONS },
+            { key: 'Limit', label: '限制数量', value: queryOptions.Limit || '', type: 'number' },
+            { key: 'Filters', label: '筛选器', value: queryOptions.Filters || '', placeholder: 'IsUnplayed,IsResumable,IsNotFolder' },
+            { key: 'SearchTerm', label: '搜索词', value: queryOptions.SearchTerm || '' }
         ];
 
         // Extract additional options (not in common fields or badge fields)
@@ -2913,7 +2913,7 @@
                     `).join('')}
                 </div>
                 <details style="margin-top: 0.5em;">
-                    <summary class="listItemBodyText" style="cursor: pointer; font-size: 0.9em;">Additional Options</summary>
+                    <summary class="listItemBodyText" style="cursor: pointer; font-size: 0.9em;">其他选项</summary>
                     <div style="padding: 0.5em 0;">
                         ${buildAdditionalOptionsControls(queryIndex)}
                         ${buildAdditionalOptionsList(queryIndex, additionalOptions)}
@@ -3139,7 +3139,7 @@
             prefix: 'query',
             sectionIndex: queryIndex,
             container: container,
-            label: type === 'IncludeItemTypes' ? 'Include Item Types' : (type === 'Collections' ? 'Collections' : (type === 'Playlists' ? 'Playlists' : type)),
+            label: type === 'IncludeItemTypes' ? '包含的条目类型' : (type === 'Collections' ? '合集' : (type === 'Playlists' ? '播放列表' : type)),
             description: BADGE_FIELD_DESCRIPTIONS[type] || '',
             currentValuesArray: currentValues,
             availableTypes: type === 'IncludeItemTypes' ? allAvailableItemTypes : null,
@@ -3166,14 +3166,14 @@
 
         return `
             <div class="query-${queryIndex}-additional-options-controls" data-query-index="${queryIndex}" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-top: 0.5em;">
-                <div class="listItemBodyText" style="margin-bottom: 0.5em;">Additional Options</div>
+                <div class="listItemBodyText" style="margin-bottom: 0.5em;">其他选项</div>
                 <div style="display: flex; gap: 0.5em; align-items: center;">
                     <select class="fld emby-select emby-select-withcolor additional-option-select" data-query-index="${queryIndex}" style="flex: 1; margin: 0; min-width: 0;">
-                        <option value="">Select an option to add...</option>
+                        <option value="">选择要添加的选项...</option>
                         ${dropdownOptions}
                     </select>
                     <button type="button" class="raised emby-button add-additional-option" data-query-index="${queryIndex}" style="background: rgba(0, 164, 220, 0.2); min-width: auto; padding: 0.5em 1em;">
-                        <span>Add</span>
+                        <span>添加</span>
                     </button>
                 </div>
             </div>
@@ -3219,7 +3219,7 @@
             return `
                 <div class="additional-option-row" style="display: flex; align-items: flex-end; gap: 0.5em; margin-top: 0.5em; padding: 0.5em; background: rgba(255,255,255,0.05); border-radius: 4px;">
                     ${inputField}
-                    <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="Remove Option">
+                    <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="移除选项">
                         <span class="material-icons">close</span>
                     </button>
                 </div>
@@ -3244,16 +3244,16 @@
         return `
             <div style="max-width: 100%;">
                 <div class="listItemBodyText secondary" style="margin-bottom: 1em; padding: 0.75em; background: rgba(255,255,255,0.05); border-radius: 4px;">
-                    <strong>Note:</strong> Discovery sections use dynamic sources that are determined at runtime. You can only modify basic settings here.
+                    <strong>注意：</strong>探索板块使用在运行时确定的动态来源。此处只能修改基本设置。
                 </div>
-                ${buildTextInput('discovery-name', section.name || '', 'Name Template (use placeholders like {Genre}, {Person}, {Title})')}
-                ${buildCheckbox('discovery-enabled', section.enabled !== false, 'Enabled')}
-                ${buildTextInput('discovery-itemLimit', section.itemLimit || 20, 'Item Limit', 'number')}
-                ${buildSelect('discovery-sortOrder', SORT_ORDERS, section.sortOrder || 'Random', 'Sort Order')}
-                ${section.sortOrderDirection ? buildSelect('discovery-sortOrderDirection', SORT_ORDER_DIRECTIONS, section.sortOrderDirection || 'Ascending', 'Sort Order Direction') : ''}
-                ${buildSelect('discovery-cardFormat', CARD_FORMATS, section.cardFormat || 'Poster', 'Card Format')}
+                ${buildTextInput('discovery-name', section.name || '', '名称模板（可使用 {Genre}、{Person}、{Title} 等占位符）')}
+                ${buildCheckbox('discovery-enabled', section.enabled !== false, '启用')}
+                ${buildTextInput('discovery-itemLimit', section.itemLimit || 20, '条目数量', 'number')}
+                ${buildSelect('discovery-sortOrder', SORT_ORDERS, section.sortOrder || 'Random', '排序方式')}
+                ${section.sortOrderDirection ? buildSelect('discovery-sortOrderDirection', SORT_ORDER_DIRECTIONS, section.sortOrderDirection || 'Ascending', '排序方向') : ''}
+                ${buildSelect('discovery-cardFormat', CARD_FORMATS, section.cardFormat || 'Poster', '卡片格式')}
                 ${buildTextInput('discovery-ttl', section.ttl !== undefined ? section.ttl : '', 'TTL (ms)', 'number')}
-                ${buildSelect('discovery-renderMode', RENDER_MODE_OPTIONS, section.renderMode || 'Normal', 'Render Mode')}
+                ${buildSelect('discovery-renderMode', RENDER_MODE_OPTIONS, section.renderMode || 'Normal', '渲染模式')}
                 <!-- Spotlight Options (visible only when Render Mode = Spotlight) -->
                 ${discoverySpotlightHTML}
             </div>
@@ -3318,15 +3318,15 @@
         footer.style.gap = '0.5em';
         footer.style.display = 'flex';
         footer.innerHTML = `
-            <button class="emby-button raised section-preview-btn" data-section-id="${section.id}" data-section-type="${ctx.sectionType}" style="background: rgba(0, 164, 220, 0.2);">Preview</button>
-            <button class="emby-button raised" onclick="window.ModalSystem.close('${modalId}')">Cancel</button>
-            <button class="emby-button raised section-update-btn" data-section-id="${section.id}" data-section-type="${ctx.sectionType}" title="Save and apply these settings to all users.">Update</button>
-            <button class="emby-button raised block button-submit section-save-btn" data-section-id="${section.id}" data-section-type="${ctx.sectionType}" title="Save and apply these settings to new users only.">OK</button>
+            <button class="emby-button raised section-preview-btn" data-section-id="${section.id}" data-section-type="${ctx.sectionType}" style="background: rgba(0, 164, 220, 0.2);">预览</button>
+            <button class="emby-button raised" onclick="window.ModalSystem.close('${modalId}')">取消</button>
+            <button class="emby-button raised section-update-btn" data-section-id="${section.id}" data-section-type="${ctx.sectionType}" title="保存并将这些设置应用到所有用户。">更新</button>
+            <button class="emby-button raised block button-submit section-save-btn" data-section-id="${section.id}" data-section-type="${ctx.sectionType}" title="保存并将这些设置仅应用到新用户。">确定</button>
         `;
 
         const modalInstance = window.ModalSystem.create({
             id: modalId,
-            title: `Edit Section: ${section.name || 'Unnamed'}`,
+            title: `编辑板块：${section.name || '未命名'}`,
             content: content,
             footer: footer,
             closeOnBackdrop: false,
@@ -3362,7 +3362,7 @@
                 const saveSectionFromEditor = async () => {
                     const sectionData = collectSectionEditorData(originalSection);
                     if (!sectionData) {
-                        sectionEditorShowToast('Error collecting section data');
+                        sectionEditorShowToast('收集板块数据时出错');
                         return null;
                     }
                     sectionData.id = section.id;
@@ -3396,12 +3396,12 @@
                             if (!sectionData) return;
                             const storedId = window.KefinUserHomeScreenConfig?.getStoredSectionPrefId?.(sectionData)
                                 || sectionData.id;
-                            sectionEditorShowToast('Section saved. Updating users…');
+                            sectionEditorShowToast('板块已保存。正在更新用户…');
                             await window.KefinUserHomeScreenConfig?.updateUserHomeScreenSectionConfiguration?.(storedId);
                             window.ModalSystem.close(modalId);
                         } catch (e) {
                             console.warn('[KefinTweaks] Failed to update section for all users:', e);
-                            sectionEditorShowToast('Error updating users');
+                            sectionEditorShowToast('更新用户时出错');
                         } finally {
                             updateBtn.disabled = false;
                             if (saveBtn) saveBtn.disabled = false;
@@ -3436,7 +3436,7 @@
                     previewBtn.addEventListener('click', async () => {
                         const sectionData = collectSectionEditorData(originalSection);
                         if (!sectionData) {
-                            sectionEditorShowToast('Error collecting section data for preview');
+                            sectionEditorShowToast('收集板块数据以进行预览时出错');
                             return;
                         }
                         sectionData.id = sectionData.id || originalSection?.id || section.id;
@@ -3494,7 +3494,7 @@
                                         modalInstance.dialogContent.querySelectorAll('.query-editor').forEach((editor, newIndex) => {
                                             editor.dataset.queryIndex = newIndex;
                                             const titleEl = editor.querySelector('.listItemBodyText');
-                                            if (titleEl) titleEl.textContent = `Query ${newIndex + 1}`;
+                                            if (titleEl) titleEl.textContent = `查询 ${newIndex + 1}`;
                                         });
                                         // Show/hide merge sorting based on query count
                                         const queriesCount = modalInstance.dialogContent.querySelectorAll('.query-editor').length;
@@ -3527,7 +3527,7 @@
                             modalInstance.dialogContent.querySelectorAll('.query-editor').forEach((editor, newIndex) => {
                                 editor.dataset.queryIndex = newIndex;
                                 const titleEl = editor.querySelector('.listItemBodyText');
-                                if (titleEl) titleEl.textContent = `Query ${newIndex + 1}`;
+                                if (titleEl) titleEl.textContent = `查询 ${newIndex + 1}`;
                                 // Update all input IDs
                                 editor.querySelectorAll('input, select, textarea').forEach(input => {
                                     const oldId = input.id;
@@ -3866,7 +3866,7 @@
                     row.style.cssText = 'display: flex; align-items: flex-end; gap: 0.5em; margin-top: 0.5em; padding: 0.5em; background: rgba(255,255,255,0.05); border-radius: 4px;';
                     row.innerHTML = `
                         ${inputField}
-                        <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="Remove Option">
+                        <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="移除选项">
                             <span class="material-icons">close</span>
                         </button>
                     `;
@@ -3903,7 +3903,7 @@
         return `
             <div class="hsc-settings-panel">
                 <div class="hsc-settings-desc listItemBodyText secondary">
-                    <p>Default behavior for spotlight sections on the home screen. Per-section overrides can be set when editing a section.</p>
+                    <p>主屏幕上聚焦板块的默认行为。可在编辑板块时针对单个板块进行覆盖设置。</p>
                 </div>
                 ${buildSharedSpotlightFieldsHTML(spotlightOpts, 'spotlight-', { useIntervalSeconds: true })}
             </div>
@@ -4021,7 +4021,7 @@
             } catch (err) {
                 if (requestId !== parentLoadRequestId) return;
                 wizardState.parentListStatus = 'error';
-                wizardState.parentListError = err.message || 'Failed to load items';
+                wizardState.parentListError = err.message || '加载条目失败';
                 console.error('[KefinTweaks Section Editor] Parent load error:', err);
             }
 
@@ -4059,7 +4059,7 @@
                 const renderPreview = window.KefinHomeScreen?.renderSectionPreviewInto;
                 const mergeResolved = window.KefinHomeScreen?.mergeDraftWithResolvedPreview;
                 if (typeof fetchPreview !== 'function' || typeof renderPreview !== 'function') {
-                    container.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">Preview unavailable.</p>';
+                    container.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">预览不可用。</p>';
                     return;
                 }
 
@@ -4071,7 +4071,7 @@
                     && appearancePreviewCache.items !== null;
 
                 if (!cacheHit) {
-                    container.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">Loading preview…</p>';
+                    container.innerHTML = '<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">正在加载预览…</p>';
                 }
 
                 try {
@@ -4089,7 +4089,7 @@
                 } catch (err) {
                     if (requestId !== appearancePreviewRequestId) return;
                     appearancePreviewCache = { queryKey: null, items: null, resolvedSection: null };
-                    container.innerHTML = `<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">${escapeHtml(err.message || 'Preview failed')}</p>`;
+                    container.innerHTML = `<p class="listItemBodyText secondary" style="text-align:center;padding:1.5em 0;">${escapeHtml(err.message || '预览失败')}</p>`;
                 }
             }, WIZARD_PARENT_DATA.APPEARANCE_PREVIEW_DEBOUNCE_MS);
         }
@@ -4122,7 +4122,7 @@
 
             const header = modalInstance.dialogHeader;
             const closeBtn = header.querySelector('.btnClose');
-            const titleText = header.querySelector('.dialogTitle, h2')?.textContent || 'Create a Section';
+            const titleText = header.querySelector('.dialogTitle, h2')?.textContent || '创建板块';
 
             header.querySelector('.hsse-header-main')?.remove();
             header.querySelector('.hsae-header-main')?.remove();
@@ -4183,7 +4183,7 @@
                 section,
                 ...groupContext,
                 originalSection,
-                headerTitle: 'Create a Section'
+                headerTitle: '创建板块'
             }, {
                 onSave: async (sectionData) => {
                     Object.assign(section, sectionData);
@@ -4412,7 +4412,7 @@
                         collectCustomItemsFromForm(root, wizardState);
                     }
                     const itemToRemove = wizardState.customItems[removeIndex];
-                    if (hasCustomItemContent(itemToRemove) && !confirm('Are you sure you want to remove this item?')) {
+                    if (hasCustomItemContent(itemToRemove) && !confirm('确定要移除此条目吗？')) {
                         break;
                     }
                     wizardState.customItems.splice(removeIndex, 1);
@@ -4561,7 +4561,7 @@
                     if (wizardState.step === 'customItems') {
                         if (!hasValidCustomItems(wizardState.customItems)) break;
                         if (!wizardState.sectionName?.trim()) {
-                            wizardState.sectionName = 'Custom Section';
+                            wizardState.sectionName = '自定义板块';
                         }
                     }
                     if (wizardState.step === 'externalList') {
@@ -4569,7 +4569,7 @@
                         if (!urls.length) break;
                         wizardState.externalListUrls = urls;
                         if (!wizardState.sectionName?.trim()) {
-                            wizardState.sectionName = 'External List';
+                            wizardState.sectionName = '外部列表';
                         }
                     }
                     if (wizardState.step === 'settings' && wizardState.sectionVisibility === 'seasonal') {

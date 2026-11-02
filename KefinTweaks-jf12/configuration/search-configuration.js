@@ -61,26 +61,26 @@
         return `
             <div style="max-width: 800px;">
                 <div class="listItemBodyText secondary" style="margin-bottom: 1em; font-size: 0.9em; line-height: 1.4;">
-                    Replaces the field on the search page with one that looks in Movies, TV Shows, Episodes and People first (chips for All, Music and Books appear next to it, only for libraries you have) and shows the answers as ordinary cards, one row per type.
-                    It works next to Jellyfin Enhanced: Seerr results, when JE shows them, sit below these rows.
+                    将搜索页上的输入框替换为优先搜索电影、剧集、集和人物的版本（旁边会出现“全部”“音乐”“图书”标签，仅显示您拥有的媒体库），
+                    并以普通卡片的形式展示结果，每种类型一行。它可以与 Jellyfin Enhanced 共存：当 JE 显示 Seerr 结果时，这些结果会排在这些行下方。
                 </div>
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Enable Seerr results from JellyfinEnhanced</div>
-                        <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">If you are using Seerr from Jellyfin Enhanced, you can enable this to add an additional search toggle for Requests</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">启用 JellyfinEnhanced 的 Seerr 结果</div>
+                        <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">如果您正在使用 Jellyfin Enhanced 的 Seerr，可以启用此项，为请求（Requests）添加一个额外的搜索切换标签</div>
                         <label class="checkboxContainer" style="display: flex; align-items: center; gap: 0.5em;">
                             <input type="checkbox" id="search_enableJellyseerr" ${config.enableJellyseerr === true ? 'checked' : ''}>
-                            <span class="listItemBodyText">Enabled</span>
+                            <span class="listItemBodyText">启用</span>
                         </label>
                     </div>
                 </div>
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Remember the search type</div>
-                        <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">The chip that was picked last (All, Movies/TV, Music, Books, Request) is selected again the next time the search page opens. It is kept in this browser only; nothing is written to the server. Turn it off to always start on Movies/TV.</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">记住搜索类型</div>
+                        <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">下次打开搜索页时会重新选中上次选择的标签（全部、电影/剧集、音乐、图书、请求）。它只保存在此浏览器中，不会写入服务器。关闭此项则始终从电影/剧集开始。</div>
                         <label class="checkboxContainer" style="display: flex; align-items: center; gap: 0.5em;">
                             <input type="checkbox" id="search_rememberType" ${config.rememberType !== false ? 'checked' : ''}>
-                            <span class="listItemBodyText">Enabled</span>
+                            <span class="listItemBodyText">启用</span>
                         </label>
                     </div>
                 </div>
@@ -118,14 +118,14 @@
             footer.style.gap = '0.75em';
             footer.style.justifyContent = 'flex-end';
             footer.innerHTML = `
-                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">Close</button>
-                <button class="emby-button raised block button-submit" id="save-search-config-btn">Save</button>
+                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">关闭</button>
+                <button class="emby-button raised block button-submit" id="save-search-config-btn">保存</button>
             `;
 
             // Create modal
             const modalInstance = window.ModalSystem.create({
                 id: MODAL_ID,
-                title: 'Search Configuration',
+                title: '搜索设置',
                 content: content,
                 footer: footer,
                 closeOnBackdrop: true,
@@ -140,11 +140,11 @@
                             const success = await saveConfig(searchConfig);
                             if (success) {
                                 if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                    window.KefinTweaksToaster.toast('Search configuration saved!');
+                                    window.KefinTweaksToaster.toast('搜索配置已保存！');
                                 }
                                 window.ModalSystem.close(MODAL_ID);
                             } else {
-                                alert('Error saving configuration. Please ensure the JavaScript Injector plugin is installed and you have administrator permissions.');
+                                alert('保存配置时出错。请确保已安装 JavaScript Injector 插件，并且您拥有管理员权限。');
                             }
                         });
                     }
@@ -160,7 +160,7 @@
             LOG('Search configuration modal opened');
         } catch (error) {
             ERR('Error opening search config modal:', error);
-            alert('Error opening configuration: ' + error.message);
+            alert('打开配置时出错：' + error.message);
         }
     }
 

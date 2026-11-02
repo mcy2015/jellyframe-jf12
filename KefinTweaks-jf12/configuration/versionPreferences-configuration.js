@@ -104,16 +104,16 @@
             ? `<span class="listItemBodyText kefin-vp-none-label" style="flex: 1; min-width: 0; font-weight: 600;"
                     data-list="${escapeHtml(listKey)}" data-index="${index}" data-term="${escapeHtml(NONE_SENTINEL)}">
                     ${escapeHtml(NONE_SENTINEL)}
-                    <span class="listItemBodyText secondary" style="font-weight: 400; font-size: 0.85em; margin-left: 0.5em;">(no match)</span>
+                    <span class="listItemBodyText secondary" style="font-weight: 400; font-size: 0.85em; margin-left: 0.5em;">（无匹配）</span>
                </span>`
             : `<input type="text" class="emby-input kefin-vp-term-input" value="${escapeHtml(term)}"
                     data-list="${escapeHtml(listKey)}" data-index="${index}"
-                    style="flex: 1; min-width: 0;" aria-label="Term ${index + 1}" />`;
+                    style="flex: 1; min-width: 0;" aria-label="词条 ${index + 1}" />`;
 
         const removeBtn = isNone
             ? ''
             : `<button type="button" class="emby-button raised kefin-vp-remove" data-list="${escapeHtml(listKey)}" data-index="${index}"
-                    title="Remove" style="min-width: auto; padding: 0.35em 0.5em;">
+                    title="移除" style="min-width: auto; padding: 0.35em 0.5em;">
                     <span class="material-icons" style="font-size: 1.1em; vertical-align: middle;">delete</span>
                 </button>`;
 
@@ -124,11 +124,11 @@
                 <span class="listItemBodyText secondary" style="min-width: 1.5em; text-align: right;">${index + 1}.</span>
                 ${termCell}
                 <button type="button" class="emby-button raised kefin-vp-move-up" data-list="${escapeHtml(listKey)}" data-index="${index}"
-                    title="Move up" style="min-width: auto; padding: 0.35em 0.5em;" ${index === 0 ? 'disabled' : ''}>
+                    title="上移" style="min-width: auto; padding: 0.35em 0.5em;" ${index === 0 ? 'disabled' : ''}>
                     <span class="material-icons" style="font-size: 1.1em; vertical-align: middle;">arrow_upward</span>
                 </button>
                 <button type="button" class="emby-button raised kefin-vp-move-down" data-list="${escapeHtml(listKey)}" data-index="${index}"
-                    title="Move down" style="min-width: auto; padding: 0.35em 0.5em;">
+                    title="下移" style="min-width: auto; padding: 0.35em 0.5em;">
                     <span class="material-icons" style="font-size: 1.1em; vertical-align: middle;">arrow_downward</span>
                 </button>
                 ${removeBtn}
@@ -147,9 +147,9 @@
                     </div>
                     <div style="display: flex; gap: 0.5em; margin-top: 0.65em; flex-wrap: wrap;">
                         <input type="text" class="emby-input kefin-vp-add-input" data-list="${escapeHtml(listKey)}"
-                            placeholder="Add a term…" style="flex: 1; min-width: 140px;" />
+                            placeholder="添加词条…" style="flex: 1; min-width: 140px;" />
                         <button type="button" class="emby-button raised button-submit kefin-vp-add-btn" data-list="${escapeHtml(listKey)}">
-                            Add
+                            添加
                         </button>
                     </div>
                 </div>
@@ -229,8 +229,8 @@
 
     function getLabelOrderDescription(showVersionBeforeEdition) {
         return showVersionBeforeEdition
-            ? 'Version will be listed before the edition (1080p - Theatrical)'
-            : 'Edition will be listed before the version (Theatrical - 1080p)';
+            ? '版本将排在特别版之前（1080p - Theatrical）'
+            : '特别版将排在版本之前（Theatrical - 1080p）';
     }
 
     function buildLabelOrderToggleHTML(showVersionBeforeEdition) {
@@ -240,7 +240,7 @@
                 <input type="checkbox" id="kefin-vp-show-version-before-edition" style="display: none;"
                     ${enabled ? 'checked' : ''} />
                 <div class="kefin-vp-label-order-text">
-                    <div class="listItemBodyText" style="font-weight: 500;">List Version Before Edition</div>
+                    <div class="listItemBodyText" style="font-weight: 500;">版本排在特别版之前</div>
                     <div class="listItemBodyText secondary kefin-vp-label-order-desc" style="margin-top: 0.35em; font-size: 0.9em;">
                         ${escapeHtml(getLabelOrderDescription(enabled))}
                     </div>
@@ -267,21 +267,21 @@
         return `
             <div style="max-width: 100%;">
                 <div class="listItemBodyText secondary" style="margin-bottom: 1em;">
-                    Manage how different versions and editions of your items are displayed.
-                    Terms are matched as case-insensitive substrings of the media source label.
-                    Higher list positions are prioritized first.
+                    管理媒体项目的不同版本和特别版的显示方式。
+                    词条将以不区分大小写的方式匹配媒体源标签的子字符串。
+                    列表中越靠前的位置优先级越高。
                 </div>
                 ${buildLabelOrderToggleHTML(config.showVersionBeforeEdition)}
                 <div class="kefin-vp-lists-grid">
                     ${buildListSectionHTML(
-                        'Version Terms',
-                        'Resolution / quality labels (e.g. 4k, 1080p).',
+                        '版本词条',
+                        '分辨率/画质标签（如 4k、1080p）。',
                         'versions',
                         config.versions
                     )}
                     ${buildListSectionHTML(
-                        'Edition Terms',
-                        'Edition labels (e.g. Theatrical, Director\'s Cut).',
+                        '特别版词条',
+                        '特别版标签（如 Theatrical、导演剪辑版）。',
                         'editions',
                         config.editions
                     )}
@@ -357,7 +357,7 @@
                 const term = input?.value?.trim();
                 if (!term) return;
                 if (isNoneSentinel(term)) {
-                    window.KefinTweaksToaster?.toast?.('"None" is a built-in priority slot and cannot be added as a term.');
+                    window.KefinTweaksToaster?.toast?.('“None”是内置的优先级占位项，不能作为词条添加。');
                     if (input) input.value = '';
                     return;
                 }
@@ -439,13 +439,13 @@
             footer.style.gap = '0.75em';
             footer.style.justifyContent = 'flex-end';
             footer.innerHTML = `
-                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">Close</button>
-                <button class="emby-button raised block button-submit" id="save-versionpreferences-config-btn">Save</button>
+                <button class="emby-button raised" onclick="window.ModalSystem.close('${MODAL_ID}')">关闭</button>
+                <button class="emby-button raised block button-submit" id="save-versionpreferences-config-btn">保存</button>
             `;
 
             const modalInstance = window.ModalSystem.create({
                 id: MODAL_ID,
-                title: 'Item Version Preferences',
+                title: '项目版本偏好',
                 content,
                 footer,
                 closeOnBackdrop: true,
@@ -459,10 +459,10 @@
                         const toSave = collectConfig(root);
                         const success = await saveConfig(toSave);
                         if (success) {
-                            window.KefinTweaksToaster?.toast?.('Configuration saved!');
+                            window.KefinTweaksToaster?.toast?.('配置已保存！');
                             window.ModalSystem.close(MODAL_ID);
                         } else {
-                            alert('Error saving configuration. Please ensure the JavaScript Injector plugin is installed and you have administrator permissions.');
+                            alert('保存配置时出错。请确保已安装 JavaScript Injector 插件，并且您拥有管理员权限。');
                         }
                     });
                 }
@@ -477,7 +477,7 @@
             LOG('Version Preferences configuration modal opened');
         } catch (error) {
             ERR('Error opening version preferences config modal:', error);
-            alert('Error opening configuration: ' + error.message);
+            alert('打开配置时出错：' + error.message);
         }
     }
 

@@ -404,7 +404,7 @@
 
                 const newSection = {
                     id: sectionId,
-                    name: libConfig.name || `Recently Added Media`,
+                    name: libConfig.name || `最近添加的媒体`,
                     enabled: libConfig.enabled !== false,
                     order: libConfig.order || 61,
                     cardFormat: libConfig.cardFormat || 'Poster',
@@ -509,7 +509,7 @@
 
         const customSection = {
             id: `custom-${Date.now()}-${Math.random()}`,
-            name: legacySection.name || 'Custom Section',
+            name: legacySection.name || '自定义板块',
             enabled: legacySection.enabled !== false,
             order: legacySection.order,
             cardFormat: legacySection.cardFormat || 'Poster',
@@ -562,12 +562,12 @@
         'writtenByWriterRecentlyWatched'
     ]);
 
-    const RECENTLY_WATCHED_CAPTION_DEFAULT = 'Because you recently watched {Title}';
+    const RECENTLY_WATCHED_CAPTION_DEFAULT = '因为你最近观看过 {Title}';
 
     const RECENTLY_WATCHED_NAME_DEFAULTS = {
-        starringActorRecentlyWatched: 'Starring {Person}',
-        directedByDirectorRecentlyWatched: 'Directed by {Person}',
-        writtenByWriterRecentlyWatched: 'Written by {Person}'
+        starringActorRecentlyWatched: '主演 {Person}',
+        directedByDirectorRecentlyWatched: '{Person} 导演',
+        writtenByWriterRecentlyWatched: '{Person} 编剧'
     };
 
     function normalizeDiscoveryTemplatePlaceholders(text) {
@@ -680,7 +680,7 @@
 
             const customSection = {
                 id: `custom-${Date.now()}-${Math.random()}`,
-                name: legacySection.name || 'Custom Section',
+                name: legacySection.name || '自定义板块',
                 enabled: legacySection.enabled !== false,
                 order: legacySection.order,
                 cardFormat: legacySection.cardFormat || 'Poster',

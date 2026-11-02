@@ -142,38 +142,38 @@
                 <div class="kefin-cml-head">
                     <span class="kefin-cml-num" data-num></span>
                     <span class="material-icons kefin-cml-preview" data-preview aria-hidden="true">${esc(link.icon || 'link')}</span>
-                    <div class="kefin-cml-title" data-title>${esc(link.name || 'New link')}</div>
+                    <div class="kefin-cml-title" data-title>${esc(link.name || '新链接')}</div>
                     <div class="kefin-cml-tools">
-                        <button type="button" class="kefin-cml-btn" data-act="up" title="Move up" aria-label="Move up"><span class="material-icons" aria-hidden="true">arrow_upward</span></button>
-                        <button type="button" class="kefin-cml-btn" data-act="down" title="Move down" aria-label="Move down"><span class="material-icons" aria-hidden="true">arrow_downward</span></button>
-                        <button type="button" class="kefin-cml-btn" data-act="delete" title="Delete this link" aria-label="Delete this link"><span class="material-icons" aria-hidden="true">delete</span></button>
+                        <button type="button" class="kefin-cml-btn" data-act="up" title="上移" aria-label="上移"><span class="material-icons" aria-hidden="true">arrow_upward</span></button>
+                        <button type="button" class="kefin-cml-btn" data-act="down" title="下移" aria-label="下移"><span class="material-icons" aria-hidden="true">arrow_downward</span></button>
+                        <button type="button" class="kefin-cml-btn" data-act="delete" title="删除此链接" aria-label="删除此链接"><span class="material-icons" aria-hidden="true">delete</span></button>
                     </div>
                 </div>
                 <div class="kefin-cml-grid">
-                    <label class="kefin-cml-field"><span>Name</span><input type="text" class="fld emby-input" data-f="name" value="${esc(link.name)}" placeholder="What the link says" autocomplete="off"></label>
-                    <label class="kefin-cml-field"><span>Icon (Material icon name)</span><input type="text" class="fld emby-input" data-f="icon" list="kefin-cml-icons" value="${esc(link.icon || 'link')}" placeholder="link" autocomplete="off" spellcheck="false"></label>
-                    <label class="kefin-cml-field kefin-cml-wide"><span>Link</span><input type="text" class="fld emby-input" data-f="url" value="${esc(link.url)}" placeholder="#/home?tab=1  or  https://example.com" autocomplete="off" spellcheck="false">
-                        <small class="kefin-cml-hint">A Jellyfin page (<code>#/search</code>, <code>#/movies?topParentId=...</code>) or a full web address (then tick "Open in a new tab").</small></label>
+                    <label class="kefin-cml-field"><span>名称</span><input type="text" class="fld emby-input" data-f="name" value="${esc(link.name)}" placeholder="链接显示的文字" autocomplete="off"></label>
+                    <label class="kefin-cml-field"><span>图标（Material 图标名称）</span><input type="text" class="fld emby-input" data-f="icon" list="kefin-cml-icons" value="${esc(link.icon || 'link')}" placeholder="link" autocomplete="off" spellcheck="false"></label>
+                    <label class="kefin-cml-field kefin-cml-wide"><span>链接</span><input type="text" class="fld emby-input" data-f="url" value="${esc(link.url)}" placeholder="#/home?tab=1  或  https://example.com" autocomplete="off" spellcheck="false">
+                        <small class="kefin-cml-hint">Jellyfin 页面（<code>#/search</code>、<code>#/movies?topParentId=...</code>）或完整网址（此时请勾选“在新标签页中打开”）。</small></label>
                 </div>
                 <div class="kefin-cml-opts">
-                    ${checkbox('openInNewTab', link.openInNewTab === true, 'Open in a new tab')}
-                    ${checkbox('sideMenu', sideMenu, 'Side menu')}
-                    <label class="kefin-cml-field"><span>Top bar</span>
+                    ${checkbox('openInNewTab', link.openInNewTab === true, '在新标签页中打开')}
+                    ${checkbox('sideMenu', sideMenu, '侧边菜单')}
+                    <label class="kefin-cml-field"><span>顶栏</span>
                         <select class="fld emby-select emby-select-withcolor" data-f="topNavigation">
-                            <option value="none"${top === 'none' ? ' selected' : ''}>Not in the top bar</option>
-                            <option value="main"${top === 'main' ? ' selected' : ''}>With the library links</option>
-                            <option value="right"${top === 'right' ? ' selected' : ''}>Icon on the right</option>
+                            <option value="none"${top === 'none' ? ' selected' : ''}>不在顶栏显示</option>
+                            <option value="main"${top === 'main' ? ' selected' : ''}>与媒体库链接一起显示</option>
+                            <option value="right"${top === 'right' ? ' selected' : ''}>图标显示在右侧</option>
                         </select></label>
-                    <span data-only-main${top === 'main' ? '' : ' hidden'}>${checkbox('collapsed', link.collapsed === true, 'Under "More"')}</span>
-                    ${checkbox('userMenu', link.userMenu === true, 'User menu')}
-                    ${checkbox('isAdminLink', link.isAdminLink === true, 'Admins only')}
+                    <span data-only-main${top === 'main' ? '' : ' hidden'}>${checkbox('collapsed', link.collapsed === true, '收进“更多”')}</span>
+                    ${checkbox('userMenu', link.userMenu === true, '用户菜单')}
+                    ${checkbox('isAdminLink', link.isAdminLink === true, '仅管理员可见')}
                 </div>
                 <details class="kefin-cml-adv"${link.action || order !== '' ? ' open' : ''}>
-                    <summary>More options</summary>
+                    <summary>更多选项</summary>
                     <div class="kefin-cml-grid" style="margin-top:0.5em;">
-                        <label class="kefin-cml-field"><span>Position in the top bar (0 = first, empty = after the others)</span><input type="number" min="0" step="1" class="fld emby-input" data-f="order" value="${esc(order)}"></label>
-                        <label class="kefin-cml-field"><span>Run a function instead of opening a link</span><input type="text" class="fld emby-input" data-f="action" value="${esc(link.action || '')}" placeholder="MyPlugin.openDialog" autocomplete="off" spellcheck="false">
-                            <small class="kefin-cml-hint">The dotted name of a function on <code>window</code>; the Link above can then stay empty.</small></label>
+                        <label class="kefin-cml-field"><span>在顶栏中的位置（0 = 最前，留空 = 排在其他链接之后）</span><input type="number" min="0" step="1" class="fld emby-input" data-f="order" value="${esc(order)}"></label>
+                        <label class="kefin-cml-field"><span>改为运行一个函数而不是打开链接</span><input type="text" class="fld emby-input" data-f="action" value="${esc(link.action || '')}" placeholder="MyPlugin.openDialog" autocomplete="off" spellcheck="false">
+                            <small class="kefin-cml-hint"><code>window</code> 上函数的点分名称；此时上面的链接可以留空。</small></label>
                     </div>
                 </details>
                 <div class="kefin-cml-error" data-error role="alert" hidden></div>
@@ -185,30 +185,30 @@
         return `
             <div class="kefin-cml" id="kefin-cml-root">
                 <datalist id="kefin-cml-icons">${ICON_SUGGESTIONS.map((n) => `<option value="${n}"></option>`).join('')}</datalist>
-                ${config.featureOn ? '' : '<div class="kefin-cml-warn" data-off-warning>Custom Menu Links is switched <strong>off</strong> in the feature list. Links saved here show up once you switch it on and reload.</div>'}
+                ${config.featureOn ? '' : '<div class="kefin-cml-warn" data-off-warning>自定义菜单链接在功能列表中已<strong>关闭</strong>。此处保存的链接会在开启该功能并刷新页面后显示。</div>'}
                 <div class="kefin-cml-intro">
-                    Add your own links to Jellyfin's menus: the left menu on phones and in the Desktop Hamburger Menu, and, if you like, the top bar, the icon tray on the right and the user menu.
-                    Icons are <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreferrer">Material icon names</a>. Links are shown in this order. Changes apply after a reload.
+                    将您自己的链接添加到 Jellyfin 的菜单中：手机上的左侧菜单和桌面端汉堡菜单，还可以选择顶栏、右侧图标区和用户菜单。
+                    图标使用 <a href="https://fonts.google.com/icons" target="_blank" rel="noopener noreferrer">Material 图标名称</a>。链接按此处的顺序显示。更改在刷新页面后生效。
                 </div>
                 <div class="kefin-cml-bar">
                     <span class="kefin-cml-count" data-count></span>
-                    <button type="button" class="emby-button raised" data-act="add" style="margin:0;"><span class="material-icons" aria-hidden="true" style="vertical-align:middle;margin-right:0.25em;">add</span><span>Add link</span></button>
+                    <button type="button" class="emby-button raised" data-act="add" style="margin:0;"><span class="material-icons" aria-hidden="true" style="vertical-align:middle;margin-right:0.25em;">add</span><span>添加链接</span></button>
                 </div>
                 <div data-list></div>
                 <div class="kefin-cml-global">
-                    ${checkbox('topDivider', config.options.topDivider !== false, 'A thin line in the top bar between Jellyfin\'s own links and these')}
+                    ${checkbox('topDivider', config.options.topDivider !== false, '在顶栏中用一条细线分隔 Jellyfin 自身的链接与这些链接')}
                 </div>
                 <details class="kefin-cml-adv" data-json-box style="margin-top:0.85em;">
-                    <summary>Advanced: edit as JSON</summary>
-                    <textarea class="fld emby-textarea kefin-cml-json" data-json spellcheck="false" aria-label="Custom menu links as JSON"></textarea>
+                    <summary>高级：以 JSON 编辑</summary>
+                    <textarea class="fld emby-textarea kefin-cml-json" data-json spellcheck="false" aria-label="自定义菜单链接（JSON 格式）"></textarea>
                     <div style="display:flex;gap:0.6em;align-items:center;margin-top:0.5em;">
-                        <button type="button" class="emby-button raised" data-act="apply-json" style="margin:0;"><span>Use this JSON for the list</span></button>
+                        <button type="button" class="emby-button raised" data-act="apply-json" style="margin:0;"><span>将此 JSON 应用到列表</span></button>
                         <span class="kefin-cml-error" data-json-error role="alert" hidden style="margin:0;"></span>
                     </div>
                 </details>
                 <div class="kefin-cml-note">
-                    These links are not written to Jellyfin's <code>config.json</code>, so apps that do not run jellyfin-web do not show them. For those, add them to <code>config.json</code>
-                    (<a href="https://jellyfin.org/docs/general/clients/web-config/#custom-menu-links" target="_blank" rel="noopener noreferrer">how</a>). A link that Jellyfin already shows from <code>config.json</code> with the same name and address is not added twice.
+                    这些链接不会写入 Jellyfin 的 <code>config.json</code>，因此不运行 jellyfin-web 的应用不会显示它们。对于这些应用，请将链接添加到 <code>config.json</code>
+                    （<a href="https://jellyfin.org/docs/general/clients/web-config/#custom-menu-links" target="_blank" rel="noopener noreferrer">查看方法</a>）。Jellyfin 已经从 <code>config.json</code> 显示的同名同地址的链接不会被重复添加。
                 </div>
             </div>
         `;
@@ -242,17 +242,17 @@
             row.querySelector('[data-act="up"]').disabled = i === 0;
             row.querySelector('[data-act="down"]').disabled = i === rows.length - 1;
             const name = (field(row, 'name').value || '').trim();
-            row.querySelector('[data-title]').textContent = name || 'New link';
+            row.querySelector('[data-title]').textContent = name || '新链接';
             row.querySelector('[data-only-main]').hidden = field(row, 'topNavigation').value !== 'main';
         });
         const count = root.querySelector('[data-count]');
-        count.textContent = rows.length === 0 ? 'No links yet' : rows.length === 1 ? '1 link' : `${rows.length} links`;
+        count.textContent = rows.length === 0 ? '暂无链接' : rows.length === 1 ? '1 个链接' : `${rows.length} 个链接`;
         let empty = root.querySelector('[data-empty]');
         if (rows.length === 0 && !empty) {
             empty = document.createElement('div');
             empty.className = 'kefin-cml-empty';
             empty.setAttribute('data-empty', '');
-            empty.textContent = 'No custom links. Use "Add link" to make the first one.';
+            empty.textContent = '还没有自定义链接。点击“添加链接”创建第一个。';
             root.querySelector('[data-list]').after(empty);
         } else if (rows.length > 0 && empty) {
             empty.remove();
@@ -285,8 +285,8 @@
         const val = (f) => (field(row, f).value || '').trim();
         const flag = (f) => !!(field(row, f) && field(row, f).checked);
         const name = val('name'), url = val('url'), action = val('action');
-        if (!name) return { error: 'Give the link a name.' };
-        if (!url && !action) return { error: 'Give the link an address (or a function to run).' };
+        if (!name) return { error: '请为链接命名。' };
+        if (!url && !action) return { error: '请为链接填写地址（或要运行的函数）。' };
         const top = normalizeTopNavigation(field(row, 'topNavigation').value);
         const orderRaw = val('order');
         const order = orderRaw === '' ? NaN : Number(orderRaw);
@@ -332,14 +332,14 @@
         try {
             const parsed = JSON.parse(root.querySelector('[data-json]').value || '[]');
             if (!Array.isArray(parsed) || parsed.some((l) => !l || typeof l !== 'object' || Array.isArray(l))) {
-                throw new Error('it must be a list of links: [ { "name": "...", "url": "..." }, ... ]');
+                throw new Error('必须是链接列表：[ { "name": "...", "url": "..." }, ... ]');
             }
             getRows(root).forEach((row) => row.remove());
             parsed.forEach((l) => addRow(root, l, false));
             refresh(root);
             errEl.hidden = true;
         } catch (err) {
-            errEl.textContent = 'Not valid: ' + err.message;
+            errEl.textContent = '无效：' + err.message;
             errEl.hidden = false;
         }
     }
@@ -425,13 +425,13 @@
             footer.style.gap = '0.75em';
             footer.style.justifyContent = 'flex-end';
             footer.innerHTML = `
-                <button class="emby-button raised" id="cancel-custommenulinks-config-btn">Close</button>
-                <button class="emby-button raised block button-submit" id="save-custommenulinks-config-btn">Save</button>
+                <button class="emby-button raised" id="cancel-custommenulinks-config-btn">关闭</button>
+                <button class="emby-button raised block button-submit" id="save-custommenulinks-config-btn">保存</button>
             `;
 
             const modalInstance = window.ModalSystem.create({
                 id: MODAL_ID,
-                title: 'Custom Menu Links',
+                title: '自定义菜单链接',
                 content: content,
                 footer: footer,
                 closeOnBackdrop: false,          // a long form: a stray click outside must not throw the edits away
@@ -449,17 +449,17 @@
                         const collected = collectConfig(root);
                         if (collected.error) {
                             collected.error.scrollIntoView({ block: 'center' });
-                            toast('Some links are not finished: see the ones marked in red.');
+                            toast('部分链接未填写完整：请查看标红的链接。');
                             return;
                         }
                         saveBtn.disabled = true;
                         const success = await saveConfig(collected.customMenuLinks, collected.options);
                         saveBtn.disabled = false;
                         if (success) {
-                            toast('Custom Menu Links saved. Reload the page to see the changes.');
+                            toast('自定义菜单链接已保存。刷新页面以查看更改。');
                             window.ModalSystem.close(MODAL_ID);
                         } else {
-                            toast('Could not save. The JavaScript Injector plugin must be installed and you must be an administrator.');
+                            toast('无法保存。必须安装 JavaScript Injector 插件，且您必须是管理员。');
                         }
                     });
                 }
@@ -474,7 +474,7 @@
             LOG('Custom Menu Links configuration modal opened');
         } catch (error) {
             ERR('Error opening custom menu links config modal:', error);
-            toast('Could not open the Custom Menu Links settings: ' + error.message);
+            toast('无法打开自定义菜单链接设置：' + error.message);
         }
     }
 

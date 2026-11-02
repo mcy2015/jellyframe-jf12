@@ -13,31 +13,31 @@
 
     const PANELS = {
         requestSeerr: {
-            title: 'Request it (Seerr)',
+            title: '影片请求（Seerr）',
             async html(c) {
-                return box(`<div class="listItemBodyText" style="margin-bottom: 0.4em;">Seerr address</div>
+                return box(`<div class="listItemBodyText" style="margin-bottom: 0.4em;">Seerr 地址</div>
                     <input type="url" id="kx_seerr_url" class="emby-input" style="width: 100%;" placeholder="https://seerr.example.com" value="${esc(c.url)}">
-                    <div class="listItemBodyText secondary" style="font-size: 0.9em; margin-top: 0.4em;">The address people open Seerr / Jellyseerr / Overseerr at. The button only links there (a new tab); KefinTweaks never calls Seerr itself.</div>`) +
-                    check('kx_seerr_search', c.onSearch !== false, 'On searches that find nothing or little', 'Opens Seerr\'s search with the same words.') +
-                    check('kx_seerr_item', c.onItem !== false, 'On items without media', 'Missing episodes and movies, and collections ("request the rest").');
+                    <div class="listItemBodyText secondary" style="font-size: 0.9em; margin-top: 0.4em;">用户打开 Seerr / Jellyseerr / Overseerr 的地址。按钮只是跳转到那里（新标签页）；KefinTweaks 自身不会调用 Seerr。</div>`) +
+                    check('kx_seerr_search', c.onSearch !== false, '搜索结果为空或很少时', '用相同的关键词打开 Seerr 的搜索页。') +
+                    check('kx_seerr_item', c.onItem !== false, '在没有媒体的项目上', '缺失的集和电影，以及合集（“请求其余部分”）。');
             },
             collect() {
                 const url = val('kx_seerr_url').value.trim().replace(/\/+$/, '');
-                if (url && !/^https?:\/\/[^\s/]+/i.test(url)) throw new Error('The Seerr address must start with http:// or https://');
+                if (url && !/^https?:\/\/[^\s/]+/i.test(url)) throw new Error('Seerr 地址必须以 http:// 或 https:// 开头');
                 return { url, onSearch: val('kx_seerr_search').checked, onItem: val('kx_seerr_item').checked };
             }
         },
         mediaBadges: {
-            title: 'Media Info Badges',
+            title: '媒体信息徽章',
             async html(c) {
-                return check('kx_mb_res', c.resolution !== false, 'Resolution (4K, 1080p, 720p, SD)') +
-                    check('kx_mb_hdr', c.hdr !== false, 'HDR and Dolby Vision') +
-                    check('kx_mb_audio', c.audio !== false, 'Audio (Atmos, TrueHD, DD+, DTS... and 5.1 / 7.1)');
+                return check('kx_mb_res', c.resolution !== false, '分辨率（4K、1080p、720p、SD）') +
+                    check('kx_mb_hdr', c.hdr !== false, 'HDR 和杜比视界') +
+                    check('kx_mb_audio', c.audio !== false, '音频（Atmos、TrueHD、DD+、DTS……以及 5.1 / 7.1）');
             },
             collect() { return { resolution: val('kx_mb_res').checked, hdr: val('kx_mb_hdr').checked, audio: val('kx_mb_audio').checked } }
         },
         kidsMode: {
-            title: 'Kids Mode',
+            title: '儿童模式',
             async html(c) {
                 const users = await ApiClient.getUsers().catch(() => []);
                 const forced = c.users || {};
@@ -46,9 +46,9 @@
                     const opt = (v, t) => `<option value="${v}" ${f === v ? 'selected' : ''}>${t}</option>`;
                     return `<div style="display: flex; align-items: center; gap: 1em; padding: 0.35em 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
                         <span class="listItemBodyText" style="flex: 1;">${esc(u.Name)}</span>
-                        <select class="emby-select-withcolor emby-select kx-kid" data-user="${esc(u.Id)}" style="width: auto;">${opt('auto', 'Automatic: ' + (auto ? 'on' : 'off'))}${opt('on', 'Always on')}${opt('off', 'Always off')}</select></div>`;
+                        <select class="emby-select-withcolor emby-select kx-kid" data-user="${esc(u.Id)}" style="width: auto;">${opt('auto', '自动：' + (auto ? '开' : '关'))}${opt('on', '始终开启')}${opt('off', '始终关闭')}</select></div>`;
                 }).join('');
-                return box(`<div class="listItemBodyText secondary" style="font-size: 0.9em; margin-bottom: 0.6em;">Automatic = on for users that Jellyfin limits to some libraries or to a maximum parental rating (set in Dashboard &gt; Users &gt; Access / Parental control), never for administrators.</div>${rows || '<div class="listItemBodyText">No users could be listed.</div>'}`);
+                return box(`<div class="listItemBodyText secondary" style="font-size: 0.9em; margin-bottom: 0.6em;">自动 = 对被 Jellyfin 限制为部分媒体库或设有最高家长分级（在控制台 &gt; 用户 &gt; 访问/家长控制中设置）的用户开启，管理员从不自动开启。</div>${rows || '<div class="listItemBodyText">无法列出用户。</div>'}`);
             },
             collect() {
                 const users = {};
@@ -66,9 +66,9 @@
             content.innerHTML = await panel.html((window.KefinTweaksConfig || {})[key] || {});
             const footer = document.createElement('div');
             footer.style.cssText = 'display: flex; gap: 0.75em; justify-content: flex-end;';
-            footer.innerHTML = `<button class="emby-button raised" data-kx-close>Close</button><button class="emby-button raised block button-submit" data-kx-save>Save</button>`;
+            footer.innerHTML = `<button class="emby-button raised" data-kx-close>关闭</button><button class="emby-button raised block button-submit" data-kx-save>保存</button>`;
             window.ModalSystem.create({
-                id, title: panel.title + ' Configuration', content, footer, closeOnBackdrop: true, closeOnEscape: true, showCloseButton: true,
+                id, title: panel.title + ' 设置', content, footer, closeOnBackdrop: true, closeOnEscape: true, showCloseButton: true,
                 onOpen: (modal) => {
                     modal.dialogFooter.querySelector('[data-kx-close]').addEventListener('click', () => window.ModalSystem.close(id));
                     modal.dialogFooter.querySelector('[data-kx-save]').addEventListener('click', async () => {
@@ -78,18 +78,18 @@
                         window.KefinTweaksConfig[key] = value;
                         try {
                             await window.KefinTweaksUtils.saveConfigToJavaScriptInjector();
-                            window.KefinTweaksToaster?.toast?.('Configuration saved!');
+                            window.KefinTweaksToaster?.toast?.('配置已保存！');
                             window.ModalSystem.close(id);
                         } catch (e) {
                             ERR('save failed', e);
-                            alert('Error saving configuration. Please ensure the JavaScript Injector plugin is installed and you have administrator permissions.');
+                            alert('保存配置时出错。请确保已安装 JavaScript Injector 插件，并且您拥有管理员权限。');
                         }
                     });
                 }
             });
         } catch (e) {
             ERR('could not open', key, e);
-            alert('Error opening configuration: ' + e.message);
+            alert('打开配置时出错：' + e.message);
         }
     }
 

@@ -75,7 +75,7 @@
             );
 
             if (!injectorPlugin) {
-                throw new Error('JavaScript Injector plugin not found');
+                throw new Error('未找到 JavaScript Injector 插件');
             }
 
             return injectorPlugin.Id;
@@ -291,7 +291,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
                 const start = Date.now();
                 const wait = () => {
                     if (window.KefinTweaksLoader) return resolve(window.KefinTweaksLoader);
-                    if (Date.now() - start > 15000) return reject(new Error('Timed out waiting for KefinTweaksLoader'));
+                    if (Date.now() - start > 15000) return reject(new Error('等待 KefinTweaksLoader 超时'));
                     setTimeout(wait, 50);
                 };
                 return wait();
@@ -300,7 +300,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
             script.src = url;
             script.async = false;
             script.onload = () => resolve(window.KefinTweaksLoader);
-            script.onerror = () => reject(new Error('Failed to load ' + url));
+            script.onerror = () => reject(new Error('加载失败：' + url));
             document.head.appendChild(script);
         });
     }
@@ -580,7 +580,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
 
         const cancelBtn = document.createElement('button');
         cancelBtn.className = 'btnCancel raised emby-button button-cancel';
-        cancelBtn.textContent = 'Cancel';
+        cancelBtn.textContent = '取消';
         cancelBtn.onclick = () => {
             closeSimpleModal(CONFIRM_MODAL_ID);
             if (onCancel) onCancel();
@@ -588,7 +588,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
 
         const confirmBtn = document.createElement('button');
         confirmBtn.className = 'btnSubmit raised emby-button button-submit';
-        confirmBtn.textContent = 'Confirm';
+        confirmBtn.textContent = '确认';
         confirmBtn.onclick = () => {
             closeSimpleModal(CONFIRM_MODAL_ID);
             if (onConfirm) onConfirm();
@@ -597,7 +597,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
         footer.appendChild(cancelBtn);
         footer.appendChild(confirmBtn);
 
-        createSimpleModal(CONFIRM_MODAL_ID, 'Confirm', content, footer);
+        createSimpleModal(CONFIRM_MODAL_ID, '确认', content, footer);
     }
 
     /**
@@ -622,7 +622,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
 
         const okBtn = document.createElement('button');
         okBtn.className = 'btnSubmit raised emby-button button-submit';
-        okBtn.textContent = 'OK';
+        okBtn.textContent = '确定';
         okBtn.onclick = () => {
             closeSimpleModal(ALERT_MODAL_ID);
         };
@@ -648,15 +648,15 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
         if (isInitialInstall) {
             // Initial installation message with support information
             content.innerHTML = `
-                <p>Thanks so much for installing KefinTweaks!</p>
-                <p>KefinTweaks is not maintained by the Jellyfin team, and as a result you are encouraged to seek support from me directly.</p>
-                <p>Sadly, there is <i>currently</i> no place suitable for discussion of plugins built by community members or fan-made projects in the official Jellyfin Discord, so please visit the <a href="https://discord.gg/v7P9CAvCKZ" target="_blank" style="color: #00a4dc; text-decoration: underline;">Jellyfin Community Discord</a> to find me (username: HighImKevin) and other users who would be happy to help you out.</p>
-                <p>Please also feel free to report bugs and request features from the <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/issues" target="_blank" style="color: #00a4dc; text-decoration: underline;">Issues</a> page. The strength of this plugin relies on awesome community members like you, so thanks for using KefinTweaks!</p>
+                <p>非常感谢您安装 KefinTweaks！</p>
+                <p>KefinTweaks 并非由 Jellyfin 团队维护，因此建议您直接向我寻求支持。</p>
+                <p>遗憾的是，官方 Jellyfin Discord 中<i>目前</i>还没有适合讨论社区成员制作的插件或粉丝项目的版块，请前往 <a href="https://discord.gg/v7P9CAvCKZ" target="_blank" style="color: #00a4dc; text-decoration: underline;">Jellyfin Community Discord</a> 找我（用户名：HighImKevin）以及其他乐意为您提供帮助的用户。</p>
+                <p>也欢迎随时在 <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/issues" target="_blank" style="color: #00a4dc; text-decoration: underline;">Issues</a> 页面报告错误和提出功能建议。这个插件的强大离不开像您这样出色的社区成员，感谢您使用 KefinTweaks！</p>
             `;
         } else {
             // Update message with refresh instruction
             content.innerHTML = `
-                <p>KefinTweaks configuration has been successfully updated. Please refresh your page for the changes to take effect!</p>
+                <p>KefinTweaks 配置已成功更新。请刷新页面以使更改生效！</p>
             `;
         }
 
@@ -694,7 +694,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
 
         const okBtn = document.createElement('button');
         okBtn.className = 'btnSubmit raised emby-button button-submit';
-        okBtn.textContent = 'OK';
+        okBtn.textContent = '确定';
         okBtn.onclick = () => {
             closeSimpleModal(SUCCESS_MODAL_ID);
             if (!isInitialInstall) {
@@ -713,7 +713,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
             });
         }
 
-        createSimpleModal(SUCCESS_MODAL_ID, `${isInitialInstall ? 'Plugin Installed' : 'Plugin Updated'}`, content, footer);
+        createSimpleModal(SUCCESS_MODAL_ID, `${isInitialInstall ? '插件已安装' : '插件已更新'}`, content, footer);
 
         
     }
@@ -722,7 +722,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
     async function openKefinTweaksSourceModal() {
         const userIsAdmin = await isAdmin();
         if (!userIsAdmin) {
-            showAlertModal('Access Denied', '<p>You must be an administrator to configure KefinTweaks.</p>');
+            showAlertModal('访问被拒绝', '<p>您必须是管理员才能配置 KefinTweaks。</p>');
             return;
         }
 
@@ -758,7 +758,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
         enabledLabel.style.gap = '0.75em';
         
         const enabledText = document.createElement('span');
-        enabledText.textContent = isEnabled ? 'Enabled' : 'Disabled';
+        enabledText.textContent = isEnabled ? '已启用' : '已禁用';
         enabledText.id = 'kefinTweaksEnabledModalLabel';
         
         enabledLabel.appendChild(enabledCheckbox);
@@ -767,14 +767,14 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
         
         // Update label text when checkbox changes
         enabledCheckbox.addEventListener('change', () => {
-            enabledText.textContent = enabledCheckbox.checked ? 'Enabled' : 'Disabled';
+            enabledText.textContent = enabledCheckbox.checked ? '已启用' : '已禁用';
         });
         
         content.appendChild(enabledContainer);
 
         // Source Type dropdown
         const sourceTypeLabel = document.createElement('label');
-        sourceTypeLabel.textContent = 'Install From:';
+        sourceTypeLabel.textContent = '安装来源：';
         sourceTypeLabel.style.display = 'block';
         sourceTypeLabel.style.marginBottom = '0.5em';
 
@@ -782,12 +782,12 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
         sourceTypeSelect.className = 'fld emby-select emby-select-withcolor';
         sourceTypeSelect.id = 'kefinTweaksSourceType';
         sourceTypeSelect.innerHTML = `
-            <option value="custom" selected>${SELF_HOSTED_NAME} (pinned URL)</option>
+            <option value="custom" selected>${SELF_HOSTED_NAME}（固定 URL）</option>
         `;
 
         // Source dropdown (for GitHub)
         const sourceLabel = document.createElement('label');
-        sourceLabel.textContent = 'Version:';
+        sourceLabel.textContent = '版本：';
         sourceLabel.style.display = 'block';
         sourceLabel.style.marginBottom = '0.5em';
 
@@ -845,19 +845,19 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
 
         const cancelBtn = document.createElement('button');
         cancelBtn.className = 'btnCancel raised emby-button button-cancel';
-        cancelBtn.textContent = 'Cancel';
+        cancelBtn.textContent = '取消';
         cancelBtn.onclick = () => closeSimpleModal(MODAL_ID);
 
         const saveBtn = document.createElement('button');
         saveBtn.className = 'btnSubmit raised emby-button button-submit';
-        saveBtn.textContent = (!currentRoot || currentRoot.trim() === '') ? 'Install' : 'Save';
+        saveBtn.textContent = (!currentRoot || currentRoot.trim() === '') ? '安装' : '保存';
         saveBtn.onclick = async () => {
             try {
                 const sourceType = sourceTypeSelect.value;
                 const source = sourceType === 'custom' ? customUrlInput.value : sourceSelect.value;
                 
                 if (sourceType === 'custom' && (!source || source.trim() === '')) {
-                    showAlertModal('Invalid URL', '<p>Please enter a valid URL for your self-hosted location.</p>');
+                    showAlertModal('无效 URL', '<p>请为您的自托管位置输入有效的 URL。</p>');
                     return;
                 }
 
@@ -866,7 +866,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
                 try {
                     await probeKefinRoot(kefinTweaksRoot);
                 } catch (probeError) {
-                    showAlertModal('Not saved', `<p>${probeError.message}</p><p>Nothing was changed.</p>`);
+                    showAlertModal('未保存', `<p>${probeError.message}</p><p>未做任何更改。</p>`);
                     return;
                 }
                 const kefinTweaksRootResolvedRaw = await resolveRootVersion(kefinTweaksRoot);
@@ -961,13 +961,13 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
                 await showSuccessModal(isInitialInstall, versionDisplay);
             } catch (error) {
                 console.error('[KefinTweaks Installer] Error saving configuration:', error);
-                showAlertModal('Configuration Error', `<p>Error saving configuration: ${error.message}</p>`);
+                showAlertModal('配置错误', `<p>保存配置时出错：${error.message}</p>`);
             }
         };
         
         const uninstallBtn = document.createElement('button');
         uninstallBtn.className = 'btnCancel raised emby-button button-cancel';
-        uninstallBtn.textContent = 'Uninstall';
+        uninstallBtn.textContent = '卸载';
         uninstallBtn.style.marginRight = 'auto';
         // Hide uninstall button if KefinTweaks isn't installed yet (no root URL)
         if (!currentRoot || currentRoot.trim() === '') {
@@ -976,21 +976,21 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
         uninstallBtn.onclick = () => {
             closeSimpleModal(MODAL_ID);
             showConfirmationModal(
-                'Are you sure you want to uninstall KefinTweaks?<br><br>This will disable the installer and backup your configuration.',
+                '确定要卸载 KefinTweaks 吗？<br><br>这将禁用安装器并备份您的配置。',
                 async () => {
                     try {
                         await uninstallKefinTweaks();
                         // Remove the plugin card
                         removeKefinTweaksPluginCard();
                         showAlertModal(
-                            'KefinTweaks Uninstalled',
-                            '<p>KefinTweaks has been uninstalled. The installer has been disabled and your configuration has been backed up.<br><br>Please refresh your page.<br><br>You can re-enable KefinTweaks at any time from the JS Injector Plugin.'
+                            'KefinTweaks 已卸载',
+                            '<p>KefinTweaks 已卸载。安装器已被禁用，您的配置已备份。<br><br>请刷新页面。<br><br>您可以随时在 JS Injector 插件中重新启用 KefinTweaks。'
                         );
                     } catch (error) {
                         console.error('[KefinTweaks Installer] Error uninstalling:', error);
                         showAlertModal(
-                            'Uninstall Error',
-                            `<p>Error uninstalling KefinTweaks: ${error.message}</p>`
+                            '卸载出错',
+                            `<p>卸载 KefinTweaks 时出错：${error.message}</p>`
                         );
                     }
                 },
@@ -1005,7 +1005,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
         footer.appendChild(cancelBtn);
         footer.appendChild(uninstallBtn);
 
-        createSimpleModal(MODAL_ID, 'KefinTweaks Plugin Settings', content, footer);
+        createSimpleModal(MODAL_ID, 'KefinTweaks 插件设置', content, footer);
     }
 
     /**
@@ -1019,7 +1019,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
             const injectorConfig = await getJavaScriptInjectorConfig(pluginId);
             
             if (!injectorConfig.CustomJavaScripts) {
-                throw new Error('No custom scripts found in JS Injector configuration');
+                throw new Error('JS Injector 配置中未找到自定义脚本');
             }
 
             // Step 1: Rename KefinTweaks-Config to backup
@@ -1151,7 +1151,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
                 }
 
                 // Determine status text
-                const statusText = root ? 'Status Active' : 'Click to Install';
+                const statusText = root ? '状态：激活' : '点击安装';
 
                 // Update status text (usually last cardText)
                 if (cardTextElements.length > 0) {
@@ -1218,7 +1218,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
             // Create the heading
             const heading = document.createElement('div');
             heading.className = 'sectionTitleContainer flex align-items-center';
-            heading.innerHTML = '<h2 class="sectionTitle">Front End Plugins</h2>';
+            heading.innerHTML = '<h2 class="sectionTitle">前端插件</h2>';
             heading.style.marginTop = '2em';
             
             // Create the frontEndPlugins container
@@ -1354,7 +1354,7 @@ window.KefinTweaksConfig = ${JSON.stringify(config, null, 2)};`;
                 }
             
                 // Determine status text
-                const statusText = root ? 'Status Active' : 'Click to Install';
+                const statusText = root ? '状态：激活' : '点击安装';
 
                 // Update status text (usually last cardText)
                 if (cardTextElements.length > 0) {
@@ -1696,10 +1696,10 @@ main.MuiBox-root .customPage.libraryPage:not(.noSecondaryNavPage)[data-kefin-cus
         const url = (root.endsWith('/') ? root : root + '/') + 'kefinTweaks-default-config.js';
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            const fail = (why) => { script.remove(); reject(new Error(`${url} ${why}. Is this the folder that holds injector.js?`)); };
-            const timer = setTimeout(() => fail('did not answer within 10 seconds'), 10000);
-            script.onload = () => { clearTimeout(timer); script.remove(); window.KefinTweaksDefaultConfig ? resolve() : fail('loaded but is not KefinTweaks\' default configuration'); };
-            script.onerror = () => { clearTimeout(timer); fail('could not be loaded'); };
+            const fail = (why) => { script.remove(); reject(new Error(`${url} ${why}。这是存放 injector.js 的目录吗？`)); };
+            const timer = setTimeout(() => fail('在 10 秒内未响应'), 10000);
+            script.onload = () => { clearTimeout(timer); script.remove(); window.KefinTweaksDefaultConfig ? resolve() : fail('已加载，但不是 KefinTweaks 的默认配置'); };
+            script.onerror = () => { clearTimeout(timer); fail('无法加载'); };
             script.src = url + '?probe=' + Date.now();
             document.head.appendChild(script);
         });
@@ -1742,7 +1742,7 @@ main.MuiBox-root .customPage.libraryPage:not(.noSecondaryNavPage)[data-kefin-cus
 
             script.onerror = (error) => {
                 console.error('[KefinTweaks Installer] Failed to load injector:', error);
-                reject(new Error(`Failed to load injector.js from ${injectorUrl}`));
+                reject(new Error(`无法从 ${injectorUrl} 加载 injector.js`));
             };
 
             document.head.appendChild(script);

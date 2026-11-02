@@ -677,7 +677,7 @@
     }
 
     function createProgressToast(total) {
-        const initialMessage = `Updating... (0/${total})`;
+        const initialMessage = `正在更新… (0/${total})`;
         if (!window.KefinTweaksToaster?.toast) {
             LOG(initialMessage);
             return {
@@ -695,14 +695,14 @@
         const handle = window.KefinTweaksToaster.toast(initialMessage, null, false);
         return {
             update(done) {
-                setToastMessage(handle, `Updating... (${done}/${total})`);
+                setToastMessage(handle, `正在更新… (${done}/${total})`);
             },
             finish(done, failed) {
                 setToastMessage(
                     handle,
                     failed
-                        ? `Updated ${done - failed}/${total} users (${failed} failed)`
-                        : `Updated ${total} users`
+                        ? `已更新 ${done - failed}/${total} 个用户（${failed} 个失败）`
+                        : `已更新全部 ${total} 个用户`
                 );
                 setTimeout(() => handle?.dismiss?.(), 2500);
             }
@@ -1746,18 +1746,18 @@
         }
 
         try {
-            container.innerHTML = '<div class="listItemBodyText secondary">Loading home sections…</div>';
+            container.innerHTML = '<div class="listItemBodyText secondary">正在加载主屏幕板块…</div>';
 
             const apiReady = await waitForHomeScreenSectionsApi();
             if (!apiReady) {
                 ERR('KefinHomeScreen.getSections not available');
-                container.innerHTML = '<div class="listItemBodyText secondary">Error loading editor. Please refresh the page.</div>';
+                container.innerHTML = '<div class="listItemBodyText secondary">加载编辑器出错。请刷新页面。</div>';
                 return;
             }
 
             if (!window.KefinTweaksUI || !window.KefinTweaksUI.renderHomeSectionsOrderEditor) {
                 ERR('KefinTweaksUI.renderHomeSectionsOrderEditor not available');
-                container.innerHTML = '<div class="listItemBodyText secondary">Error loading editor. Please refresh the page.</div>';
+                container.innerHTML = '<div class="listItemBodyText secondary">加载编辑器出错。请刷新页面。</div>';
                 return;
             }
 
@@ -1788,13 +1788,13 @@
 
             const serverPairDefault = getServerPairNativeHomeSectionsDefault();
             const effectivePair = resolvePairNativeHomeSections(userConfig.homeScreen);
-            const pairDescOn = 'Do NOT enable this if you use the official Jellyfin for Roku or Android TV clients. When this is enabled, your Home Screen on those clients will be empty and you will need to go to your User Settings to re-enable sections.';
-            const pairDescOff = 'Do NOT enable this if you use the official Jellyfin for Roku or Android TV clients. When this is enabled, your Home Screen on those clients will be empty and you will need to go to your User Settings to re-enable sections.';
+            const pairDescOn = '如果你使用官方的 Jellyfin for Roku 或 Android TV 客户端，请勿启用此项。启用后，这些客户端上的主屏幕将为空白，你需要前往用户设置重新启用各板块。';
+            const pairDescOff = '如果你使用官方的 Jellyfin for Roku 或 Android TV 客户端，请勿启用此项。启用后，这些客户端上的主屏幕将为空白，你需要前往用户设置重新启用各板块。';
             const pairToggleHTML = typeof window.KefinTweaksUI?.buildToggleCard === 'function'
                 ? window.KefinTweaksUI.buildToggleCard(
                     'kefin-user-pair-native-home-sections',
                     !effectivePair,
-                    'Improve Home Screen Performance',
+                    '提升主屏幕性能',
                     !effectivePair ? pairDescOn : pairDescOff,
                     { hintKey: 'pairNativeHomeSections' }
                 )
@@ -1803,8 +1803,8 @@
             container.innerHTML = `
                 <div class="verticalSection verticalSection-extrabottompadding">
                     <div class="sectionTitleContainer" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5em;">
-                        <h2 class="sectionTitle">Home Sections Order</h2>
-                        <button type="button" class="emby-button raised kefin-restore-defaults-btn" title="Restore Defaults" aria-label="Restore Defaults">
+                        <h2 class="sectionTitle">主屏幕板块排序</h2>
+                        <button type="button" class="emby-button raised kefin-restore-defaults-btn" title="恢复默认" aria-label="恢复默认">
                             <span class="restoreBtn" aria-hidden="true"></span>
                         </button>
                     </div>
@@ -1859,14 +1859,14 @@
             if (restoreBtn && window.ModalSystem) {
                 restoreBtn.addEventListener('click', () => {
                     const modalId = 'kefin-user-homescreen-restore-defaults';
-                    const content = '<p class="listItemBodyText">Restoring the default Home Screen Settings will override your existing settings. Are you sure you want to proceed?</p>';
+                    const content = '<p class="listItemBodyText">恢复默认主屏幕设置将覆盖你现有的设置。确定要继续吗？</p>';
                     const footer = `
-                        <button type="button" class="emby-button button-cancel button-flat" onclick="window.ModalSystem.close('${modalId}')">Cancel</button>
-                        <button type="button" class="emby-button raised button-submit" id="kefin-restore-defaults-confirm">Proceed</button>
+                        <button type="button" class="emby-button button-cancel button-flat" onclick="window.ModalSystem.close('${modalId}')">取消</button>
+                        <button type="button" class="emby-button raised button-submit" id="kefin-restore-defaults-confirm">继续</button>
                     `;
                     window.ModalSystem.create({
                         id: modalId,
-                        title: 'Restore Defaults',
+                        title: '恢复默认',
                         content: content,
                         footer: footer,
                         closeOnBackdrop: true,
@@ -1903,7 +1903,7 @@
                                             window.ModalSystem.close(modalId);
                                             await renderUserHomeSectionsEditor(container);
                                             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                                window.KefinTweaksToaster.toast('Home Screen settings restored to defaults.');
+                                                window.KefinTweaksToaster.toast('主屏幕设置已恢复为默认值。');
                                             }
                                         } else {
                                             WARN('Failed to restore defaults');
@@ -1988,7 +1988,7 @@
             LOG('User home sections editor rendered');
         } catch (error) {
             ERR('Error rendering user home sections editor:', error);
-            container.innerHTML = '<div class="listItemBodyText secondary">Error loading editor. Please refresh the page.</div>';
+            container.innerHTML = '<div class="listItemBodyText secondary">加载编辑器出错。请刷新页面。</div>';
         }
     }
 
