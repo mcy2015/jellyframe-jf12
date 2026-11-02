@@ -39,5 +39,27 @@
         ]
       }
     ]
+  },
+  {
+    "name": "Media Bar Enhanced",
+    "guid": "d7e11d57-819b-4bdd-a88d-53c5f5560225",
+    "category": "General",
+    "overview": "Jellyfin 12.4 adaptation build of Media Bar Enhanced 3.12 (upstream: CodeDevMLH/jellyfin-plugin-media-bar-enhanced).",
+    "description": "Featured content slideshow bar for the Jellyfin home page: backdrops, logos, ratings, plot, play button, trailer autoplay. Per-library include/exclude, excluded genres/tags, item limits. Requires the File Transformation plugin (install it from this repository first).",
+    "owner": "mcy2015 (upstream: CodeDevMLH)",
+    "imageUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/MediaBarEnhanced/logo.png",
+    "versions": [
+      {
+        "version": "3.12.0.1",
+        "changelog": "Rebuilt against Jellyfin 12.4.0 packages (net10.0). No functional changes vs upstream 3.12.0.0.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/dist/Jellyfin.Plugin.MediaBarEnhanced_v3.12.0.1_jf124.zip",
+        "checksum": "762B8D7E5EC5A1FD446B6A3C4DD14EE6",
+        "timestamp": "2026-11-02T02:10:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      }
+    ]
   }
 ]
