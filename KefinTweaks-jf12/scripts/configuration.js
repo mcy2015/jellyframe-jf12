@@ -11,80 +11,80 @@
     let currentLoadedConfig = null;
 
     const DISCOVERY_SECTION_DEFINITIONS = [
-        { key: 'spotlightGenre', label: 'Spotlight Sections (Genre)', defaultName: 'Spotlight' },
-        { key: 'spotlightNetwork', label: 'Spotlight Sections (Network)', defaultName: 'Spotlight' },
-        { key: 'genreMovies', label: 'Genre Movies', defaultName: '[Genre] Movies' },
-        { key: 'studioShows', label: 'Shows from [Studio]', defaultName: 'Shows from [Studio]' },
-        { key: 'collections', label: 'Collection Spotlight', defaultName: '[Collection Name]', extras: { minimumItems: 10 } },
-        { key: 'becauseYouWatched', label: 'Because you watched [Movie]', defaultName: 'Because you watched [Movie]' },
-        { key: 'becauseYouLiked', label: 'Because you liked [Movie]', defaultName: 'Because you liked [Movie]' },
-        { key: 'starringTopActor', label: 'Starring [Top Actor]', defaultName: 'Starring [Actor]' },
-        { key: 'directedByTopDirector', label: 'Directed by [Top Director]', defaultName: 'Directed by [Director]' },
-        { key: 'writtenByTopWriter', label: 'Written by [Top Writer]', defaultName: 'Written by [Writer]' },
-        { key: 'becauseYouRecentlyWatched', label: 'Because you recently watched [Movie]', defaultName: 'Because you recently watched [Movie]' },
-        { key: 'starringActorRecentlyWatched', label: 'Starring [Person]', defaultName: 'Starring {Person}', extras: { caption: 'because you recently watched {Title}' } },
-        { key: 'directedByDirectorRecentlyWatched', label: 'Directed by [Person]', defaultName: 'Directed by {Person}', extras: { caption: 'because you recently watched {Title}' } },
-        { key: 'writtenByWriterRecentlyWatched', label: 'Written by [Person]', defaultName: 'Written by {Person}', extras: { caption: 'because you recently watched {Title}' } }
+        { key: 'spotlightGenre', label: '精选板块（流派）', defaultName: '精选' },
+        { key: 'spotlightNetwork', label: '精选板块（电视网）', defaultName: '精选' },
+        { key: 'genreMovies', label: '流派电影', defaultName: '[Genre] 电影' },
+        { key: 'studioShows', label: '来自 [Studio] 的剧集', defaultName: '来自 [Studio] 的剧集' },
+        { key: 'collections', label: '合集精选', defaultName: '[Collection Name]', extras: { minimumItems: 10 } },
+        { key: 'becauseYouWatched', label: '因为你看过 [Movie]', defaultName: '因为你看过 [Movie]' },
+        { key: 'becauseYouLiked', label: '因为你喜欢 [Movie]', defaultName: '因为你喜欢 [Movie]' },
+        { key: 'starringTopActor', label: '由 [Top Actor] 主演', defaultName: '由 [Actor] 主演' },
+        { key: 'directedByTopDirector', label: '由 [Top Director] 执导', defaultName: '由 [Director] 执导' },
+        { key: 'writtenByTopWriter', label: '由 [Top Writer] 编剧', defaultName: '由 [Writer] 编剧' },
+        { key: 'becauseYouRecentlyWatched', label: '因为你最近看过 [Movie]', defaultName: '因为你最近看过 [Movie]' },
+        { key: 'starringActorRecentlyWatched', label: '由 [Person] 主演', defaultName: '由 {Person} 主演', extras: { caption: '因为你最近看过 {Title}' } },
+        { key: 'directedByDirectorRecentlyWatched', label: '由 [Person] 执导', defaultName: '由 {Person} 执导', extras: { caption: '因为你最近看过 {Title}' } },
+        { key: 'writtenByWriterRecentlyWatched', label: '由 [Person] 编剧', defaultName: '由 {Person} 编剧', extras: { caption: '因为你最近看过 {Title}' } }
     ];
 
     const SUPPORTED_CUSTOM_SECTION_PARAMS = {
-        filters: { label: 'Filters', type: 'array', hint: 'IsFolder, IsNotFolder, IsUnplayed, IsPlayed, IsFavorite, IsResumable, Likes, Dislikes' },
-        isPlayed: { label: 'Is Played', type: 'boolean' },
-        person: { label: 'Person Name', type: 'string' },
-        personTypes: { label: 'Person Types', type: 'array', hint: 'Actor, Director, Writer, etc.' },
-        years: { label: 'Years', type: 'array', hint: 'Comma-separated years' },
+        filters: { label: '筛选器', type: 'array', hint: 'IsFolder, IsNotFolder, IsUnplayed, IsPlayed, IsFavorite, IsResumable, Likes, Dislikes' },
+        isPlayed: { label: '是否已播放', type: 'boolean' },
+        person: { label: '人物名称', type: 'string' },
+        personTypes: { label: '人物类型', type: 'array', hint: 'Actor、Director、Writer 等' },
+        years: { label: '年份', type: 'array', hint: '多个年份用逗号分隔' },
         
         // Dates (ISO 8601)
-        minPremiereDate: { label: 'Min Premiere Date', type: 'date', hint: 'YYYY-MM-DD' },
-        maxPremiereDate: { label: 'Max Premiere Date', type: 'date', hint: 'YYYY-MM-DD' },
+        minPremiereDate: { label: '最早首播日期', type: 'date', hint: 'YYYY-MM-DD' },
+        maxPremiereDate: { label: '最晚首播日期', type: 'date', hint: 'YYYY-MM-DD' },
         //minDateLastSaved: { label: 'Min Date Last Saved', type: 'date', hint: 'YYYY-MM-DD' },
         //minDateLastSavedForUser: { label: 'Min Date Last Saved For User', type: 'date', hint: 'YYYY-MM-DD' },
         
         // Numbers
-        indexNumber: { label: 'Index Number', type: 'number' },
-        parentIndexNumber: { label: 'Parent Index Number', type: 'number' },
-        minCommunityRating: { label: 'Min Community Rating', type: 'number' },
-        minCriticRating: { label: 'Min Critic Rating', type: 'number' },
+        indexNumber: { label: '索引编号', type: 'number' },
+        parentIndexNumber: { label: '父级索引编号', type: 'number' },
+        minCommunityRating: { label: '最低社区评分', type: 'number' },
+        minCriticRating: { label: '最低评论家评分', type: 'number' },
 
         // Booleans
-        isFavorite: { label: 'Is Favorite', type: 'boolean' },
-        hasThemeSong: { label: 'Has Theme Song', type: 'boolean' },
-        hasThemeVideo: { label: 'Has Theme Video', type: 'boolean' },
-        hasSubtitles: { label: 'Has Subtitles', type: 'boolean' },
-        hasSpecialFeature: { label: 'Has Special Feature', type: 'boolean' },
-        hasTrailer: { label: 'Has Trailer', type: 'boolean' },
-        hasParentalRating: { label: 'Has Parental Rating', type: 'boolean' },
-        isHd: { label: 'Is HD', type: 'boolean' },
-        is4K: { label: 'Is 4K', type: 'boolean' },
-        isMissing: { label: 'Is Missing', type: 'boolean' },
-        isUnaired: { label: 'Is Unaired', type: 'boolean' },
+        isFavorite: { label: '是否收藏', type: 'boolean' },
+        hasThemeSong: { label: '有主题曲', type: 'boolean' },
+        hasThemeVideo: { label: '有主题视频', type: 'boolean' },
+        hasSubtitles: { label: '有字幕', type: 'boolean' },
+        hasSpecialFeature: { label: '有特别收录', type: 'boolean' },
+        hasTrailer: { label: '有预告片', type: 'boolean' },
+        hasParentalRating: { label: '有家长分级', type: 'boolean' },
+        isHd: { label: '是否高清', type: 'boolean' },
+        is4K: { label: '是否 4K', type: 'boolean' },
+        isMissing: { label: '是否缺失', type: 'boolean' },
+        isUnaired: { label: '是否未播出', type: 'boolean' },
         //is3D: { label: 'Is 3D', type: 'boolean' },
         //isSeries: { label: 'Is Series (Live TV)', type: 'boolean' },
-        hasOverview: { label: 'Has Overview', type: 'boolean' },
-        hasOfficialRating: { label: 'Has Official Rating', type: 'boolean' },
-        recursive: { label: 'Recursive', type: 'boolean', default: true },
+        hasOverview: { label: '有简介', type: 'boolean' },
+        hasOfficialRating: { label: '有官方分级', type: 'boolean' },
+        recursive: { label: '递归', type: 'boolean', default: true },
         
         // Strings
-        maxOfficialRating: { label: 'Max Official Rating', type: 'string', hint: 'e.g., PG-13, TV-MA' },
-        minOfficialRating: { label: 'Min Official Rating', type: 'string', hint: 'e.g., PG, TV-14' },
-        nameStartsWith: { label: 'Name Starts With', type: 'string' },
-        nameStartsWithOrGreater: { label: 'Name Starts With Or Greater', type: 'string' },
-        nameLessThan: { label: 'Name Less Than', type: 'string' },
+        maxOfficialRating: { label: '最高官方分级', type: 'string', hint: '例如 PG-13、TV-MA' },
+        minOfficialRating: { label: '最低官方分级', type: 'string', hint: '例如 PG、TV-14' },
+        nameStartsWith: { label: '名称开头为', type: 'string' },
+        nameStartsWithOrGreater: { label: '名称开头或按字母序更大', type: 'string' },
+        nameLessThan: { label: '名称按字母序小于', type: 'string' },
         
         // Arrays (Comma-separated strings in UI)
-        locationTypes: { label: 'Location Types', type: 'array', hint: 'FileSystem, Remote, Virtual, Offline' },
-        excludeLocationTypes: { label: 'Exclude Location Types', type: 'array', hint: 'FileSystem, Remote, Virtual, Offline' },
-        excludeItemIds: { label: 'Exclude Item IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        excludeItemTypes: { label: 'Exclude Item Types', type: 'array', hint: 'Movie, Series, Episode, etc.' },
-        imageTypes: { label: 'Image Types', type: 'array', hint: 'Primary, Backdrop, Thumb, Logo, etc.' },
-        officialRatings: { label: 'Official Ratings', type: 'array', hint: 'PG, PG-13, R, etc.' },
-        studios: { label: 'Studios', type: 'array', hint: 'Pipe-delimited names' },
-        artists: { label: 'Artists', type: 'array', hint: 'Pipe-delimited names' },
-        albums: { label: 'Albums', type: 'array', hint: 'Pipe-delimited names' },
-        seriesStatus: { label: 'Series Status', type: 'array', hint: 'Continuing, Ended, Unreleased' },
-        personIds: { label: 'Person IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        studioIds: { label: 'Studio IDs', type: 'array', hint: 'Comma-separated GUIDs' },
-        ids: { label: 'Item IDs', type: 'array', hint: 'Comma-separated GUIDs' }
+        locationTypes: { label: '位置类型', type: 'array', hint: 'FileSystem, Remote, Virtual, Offline' },
+        excludeLocationTypes: { label: '排除的位置类型', type: 'array', hint: 'FileSystem, Remote, Virtual, Offline' },
+        excludeItemIds: { label: '排除的条目 ID', type: 'array', hint: '多个 GUID 用逗号分隔' },
+        excludeItemTypes: { label: '排除的条目类型', type: 'array', hint: 'Movie、Series、Episode 等' },
+        imageTypes: { label: '图像类型', type: 'array', hint: 'Primary、Backdrop、Thumb、Logo 等' },
+        officialRatings: { label: '官方分级', type: 'array', hint: 'PG、PG-13、R 等' },
+        studios: { label: '制片公司', type: 'array', hint: '多个名称用竖线 | 分隔' },
+        artists: { label: '艺术家', type: 'array', hint: '多个名称用竖线 | 分隔' },
+        albums: { label: '专辑', type: 'array', hint: '多个名称用竖线 | 分隔' },
+        seriesStatus: { label: '剧集状态', type: 'array', hint: 'Continuing、Ended、Unreleased' },
+        personIds: { label: '人物 ID', type: 'array', hint: '多个 GUID 用逗号分隔' },
+        studioIds: { label: '制片公司 ID', type: 'array', hint: '多个 GUID 用逗号分隔' },
+        ids: { label: '条目 ID', type: 'array', hint: '多个 GUID 用逗号分隔' }
     };
 
     // Check if user is admin
@@ -235,29 +235,29 @@
         const seasonalSeasons = config.homeScreen?.seasonal?.seasons || [];
         
         if (customSections.length === 0 && seasonalSeasons.length === 0) {
-            alert('No custom sections or seasonal configurations found to export.');
+            alert('没有找到可导出的自定义板块或季节配置。');
             return;
         }
 
         const content = document.createElement('div');
         content.innerHTML = `
             <div class="content-primary">
-                <div class="listItemBodyText" style="margin-bottom: 1em;">Select sections to export:</div>
+                <div class="listItemBodyText" style="margin-bottom: 1em;">选择要导出的板块：</div>
                 
                 ${customSections.length > 0 ? `
                 <div style="margin-bottom: 1.5em;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5em;">
-                        <h3 class="listItemBodyText" style="margin: 0;">Custom Sections</h3>
+                        <h3 class="listItemBodyText" style="margin: 0;">自定义板块</h3>
                         <div>
-                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = true)" style="font-size: 0.9em;">Select All</button>
-                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = false)" style="font-size: 0.9em;">Deselect All</button>
+                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = true)" style="font-size: 0.9em;">全选</button>
+                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-custom-check').forEach(c => c.checked = false)" style="font-size: 0.9em;">全不选</button>
                         </div>
                     </div>
                     <div style="background: rgba(0,0,0,0.2); border-radius: 4px; padding: 0.5em;">
                         ${customSections.map((section, i) => `
                             <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.5em;">
                                 <input type="checkbox" class="export-custom-check" data-index="${i}" checked>
-                                <span class="listItemBodyText" style="margin-left: 0.5em;">${section.name || 'Unnamed Section'}</span>
+                                <span class="listItemBodyText" style="margin-left: 0.5em;">${section.name || '未命名板块'}</span>
                             </label>
                         `).join('')}
                     </div>
@@ -266,28 +266,28 @@
                 ${seasonalSeasons.length > 0 ? `
                 <div style="margin-bottom: 1.5em;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5em;">
-                        <h3 class="listItemBodyText" style="margin: 0;">Seasonal Seasons</h3>
+                        <h3 class="listItemBodyText" style="margin: 0;">季节主题季</h3>
                         <div>
-                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-seasonal-check').forEach(c => c.checked = true)" style="font-size: 0.9em;">Select All</button>
-                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-seasonal-check').forEach(c => c.checked = false)" style="font-size: 0.9em;">Deselect All</button>
+                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-seasonal-check').forEach(c => c.checked = true)" style="font-size: 0.9em;">全选</button>
+                            <button type="button" class="emby-button" onclick="this.closest('.content-primary').querySelectorAll('.export-seasonal-check').forEach(c => c.checked = false)" style="font-size: 0.9em;">全不选</button>
                         </div>
                     </div>
                     <div style="background: rgba(0,0,0,0.2); border-radius: 4px; padding: 0.5em;">
                         ${seasonalSeasons.map((season, i) => `
                             <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.5em;">
                                 <input type="checkbox" class="export-seasonal-check" data-index="${i}" checked>
-                                <span class="listItemBodyText" style="margin-left: 0.5em;">${season.name || 'Unnamed Season'}</span>
+                                <span class="listItemBodyText" style="margin-left: 0.5em;">${season.name || '未命名季'}</span>
                             </label>
                         `).join('')}
                     </div>
                 </div>` : ''}
                 
                 <div id="exportOutputContainer" style="display: none; margin-top: 1.5em;">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Export JSON:</div>
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">导出 JSON：</div>
                     <textarea id="exportOutput" class="fld emby-textarea" readonly style="width: 100%; height: 200px; font-family: monospace;"></textarea>
                     <div style="display: flex; gap: 1em; margin-top: 0.5em;">
-                        <button type="button" class="emby-button raised" id="copyExportBtn">Copy to Clipboard</button>
-                        <button type="button" class="emby-button raised" id="downloadExportBtn">Download .json</button>
+                        <button type="button" class="emby-button raised" id="copyExportBtn">复制到剪贴板</button>
+                        <button type="button" class="emby-button raised" id="downloadExportBtn">下载 .json</button>
                     </div>
                 </div>
             </div>
@@ -297,13 +297,13 @@
         footer.style.display = 'flex';
         footer.style.gap = '0.75em';
         footer.innerHTML = `
-            <button class="emby-button raised button-submit" id="generateExportBtn" style="padding: 0.75em 2em;">Generate JSON</button>
-            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinTweaksExportModal')">Close</button>
+            <button class="emby-button raised button-submit" id="generateExportBtn" style="padding: 0.75em 2em;">生成 JSON</button>
+            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinTweaksExportModal')">关闭</button>
         `;
 
         window.ModalSystem.create({
             id: 'kefinTweaksExportModal',
-            title: 'Export Custom Sections',
+            title: '导出自定义板块',
             content: content,
             footer: footer,
             closeOnBackdrop: true,
@@ -315,7 +315,7 @@
                     const selectedSeasonalIndices = Array.from(content.querySelectorAll('.export-seasonal-check:checked')).map(c => parseInt(c.dataset.index));
                     
                     if (selectedCustomIndices.length === 0 && selectedSeasonalIndices.length === 0) {
-                        alert('Please select at least one item to export.');
+                        alert('请至少选择一个要导出的条目。');
                         return;
                     }
 
@@ -341,7 +341,7 @@
                         output.select();
                         document.execCommand('copy');
                         if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                            window.KefinTweaksToaster.toast('Copied to clipboard');
+                            window.KefinTweaksToaster.toast('已复制到剪贴板');
                         }
                     });
                     
@@ -365,7 +365,7 @@
     async function showCommunityImportDialog(config, saveConfigCallback) {
         // Ensure community config is available
         if (!window.KefinCommunityConfig) {
-            alert('Community configuration not loaded. Please ensure homeScreenConfig-community.js is loaded.');
+            alert('社区配置未加载。请确保已加载 homeScreenConfig-community.js。');
             return;
         }
 
@@ -374,21 +374,21 @@
         const content = document.createElement('div');
         content.innerHTML = `
             <div class="content-primary">
-                <div class="listItemBodyText" style="margin-bottom: 1em;">Select Home Screen Sections to import:</div>
-                <div class="listItemBodyText" style="margin-bottom: 1em;">These sections are created and submitted by community members like you!</div>
-                <div class="listItemBodyText secondary" style="margin-bottom: 1.5em;">Submit your own Home Screen Sections <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/discussions/64" target="_blank" class="button-link">here.</a></div>
+                <div class="listItemBodyText" style="margin-bottom: 1em;">选择要导入的主屏幕板块：</div>
+                <div class="listItemBodyText" style="margin-bottom: 1em;">这些板块由和你一样的社区成员创建并提交！</div>
+                <div class="listItemBodyText secondary" style="margin-bottom: 1.5em;">在此提交你自己的主屏幕板块 <a href="${(window.KefinTweaksLoader?.UPSTREAM?.repository || '')}/discussions/64" target="_blank" class="button-link">点这里。</a></div>
                 
                 <div style="margin-bottom: 1.5em;">
                     <select id="communityCollectionSelect" class="emby-select-withcolor emby-select" style="width: 100%; padding: 0.5em; background: rgba(255,255,255,0.1); color: inherit; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px;">
-                        <option value="">Select a collection...</option>
-                        ${communityCollections.map((c, i) => `<option value="${i}">${c.name} by ${c.author}</option>`).join('')}
+                        <option value="">选择一个合集...</option>
+                        ${communityCollections.map((c, i) => `<option value="${i}">${c.name}（作者：${c.author}）</option>`).join('')}
                     </select>
                 </div>
                 
                 <div id="collectionDescription" style="margin-bottom: 1.5em; font-style: italic; color: #ccc; display: none; padding: 1em; background: rgba(0,0,0,0.2); border-radius: 4px;"></div>
 
                 <div id="importSelectionContainer" style="display: none; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1em;">
-                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">Sections in this collection:</div>
+                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">此合集包含的板块：</div>
                     <div id="importSelectionList"></div>
                 </div>
             </div>
@@ -398,15 +398,15 @@
         footer.style.display = 'flex';
         footer.style.gap = '0.75em';
         footer.innerHTML = `
-            <button class="emby-button raised button-submit" id="confirmCommunityImportBtn" style="padding: 0.75em 2em; display: none;">Import Selected</button>
-            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinTweaksCommunityImportModal')">Cancel</button>
+            <button class="emby-button raised button-submit" id="confirmCommunityImportBtn" style="padding: 0.75em 2em; display: none;">导入所选</button>
+            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinTweaksCommunityImportModal')">取消</button>
         `;
 
         let selectedCollection = null;
 
         window.ModalSystem.create({
             id: 'kefinTweaksCommunityImportModal',
-            title: 'Import Community Sections',
+            title: '导入社区板块',
             content: content,
             footer: footer,
             closeOnBackdrop: false,
@@ -431,7 +431,7 @@
                     selectedCollection = communityCollections[parseInt(index)];
                     
                     // Show description
-                    descContainer.textContent = selectedCollection.description || 'No description.';
+                    descContainer.textContent = selectedCollection.description || '暂无描述。';
                     descContainer.style.display = 'block';
 
                     // Render sections list
@@ -442,12 +442,12 @@
                                 ${selectedCollection.sections.map((s, i) => `
                                     <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.5em;">
                                         <input type="checkbox" class="import-community-check" data-index="${i}" checked>
-                                        <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || 'Unnamed'} (${s.type})</span>
+                                        <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || '未命名'}（${s.type}）</span>
                                     </label>
                                 `).join('')}
                             </div>`;
                     } else {
-                        html = '<div class="listItemBodyText secondary">No sections found in this collection.</div>';
+                        html = '<div class="listItemBodyText secondary">此合集中没有板块。</div>';
                     }
 
                     selectionList.innerHTML = html;
@@ -461,7 +461,7 @@
                     const selectedIndices = Array.from(content.querySelectorAll('.import-community-check:checked')).map(c => parseInt(c.dataset.index));
                     
                     if (selectedIndices.length === 0) {
-                        alert('Please select at least one section to import.');
+                        alert('请至少选择一个要导入的板块。');
                         return;
                     }
 
@@ -480,7 +480,7 @@
 
                     if (importedCount > 0) {
                         await saveConfigCallback(config);
-                        alert(`Successfully imported ${importedCount} sections. The page will reload.`);
+                        alert(`成功导入 ${importedCount} 个板块。页面即将刷新。`);
                         window.location.reload();
                     } else {
                         window.ModalSystem.close('kefinTweaksCommunityImportModal');
@@ -494,11 +494,11 @@
         const content = document.createElement('div');
         content.innerHTML = `
             <div class="content-primary">
-                <div class="listItemBodyText" style="margin-bottom: 1em;">Paste JSON content or a URL (Raw GitHub, Gist, Pastebin):</div>
-                <textarea id="importInput" class="fld emby-textarea" style="width: 100%; height: 150px; font-family: monospace;" placeholder='{"customSections": [...]} or https://...'></textarea>
+                <div class="listItemBodyText" style="margin-bottom: 1em;">粘贴 JSON 内容或 URL（Raw GitHub、Gist、Pastebin）：</div>
+                <textarea id="importInput" class="fld emby-textarea" style="width: 100%; height: 150px; font-family: monospace;" placeholder='{"customSections": [...]} 或 https://...'></textarea>
                 
                 <div id="importSelectionContainer" style="display: none; margin-top: 1.5em; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1em;">
-                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">Found items to import:</div>
+                    <div class="listItemBodyText" style="margin-bottom: 1em; font-weight: bold;">找到可导入的项目：</div>
                     <div id="importSelectionList"></div>
                 </div>
             </div>
@@ -508,16 +508,16 @@
         footer.style.display = 'flex';
         footer.style.gap = '0.75em';
         footer.innerHTML = `
-            <button class="emby-button raised button-submit" id="loadImportBtn" style="padding: 0.75em 2em;">Load</button>
-            <button class="emby-button raised button-submit" id="confirmImportBtn" style="padding: 0.75em 2em; display: none;">Import Selected</button>
-            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinTweaksImportModal')">Cancel</button>
+            <button class="emby-button raised button-submit" id="loadImportBtn" style="padding: 0.75em 2em;">加载</button>
+            <button class="emby-button raised button-submit" id="confirmImportBtn" style="padding: 0.75em 2em; display: none;">导入所选</button>
+            <button class="emby-button raised" onclick="window.ModalSystem.close('kefinTweaksImportModal')">取消</button>
         `;
 
         let parsedData = null;
 
         window.ModalSystem.create({
             id: 'kefinTweaksImportModal',
-            title: 'Import Custom Sections',
+            title: '导入自定义板块',
             content: content,
             footer: footer,
             closeOnBackdrop: false,
@@ -534,20 +534,20 @@
                     if (!rawInput) return;
 
                     loadBtn.disabled = true;
-                    loadBtn.textContent = 'Loading...';
+                    loadBtn.textContent = '加载中...';
 
                     try {
                         let jsonStr = rawInput;
                         // Check if URL
                         if (rawInput.startsWith('http://') || rawInput.startsWith('https://')) {
                             const res = await fetch(rawInput);
-                            if (!res.ok) throw new Error(`Failed to fetch URL: ${res.status}`);
+                            if (!res.ok) throw new Error(`获取 URL 失败：${res.status}`);
                             jsonStr = await res.text();
                         }
 
                         parsedData = JSON.parse(jsonStr);
                         if (!parsedData.customSections && !parsedData.seasonalSeasons && !Array.isArray(parsedData)) {
-                            throw new Error('Invalid format: No sections found.');
+                            throw new Error('无效的格式：未找到板块。');
                         }
                         
                         // Handle legacy/array-only format if necessary (assume customSections)
@@ -560,12 +560,12 @@
                         if (parsedData.customSections && parsedData.customSections.length > 0) {
                             html += `
                                 <div style="margin-bottom: 1em;">
-                                    <h3 class="listItemBodyText">Custom Sections</h3>
+                                    <h3 class="listItemBodyText">自定义板块</h3>
                                     <div style="background: rgba(0,0,0,0.2); border-radius: 4px; padding: 0.5em;">
                                         ${parsedData.customSections.map((s, i) => `
                                             <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.5em;">
                                                 <input type="checkbox" class="import-custom-check" data-index="${i}" checked>
-                                                <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || 'Unnamed'}</span>
+                                                <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || '未命名'}</span>
                                             </label>
                                         `).join('')}
                                     </div>
@@ -574,19 +574,19 @@
                         if (parsedData.seasonalSeasons && parsedData.seasonalSeasons.length > 0) {
                             html += `
                                 <div style="margin-bottom: 1em;">
-                                    <h3 class="listItemBodyText">Seasonal Seasons</h3>
+                                    <h3 class="listItemBodyText">季节主题季</h3>
                                     <div style="background: rgba(0,0,0,0.2); border-radius: 4px; padding: 0.5em;">
                                         ${parsedData.seasonalSeasons.map((s, i) => `
                                             <label class="checkboxContainer" style="display: flex; align-items: center; padding: 0.5em;">
                                                 <input type="checkbox" class="import-seasonal-check" data-index="${i}" checked>
-                                                <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || 'Unnamed'}</span>
+                                                <span class="listItemBodyText" style="margin-left: 0.5em;">${s.name || '未命名'}</span>
                                             </label>
                                         `).join('')}
                                     </div>
                                 </div>`;
                         }
 
-                        if (!html) throw new Error('No valid sections found in data.');
+                        if (!html) throw new Error('数据中没有有效的板块。');
 
                         selectionList.innerHTML = html;
                         selectionContainer.style.display = 'block';
@@ -595,9 +595,9 @@
                         input.disabled = true;
 
                     } catch (err) {
-                        alert('Error loading data: ' + err.message);
+                        alert('加载数据时出错：' + err.message);
                         loadBtn.disabled = false;
-                        loadBtn.textContent = 'Load';
+                        loadBtn.textContent = '加载';
                     }
                 });
 
@@ -645,7 +645,7 @@
 
                     if (importedCount > 0) {
                         await saveConfigCallback(config);
-                        alert(`Successfully imported ${importedCount} items. The page will reload.`);
+                        alert(`成功导入 ${importedCount} 个项目。页面即将刷新。`);
                         window.location.reload();
                     } else {
                         window.ModalSystem.close('kefinTweaksImportModal');
@@ -881,16 +881,16 @@
                     <div class="listItemContent" style="display: flex; gap: 1em; align-items: center; flex-wrap: wrap;">
                         <label class="checkboxContainer" style="display: flex; align-items: center; gap: 0.75em; cursor: pointer;">
                             <input type="checkbox" id="kefinTweaksEnabled" class="checkbox" ${isEnabled ? 'checked' : ''}>
-                            <span id="kefinTweaksEnabledLabel" class="listItemBodyText" style="margin: 0;">${isEnabled ? 'Enabled' : 'Disabled'}</span>
+                            <span id="kefinTweaksEnabledLabel" class="listItemBodyText" style="margin: 0;">${isEnabled ? '已启用' : '已禁用'}</span>
                         </label>
-                        <button class="emby-button raised" id="changeKefinTweaksSourceBtn" style="padding: 0.75em 2em; font-size: 1em;" title="Where KefinTweaks loads its files from (a pinned folder or your own server), turn it off, or uninstall it.">
-                            <span>Plugin Settings</span>
+                        <button class="emby-button raised" id="changeKefinTweaksSourceBtn" style="padding: 0.75em 2em; font-size: 1em;" title="KefinTweaks 的文件加载来源（固定文件夹或你自己的服务器）、关闭或卸载。">
+                            <span>插件设置</span>
                         </button>
                         <button class="emby-button raised" id="exportConfigBtn" style="padding: 0.75em 2em; font-size: 1em;">
-                            <span>Export</span>
+                            <span>导出</span>
                         </button>
                         <button class="emby-button raised" id="importConfigBtn" style="padding: 0.75em 2em; font-size: 1em;">
-                            <span>Import</span>
+                            <span>导入</span>
                         </button>
                     </div>
                 </div>
@@ -899,8 +899,8 @@
             <div class="paperList" style="margin-bottom: 1em;">
                 <div class="listItem" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1em; margin-bottom: 1em;">
                     <div class="listItemContent">
-                        <h3 class="listItemBodyText" style="margin-bottom: 0.25em;">Feature Configuration</h3>
-                        <div class="listItemBodyText secondary">Toggle individual KefinTweaks features on or off. Existing configurations are maintained when disabling features.</div>
+                        <h3 class="listItemBodyText" style="margin-bottom: 0.25em;">功能配置</h3>
+                        <div class="listItemBodyText secondary">逐个开启或关闭 KefinTweaks 功能。停用功能时会保留其现有配置。</div>
                     </div>
                 </div>
                 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.5em;">
@@ -1076,14 +1076,14 @@
         if (optionalIncludes.length === 0) {
             return `
                 <div class="listItemBodyText secondary" style="padding: 1em; text-align: center; opacity: 0.7;">
-                    No optional CSS modules available for ${category === 'global' ? 'global options' : category}.
+                    没有适用于${category === 'global' ? '全局选项' : category}的可选 CSS 模块。
                 </div>
             `;
         }
         
         return `
             <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">
-                Configure which optional CSS modules are enabled by default. Users can override these settings individually.
+                配置默认启用哪些可选 CSS 模块。用户可以在个人设置中单独覆盖。
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 0.5em;">
                 ${optionalIncludes.map((include, index) => {
@@ -1097,7 +1097,7 @@
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5em; gap: 0.5em;">
                                     <div style="flex: 1; min-width: 0;">
                                         <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.25em;">${include.name}</div>
-                                        ${author ? `<div class="listItemBodyText secondary" style="font-size: 0.85em;">by <a href="https://github.com/${author}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; opacity: 0.8; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">${author}</a></div>` : ''}
+                                        ${author ? `<div class="listItemBodyText secondary" style="font-size: 0.85em;">作者：<a href="https://github.com/${author}" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: underline; opacity: 0.8; transition: opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">${author}</a></div>` : ''}
                                     </div>
                                     <input type="checkbox" 
                                            id="optionalInclude_${category}_${index}" 
@@ -1146,11 +1146,11 @@
             // Determine tooltip text
             let tooltipText = '';
             if (source === 'default') {
-                tooltipText = 'This skin is included automatically by KefinTweaks';
+                tooltipText = '此皮肤由 KefinTweaks 自动包含';
             } else if (source === 'overridden') {
-                tooltipText = 'This default skin has been overridden by a custom configuration';
+                tooltipText = '此默认皮肤已被自定义配置覆盖';
             } else if (githubUrl) {
-                tooltipText = 'View on GitHub';
+                tooltipText = '在 GitHub 上查看';
             }
             
             return `
@@ -1158,7 +1158,7 @@
                     <div class="listItemContent" style="display: flex; justify-content: space-between; align-items: center; gap: 0.5em;">
                         <div style="flex: 1; display: flex; align-items: center; gap: 0.5em; min-width: 0;">
                             ${githubUrl ? `
-                                <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.4em; color: inherit; text-decoration: none; opacity: 0.85; transition: opacity 0.2s; min-width: 0;" title="View on GitHub" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+                                <a href="${githubUrl}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 0.4em; color: inherit; text-decoration: none; opacity: 0.85; transition: opacity 0.2s; min-width: 0;" title="在 GitHub 上查看" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
                                     <span class="listItemBodyText" style="font-weight: 500; font-size: 0.9em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${skin.name}</span>
                                     <span class="material-icons" style="font-size: 1em; flex-shrink: 0;">info</span>
                                 </a>
@@ -1181,33 +1181,33 @@
         const featuresWithConfig = new Set(['homeScreen', 'search', 'flattenSingleSeasonShows', 'skinManager', 'customMenuLinks', 'seriesInfo', 'versionPreferences', 'thumbnailScrubber', 'watchTogether', 'watchlist', 'userManager', 'requestSeerr', 'mediaBadges', 'kidsMode']);
         
         const scriptNames = [
-            { key: 'watchlist', label: 'Watchlist', desc: 'Allows your users to add items to their Watchlist. The Watchlist page shows an overview of all items on a user\'s Watchlist, as well as their Series Progress and Movie History. It also includes a Statistics page with an overview of your user watched stats.' },
-            { key: 'homeScreen', label: 'Enhanced Home Screen', desc: 'Add custom home screen sections and a "discovery engine" to your Home Page. Create sections based on Genre, Tags, Playlists, Collections or Search Terms for specific Item Types. Use the "Spotlight" feature to highlight specific sections with an image carousel/slideshow.' },
-            { key: 'search', label: 'Enhanced Search', desc: 'Search speed is improved by searching less content types by default. Provides options to specify which content type to search. Fully compatible with both the Jellysearch Search from Jellyfin Enhanced plugin and the Meilisearch plugin.' },
-            { key: 'infiniteScroll', label: 'Infinite Scroll', desc: 'Adds infinite scrolling to the library pages for Movies and TV' },
-            { key: 'removeContinue', label: 'Remove Continue', desc: 'Adds the ability to remove items from the Continue Watching sections' },
-            { key: 'skinManager', label: 'Skin Manager', desc: 'Skin selection and management - adds skin dropdown to header and display preferences' },
-            { key: 'headerTabs', label: 'Header Tabs', desc: 'Allows direct navigation to specific Tab sections of a given library page. Full support for default Jellyfin landing pages.' },
-            { key: 'customMenuLinks', label: 'Custom Menu Links', desc: 'Add custom menu links to the left side navigation menu' },
-            { key: 'hamburgerMenu', label: 'Desktop Hamburger Menu', desc: 'Shows an Open Menu button on desktop (900px+) that opens a left navigation drawer like the mobile layout, including libraries and custom menu links.' },
-            { key: 'games', label: 'Games', desc: 'Add a Games link to the side menu for Movie LUT and other library games' },
-            { key: 'breadcrumbs', label: 'Breadcrumbs', desc: 'Breadcrumb navigation for Movies, TV and Music. Allows quick navigation between Seasons/Episodes and Albums/Songs.' },
-            { key: 'playlist', label: 'Playlist UX', desc: 'Improved Playlist page navigation: Items only play when the Play button is pressed. Clicking an item navigates to the item\'s page.' },
-            { key: 'itemDetailsCollections', label: 'Collections on Details Page', desc: 'Displays collections on item details pages (Included In section)' },
-            { key: 'flattenSingleSeasonShows', label: 'Episodes On Series Page', desc: 'Displays episodes directly on series page. For single-season shows, shows all episodes. For multi-season shows, shows episodes from the season with Next Up episode (or Season 1 if no Next Up).' },
-            { key: 'seriesInfo', label: 'Series Info+', desc: 'Adds Season and Episode counts to the Series and Season pages. Also adds an "Ends at" time similar to the Episode page.' },
-            { key: 'versionPreferences', label: 'Item Version Preferences', desc: 'Manage how different versions and editions of your items are displayed. Reorders and sanitizes the media source dropdown on item details pages by prioritized version and edition terms.' },
-            { key: 'collections', label: 'Collection Sorting', desc: 'Collection sorting functionality on the Collection page' },
-            { key: 'subtitleSearch', label: 'Subtitle Search', desc: 'Search and download subtitles directly from the video OSD' },
-            { key: 'backdropLeakFix', label: 'Backdrop Leak Fix', desc: 'Fixes memory leaks from backdrop images when tab isn\'t focused' },
-            { key: 'dashboardButtonFix', label: 'Dashboard Button Fix', desc: 'Improved back button behavior on dashboard - prevents navigating back to the new tab browser page' },
-            { key: 'thumbnailScrubber', label: 'Thumbnail Scrubber', desc: 'Shows trickplay thumbnail preview when hovering in the bottom 40px of a video card similar to Youtube. Needs the trickplay images Jellyfin generates; does nothing on touch screens.' },
-            { key: 'watchTogether', label: 'Watch Together', desc: 'Link additional Jellyfin accounts to a Watch Together group, then sync watched / in-progress playstate to selected accounts on this device.' },
-            { key: 'userManager', label: 'User Manager', desc: 'Create reusable user policy templates and apply them when adding users or bulk-editing existing accounts. Import/export comes later.' },
-            { key: 'requestSeerr', label: 'Request it (Seerr)', desc: 'A "Request on Seerr" button that opens your Seerr / Jellyseerr: on a search that finds nothing or little (with the search filled in), and on items without media (missing episodes, collections). Set the Seerr address with the edit button. Hidden for Kids Mode users.' },
-            { key: 'mediaBadges', label: 'Media Info Badges', desc: 'Small 4K / 1080p, HDR / Dolby Vision and audio (Atmos, DD+ 5.1...) badges on movie and episode cards and on the item page. Read lazily for the cards in view, in batches, and kept for the session. Each badge can be switched off.' },
-            { key: 'jumpBar', label: 'Jump Bar', desc: 'An A-Z rail on the Movies, TV and Music grids (sorted by name) that jumps to a letter, loading more items (with Infinite Scroll or the next page) until it is there.' },
-            { key: 'kidsMode', label: 'Kids Mode', desc: 'For users that Jellyfin limits to some libraries or to a maximum parental rating: bigger tiles, no search, no Request button, no Watch Together. Driven by each user\'s own Jellyfin settings; the edit button can force it on or off per user.' }
+            { key: 'watchlist', label: '片单', desc: '允许用户将条目添加到自己的片单。片单页面展示用户片单中所有条目的总览，以及剧集观看进度和电影观看历史。还包含一个统计页面，概述用户的观看数据。' },
+            { key: 'homeScreen', label: '增强主屏幕', desc: '在主页添加自定义主屏幕板块和“发现引擎”。可基于流派、标签、播放列表、合集或针对特定条目类型的搜索词创建板块。使用“精选”功能，以图片轮播/幻灯片突出显示特定板块。' },
+            { key: 'search', label: '增强搜索', desc: '默认只搜索较少的内容类型，从而提升搜索速度。提供选项指定要搜索的内容类型。与 Jellyfin Enhanced 插件的 Jellysearch 搜索以及 Meilisearch 插件完全兼容。' },
+            { key: 'infiniteScroll', label: '无限滚动', desc: '为电影和剧集的媒体库页面添加无限滚动' },
+            { key: 'removeContinue', label: '移除“继续观看”', desc: '支持从“继续观看”板块中移除条目' },
+            { key: 'skinManager', label: '皮肤管理器', desc: '皮肤选择与管理 - 在页眉和显示偏好设置中添加皮肤下拉菜单' },
+            { key: 'headerTabs', label: '页眉标签页', desc: '允许直接导航到指定媒体库页面的特定标签页区域。完全支持 Jellyfin 默认落地页。' },
+            { key: 'customMenuLinks', label: '自定义菜单链接', desc: '在左侧导航菜单中添加自定义菜单链接' },
+            { key: 'hamburgerMenu', label: '桌面端汉堡菜单', desc: '在桌面端（900px 以上）显示“打开菜单”按钮，像移动端布局一样打开左侧导航抽屉，包含媒体库和自定义菜单链接。' },
+            { key: 'games', label: '游戏', desc: '在侧边菜单中添加“游戏”链接，用于 Movie LUT 及其他媒体库游戏' },
+            { key: 'breadcrumbs', label: '面包屑导航', desc: '适用于电影、剧集和音乐的面包屑导航。可在季/集以及专辑/歌曲之间快速切换。' },
+            { key: 'playlist', label: '播放列表体验', desc: '改进播放列表页面导航：只有在按下“播放”按钮时才会播放。点击条目会进入该条目的页面。' },
+            { key: 'itemDetailsCollections', label: '详情页显示合集', desc: '在条目详情页显示所属合集（“收录于”区域）' },
+            { key: 'flattenSingleSeasonShows', label: '剧集页显示单集', desc: '直接在剧集页面显示单集。单季剧集显示全部单集；多季剧集显示“接下来播放”所在季的单集（若没有则显示第 1 季）。' },
+            { key: 'seriesInfo', label: '剧集信息+', desc: '在剧集和季页面添加季数和集数统计。并像单集页面一样添加“结束时间”。' },
+            { key: 'versionPreferences', label: '条目版本偏好', desc: '管理条目的不同版本和版次的显示方式。按优先的版本/版次关键词对条目详情页的媒体源下拉菜单重新排序并清理。' },
+            { key: 'collections', label: '合集排序', desc: '合集页面的排序功能' },
+            { key: 'subtitleSearch', label: '字幕搜索', desc: '直接从视频 OSD 搜索并下载字幕' },
+            { key: 'backdropLeakFix', label: '背景图内存泄漏修复', desc: '修复标签页未聚焦时背景图片导致的内存泄漏' },
+            { key: 'dashboardButtonFix', label: '控制台按钮修复', desc: '改进控制台的返回按钮行为 - 防止返回到新标签页浏览器页面' },
+            { key: 'thumbnailScrubber', label: '进度条缩略图', desc: '类似 YouTube，将鼠标悬停在视频卡片底部 40px 区域时显示 trickplay 缩略图预览。需要 Jellyfin 生成的 trickplay 图片；在触屏设备上无效。' },
+            { key: 'watchTogether', label: '一起观看', desc: '将其他 Jellyfin 账户加入“一起观看”分组，并在本设备上向所选账户同步已观看/观看中的播放状态。' },
+            { key: 'userManager', label: '用户管理器', desc: '创建可复用的用户策略模板，在添加用户或批量编辑现有账户时套用。导入/导出功能稍后推出。' },
+            { key: 'requestSeerr', label: '求片（Seerr）', desc: '一个“在 Seerr 上求片”按钮，会打开你的 Seerr / Jellyseerr：在搜索无结果或结果很少时（自动填入搜索词），以及在缺少媒体的条目（缺失单集、合集）上显示。通过编辑按钮设置 Seerr 地址。儿童模式用户不可见。' },
+            { key: 'mediaBadges', label: '媒体信息角标', desc: '在电影和单集卡片及条目页面上显示 4K / 1080p、HDR / 杜比视界和音频（Atmos、DD+ 5.1 等）小角标。对当前可见的卡片分批懒加载读取，并在本次会话中保留。每个角标都可单独关闭。' },
+            { key: 'jumpBar', label: '字母跳转栏', desc: '在电影、剧集和音乐网格（按名称排序）上添加 A-Z 字母栏，点击跳转到对应字母，并加载更多条目（通过无限滚动或下一页）直到目标位置。' },
+            { key: 'kidsMode', label: '儿童模式', desc: '面向被 Jellyfin 限制只能访问部分媒体库或最高家长分级的用户：更大的卡片、无搜索、无求片按钮、无一起观看。由每个用户自己的 Jellyfin 设置驱动；编辑按钮可按用户强制开启或关闭。' }
         ];
 
         const defsByName = new Map(
@@ -1237,7 +1237,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75em;">
                             <div class="listItemBodyText" style="font-weight: 500;">${script.label}</div>
                             <div style="display: flex; align-items: center; gap: 0.5em;">
-                                ${hasConfig ? `<button class="emby-button raised" data-feature-edit="${configKey}" style="padding: 0.35em 0.75em; font-size: 0.85em; min-width: auto;" title="Configure ${script.label}">
+                                ${hasConfig ? `<button class="emby-button raised" data-feature-edit="${configKey}" style="padding: 0.35em 0.75em; font-size: 0.85em; min-width: auto;" title="配置 ${script.label}">
                                     <span class="material-icons" style="font-size: 1.1em; vertical-align: middle;">edit</span>
                                 </button>` : ''}
                                 ${buildJellyfinCheckbox(`script_${script.key}`, isEnabled, '', { 'data-script-key': script.key })}
@@ -1309,13 +1309,13 @@
             'Series', 'Studio', 'Trailer', 'TvChannel', 'TvProgram', 'UserRootFolder', 'UserView', 'Video', 'Year'
         ];
         
-        const selectionLabel = currentTypes.length ? `${currentTypes.length} selected` : 'Select item types';
+        const selectionLabel = currentTypes.length ? `已选 ${currentTypes.length} 项` : '选择条目类型';
         
         // Current types as badges
         const badgesHtml = currentTypes.map(typeName => `
             <span class="tag-badge" data-value="${typeName}" style="display: inline-flex; align-items: center; gap: 0.25em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; margin: 0.25em; font-size: 0.9em;">
                 ${typeName}
-                <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="Remove">×</button>
+                <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="移除">×</button>
             </span>
         `).join('');
         
@@ -1333,8 +1333,8 @@
             <div class="${prefix}_section_includeItemTypes_container" data-section-index="${sectionIndex}" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; position: static;">
                 <div style="position: relative;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5em;">
-                        <div class="listItemBodyText">Include Item Types</div>
-                        <button type="button" class="badge-clear-all" data-section-index="${sectionIndex}" data-field="includeItemTypes" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; color: rgba(255,255,255,0.87); cursor: pointer; font-size: 0.85em;" title="Clear All">Clear All</button>
+                        <div class="listItemBodyText">包含的条目类型</div>
+                        <button type="button" class="badge-clear-all" data-section-index="${sectionIndex}" data-field="includeItemTypes" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; color: rgba(255,255,255,0.87); cursor: pointer; font-size: 0.85em;" title="清空">清空</button>
                     </div>
                     <div class="tag-badge-container includeItemTypes-badge-container" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-available-types="${allAvailableTypes.join(',')}" style="border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.5em; margin-bottom: 0.5em; background: rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 0.5em; position: relative;">
                         <button type="button" class="includeItemTypes-dropdown-toggle" data-section-index="${sectionIndex}" style="display: inline-flex; align-items: center; justify-content: space-between; gap: 0.5em; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.35em 0.75em; color: rgba(255,255,255,0.87); cursor: pointer; font-size: 0.9em;">
@@ -1348,7 +1348,7 @@
                         </div>
                         <input type="text" class="${prefix}_section_includeItemTypes fld emby-input includeItemTypes-input-proxy" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-field="includeItemTypes" autocomplete="off" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;">
                         <div class="includeItemTypes-badges" style="flex: 1; min-height: 2.5em; min-width: 0; display: flex; flex-wrap: wrap; gap: 0.25em; align-items: flex-start; overflow-wrap: break-word;">
-                            <span class="includeItemTypes-empty" ${currentTypes.length ? 'hidden' : ''} style="opacity: 0.6; font-size: 0.9em; margin: 0.25em;">No item types selected</span>
+                            <span class="includeItemTypes-empty" ${currentTypes.length ? 'hidden' : ''} style="opacity: 0.6; font-size: 0.9em; margin: 0.25em;">未选择条目类型</span>
                             ${badgesHtml}
                         </div>
                     </div>
@@ -1368,14 +1368,14 @@
 
         return `
             <div class="${prefix}_section_additionalOptions_controls" data-section-index="${sectionIndex}" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; position: static;">
-                <div class="listItemBodyText" style="margin-bottom: 0.5em;">Additional Options</div>
+                <div class="listItemBodyText" style="margin-bottom: 0.5em;">附加选项</div>
                 <div style="display: flex; gap: 0.5em; align-items: center;">
                     <select class="fld emby-select-withcolor emby-select additional-option-select" style="flex: 1; margin: 0; min-width: 0;">
-                        <option value="">Select an option to add...</option>
+                        <option value="">选择要添加的选项...</option>
                         ${dropdownOptions}
                     </select>
                     <button type="button" class="raised emby-button add-additional-option" style="background: rgba(0, 164, 220, 0.2); min-width: auto; padding: 0.5em 1em;">
-                        <span>Add</span>
+                        <span>添加</span>
                     </button>
                 </div>
             </div>
@@ -1408,7 +1408,7 @@
             return `
                 <div class="additional-option-row" style="display: flex; align-items: flex-end; gap: 0.5em; margin-top: 0.5em; padding: 0.5em; background: rgba(255,255,255,0.05); border-radius: 4px;">
                     ${inputField}
-                    <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="Remove Option">
+                    <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="移除选项">
                         <span class="material-icons">close</span>
                     </button>
                 </div>
@@ -1480,8 +1480,8 @@
             sourceFieldHtml = `
                 <div class="${prefix}_section_source_container" data-section-index="${sectionIndex}" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; position: static;">
                     <div style="position: relative;">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Parent IDs (comma-separated, leave empty for "Any")</div>
-                        <input type="text" class="${prefix}_section_source fld emby-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" value="${parentIds}" placeholder="Enter parent IDs (e.g., collection-id, playlist-id) or leave empty" style="width: 100%;">
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">父级 ID（逗号分隔，留空表示“任意”）</div>
+                        <input type="text" class="${prefix}_section_source fld emby-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" value="${parentIds}" placeholder="输入父级 ID（例如 collection-id、playlist-id），或留空" style="width: 100%;">
                         <input type="hidden" class="${prefix}_section_source_hidden" data-section-index="${sectionIndex}" value="${parentIds}">
                     </div>
                 </div>
@@ -1497,7 +1497,7 @@
                 badgesHtml = sourceArray.map(val => `
                     <span class="tag-badge" data-value="${val}" style="display: inline-flex; align-items: center; gap: 0.25em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; margin: 0.25em; font-size: 0.9em;">
                         ${val}
-                        <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="Remove">×</button>
+                        <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="移除">×</button>
                     </span>
                 `).join('');
             } else {
@@ -1505,7 +1505,7 @@
                 badgesHtml = sourceArray.map(id => `
                     <span class="tag-badge" data-value="${id}" data-loading="true" style="display: inline-flex; align-items: center; gap: 0.25em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; margin: 0.25em; font-size: 0.9em;">
                         ${id}
-                        <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="Remove">×</button>
+                        <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="移除">×</button>
                     </span>
                 `).join('');
             }
@@ -1515,10 +1515,10 @@
                     <div style="position: relative;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5em;">
                             <div class="listItemBodyText">${type}</div>
-                            <button type="button" class="badge-clear-all" data-section-index="${sectionIndex}" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; color: rgba(255,255,255,0.87); cursor: pointer; font-size: 0.85em;" title="Clear All">Clear All</button>
+                            <button type="button" class="badge-clear-all" data-section-index="${sectionIndex}" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; color: rgba(255,255,255,0.87); cursor: pointer; font-size: 0.85em;" title="清空">清空</button>
                         </div>
                         <div class="tag-badge-container" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" style="min-height: 2.5em; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.5em; margin-bottom: 0.5em; background: rgba(0,0,0,0.2); display: flex; gap: 0.5em; align-items: flex-start; overflow: hidden;">
-                            <input type="text" class="${prefix}_section_source fld emby-input autocomplete-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" placeholder="Type to add ${type.toLowerCase()}..." autocomplete="off" style="flex: 0 0 auto; width: 120px; min-width: 200px; max-width: 120px; border: none; background: transparent; outline: none; color: rgba(255,255,255,0.87); padding: 0.25em;">
+                            <input type="text" class="${prefix}_section_source fld emby-input autocomplete-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" placeholder="输入以添加 ${type.toLowerCase()}..." autocomplete="off" style="flex: 0 0 auto; width: 120px; min-width: 200px; max-width: 120px; border: none; background: transparent; outline: none; color: rgba(255,255,255,0.87); padding: 0.25em;">
                             <div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: 0.25em; align-items: flex-start; overflow-wrap: break-word;">
                                 ${badgesHtml}
                             </div>
@@ -1539,7 +1539,7 @@
             section,
             {
                 includeName: true,
-                defaultName: name || 'Unnamed Section',
+                defaultName: name || '未命名板块',
                 nameInputAttributes: {
                     class: `${prefix}_section_name`,
                     'data-section-index': sectionIndex,
@@ -1559,29 +1559,29 @@
                 <!-- Row 1: Enabled, Render Mode, Discovery, Type -->
                 <div class="listItem" style="display: grid; grid-template-columns: auto auto auto 1fr; gap: 1em; align-items: end; margin: 0.75em 0; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                     <div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Enabled</div>
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">启用</div>
                         ${buildJellyfinCheckbox(`${prefix}_section_enabled_${sectionIndex}`, enabled, '', { 'data-section-index': sectionIndex, 'data-prefix': prefix, 'class': `${prefix}_section_enabled` })}
                     </div>
                     <div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Render Mode</div>
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">渲染模式</div>
                         <select class="${prefix}_section_renderMode fld emby-select-withcolor emby-select" data-section-index="${sectionIndex}" data-prefix="${prefix}" style="width: 100%;">
-                            <option value="Normal" ${renderMode === 'Normal' ? 'selected' : ''}>Normal</option>
-                            <option value="Spotlight" ${renderMode === 'Spotlight' ? 'selected' : ''}>Spotlight</option>
-                            <option value="Random" ${renderMode === 'Random' ? 'selected' : ''}>Random</option>
+                            <option value="Normal" ${renderMode === 'Normal' ? 'selected' : ''}>常规</option>
+                            <option value="Spotlight" ${renderMode === 'Spotlight' ? 'selected' : ''}>精选</option>
+                            <option value="Random" ${renderMode === 'Random' ? 'selected' : ''}>随机</option>
                         </select>
                     </div>
                     <div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Discovery</div>
-                        ${buildJellyfinCheckbox(discoveryCheckboxId, discoveryEnabled, 'Enable as Discovery', { 'data-section-index': sectionIndex, 'data-prefix': prefix, 'class': `${prefix}_section_discovery` })}
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">发现</div>
+                        ${buildJellyfinCheckbox(discoveryCheckboxId, discoveryEnabled, '启用为发现板块', { 'data-section-index': sectionIndex, 'data-prefix': prefix, 'class': `${prefix}_section_discovery` })}
                     </div>
                     <div>
-                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Type</div>
+                        <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">类型</div>
                         <select class="${prefix}_section_type fld emby-select-withcolor emby-select" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-is-seasonal="${isSeasonalNested}" style="width: 100%;">
-                            <option value="Tag" ${type === 'Tag' ? 'selected' : ''}>Tag</option>
-                            <option value="Genre" ${type === 'Genre' ? 'selected' : ''}>Genre</option>
-                            <option value="Playlist" ${type === 'Playlist' ? 'selected' : ''}>Playlist</option>
-                            <option value="Collection" ${type === 'Collection' ? 'selected' : ''}>Collection</option>
-                            <option value="Parent" ${type === 'Parent' ? 'selected' : ''}>Generic Query</option>
+                            <option value="Tag" ${type === 'Tag' ? 'selected' : ''}>标签</option>
+                            <option value="Genre" ${type === 'Genre' ? 'selected' : ''}>流派</option>
+                            <option value="Playlist" ${type === 'Playlist' ? 'selected' : ''}>播放列表</option>
+                            <option value="Collection" ${type === 'Collection' ? 'selected' : ''}>合集</option>
+                            <option value="Parent" ${type === 'Parent' ? 'selected' : ''}>通用查询</option>
                         </select>
                     </div>
                 </div>
@@ -1595,8 +1595,8 @@
                     <!-- Search Term field -->
                     <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                         <div class="listItemContent">
-                            <div class="listItemBodyText" style="margin-bottom: 0.5em;">Search Term</div>
-                            <input type="text" id="${sanitizedSectionPrefix}_searchTerm" class="fld emby-input" value="${searchTerm}" placeholder="Optional search filter" style="width: 100%;">
+                            <div class="listItemBodyText" style="margin-bottom: 0.5em;">搜索词</div>
+                            <input type="text" id="${sanitizedSectionPrefix}_searchTerm" class="fld emby-input" value="${searchTerm}" placeholder="可选的搜索过滤词" style="width: 100%;">
                         </div>
                     </div>
                     <!-- Include Item Types field -->
@@ -1620,7 +1620,7 @@
             const orderClass = prefix === 'customSection' ? 'custom-section-order' : 'seasonal-section-order';
             const showPreviewButton = prefix === 'customSection' || prefix === 'seasonal_season';
             const previewButtonHtml = showPreviewButton
-                ? `<button class="emby-button preview-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Preview</button>`
+                ? `<button class="emby-button preview-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">预览</button>`
                 : '';
             
             return `
@@ -1628,12 +1628,12 @@
                     <summary class="${summaryClass}" data-section-index="${sectionIndex}" style="display: flex; justify-content: space-between; align-items: center; padding: 1em; cursor: pointer; list-style: none; user-select: none;">
                         <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em;">
                             <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                        <span class="${nameClass}" data-section-index="${sectionIndex}">${name || 'Unnamed Section'}</span>
-                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="${enabledClass}" data-section-index="${sectionIndex}">${enabled ? 'Enabled' : 'Disabled'}</span>, Order: <span class="${orderClass}" data-section-index="${sectionIndex}">${order}</span>)</span>
+                        <span class="${nameClass}" data-section-index="${sectionIndex}">${name || '未命名板块'}</span>
+                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="${enabledClass}" data-section-index="${sectionIndex}">${enabled ? '已启用' : '已禁用'}</span>，排序：<span class="${orderClass}" data-section-index="${sectionIndex}">${order}</span>)</span>
                         </div>
                         <div style="display: flex; gap: 0.5em;">
                             ${previewButtonHtml}
-                            <button class="emby-button delete-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" data-is-seasonal="${isSeasonalNested}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">Delete</button>
+                            <button class="emby-button delete-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" data-is-seasonal="${isSeasonalNested}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">删除</button>
                         </div>
                     </summary>
                     <div style="padding: 0 1em 1em 1em; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 0;">
@@ -1645,15 +1645,15 @@
             // Fallback for any other section types (shouldn't happen in current code)
             const showPreviewButton = prefix === 'customSection' || prefix === 'seasonal_season';
             const previewButtonHtml = showPreviewButton
-                ? `<button class="emby-button preview-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">Preview</button>`
+                ? `<button class="emby-button preview-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">预览</button>`
                 : '';
             return `
                 <div class="${prefix}_section_item" data-section-index="${sectionIndex}" data-section-id="${sectionId}" style="border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; padding: 1em; margin-bottom: 0.75em; background: rgba(255,255,255,0.03);">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75em;">
-                        <div class="listItemBodyText" style="font-weight: 500;">${name || 'Unnamed Section'}</div>
+                        <div class="listItemBodyText" style="font-weight: 500;">${name || '未命名板块'}</div>
                         <div style="display: flex; gap: 0.5em;">
                             ${previewButtonHtml}
-                            <button class="emby-button delete-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" data-is-seasonal="${isSeasonalNested}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">Delete</button>
+                            <button class="emby-button delete-section-btn" data-prefix="${prefix}" data-section-index="${sectionIndex}" data-is-seasonal="${isSeasonalNested}" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">删除</button>
                         </div>
                     </div>
                     ${sectionContent}
@@ -1767,7 +1767,7 @@
             includeOrder = true,
             includeName = true,
             defaultName = '',
-            nameLabel = 'Section Name',
+            nameLabel = '板块名称',
             nameInputAttributes = {},
             includeCardFormat = true,
             includeItemLimit = true,
@@ -1808,12 +1808,12 @@
             html += `
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Card Format</div>
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">卡片格式</div>
                     <select id="${prefix}_cardFormat" class="fld emby-select-withcolor emby-select" style="width: 100%; max-width: 200px;">
-                        <option value="Random" ${cardFormat === 'Random' ? 'selected' : ''}>Random</option>
-                        <option value="Backdrop" ${cardFormat === 'Backdrop' ? 'selected' : ''}>Backdrop</option>
-                        <option value="Thumb" ${cardFormat === 'Thumb' ? 'selected' : ''}>Thumb</option>
-                        <option value="Poster" ${cardFormat === 'Poster' ? 'selected' : ''}>Poster</option>
+                        <option value="Random" ${cardFormat === 'Random' ? 'selected' : ''}>随机</option>
+                        <option value="Backdrop" ${cardFormat === 'Backdrop' ? 'selected' : ''}>背景图</option>
+                        <option value="Thumb" ${cardFormat === 'Thumb' ? 'selected' : ''}>缩略图</option>
+                        <option value="Poster" ${cardFormat === 'Poster' ? 'selected' : ''}>海报</option>
                     </select>
                 </div>
             </div>`;
@@ -1823,42 +1823,42 @@
             html += `
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Sort Order</div>
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">排序方式</div>
                     <select id="${prefix}_sortOrder" class="fld emby-select-withcolor emby-select" style="width: 100%; max-width: 200px;">
-                        <option value="Random" ${sortOrder === 'Random' ? 'selected' : ''}>Random</option>
-                        <option value="PremiereDate" ${sortOrder === 'PremiereDate' ? 'selected' : ''}>Premiere Date</option>
-                        <option value="DateCreated" ${sortOrder === 'DateCreated' ? 'selected' : ''}>Date Created</option>
-                        <option value="DateAdded" ${sortOrder === 'DateAdded' ? 'selected' : ''}>Date Added</option>
-                        <option value="SortName" ${sortOrder === 'SortName' ? 'selected' : ''}>Sort Name</option>
-                        <option value="Name" ${sortOrder === 'Name' ? 'selected' : ''}>Name</option>
-                        <option value="CommunityRating" ${sortOrder === 'CommunityRating' ? 'selected' : ''}>Community Rating</option>
-                        <option value="CriticRating" ${sortOrder === 'CriticRating' ? 'selected' : ''}>Critic Rating</option>
-                        <option value="OfficialRating" ${sortOrder === 'OfficialRating' ? 'selected' : ''}>Official Rating</option>
-                        <option value="ProductionYear" ${sortOrder === 'ProductionYear' ? 'selected' : ''}>Production Year</option>
-                        <option value="PlayCount" ${sortOrder === 'PlayCount' ? 'selected' : ''}>Play Count</option>
-                        <option value="Runtime" ${sortOrder === 'Runtime' ? 'selected' : ''}>Runtime</option>
-                        <option value="Default" ${sortOrder === 'Default' ? 'selected' : ''}>Default</option>
-                        <option value="AiredEpisodeOrder" ${sortOrder === 'AiredEpisodeOrder' ? 'selected' : ''}>Aired Episode Order</option>
-                        <option value="DatePlayed" ${sortOrder === 'DatePlayed' ? 'selected' : ''}>Date Played</option>
-                        <option value="StartDate" ${sortOrder === 'StartDate' ? 'selected' : ''}>Start Date</option>
-                        <option value="IsFolder" ${sortOrder === 'IsFolder' ? 'selected' : ''}>Is Folder</option>
-                        <option value="IsUnplayed" ${sortOrder === 'IsUnplayed' ? 'selected' : ''}>Is Unplayed</option>
-                        <option value="IsPlayed" ${sortOrder === 'IsPlayed' ? 'selected' : ''}>Is Played</option>
-                        <option value="SeriesSortName" ${sortOrder === 'SeriesSortName' ? 'selected' : ''}>Series Sort Name</option>
-                        <option value="AirTime" ${sortOrder === 'AirTime' ? 'selected' : ''}>Air Time</option>
-                        <option value="Studio" ${sortOrder === 'Studio' ? 'selected' : ''}>Studio</option>
-                        <option value="IsFavoriteOrLiked" ${sortOrder === 'IsFavoriteOrLiked' ? 'selected' : ''}>Is Favorite Or Liked</option>
-                        <option value="ParentIndexNumber" ${sortOrder === 'ParentIndexNumber' ? 'selected' : ''}>Parent Index Number</option>
-                        <option value="IndexNumber" ${sortOrder === 'IndexNumber' ? 'selected' : ''}>Index Number</option>
+                        <option value="Random" ${sortOrder === 'Random' ? 'selected' : ''}>随机</option>
+                        <option value="PremiereDate" ${sortOrder === 'PremiereDate' ? 'selected' : ''}>首播日期</option>
+                        <option value="DateCreated" ${sortOrder === 'DateCreated' ? 'selected' : ''}>创建日期</option>
+                        <option value="DateAdded" ${sortOrder === 'DateAdded' ? 'selected' : ''}>添加日期</option>
+                        <option value="SortName" ${sortOrder === 'SortName' ? 'selected' : ''}>排序名称</option>
+                        <option value="Name" ${sortOrder === 'Name' ? 'selected' : ''}>名称</option>
+                        <option value="CommunityRating" ${sortOrder === 'CommunityRating' ? 'selected' : ''}>社区评分</option>
+                        <option value="CriticRating" ${sortOrder === 'CriticRating' ? 'selected' : ''}>评论家评分</option>
+                        <option value="OfficialRating" ${sortOrder === 'OfficialRating' ? 'selected' : ''}>官方分级</option>
+                        <option value="ProductionYear" ${sortOrder === 'ProductionYear' ? 'selected' : ''}>制作年份</option>
+                        <option value="PlayCount" ${sortOrder === 'PlayCount' ? 'selected' : ''}>播放次数</option>
+                        <option value="Runtime" ${sortOrder === 'Runtime' ? 'selected' : ''}>时长</option>
+                        <option value="Default" ${sortOrder === 'Default' ? 'selected' : ''}>默认</option>
+                        <option value="AiredEpisodeOrder" ${sortOrder === 'AiredEpisodeOrder' ? 'selected' : ''}>播出集序</option>
+                        <option value="DatePlayed" ${sortOrder === 'DatePlayed' ? 'selected' : ''}>播放日期</option>
+                        <option value="StartDate" ${sortOrder === 'StartDate' ? 'selected' : ''}>开始日期</option>
+                        <option value="IsFolder" ${sortOrder === 'IsFolder' ? 'selected' : ''}>是否文件夹</option>
+                        <option value="IsUnplayed" ${sortOrder === 'IsUnplayed' ? 'selected' : ''}>是否未播放</option>
+                        <option value="IsPlayed" ${sortOrder === 'IsPlayed' ? 'selected' : ''}>是否已播放</option>
+                        <option value="SeriesSortName" ${sortOrder === 'SeriesSortName' ? 'selected' : ''}>剧集排序名称</option>
+                        <option value="AirTime" ${sortOrder === 'AirTime' ? 'selected' : ''}>播出时间</option>
+                        <option value="Studio" ${sortOrder === 'Studio' ? 'selected' : ''}>制片公司</option>
+                        <option value="IsFavoriteOrLiked" ${sortOrder === 'IsFavoriteOrLiked' ? 'selected' : ''}>是否收藏或喜欢</option>
+                        <option value="ParentIndexNumber" ${sortOrder === 'ParentIndexNumber' ? 'selected' : ''}>父级索引编号</option>
+                        <option value="IndexNumber" ${sortOrder === 'IndexNumber' ? 'selected' : ''}>索引编号</option>
                     </select>
                 </div>
             </div>
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Sort Order Direction</div>
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">排序方向</div>
                     <select id="${prefix}_sortOrderDirection" class="fld emby-select-withcolor emby-select" style="width: 100%; max-width: 200px;">
-                        <option value="Ascending" ${sortOrderDirection === 'Ascending' ? 'selected' : ''}>Ascending</option>
-                        <option value="Descending" ${sortOrderDirection === 'Descending' ? 'selected' : ''}>Descending</option>
+                        <option value="Ascending" ${sortOrderDirection === 'Ascending' ? 'selected' : ''}>升序</option>
+                        <option value="Descending" ${sortOrderDirection === 'Descending' ? 'selected' : ''}>降序</option>
                     </select>
                 </div>
             </div>`;
@@ -1869,8 +1869,8 @@
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
                     <div class="listItemBodyText" style="margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.4em; overflow: visible;">
-                        <span>Order</span>
-                        <span class="material-icons info info-tooltip" tabindex="0" role="note" data-tooltip="Lower numbers appear first" aria-label="Lower numbers appear first"></span>
+                        <span>排序</span>
+                        <span class="material-icons info info-tooltip" tabindex="0" role="note" data-tooltip="数字越小越靠前" aria-label="数字越小越靠前"></span>
                     </div>
                     <input type="number" id="${prefix}_order" class="fld emby-input" value="${order}" min="0" style="width: 100%; max-width: 200px;">
                 </div>
@@ -1881,7 +1881,7 @@
             html += `
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Item Limit</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">条目数量上限</div>
                         <input type="number" id="${prefix}_itemLimit" class="fld emby-input" value="${itemLimit}" min="1" style="width: 100%; max-width: 200px;">
                     </div>
                 </div>`;
@@ -1893,16 +1893,16 @@
             html += `                
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Minimum Age (Days)</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">最短天数</div>
                         <input type="number" id="${prefix}_minAgeInDays" class="fld emby-input" value="${minAgeInDays}" style="width: 100%;">
-                        <div class="fieldDescription" style="margin-top: 0.25em;">Optional. Days since release (e.g. 0 for today).</div>
+                        <div class="fieldDescription" style="margin-top: 0.25em;">可选。距发布的天数（例如 0 表示今天）。</div>
                     </div>
                 </div>
                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                     <div class="listItemContent">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Maximum Age (Days)</div>
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">最长天数</div>
                         <input type="number" id="${prefix}_maxAgeInDays" class="fld emby-input" value="${maxAgeInDays}" style="width: 100%;">
-                        <div class="fieldDescription" style="margin-top: 0.25em;">Optional. Max days old (e.g. 30).</div>
+                        <div class="fieldDescription" style="margin-top: 0.25em;">可选。最大天数（例如 30）。</div>
                     </div>
                 </div>`;
         }
@@ -1911,12 +1911,12 @@
             html += `
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                    ${buildJellyfinCheckbox(`${prefix}_isPlayed_enabled`, isPlayedFilterEnabled, 'Filter by Played Status')}
+                    ${buildJellyfinCheckbox(`${prefix}_isPlayed_enabled`, isPlayedFilterEnabled, '按播放状态筛选')}
                     
                     <div id="${prefix}_isPlayed_options" style="margin-top: 0.5em; margin-left: 1.5em; display: ${isPlayedFilterEnabled ? 'block' : 'none'};">
                         <select id="${prefix}_isPlayed_value" class="fld emby-select-withcolor emby-select" style="width: 100%; max-width: 200px;">
-                            <option value="false" ${!isPlayedValue ? 'selected' : ''}>Unplayed</option>
-                            <option value="true" ${isPlayedValue ? 'selected' : ''}>Played</option>
+                            <option value="false" ${!isPlayedValue ? 'selected' : ''}>未播放</option>
+                            <option value="true" ${isPlayedValue ? 'selected' : ''}>已播放</option>
                         </select>
                     </div>
                 </div>
@@ -1954,43 +1954,43 @@
                 <summary class="seasonal-season-summary" data-season-index="${seasonIndex}" style="display: flex; justify-content: space-between; align-items: center; padding: 1em; cursor: pointer; list-style: none; user-select: none;">
                     <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em;">
                         <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                        <span class="seasonal-season-name-display" data-season-index="${seasonIndex}">${season.name || 'Unnamed Season'}</span>
-                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="seasonal-season-enabled-display" data-season-index="${seasonIndex}">${season.enabled !== false ? 'Enabled' : 'Disabled'}</span>, Order: <span class="seasonal-season-order" data-season-index="${seasonIndex}">${seasonOrder}</span>)</span>
+                        <span class="seasonal-season-name-display" data-season-index="${seasonIndex}">${season.name || '未命名季'}</span>
+                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="seasonal-season-enabled-display" data-season-index="${seasonIndex}">${season.enabled !== false ? '已启用' : '已禁用'}</span>，排序：<span class="seasonal-season-order" data-season-index="${seasonIndex}">${seasonOrder}</span>)</span>
                     </div>
                     <div style="display: flex; gap: 0.5em;">
-                        <button class="emby-button" onclick="deleteSeasonalSeason(${seasonIndex})" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">Delete</button>
+                        <button class="emby-button" onclick="deleteSeasonalSeason(${seasonIndex})" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">删除</button>
                     </div>
                 </summary>
                 <div style="padding: 0 1em 1em 1em; border-top: 1px solid rgba(255,255,255,0.1);">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75em; margin-bottom: 0.75em; margin-top: 0.75em;">
                         <div>
-                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Enabled</div>
-                            ${buildJellyfinCheckbox(`seasonal-season-enabled-${seasonIndex}`, season.enabled !== false, 'Enabled', { 'data-index': seasonIndex, 'class': 'seasonal-season-enabled' })}
+                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">启用</div>
+                            ${buildJellyfinCheckbox(`seasonal-season-enabled-${seasonIndex}`, season.enabled !== false, '启用', { 'data-index': seasonIndex, 'class': 'seasonal-season-enabled' })}
                         </div>
                         <div>
-                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Name</div>
+                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">名称</div>
                             <input type="text" class="seasonal-season-name fld emby-input" data-index="${seasonIndex}" value="${season.name || ''}" style="width: 100%;">
                         </div>
                         <div>
-                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Start Date (MM-DD)</div>
+                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">开始日期（MM-DD）</div>
                             <input type="text" class="seasonal-season-startDate fld emby-input" data-index="${seasonIndex}" value="${season.startDate || ''}" placeholder="10-01" style="width: 100%;">
                         </div>
                         <div>
-                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">End Date (MM-DD)</div>
+                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">结束日期（MM-DD）</div>
                             <input type="text" class="seasonal-season-endDate fld emby-input" data-index="${seasonIndex}" value="${season.endDate || ''}" placeholder="10-31" style="width: 100%;">
                         </div>
                         <div>
-                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em; display: flex; align-items: center; gap: 0.4em;">Order</div>
+                            <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em; display: flex; align-items: center; gap: 0.4em;">排序</div>
                             <input type="number" class="seasonal-season-order-input fld emby-input" data-index="${seasonIndex}" value="${seasonOrder}" min="0" style="width: 100%;">
                         </div>
                     </div>
                     <div style="margin-top: 0.75em; margin-bottom: 0.75em;">
-                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">Sections</div>
+                        <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">板块</div>
                         <div class="seasonal_season_sections_list" data-season-index="${seasonIndex}">
                             ${sectionsHtml}
                         </div>
                         <button type="button" class="emby-button raised add-section-to-seasonal-btn" data-season-index="${seasonIndex}" style="padding: 0.75em 1.5em; margin-top: 0.5em;">
-                            <span>Add Section</span>
+                            <span>添加板块</span>
                         </button>
                     </div>
                 </div>
@@ -2003,7 +2003,7 @@
             recentlyAddedInLibraryHtml = libraries.map(library => {
                 const libConfig = recentlyAddedInLibrary[library.Id] || {};
                 const prefix = `homeScreen_recentlyAddedInLibrary_${library.Id}`;
-                const defaultName = `Recently Added ${library.Name}`;
+                const defaultName = `最近添加 ${library.Name}`;
                 
                 return `
                     <details class="listItem" style="display: grid; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0; gap: 0.5em;">
@@ -2011,12 +2011,12 @@
                             <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em;">
                                 <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
                                 <span>${library.Name}</span>
-                                <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="${prefix}_enabled_display">${libConfig.enabled !== false ? 'Enabled' : 'Disabled'}</span>, Order: <span class="${prefix}_order_display">${libConfig.order || 11}</span>)</span>
+                                <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="${prefix}_enabled_display">${libConfig.enabled !== false ? '已启用' : '已禁用'}</span>, 排序: <span class="${prefix}_order_display">${libConfig.order || 11}</span>)</span>
                             </div>
                         </summary>
                         <div style="padding: 0 0.75em 0.75em 0.75em; border-top: 1px solid rgba(255,255,255,0.1);">
                             <div style="margin-top: 0.75em; margin-bottom: 0.75em;">
-                                ${buildJellyfinCheckbox(`${prefix}_enabled`, libConfig.enabled !== false, 'Enabled', { 'data-library-id': library.Id, 'class': 'recently-added-library-enabled' })}
+                                ${buildJellyfinCheckbox(`${prefix}_enabled`, libConfig.enabled !== false, '已启用', { 'data-library-id': library.Id, 'class': 'recently-added-library-enabled' })}
                             </div>
                             <div class="listItemContent" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75em;">
                                 ${createSectionConfiguration(prefix, libConfig, { 
@@ -2045,7 +2045,7 @@
             recentlyAddedInLibraryHtml += orphanedLibraryIds.map(id => {
                 const libConfig = recentlyAddedInLibrary[id];
                 const prefix = `homeScreen_recentlyAddedInLibrary_${id}`;
-                const name = libConfig.name || `Unknown Library (${id})`;
+                const name = libConfig.name || `未知媒体库 (${id})`;
                 
                 return `
                     <details class="listItem recently-added-library-item" style="display: grid; border: 1px solid rgba(244, 67, 54, 0.3); border-radius: 4px; padding: 0; gap: 0.5em; background: rgba(244, 67, 54, 0.05);">
@@ -2053,7 +2053,7 @@
                             <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em; color: #ff8a80;">
                                 <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">warning</span>
                                 <span>${name}</span>
-                                <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(Library Missing)</span>
+                                <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(媒体库缺失)</span>
                             </div>
                             <button type="button" class="emby-button" onclick="this.closest('.recently-added-library-item').remove()" style="padding: 0.5em; min-width: auto; background: rgba(244, 67, 54, 0.1);">
                                 <span class="material-icons" style="font-size: 1.2em; color: #ff8a80;">delete</span>
@@ -2062,9 +2062,9 @@
                         <div style="padding: 0 0.75em 0.75em 0.75em; border-top: 1px solid rgba(244, 67, 54, 0.1);">
                             <div style="margin-top: 0.75em; margin-bottom: 0.75em;">
                                 <div class="listItemBodyText" style="color: #ff8a80; font-size: 0.9em; margin-bottom: 0.5em;">
-                                    This library is no longer available. You should remove this section.
+                                    该媒体库已不可用，请移除此板块。
                                 </div>
-                                ${buildJellyfinCheckbox(`${prefix}_enabled`, false, 'Enabled', { 'data-library-id': id, 'class': 'recently-added-library-enabled', 'disabled': 'true' })}
+                                ${buildJellyfinCheckbox(`${prefix}_enabled`, false, '已启用', { 'data-library-id': id, 'class': 'recently-added-library-enabled', 'disabled': 'true' })}
                             </div>
                         </div>
                     </details>
@@ -2078,7 +2078,7 @@
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
                     <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                    Recently Added in Library Sections
+                    媒体库内最近添加板块
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_recentlyAddedInLibrary_container">
@@ -2093,7 +2093,7 @@
             <!-- Recently Released Sections -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_recentlyReleased_enabled', recentlyReleased.enabled !== false, 'Recently Released Sections')}
+                    ${buildJellyfinCheckbox('homeScreen_recentlyReleased_enabled', recentlyReleased.enabled !== false, '最近发布板块')}
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_recentlyReleased_container">
@@ -2102,16 +2102,16 @@
                                 <summary class="recently-released-subsection-summary" style="display: flex; justify-content: space-between; align-items: center; padding: 0.75em; cursor: pointer; list-style: none; user-select: none;">
                                     <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em;">
                                         <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                                        <span>Recently Released Movies</span>
-                                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="recently-released-movies-enabled">${(recentlyReleased.movies || {}).enabled !== false ? 'Enabled' : 'Disabled'}</span>, Order: <span class="recently-released-movies-order">${(recentlyReleased.movies || {}).order || 30}</span>)</span>
+                                        <span>最近发布的电影</span>
+                                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="recently-released-movies-enabled">${(recentlyReleased.movies || {}).enabled !== false ? '已启用' : '已禁用'}</span>, 排序: <span class="recently-released-movies-order">${(recentlyReleased.movies || {}).order || 30}</span>)</span>
                                     </div>
                                 </summary>
                                 <div style="padding: 0 0.75em 0.75em 0.75em; border-top: 1px solid rgba(255,255,255,0.1);">
                                     <div style="margin-top: 0.75em; margin-bottom: 0.75em;">
-                                        ${buildJellyfinCheckbox('homeScreen_recentlyReleased_movies_enabled', (recentlyReleased.movies || {}).enabled !== false, 'Enabled')}
+                                        ${buildJellyfinCheckbox('homeScreen_recentlyReleased_movies_enabled', (recentlyReleased.movies || {}).enabled !== false, '已启用')}
                                     </div>
                                     <div class="listItemContent" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75em;">
-                                        ${createSectionConfiguration('homeScreen_recentlyReleased_movies', recentlyReleased.movies || {}, { includeName: true, defaultName: 'Recently Released Movies', includeSortOrder: true, includeOrder: true, includeIsPlayed: true, includePremiereDays: true })}
+                                        ${createSectionConfiguration('homeScreen_recentlyReleased_movies', recentlyReleased.movies || {}, { includeName: true, defaultName: '最近发布的电影', includeSortOrder: true, includeOrder: true, includeIsPlayed: true, includePremiereDays: true })}
                                     </div>
                                 </div>
                             </details>
@@ -2119,16 +2119,16 @@
                                 <summary class="recently-released-subsection-summary" style="display: flex; justify-content: space-between; align-items: center; padding: 0.75em; cursor: pointer; list-style: none; user-select: none;">
                                     <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em;">
                                         <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                                        <span>Recently Aired Episodes</span>
-                                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="recently-released-episodes-enabled">${(recentlyReleased.episodes || {}).enabled !== false ? 'Enabled' : 'Disabled'}</span>, Order: <span class="recently-released-episodes-order">${(recentlyReleased.episodes || {}).order || 31}</span>)</span>
+                                        <span>最近播出的集</span>
+                                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="recently-released-episodes-enabled">${(recentlyReleased.episodes || {}).enabled !== false ? '已启用' : '已禁用'}</span>, 排序: <span class="recently-released-episodes-order">${(recentlyReleased.episodes || {}).order || 31}</span>)</span>
                                     </div>
                                 </summary>
                                 <div style="padding: 0 0.75em 0.75em 0.75em; border-top: 1px solid rgba(255,255,255,0.1);">
                                     <div style="margin-top: 0.75em; margin-bottom: 0.75em;">
-                                        ${buildJellyfinCheckbox('homeScreen_recentlyReleased_episodes_enabled', (recentlyReleased.episodes || {}).enabled !== false, 'Enabled')}
+                                        ${buildJellyfinCheckbox('homeScreen_recentlyReleased_episodes_enabled', (recentlyReleased.episodes || {}).enabled !== false, '已启用')}
                                     </div>
                                     <div class="listItemContent" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75em;">
-                                        ${createSectionConfiguration('homeScreen_recentlyReleased_episodes', recentlyReleased.episodes || {}, { includeName: true, defaultName: 'Recently Aired Episodes', includeSortOrder: true, includeOrder: true, includeIsPlayed: true, includePremiereDays: true })}
+                                        ${createSectionConfiguration('homeScreen_recentlyReleased_episodes', recentlyReleased.episodes || {}, { includeName: true, defaultName: '最近播出的集', includeSortOrder: true, includeOrder: true, includeIsPlayed: true, includePremiereDays: true })}
                                     </div>
                                 </div>
                             </details>
@@ -2140,14 +2140,14 @@
             <!-- Trending Sections -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em; display: none;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_trending_enabled', trending.enabled === true, 'Trending Sections', { disabled: 'true' })}
-                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(Order: <span class="home-section-order" data-prefix="homeScreen_trending">${trending.order || 100}</span>)</span>
-                    <span class="listItemBodyText secondary" style="font-size: 0.85em; font-style: italic; opacity: 0.7;">Under development</span>
+                    ${buildJellyfinCheckbox('homeScreen_trending_enabled', trending.enabled === true, '热门板块', { disabled: 'true' })}
+                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(排序: <span class="home-section-order" data-prefix="homeScreen_trending">${trending.order || 100}</span>)</span>
+                    <span class="listItemBodyText secondary" style="font-size: 0.85em; font-style: italic; opacity: 0.7;">开发中</span>
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_trending_container">
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75em;">
-                            ${createSectionConfiguration('homeScreen_trending', trending, { includeName: true, defaultName: 'Trending', includeIsPlayed: true })}
+                            ${createSectionConfiguration('homeScreen_trending', trending, { includeName: true, defaultName: '热门', includeIsPlayed: true })}
                         </div>
                     </div>
                 </div>
@@ -2156,16 +2156,16 @@
             <!-- Popular TV Networks Sections -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_popularTVNetworks_enabled', popularTVNetworks.enabled === true, 'Popular TV Networks Sections')}
-                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(Order: <span class="home-section-order" data-prefix="homeScreen_popularTVNetworks">${popularTVNetworks.order || 100}</span>)</span>
+                    ${buildJellyfinCheckbox('homeScreen_popularTVNetworks_enabled', popularTVNetworks.enabled === true, '热门电视网板块')}
+                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(排序: <span class="home-section-order" data-prefix="homeScreen_popularTVNetworks">${popularTVNetworks.order || 100}</span>)</span>
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_popularTVNetworks_container">
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75em;">
-                            ${createSectionConfiguration('homeScreen_popularTVNetworks', popularTVNetworks, { includeName: true, defaultName: 'Popular TV Networks' })}
+                            ${createSectionConfiguration('homeScreen_popularTVNetworks', popularTVNetworks, { includeName: true, defaultName: '热门电视网' })}
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Minimum Shows for Network to Appear</div>
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">电视网出现所需最少剧集数</div>
                                     <input type="number" id="homeScreen_popularTVNetworks_minimumShowsForNetwork" class="fld emby-input" value="${popularTVNetworks.minimumShowsForNetwork || 5}" min="1" style="width: 100%; max-width: 200px;">
                 </div>
             </div>
@@ -2177,13 +2177,13 @@
             <!-- Watchlist -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_watchlist_enabled', watchlist.enabled === true, 'Watchlist')}
-                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(Order: <span class="home-section-order" data-prefix="homeScreen_watchlist">${watchlist.order || 100}</span>)</span>
+                    ${buildJellyfinCheckbox('homeScreen_watchlist_enabled', watchlist.enabled === true, '片单')}
+                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(排序: <span class="home-section-order" data-prefix="homeScreen_watchlist">${watchlist.order || 100}</span>)</span>
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_watchlist_container">
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75em;">
-                            ${createSectionConfiguration('homeScreen_watchlist', watchlist, { includeName: true, defaultName: 'Watchlist' })}
+                            ${createSectionConfiguration('homeScreen_watchlist', watchlist, { includeName: true, defaultName: '片单' })}
                         </div>
                     </div>
                 </div>
@@ -2192,13 +2192,13 @@
             <!-- Upcoming -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_upcoming_enabled', upcoming.enabled !== false, 'Upcoming')}
-                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(Order: <span class="home-section-order" data-prefix="homeScreen_upcoming">${upcoming.order || 100}</span>)</span>
+                    ${buildJellyfinCheckbox('homeScreen_upcoming_enabled', upcoming.enabled !== false, '即将上线')}
+                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(排序: <span class="home-section-order" data-prefix="homeScreen_upcoming">${upcoming.order || 100}</span>)</span>
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_upcoming_container">
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75em;">
-                            ${createSectionConfiguration('homeScreen_upcoming', upcoming, { includeName: true, defaultName: 'Upcoming', includeSortOrder: false })}
+                            ${createSectionConfiguration('homeScreen_upcoming', upcoming, { includeName: true, defaultName: '即将上线', includeSortOrder: false })}
                         </div>
                     </div>
                 </div>
@@ -2208,7 +2208,7 @@
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
                     ${buildJellyfinCheckbox('homeScreen_imdbTop250_enabled', imdbTop250.enabled !== false, 'IMDb Top 250')}
-                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(Order: <span class="home-section-order" data-prefix="homeScreen_imdbTop250">${imdbTop250.order || 100}</span>)</span>
+                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(排序: <span class="home-section-order" data-prefix="homeScreen_imdbTop250">${imdbTop250.order || 100}</span>)</span>
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_imdbTop250_container">
@@ -2222,29 +2222,29 @@
             <!-- Seasonal Sections -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_seasonal_enabled', seasonal.enabled !== false, 'Seasonal Sections')}
+                    ${buildJellyfinCheckbox('homeScreen_seasonal_enabled', seasonal.enabled !== false, '季节板块')}
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_seasonal_container">
                             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Enable Seasonal Animations</div>
-                                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">Enable falling snow/leaves animations for seasonal themes</div>
-                                    ${buildJellyfinCheckbox('homeScreen_seasonal_enableSeasonalAnimations', seasonal.enableSeasonalAnimations !== false, 'Enabled')}
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">启用季节动画</div>
+                                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">为季节主题启用飘雪/落叶动画</div>
+                                    ${buildJellyfinCheckbox('homeScreen_seasonal_enableSeasonalAnimations', seasonal.enableSeasonalAnimations !== false, '已启用')}
                                 </div>
                             </div>
                             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Enable Christmas Background</div>
-                                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">Enable the festive background image for the Christmas theme</div>
-                                    ${buildJellyfinCheckbox('homeScreen_seasonal_enableSeasonalBackground', seasonal.enableSeasonalBackground !== false, 'Enabled')}
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">启用圣诞背景</div>
+                                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">为圣诞主题启用节日背景图片</div>
+                                    ${buildJellyfinCheckbox('homeScreen_seasonal_enableSeasonalBackground', seasonal.enableSeasonalBackground !== false, '已启用')}
                                 </div>
                             </div>
                         <div id="homeScreen_seasonal_seasons_list" style="margin-bottom: 1em;">
                             ${seasonalSectionsHtml}
                         </div>
                         <button class="emby-button raised" onclick="addNewSeasonalSeason()" style="padding: 0.75em 1.5em; margin-bottom: 1em;">
-                            <span>Add New Season</span>
+                            <span>添加新季节</span>
                         </button>
                     </div>
                 </div>
@@ -2253,13 +2253,13 @@
             <!-- Watch Again -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_watchAgain_enabled', watchAgain.enabled === true, 'Watch Again')}
-                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(Order: <span class="home-section-order" data-prefix="homeScreen_watchAgain">${watchAgain.order || 100}</span>)</span>
+                    ${buildJellyfinCheckbox('homeScreen_watchAgain_enabled', watchAgain.enabled === true, '再看一次')}
+                    <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal; margin-left: auto;">(排序: <span class="home-section-order" data-prefix="homeScreen_watchAgain">${watchAgain.order || 100}</span>)</span>
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_watchAgain_container">
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75em;">
-                            ${createSectionConfiguration('homeScreen_watchAgain', watchAgain, { includeName: true, defaultName: 'Watch Again' })}
+                            ${createSectionConfiguration('homeScreen_watchAgain', watchAgain, { includeName: true, defaultName: '再看一次' })}
                         </div>
                     </div>
                 </div>
@@ -2268,52 +2268,52 @@
             <!-- Discovery Sections -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
-                    ${buildJellyfinCheckbox('homeScreen_discovery_enabled', discovery.enabled !== false, 'Discovery Sections')}
+                    ${buildJellyfinCheckbox('homeScreen_discovery_enabled', discovery.enabled !== false, '发现板块')}
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
                     <div id="homeScreen_discovery_container">
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75em; margin-bottom: 0.75em;">
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Infinite Scroll / Discover More</div>
-                                    ${buildJellyfinCheckbox('homeScreen_discovery_infiniteScroll', discovery.infiniteScroll !== false, 'Infinite Scroll')}
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">无限滚动 / 发现更多</div>
+                                    ${buildJellyfinCheckbox('homeScreen_discovery_infiniteScroll', discovery.infiniteScroll !== false, '无限滚动')}
                 </div>
             </div>
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Randomize Section Order</div>
-                                    ${buildJellyfinCheckbox('homeScreen_discovery_randomizeOrder', discovery.randomizeOrder === true, 'Randomize Order')}
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">随机化板块排序</div>
+                                    ${buildJellyfinCheckbox('homeScreen_discovery_randomizeOrder', discovery.randomizeOrder === true, '随机排序')}
                 </div>
             </div>
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Minimum Appearances for Top People</div>
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">热门人物最少出现次数</div>
                                     <input type="number" id="homeScreen_discovery_minPeopleAppearances" class="fld emby-input" value="${discovery.minPeopleAppearances || 10}" min="1" style="width: 100%; max-width: 200px;">
                 </div>
             </div>
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Minimum Movie count for Genres</div>
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">流派最少电影数量</div>
                                     <input type="number" id="homeScreen_discovery_minGenreMovieCount" class="fld emby-input" value="${discovery.minGenreMovieCount || 50}" min="1" style="width: 100%; max-width: 200px;">
                 </div>
             </div>
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Spotlight & Collection Spawn Chance</div>
+                                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">焦点与合集出现概率</div>
                                     <input type="number" id="homeScreen_discovery_spotlightDiscoveryChance" class="fld emby-input" value="${discovery.spotlightDiscoveryChance ?? 0.5}" min="0" max="1" step="0.01" style="width: 100%; max-width: 200px;">
-                                    <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-top: 0.25em;">0.0 = never, 1.0 = always</div>
+                                    <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-top: 0.25em;">0.0 = 从不，1.0 = 总是</div>
                 </div>
             </div>
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; display: grid;">
-                ${buildJellyfinCheckbox('homeScreen_discovery_renderSpotlightAboveMatching', discovery.renderSpotlightAboveMatching === true, 'Spotlight Grouping')}
-                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-top: 0.25em; margin-left: 2em;">Render Spotlight discovery sections alongside the corresponding discovery section (e.g. Action Spotlight above Action Movies).</div>
+                ${buildJellyfinCheckbox('homeScreen_discovery_renderSpotlightAboveMatching', discovery.renderSpotlightAboveMatching === true, '焦点分组')}
+                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-top: 0.25em; margin-left: 2em;">将焦点（Spotlight）发现板块与对应的发现板块一同渲染（例如“动作焦点”显示在“动作电影”上方）。</div>
             </div>
             ${createSectionConfiguration('homeScreen_discovery', discovery, { includeName: false, includeOrder: false, includeCardFormat: false, includeSortOrder: false, includeItemLimit: false })}
                         </div>
                         <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 0.75em;">
                             <div class="listItemContent">
-                                <div class="listItemBodyText" style="margin-bottom: 0.25em; font-weight: 500;">Discovery Sections</div>
-                                <div class="listItemBodyText secondary" style="font-size: 0.85em;">Section names support placeholders such as [Genre], [Director], [Writer], [Actor], [Movie], [Studio], [Collection Name]</div>
+                                <div class="listItemBodyText" style="margin-bottom: 0.25em; font-weight: 500;">发现板块</div>
+                                <div class="listItemBodyText secondary" style="font-size: 0.85em;">板块名称支持占位符，例如 [Genre]、[Director]、[Writer]、[Actor]、[Movie]、[Studio]、[Collection Name]</div>
                                 <div style="display: grid; gap: 0.75em; margin-top: 0.75em;">
                                     ${DISCOVERY_SECTION_DEFINITIONS.map(section => {
                                         const sectionConfig = normalizedDiscoverySections[section.key];
@@ -2323,7 +2323,7 @@
                                             ? `
                                                 <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                                                     <div class="listItemContent">
-                                                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Minimum Items</div>
+                                                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">最少条目数</div>
                                                         <input type="number" id="${prefix}_minimumItems" class="fld emby-input" value="${sectionConfig.minimumItems ?? section.extras.minimumItems}" min="1" style="width: 100%; max-width: 200px;">
                                                     </div>
                                                 </div>
@@ -2337,12 +2337,12 @@
                                                     <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em;">
                                                         <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
                                                         <span>${section.label}</span>
-                                                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="discovery-section-type-enabled" data-section-key="${section.key}">${sectionConfig.enabled !== false ? 'Enabled' : 'Disabled'}</span>, Order: <span class="discovery-section-type-order" data-section-key="${section.key}">${discoveryOrder}</span>)</span>
+                                                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="discovery-section-type-enabled" data-section-key="${section.key}">${sectionConfig.enabled !== false ? '已启用' : '已禁用'}</span>, 排序: <span class="discovery-section-type-order" data-section-key="${section.key}">${discoveryOrder}</span>)</span>
                                                     </div>
                                                 </summary>
                                                 <div style="padding: 0 0.75em 0.75em 0.75em; border-top: 1px solid rgba(255,255,255,0.1);">
                                                     <div style="margin-top: 0.75em; margin-bottom: 0.75em;">
-                                                        ${buildJellyfinCheckbox(`${prefix}_enabled`, sectionConfig.enabled !== false, 'Enabled')}
+                                                        ${buildJellyfinCheckbox(`${prefix}_enabled`, sectionConfig.enabled !== false, '已启用')}
                                                     </div>
                                                     <div style="display: flex; gap: 0.5em;">
                                                         ${configHtml}
@@ -2361,16 +2361,16 @@
             
             <!-- Custom Sections -->
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
-                <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em;">Custom Sections</summary>
+                <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em;">自定义板块</summary>
                 <div style="padding: 0.75em 0 0 0;">
-                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">Sections</div>
+                    <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">板块</div>
                     <div id="customSections_list" style="margin-bottom: 1em;">
                         ${(customSections || []).map((section, index) => {
                             return buildSectionUI('customSection', section, index, false);
                         }).join('')}
                     </div>
                     <button type="button" class="emby-button raised add-custom-section-btn" style="padding: 0.75em 1.5em; margin-bottom: 1em;">
-                        <span>Add Section</span>
+                        <span>添加板块</span>
                     </button>
             </div>
             </details>
@@ -2379,19 +2379,19 @@
             <details style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em; margin-bottom: 1em;">
                 <summary class="listItemBodyText" style="font-weight: 500; cursor: pointer; margin-bottom: 0.5em; display: flex; align-items: center; gap: 0.5em; border-radius: 0px !important;">
                     <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">import_export</span>
-                    Import / Export Custom Sections
+                    导入 / 导出自定义板块
                 </summary>
                 <div style="padding: 0.75em 0 0 0;">
-                    <div class="listItemBodyText secondary" style="margin-bottom: 1em;">Share your custom home screen sections or import configurations from others.</div>
+                    <div class="listItemBodyText secondary" style="margin-bottom: 1em;">分享您的自定义主屏幕板块，或导入他人的配置。</div>
                     <div style="display: flex; gap: 1em;">
                         <button type="button" class="emby-button raised export-custom-sections-btn" style="padding: 0.75em 1.5em;">
-                            <span>Export Sections</span>
+                            <span>导出板块</span>
                         </button>
                         <button type="button" class="emby-button raised import-custom-sections-btn" style="padding: 0.75em 1.5em;">
-                            <span>Import Sections</span>
+                            <span>导入板块</span>
                         </button>
                         <button type="button" class="emby-button raised import-community-sections-btn" style="padding: 0.75em 1.5em;">
-                            <span>Import from Community</span>
+                            <span>从社区导入</span>
                         </button>
                     </div>
                 </div>
@@ -2404,9 +2404,9 @@
         return `
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Hide Server Name</div>
-                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">Set to true to hide server name, useful when you want to only show a logo or icon via CSS</div>
-                    ${buildJellyfinCheckbox('exclusiveElsewhere_hideServerName', exclusiveElsewhere.hideServerName === true, 'Enabled')}
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">隐藏服务器名称</div>
+                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">设为 true 以隐藏服务器名称，适合只想通过 CSS 显示 logo 或图标的场景</div>
+                    ${buildJellyfinCheckbox('exclusiveElsewhere_hideServerName', exclusiveElsewhere.hideServerName === true, '已启用')}
                 </div>
             </div>
         `;
@@ -2417,9 +2417,9 @@
         return `
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Enable Seerr results from JellyfinEnhanced</div>
-                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">If you are using Seerr from Jellyfin Enhanced, you can enable this to add an additional search toggle for Requests</div>
-                    ${buildJellyfinCheckbox('search_enableJellyseerr', search.enableJellyseerr === true, 'Enabled')}
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">启用来自 JellyfinEnhanced 的 Seerr 结果</div>
+                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">如果您正在使用 Jellyfin Enhanced 的 Seerr，可启用此项，为“请求”添加额外的搜索开关</div>
+                    ${buildJellyfinCheckbox('search_enableJellyseerr', search.enableJellyseerr === true, '已启用')}
                 </div>
             </div>
         `;
@@ -2431,9 +2431,9 @@
         return `
             <div class="listItem" style="border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 0.75em;">
                 <div class="listItemContent">
-                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">Flatten Single Season Shows</div>
-                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">When enabled, hides the season container section when a series has only one season, since episodes are already displayed directly.</div>
-                    ${buildJellyfinCheckbox('flattenSingleSeasonShows_hideSingleSeasonContainer', hideSingleSeasonContainer, 'Enabled')}
+                    <div class="listItemBodyText" style="margin-bottom: 0.5em;">扁平化单季剧集</div>
+                    <div class="listItemBodyText secondary" style="margin-bottom: 0.75em; font-size: 0.9em;">启用后，当剧集只有一季时隐藏季容器板块，因为各集已直接显示。</div>
+                    ${buildJellyfinCheckbox('flattenSingleSeasonShows_hideSingleSeasonContainer', hideSingleSeasonContainer, '已启用')}
                 </div>
             </div>
         `;
@@ -2475,7 +2475,7 @@
             config = await getKefinTweaksConfig();
         } catch (error) {
             console.error('[KefinTweaks Configuration] Error loading config:', error);
-            alert('Error loading configuration. Please try again.');
+            alert('加载配置出错，请重试。');
             return;
         }
 
@@ -2508,23 +2508,23 @@
         footer.style.alignItems = 'center';
         footer.innerHTML = `
             <button class="emby-button raised" id="resetConfigBtn" style="padding: 0.75em 2em; font-size: 1em;">
-                <span>Restore Defaults</span>
+                <span>恢复默认</span>
             </button>
             <button class="emby-button raised button-submit" id="saveConfigBtn" style="padding: 0.75em 2em; font-size: 1em; font-weight: 500;">
-                <span>Save</span>
+                <span>保存</span>
             </button>
         `;
 
         // Create modal using ModalSystem
         if (!window.ModalSystem) {
             console.error('[KefinTweaks Configuration] ModalSystem not available');
-            alert('Modal system not available. Please ensure modal.js is loaded.');
+            alert('模态框系统不可用，请确保已加载 modal.js。');
             return;
                     }
 
         const modal = window.ModalSystem.create({
             id: MODAL_ID,
-            title: 'KefinTweaks Configuration',
+            title: 'KefinTweaks 配置',
             content: content,
             footer: footer,
             closeOnBackdrop: true,
@@ -2575,7 +2575,7 @@
             // Function to update label text
             const updateLabel = () => {
                 if (enabledLabel) {
-                    enabledLabel.textContent = enabledCheckbox.checked ? 'Enabled' : 'Disabled';
+                    enabledLabel.textContent = enabledCheckbox.checked ? '已启用' : '已禁用';
                 }
             };
             
@@ -2595,14 +2595,14 @@
                     console.log('[KefinTweaks Configuration] KefinTweaks', isEnabled ? 'enabled' : 'disabled');
                     
                     if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                        window.KefinTweaksToaster.toast(`KefinTweaks ${isEnabled ? 'enabled' : 'disabled'}. Page refresh required.`);
+                        window.KefinTweaksToaster.toast(`KefinTweaks 已${isEnabled ? '启用' : '禁用'}，需要刷新页面。`);
                     }
                 } catch (error) {
                     console.error('[KefinTweaks Configuration] Error toggling KefinTweaks:', error);
                     // Revert checkbox on error
                     enabledCheckbox.checked = !isEnabled;
                     updateLabel();
-                    alert(`Failed to ${isEnabled ? 'enable' : 'disable'} KefinTweaks: ${error.message}`);
+                    alert(`${isEnabled ? '启用' : '禁用'} KefinTweaks 失败：${error.message}`);
                 }
             });
         }
@@ -2631,7 +2631,7 @@
                     window.openKefinTweaksSourceModal();
                 } catch (error) {
                     console.error('[KefinTweaks Configuration] Error opening source modal:', error);
-                    alert(`Failed to open source configuration: ${error.message}`);
+                    alert(`打开源配置失败：${error.message}`);
                 }
             });
         }
@@ -2883,7 +2883,7 @@
             const moviesEnabledCheckbox = modalInstance.dialogContent.querySelector('#homeScreen_recentlyReleased_movies_enabled');
             if (moviesEnabledSpan && moviesEnabledCheckbox) {
                 moviesEnabledCheckbox.addEventListener('change', () => {
-                    moviesEnabledSpan.textContent = moviesEnabledCheckbox.checked ? 'Enabled' : 'Disabled';
+                    moviesEnabledSpan.textContent = moviesEnabledCheckbox.checked ? '已启用' : '已禁用';
                 });
             }
             
@@ -2891,7 +2891,7 @@
             const episodesEnabledCheckbox = modalInstance.dialogContent.querySelector('#homeScreen_recentlyReleased_episodes_enabled');
             if (episodesEnabledSpan && episodesEnabledCheckbox) {
                 episodesEnabledCheckbox.addEventListener('change', () => {
-                    episodesEnabledSpan.textContent = episodesEnabledCheckbox.checked ? 'Enabled' : 'Disabled';
+                    episodesEnabledSpan.textContent = episodesEnabledCheckbox.checked ? '已启用' : '已禁用';
                 });
             }
         }
@@ -2916,7 +2916,7 @@
                 const enabledSpan = modalInstance.dialogContent.querySelector(`.seasonal-season-enabled-display[data-season-index="${seasonIndex}"]`);
                 if (enabledSpan) {
                     checkbox.addEventListener('change', () => {
-                        enabledSpan.textContent = checkbox.checked ? 'Enabled' : 'Disabled';
+                        enabledSpan.textContent = checkbox.checked ? '已启用' : '已禁用';
                     });
                 }
             });
@@ -2939,7 +2939,7 @@
                 const enabledSpan = modalInstance.dialogContent.querySelector(`.discovery-section-type-enabled[data-section-key="${section.key}"]`);
                 if (enabledCheckbox && enabledSpan) {
                     enabledCheckbox.addEventListener('change', () => {
-                        enabledSpan.textContent = enabledCheckbox.checked ? 'Enabled' : 'Disabled';
+                        enabledSpan.textContent = enabledCheckbox.checked ? '已启用' : '已禁用';
                     });
                 }
             });
@@ -2953,7 +2953,7 @@
                 const nameSpan = modalInstance.dialogContent.querySelector(`.seasonal-season-name-display[data-season-index="${seasonIndex}"]`);
                 if (nameSpan) {
                     input.addEventListener('input', () => {
-                        nameSpan.textContent = input.value || 'Unnamed Season';
+                        nameSpan.textContent = input.value || '未命名季节';
                     });
                 }
             });
@@ -2969,7 +2969,7 @@
             const newSection = {
                 id: `seasonal-${seasonIndex}-section-${sectionIndex}`,
                 enabled: true,
-                name: 'New Section',
+                name: '新板块',
                 type: 'Genre',
                 source: '',
                 itemLimit: 16,
@@ -3025,7 +3025,7 @@
             const newSection = {
                 id: `custom-section-${sectionIndex}`,
                 enabled: true,
-                name: 'New Custom Section',
+                name: '新自定义板块',
                 type: 'Collection',
                 source: '',
                 itemLimit: 16,
@@ -3096,7 +3096,7 @@
             
             if (nameInput && nameSpan) {
                 nameInput.addEventListener('input', () => {
-                    nameSpan.textContent = nameInput.value || 'Unnamed Section';
+                    nameSpan.textContent = nameInput.value || '未命名板块';
                 });
             }
             
@@ -3108,7 +3108,7 @@
             
             if (enabledCheckbox && enabledSpan) {
                 enabledCheckbox.addEventListener('change', () => {
-                    enabledSpan.textContent = enabledCheckbox.checked ? 'Enabled' : 'Disabled';
+                    enabledSpan.textContent = enabledCheckbox.checked ? '已启用' : '已禁用';
                 });
             }
 
@@ -3154,7 +3154,7 @@
                         row.style.cssText = 'display: flex; align-items: flex-end; gap: 0.5em; margin-top: 0.5em; padding: 0.5em; background: rgba(255,255,255,0.05); border-radius: 4px;';
                         row.innerHTML = `
                             ${inputField}
-                            <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="Remove Option">
+                            <button type="button" class="remove-additional-option" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0.25em; display: flex; align-items: center;" title="删除选项">
                                 <span class="material-icons">close</span>
                             </button>
                         `;
@@ -3189,7 +3189,7 @@
             const sectionItem = modalInstance.dialogContent.querySelector(
                 `.${prefix}_section_item[data-section-index="${sectionIndex}"], .${prefix}_section_item[data-section-index='${sectionIndex}']`
             );
-            if (sectionItem && confirm('Are you sure you want to delete this section?')) {
+            if (sectionItem && confirm('确定要删除此板块吗？')) {
                 sectionItem.remove();
                 
                 // For seasonal sections, sectionIndex is compound (e.g., "0_1"), need special handling
@@ -3292,13 +3292,13 @@
         
         async function previewSection(prefix, sectionIndex) {
             if (!window.ModalSystem) {
-                alert('Modal system not available. Please ensure modal.js is loaded.');
+                alert('模态框系统不可用，请确保已加载 modal.js。');
                 return;
             }
             
             const sectionConfig = getSectionConfigFromUI(modalInstance.dialogContent, prefix, sectionIndex);
             if (!sectionConfig) {
-                alert('Unable to build preview for this section. Please check the configuration values.');
+                alert('无法为此板块生成预览，请检查配置值。');
                 return;
             }
             
@@ -3307,15 +3307,15 @@
             
             const previewModal = window.ModalSystem.create({
                 id: modalId,
-                title: `Preview: ${sectionConfig.name || 'Custom Section'}`,
+                title: `预览：${sectionConfig.name || '自定义板块'}`,
                 content: `
                     <div id="${contentId}" class="preview-section-container" style="min-height: 320px; display: flex; align-items: center; justify-content: center; padding: 1.5em;>
-                        <div style="opacity: 0.75;">Preparing preview...</div>
+                        <div style="opacity: 0.75;">正在准备预览…</div>
                     </div>
                 `,
                 footer: `
                     <button class="emby-button raised" id="${modalId}_closeBtn" style="padding: 0.75em 2em; font-size: 1em;">
-                        <span>Close</span>
+                        <span>关闭</span>
                     </button>
                 `,
                 closeOnBackdrop: true,
@@ -3334,23 +3334,23 @@
                         return;
                     }
                     
-                    container.innerHTML = `<div style="opacity: 0.75;">Loading preview...</div>`;
+                    container.innerHTML = `<div style="opacity: 0.75;">正在加载预览…</div>`;
                     
                     try {
                         const items = await fetchItemsForSectionPreview(sectionConfig);
                         if (!items || items.length === 0) {
-                            container.innerHTML = `<div style="opacity: 0.75; text-align: center;">No items match this configuration yet.</div>`;
+                            container.innerHTML = `<div style="opacity: 0.75; text-align: center;">暂无符合此配置的条目。</div>`;
                             return;
                         }
                         
                         if (!window.cardBuilder) {
-                            container.innerHTML = `<div style="color: #ff6b6b; text-align: center;">Card builder utilities are not available.</div>`;
+                            container.innerHTML = `<div style="color: #ff6b6b; text-align: center;">卡片构建工具不可用。</div>`;
                             return;
                         }
                         
                         let previewElement = null;
                         if (sectionConfig.spotlight && typeof window.cardBuilder.renderSpotlightSection === 'function') {
-                            previewElement = window.cardBuilder.renderSpotlightSection(items, sectionConfig.name || 'Preview', {
+                            previewElement = window.cardBuilder.renderSpotlightSection(items, sectionConfig.name || '预览', {
                                 autoPlay: false,
                                 showDots: true,
                                 showNavButtons: true,
@@ -3359,7 +3359,7 @@
                         } else if (typeof window.cardBuilder.renderCards === 'function') {
                             previewElement = window.cardBuilder.renderCards(
                                 items,
-                                sectionConfig.name || 'Preview',
+                                sectionConfig.name || '预览',
                                 null,
                                 true,
                                 sectionConfig.cardFormat || 'Poster',
@@ -3372,11 +3372,11 @@
                         if (previewElement) {
                             container.appendChild(previewElement);
                         } else {
-                            container.innerHTML = `<div style="opacity: 0.75; text-align: center;">Unable to render preview with the current configuration.</div>`;
+                            container.innerHTML = `<div style="opacity: 0.75; text-align: center;">无法使用当前配置渲染预览。</div>`;
                         }
                     } catch (error) {
                         console.error('[KefinTweaks Configuration] Error rendering preview:', error);
-                        container.innerHTML = `<div style="color: #ff6b6b; text-align: center;">Failed to load preview: ${error?.message || error}</div>`;
+                        container.innerHTML = `<div style="color: #ff6b6b; text-align: center;">加载预览失败：${error?.message || error}</div>`;
                     }
                 }
             });
@@ -3432,8 +3432,8 @@
                 // Parent type uses simple text input
                 newSourceHtml = `
                     <div style="position: relative;">
-                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">Parent IDs (comma-separated, leave empty for "Any")</div>
-                        <input type="text" class="${prefix}_section_source fld emby-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" value="${currentSource}" placeholder="Enter parent IDs (e.g., collection-id, playlist-id) or leave empty" style="width: 100%;">
+                        <div class="listItemBodyText" style="margin-bottom: 0.5em;">父级 ID（逗号分隔，留空表示“任意”）</div>
+                        <input type="text" class="${prefix}_section_source fld emby-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" value="${currentSource}" placeholder="输入父级 ID（如 collection-id、playlist-id），或留空" style="width: 100%;">
                         <input type="hidden" class="${prefix}_section_source_hidden" data-section-index="${sectionIndex}" value="${currentSource}">
                     </div>
                 `;
@@ -3444,12 +3444,12 @@
                     if (type === 'Tag' || type === 'Genre') {
                         return `<span class="tag-badge" data-value="${val}" style="display: inline-flex; align-items: center; gap: 0.25em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; margin: 0.25em; font-size: 0.9em;">
                             ${val}
-                            <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="Remove">×</button>
+                            <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="删除">×</button>
                         </span>`;
                     } else {
                         return `<span class="tag-badge" data-value="${val}" data-loading="true" style="display: inline-flex; align-items: center; gap: 0.25em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; margin: 0.25em; font-size: 0.9em;">
                             ${val}
-                            <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="Remove">×</button>
+                            <button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="删除">×</button>
                         </span>`;
                     }
                 }).join('');
@@ -3458,10 +3458,10 @@
                     <div style="position: relative;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5em;">
                             <div class="listItemBodyText">${type}</div>
-                            <button type="button" class="badge-clear-all" data-section-index="${sectionIndex}" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; color: rgba(255,255,255,0.87); cursor: pointer; font-size: 0.85em;" title="Clear All">Clear All</button>
+                            <button type="button" class="badge-clear-all" data-section-index="${sectionIndex}" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; color: rgba(255,255,255,0.87); cursor: pointer; font-size: 0.85em;" title="清空全部">清空全部</button>
                         </div>
                         <div class="tag-badge-container" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" style="min-height: 2.5em; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.5em; margin-bottom: 0.5em; background: rgba(0,0,0,0.2); display: flex; gap: 0.5em; align-items: flex-start; overflow: hidden;">
-                            <input type="text" class="${prefix}_section_source fld emby-input autocomplete-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" placeholder="Type to add ${type.toLowerCase()}..." autocomplete="off" style="flex: 0 0 auto; width: 120px; min-width: 200px; max-width: 120px; border: none; background: transparent; outline: none; color: rgba(255,255,255,0.87); padding: 0.25em;">
+                            <input type="text" class="${prefix}_section_source fld emby-input autocomplete-input" data-section-index="${sectionIndex}" data-prefix="${prefix}" data-type="${type}" placeholder="输入以添加 ${type.toLowerCase()}…" autocomplete="off" style="flex: 0 0 auto; width: 120px; min-width: 200px; max-width: 120px; border: none; background: transparent; outline: none; color: rgba(255,255,255,0.87); padding: 0.25em;">
                             <div style="flex: 1; min-width: 0; display: flex; flex-wrap: wrap; gap: 0.25em; align-items: flex-start; overflow-wrap: break-word;">
                                 ${badgesHtml}
                             </div>
@@ -3531,7 +3531,7 @@
                 badge.className = 'tag-badge';
                 badge.setAttribute('data-value', value);
                 badge.style.cssText = 'display: inline-flex; align-items: center; gap: 0.25em; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; padding: 0.25em 0.5em; margin: 0.25em; font-size: 0.9em;';
-                badge.innerHTML = `${displayText}<button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="Remove">×</button>`;
+                badge.innerHTML = `${displayText}<button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="删除">×</button>`;
                 return badge;
             },
             
@@ -3879,7 +3879,7 @@
                     const item = itemMap.get(id);
                     if (item) {
                         const displayText = item.Name;
-                        badge.innerHTML = `${displayText}<button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="Remove">×</button>`;
+                        badge.innerHTML = `${displayText}<button type="button" class="tag-badge-remove" style="background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 0; margin-left: 0.25em; font-size: 1.2em; line-height: 1; display: flex; align-items: center;" title="删除">×</button>`;
                         badge.removeAttribute('data-loading');
                     } else {
                         // Item not found, keep ID display
@@ -3972,7 +3972,7 @@
                 if (toggleButton) {
                     const textSpan = toggleButton.querySelector('.includeItemTypes-toggle-label');
                     if (textSpan) {
-                        textSpan.textContent = count > 0 ? `${count} selected` : 'Select item types';
+                        textSpan.textContent = count > 0 ? `已选择 ${count} 个` : '选择条目类型';
                     }
                 }
             };
@@ -4030,7 +4030,7 @@
             const newSeason = {
                 id: `season-${newIndex}`,
                 enabled: true,
-                name: 'New Season',
+                name: '新季',
                 startDate: '',
                 endDate: '',
                 order: 100,
@@ -4042,42 +4042,42 @@
                     <summary class="seasonal-season-summary" data-season-index="${newIndex}" style="display: flex; justify-content: space-between; align-items: center; padding: 1em; cursor: pointer; list-style: none; user-select: none;">
                         <div class="listItemBodyText" style="font-weight: 500; display: flex; align-items: center; gap: 0.5em;">
                             <span class="material-icons" style="font-size: 1.2em; transition: transform 0.2s;">chevron_right</span>
-                        <span class="seasonal-season-name-display" data-season-index="${newIndex}">New Season</span>
-                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="seasonal-season-enabled-display" data-season-index="${newIndex}">Enabled</span>, Order: <span class="seasonal-season-order" data-season-index="${newIndex}">100</span>)</span>
+                        <span class="seasonal-season-name-display" data-season-index="${newIndex}">新季</span>
+                        <span class="listItemBodyText secondary" style="font-size: 0.9em; font-weight: normal;">(<span class="seasonal-season-enabled-display" data-season-index="${newIndex}">已启用</span>，排序: <span class="seasonal-season-order" data-season-index="${newIndex}">100</span>)</span>
                         </div>
                         <div style="display: flex; gap: 0.5em;">
-                            <button class="emby-button" onclick="deleteSeasonalSeason(${newIndex})" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">Delete</button>
+                            <button class="emby-button" onclick="deleteSeasonalSeason(${newIndex})" style="padding: 0.5em 1em; font-size: 0.9em; background: rgba(255,0,0,0.2);">删除</button>
                         </div>
                     </summary>
                     <div style="padding: 0 1em 1em 1em; border-top: 1px solid rgba(255,255,255,0.1);">
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75em; margin-bottom: 0.75em; margin-top: 0.75em;">
                             <div>
-                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Enabled</div>
-                                ${buildJellyfinCheckbox(`seasonal-season-enabled-${newIndex}`, true, 'Enabled', { 'data-index': newIndex, 'class': 'seasonal-season-enabled' })}
+                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">启用</div>
+                                ${buildJellyfinCheckbox(`seasonal-season-enabled-${newIndex}`, true, '启用', { 'data-index': newIndex, 'class': 'seasonal-season-enabled' })}
                             </div>
                             <div>
-                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Name</div>
+                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">名称</div>
                                 <input type="text" class="seasonal-season-name fld emby-input" data-index="${newIndex}" value="" style="width: 100%;">
                             </div>
                             <div>
-                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">Start Date (MM-DD)</div>
+                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">开始日期 (MM-DD)</div>
                                 <input type="text" class="seasonal-season-startDate fld emby-input" data-index="${newIndex}" value="" placeholder="10-01" style="width: 100%;">
                             </div>
                             <div>
-                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">End Date (MM-DD)</div>
+                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em;">结束日期 (MM-DD)</div>
                                 <input type="text" class="seasonal-season-endDate fld emby-input" data-index="${newIndex}" value="" placeholder="10-31" style="width: 100%;">
                             </div>
                             <div>
-                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em; display: flex; align-items: center; gap: 0.4em;">Order</div>
+                                <div class="listItemBodyText secondary" style="font-size: 0.85em; margin-bottom: 0.25em; display: flex; align-items: center; gap: 0.4em;">排序</div>
                                 <input type="number" class="seasonal-season-order-input fld emby-input" data-index="${newIndex}" value="100" min="0" style="width: 100%;">
                             </div>
                         </div>
                         <div style="margin-top: 0.75em; margin-bottom: 0.75em;">
-                            <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">Sections</div>
+                            <div class="listItemBodyText" style="font-weight: 500; margin-bottom: 0.5em;">板块</div>
                             <div class="seasonal_season_sections_list" data-season-index="${newIndex}">
                             </div>
                             <button type="button" class="emby-button raised add-section-to-seasonal-btn" data-season-index="${newIndex}" style="padding: 0.75em 1.5em; margin-top: 0.5em;">
-                                <span>Add Section</span>
+                                <span>添加板块</span>
                             </button>
                         </div>
                     </div>
@@ -4097,7 +4097,7 @@
                 
                 if (nameInput && nameSpan) {
                     nameInput.addEventListener('input', () => {
-                        nameSpan.textContent = nameInput.value || 'Unnamed Season';
+                        nameSpan.textContent = nameInput.value || '未命名季';
                     });
                 }
                 
@@ -4109,7 +4109,7 @@
                 
                 if (enabledCheckbox && enabledSpan) {
                     enabledCheckbox.addEventListener('change', () => {
-                        enabledSpan.textContent = enabledCheckbox.checked ? 'Enabled' : 'Disabled';
+                        enabledSpan.textContent = enabledCheckbox.checked ? '已启用' : '已禁用';
                     });
                 }
             }
@@ -4118,7 +4118,7 @@
         // Collection and Playlist picker functions
         window.openCollectionPicker = async function(seasonIndex) {
             if (!window.ModalSystem) {
-                alert('Modal system not available');
+                alert('模态框系统不可用');
                 return;
             }
             
@@ -4147,11 +4147,11 @@
                 let pickerModalInstanceRef = null;
                 const pickerModal = window.ModalSystem.create({
                     id: 'collectionPickerModal',
-                    title: 'Select Collections',
+                    title: '选择合集',
                     content: `
                         <div style="max-height: 60vh; overflow-y: auto;">
                             <div style="margin-bottom: 1em;">
-                                <input type="text" id="collectionPickerSearch" class="fld emby-input" placeholder="Search collections..." style="width: 100%;">
+                                <input type="text" id="collectionPickerSearch" class="fld emby-input" placeholder="搜索合集..." style="width: 100%;">
                             </div>
                             <div id="collectionPickerList" style="display: flex; flex-direction: column; gap: 0.5em;">
                                 ${collections.map(collection => {
@@ -4159,7 +4159,7 @@
                                     return `
                                         <label class="checkboxContainer" style="padding: 0.75em; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; cursor: pointer;">
                                             <input type="checkbox" value="${collection.Id}" data-name="${collection.Name}" ${isSelected ? 'checked' : ''}>
-                                            <span>${collection.Name} (${collection.ChildCount || 0} items)</span>
+                                            <span>${collection.Name} (${collection.ChildCount || 0} 个条目)</span>
                                         </label>
                                     `;
                                 }).join('')}
@@ -4168,10 +4168,10 @@
                     `,
                     footer: `
                         <button class="emby-button raised button-submit" id="collectionPickerConfirm" style="padding: 0.75em 2em;">
-                            <span>Confirm</span>
+                            <span>确认</span>
                         </button>
                         <button class="emby-button raised" id="collectionPickerCancel" style="padding: 0.75em 2em;">
-                            <span>Cancel</span>
+                            <span>取消</span>
                         </button>
                     `,
                     closeOnBackdrop: true,
@@ -4211,10 +4211,10 @@
                                     const selectedDiv = modalInstance.dialogContent.querySelector(`.seasonal-season-collections-selected[data-index="${seasonIndex}"]`);
                                     
                                     if (button) {
-                                        button.querySelector('span').textContent = `Select Collections (${selectedIds.length})`;
+                                        button.querySelector('span').textContent = `选择合集 (${selectedIds.length})`;
                                     }
                                     if (selectedDiv) {
-                                        selectedDiv.textContent = selectedIds.length > 0 ? `Selected: ${selectedIds.length} collection(s)` : 'No collections selected';
+                                        selectedDiv.textContent = selectedIds.length > 0 ? `已选: ${selectedIds.length} 个合集` : '未选择合集';
                                     }
                                 }
                                 
@@ -4232,13 +4232,13 @@
                 
             } catch (error) {
                 console.error('[KefinTweaks Configuration] Error opening collection picker:', error);
-                alert('Error loading collections. Please try again.');
+                alert('加载合集出错，请重试。');
             }
         };
         
         window.openPlaylistPicker = async function(seasonIndex) {
             if (!window.ModalSystem) {
-                alert('Modal system not available');
+                alert('模态框系统不可用');
                 return;
             }
             
@@ -4267,11 +4267,11 @@
                 let pickerModalInstanceRef = null;
                 const pickerModal = window.ModalSystem.create({
                     id: 'playlistPickerModal',
-                    title: 'Select Playlists',
+                    title: '选择播放列表',
                     content: `
                         <div style="max-height: 60vh; overflow-y: auto;">
                             <div style="margin-bottom: 1em;">
-                                <input type="text" id="playlistPickerSearch" class="fld emby-input" placeholder="Search playlists..." style="width: 100%;">
+                                <input type="text" id="playlistPickerSearch" class="fld emby-input" placeholder="搜索播放列表..." style="width: 100%;">
                             </div>
                             <div id="playlistPickerList" style="display: flex; flex-direction: column; gap: 0.5em;">
                                 ${playlists.map(playlist => {
@@ -4279,7 +4279,7 @@
                                     return `
                                         <label class="checkboxContainer" style="padding: 0.75em; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; cursor: pointer;">
                                             <input type="checkbox" value="${playlist.Id}" data-name="${playlist.Name}" ${isSelected ? 'checked' : ''}>
-                                            <span>${playlist.Name} (${playlist.ChildCount || 0} items)</span>
+                                            <span>${playlist.Name} (${playlist.ChildCount || 0} 个条目)</span>
                                         </label>
                                     `;
                                 }).join('')}
@@ -4288,10 +4288,10 @@
                     `,
                     footer: `
                         <button class="emby-button raised button-submit" id="playlistPickerConfirm" style="padding: 0.75em 2em;">
-                            <span>Confirm</span>
+                            <span>确认</span>
                         </button>
                         <button class="emby-button raised" id="playlistPickerCancel" style="padding: 0.75em 2em;">
-                            <span>Cancel</span>
+                            <span>取消</span>
                         </button>
                     `,
                     closeOnBackdrop: true,
@@ -4331,10 +4331,10 @@
                                     const selectedDiv = modalInstance.dialogContent.querySelector(`.seasonal-season-playlists-selected[data-index="${seasonIndex}"]`);
                                     
                                     if (button) {
-                                        button.querySelector('span').textContent = `Select Playlists (${selectedIds.length})`;
+                                        button.querySelector('span').textContent = `选择播放列表 (${selectedIds.length})`;
                                     }
                                     if (selectedDiv) {
-                                        selectedDiv.textContent = selectedIds.length > 0 ? `Selected: ${selectedIds.length} playlist(s)` : 'No playlists selected';
+                                        selectedDiv.textContent = selectedIds.length > 0 ? `已选: ${selectedIds.length} 个播放列表` : '未选择播放列表';
                                     }
                                 }
                                 
@@ -4352,14 +4352,14 @@
                 
             } catch (error) {
                 console.error('[KefinTweaks Configuration] Error opening playlist picker:', error);
-                alert('Error loading playlists. Please try again.');
+                alert('加载播放列表出错，请重试。');
             }
         };
         
         // Picker functions for sections (used in nested sections)
         async function openCollectionPickerForSection(prefix, sectionIndex, isSeasonalNested) {
             if (!window.ModalSystem) {
-                alert('Modal system not available');
+                alert('模态框系统不可用');
                 return;
             }
             
@@ -4386,11 +4386,11 @@
                 
                 const pickerModal = window.ModalSystem.create({
                     id: 'collectionPickerForSectionModal',
-                    title: 'Select Collection',
+                    title: '选择合集',
                     content: `
                         <div style="max-height: 60vh; overflow-y: auto;">
                             <div style="margin-bottom: 1em;">
-                                <input type="text" id="collectionPickerForSectionSearch" class="fld emby-input" placeholder="Search collections..." style="width: 100%;">
+                                <input type="text" id="collectionPickerForSectionSearch" class="fld emby-input" placeholder="搜索合集..." style="width: 100%;">
                             </div>
                             <div id="collectionPickerForSectionList" style="display: flex; flex-direction: column; gap: 0.5em;">
                                 ${collections.map(collection => {
@@ -4398,7 +4398,7 @@
                                     return `
                                         <label class="checkboxContainer" style="padding: 0.75em; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; cursor: pointer;">
                                             <input type="radio" name="collectionPickerForSection" value="${collection.Id}" ${isSelected ? 'checked' : ''}>
-                                            <span>${collection.Name} (${collection.ChildCount || 0} items)</span>
+                                            <span>${collection.Name} (${collection.ChildCount || 0} 个条目)</span>
                                         </label>
                                     `;
                                 }).join('')}
@@ -4407,13 +4407,13 @@
                     `,
                     footer: `
                         <button class="emby-button raised" id="collectionPickerForSectionClear" style="padding: 0.75em 2em; margin-right: 0.5em;">
-                            <span>Clear</span>
+                            <span>清除</span>
                         </button>
                         <button class="emby-button raised button-submit" id="collectionPickerForSectionConfirm" style="padding: 0.75em 2em;">
-                            <span>Confirm</span>
+                            <span>确认</span>
                         </button>
                         <button class="emby-button raised" id="collectionPickerForSectionCancel" style="padding: 0.75em 2em;">
-                            <span>Cancel</span>
+                            <span>取消</span>
                         </button>
                     `,
                     closeOnBackdrop: true,
@@ -4448,10 +4448,10 @@
                                     const selectedDiv = sectionItem?.querySelector(`.${prefix}_section_collection_selected[data-section-index="${sectionIndex}"]`);
                                     
                                     if (button) {
-                                        button.querySelector('span').textContent = `Select Collection ${selectedId ? '(1)' : ''}`;
+                                        button.querySelector('span').textContent = `选择合集 ${selectedId ? '(1)' : ''}`;
                                     }
                                     if (selectedDiv) {
-                                        selectedDiv.textContent = selectedId ? `Selected: 1 collection` : 'No collection selected';
+                                        selectedDiv.textContent = selectedId ? `已选: 1 个合集` : '未选择合集';
                                     }
                                 }
                                 
@@ -4471,10 +4471,10 @@
                                     const selectedDiv = sectionItem?.querySelector(`.${prefix}_section_collection_selected[data-section-index="${sectionIndex}"]`);
                                     
                                     if (button) {
-                                        button.querySelector('span').textContent = 'Select Collection';
+                                        button.querySelector('span').textContent = '选择合集';
                                     }
                                     if (selectedDiv) {
-                                        selectedDiv.textContent = 'No collection selected';
+                                        selectedDiv.textContent = '未选择合集';
                                     }
                                 }
                                 
@@ -4491,13 +4491,13 @@
                 });
             } catch (error) {
                 console.error('[KefinTweaks Configuration] Error opening collection picker for section:', error);
-                alert('Error loading collections. Please try again.');
+                alert('加载合集出错，请重试。');
             }
         };
         
         async function openPlaylistPickerForSection(prefix, sectionIndex, isSeasonalNested) {
             if (!window.ModalSystem) {
-                alert('Modal system not available');
+                alert('模态框系统不可用');
                 return;
             }
             
@@ -4524,11 +4524,11 @@
                 
                 const pickerModal = window.ModalSystem.create({
                     id: 'playlistPickerForSectionModal',
-                    title: 'Select Playlist',
+                    title: '选择播放列表',
                     content: `
                         <div style="max-height: 60vh; overflow-y: auto;">
                             <div style="margin-bottom: 1em;">
-                                <input type="text" id="playlistPickerForSectionSearch" class="fld emby-input" placeholder="Search playlists..." style="width: 100%;">
+                                <input type="text" id="playlistPickerForSectionSearch" class="fld emby-input" placeholder="搜索播放列表..." style="width: 100%;">
                             </div>
                             <div id="playlistPickerForSectionList" style="display: flex; flex-direction: column; gap: 0.5em;">
                                 ${playlists.map(playlist => {
@@ -4536,7 +4536,7 @@
                                     return `
                                         <label class="checkboxContainer" style="padding: 0.75em; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; cursor: pointer;">
                                             <input type="radio" name="playlistPickerForSection" value="${playlist.Id}" ${isSelected ? 'checked' : ''}>
-                                            <span>${playlist.Name} (${playlist.ChildCount || 0} items)</span>
+                                            <span>${playlist.Name} (${playlist.ChildCount || 0} 个条目)</span>
                                         </label>
                                     `;
                                 }).join('')}
@@ -4545,13 +4545,13 @@
                     `,
                     footer: `
                         <button class="emby-button raised" id="playlistPickerForSectionClear" style="padding: 0.75em 2em; margin-right: 0.5em;">
-                            <span>Clear</span>
+                            <span>清除</span>
                         </button>
                         <button class="emby-button raised button-submit" id="playlistPickerForSectionConfirm" style="padding: 0.75em 2em;">
-                            <span>Confirm</span>
+                            <span>确认</span>
                         </button>
                         <button class="emby-button raised" id="playlistPickerForSectionCancel" style="padding: 0.75em 2em;">
-                            <span>Cancel</span>
+                            <span>取消</span>
                         </button>
                     `,
                     closeOnBackdrop: true,
@@ -4586,10 +4586,10 @@
                                     const selectedDiv = sectionItem?.querySelector(`.${prefix}_section_playlist_selected[data-section-index="${sectionIndex}"]`);
                                     
                                     if (button) {
-                                        button.querySelector('span').textContent = `Select Playlist ${selectedId ? '(1)' : ''}`;
+                                        button.querySelector('span').textContent = `选择播放列表 ${selectedId ? '(1)' : ''}`;
                                     }
                                     if (selectedDiv) {
-                                        selectedDiv.textContent = selectedId ? `Selected: 1 playlist` : 'No playlist selected';
+                                        selectedDiv.textContent = selectedId ? `已选: 1 个播放列表` : '未选择播放列表';
                                     }
                                 }
                                 
@@ -4609,10 +4609,10 @@
                                     const selectedDiv = sectionItem?.querySelector(`.${prefix}_section_playlist_selected[data-section-index="${sectionIndex}"]`);
                                     
                                     if (button) {
-                                        button.querySelector('span').textContent = 'Select Playlist';
+                                        button.querySelector('span').textContent = '选择播放列表';
                                     }
                                     if (selectedDiv) {
-                                        selectedDiv.textContent = 'No playlist selected';
+                                        selectedDiv.textContent = '未选择播放列表';
                                     }
                                 }
                                 
@@ -4629,7 +4629,7 @@
                 });
             } catch (error) {
                 console.error('[KefinTweaks Configuration] Error opening playlist picker for section:', error);
-                alert('Error loading playlists. Please try again.');
+                alert('加载播放列表出错，请重试。');
             }
         };
         
@@ -4643,7 +4643,7 @@
             if (!seasonsList) return;
             
             const seasonItem = seasonsList.querySelector(`.seasonal-season-item[data-season-index="${index}"]`);
-            if (seasonItem && confirm('Are you sure you want to delete this season?')) {
+            if (seasonItem && confirm('确定要删除此季吗？')) {
                 seasonItem.remove();
                 // Re-index remaining items
                 const remainingItems = seasonsList.querySelectorAll('.seasonal-season-item');
@@ -4821,9 +4821,9 @@
             
             if (removedCount === 0) {
                 if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                    window.KefinTweaksToaster.toast('No duplicate default skins found in configuration');
+                    window.KefinTweaksToaster.toast('配置中未发现重复的默认皮肤');
                 } else {
-                    alert('No duplicate default skins found in configuration');
+                    alert('配置中未发现重复的默认皮肤');
                 }
                 return;
             }
@@ -4833,16 +4833,16 @@
             
             // Show confirmation
             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                window.KefinTweaksToaster.toast(`Removed ${removedCount} custom skin${removedCount > 1 ? 's' : ''} that were overriding defaults`);
+                window.KefinTweaksToaster.toast(`已移除 ${removedCount} 个覆盖默认设置的自定义皮肤`);
             } else {
-                alert(`Removed ${removedCount} custom skin${removedCount > 1 ? 's' : ''} that were overriding defaults`);
+                alert(`已移除 ${removedCount} 个覆盖默认设置的自定义皮肤`);
             }
         } catch (error) {
             console.error('[KefinTweaks Configuration] Error removing duplicate defaults:', error);
             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                window.KefinTweaksToaster.toast('Error processing skins JSON', '5');
+                window.KefinTweaksToaster.toast('处理皮肤 JSON 出错', '5');
             } else {
-                alert('Error processing skins JSON. Please check the format.');
+                alert('处理皮肤 JSON 出错。请检查格式。');
             }
         }
     }
@@ -4865,11 +4865,11 @@
 
                 window.ModalSystem.create({
                     id: 'exportConfigModal',
-                    title: 'Export Configuration',
+                    title: '导出配置',
                     content: `
                         <div class="listItemBodyText" style="margin-bottom: 1em;">
-                            Your current configuration is shown below as JSON. Select and copy this text to back up or share your configuration.
-                            ${canUseClipboard ? '' : ' Clipboard access requires an HTTPS connection, so manual copying is required.'}
+                            您当前的配置以 JSON 形式显示在下方。选中并复制此文本，即可备份或分享您的配置。
+                            ${canUseClipboard ? '' : ' 剪贴板访问需要 HTTPS 连接，因此需要手动复制。'}
                         </div>
                         <textarea id="exportConfigTextarea" class="fld emby-textarea" rows="20"
                             readonly
@@ -4881,14 +4881,14 @@
                                 ? `
                         <button class="emby-button raised button-submit" id="copyExportConfigBtn"
                             style="padding: 0.75em 2em; font-size: 1em; font-weight: 500; margin-right: 1em;">
-                            <span>Copy to Clipboard</span>
+                            <span>复制到剪贴板</span>
                         </button>
                         `
                                 : ''
                         }
                         <button class="emby-button raised" id="closeExportConfigBtn"
                             style="padding: 0.75em 2em; font-size: 1em;">
-                            <span>Close</span>
+                            <span>关闭</span>
                         </button>
                     `,
                     closeOnBackdrop: true,
@@ -4916,9 +4916,9 @@
                                     try {
                                         await navigator.clipboard.writeText(configJson);
                                         if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                            window.KefinTweaksToaster.toast('Configuration copied to clipboard!');
+                                            window.KefinTweaksToaster.toast('配置已复制到剪贴板！');
                                         } else {
-                                            alert('Configuration copied to clipboard!');
+                                            alert('配置已复制到剪贴板！');
                                         }
                                     } catch (copyError) {
                                         console.error(
@@ -4927,11 +4927,11 @@
                                         );
                                         if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
                                             window.KefinTweaksToaster.toast(
-                                                'Error copying configuration to clipboard',
+                                                '复制配置到剪贴板时出错',
                                                 '5'
                                             );
                                         } else {
-                                            alert('Error copying configuration to clipboard');
+                                            alert('复制配置到剪贴板时出错');
                                         }
                                     }
                                 });
@@ -4944,30 +4944,30 @@
                 await navigator.clipboard.writeText(configJson);
 
                 if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                    window.KefinTweaksToaster.toast('Configuration exported to clipboard!');
+                    window.KefinTweaksToaster.toast('配置已导出到剪贴板！');
                 } else {
-                    alert('Configuration exported to clipboard!');
+                    alert('配置已导出到剪贴板！');
                 }
             } else {
                 // Last-resort fallback: log to console
                 console.log('[KefinTweaks Configuration] Exported configuration:', configJson);
                 if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
                     window.KefinTweaksToaster.toast(
-                        'Unable to open export modal or access clipboard; configuration logged to console',
+                        '无法打开导出弹窗或访问剪贴板；配置已输出到控制台',
                         '3'
                     );
                 } else {
                     alert(
-                        'Unable to open export modal or access clipboard. Check the browser console for the exported configuration.'
+                        '无法打开导出弹窗或访问剪贴板。请在浏览器控制台中查看导出的配置。'
                     );
                 }
             }
         } catch (error) {
             console.error('[KefinTweaks Configuration] Error exporting config:', error);
             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                window.KefinTweaksToaster.toast('Error exporting configuration', '5');
+                window.KefinTweaksToaster.toast('导出配置出错', '5');
             } else {
-                alert('Error exporting configuration');
+                alert('导出配置出错');
             }
         }
     }
@@ -4975,26 +4975,26 @@
     // Import configuration from clipboard
     async function handleImportConfig(modalInstance) {
         if (!window.ModalSystem) {
-            alert('Modal system not available');
+            alert('模态框系统不可用');
             return;
         }
 
         // Show import modal with textarea
         const importModal = window.ModalSystem.create({
             id: 'importConfigModal',
-            title: 'Import Configuration',
+            title: '导入配置',
             content: `
                 <div class="listItemBodyText" style="margin-bottom: 1em;">
-                    Paste your configuration JSON below. This will completely replace your current configuration.
+                    请在下方粘贴您的配置 JSON。此操作将完全替换您当前的配置。
                 </div>
-                <textarea id="importConfigTextarea" class="fld emby-textarea" rows="20" placeholder='Paste your configuration JSON here...' style="width: 100%; font-family: monospace; font-size: 0.9em; line-height: 1.5;"></textarea>
+                <textarea id="importConfigTextarea" class="fld emby-textarea" rows="20" placeholder='在此粘贴您的配置 JSON...' style="width: 100%; font-family: monospace; font-size: 0.9em; line-height: 1.5;"></textarea>
             `,
             footer: `
                 <button class="emby-button raised button-submit" id="confirmImportBtn" style="padding: 0.75em 2em; font-size: 1em; font-weight: 500; margin-right: 1em;">
-                    <span>Import</span>
+                    <span>导入</span>
                 </button>
                 <button class="emby-button raised" id="cancelImportBtn" style="padding: 0.75em 2em; font-size: 1em;">
-                    <span>Cancel</span>
+                    <span>取消</span>
                 </button>
             `,
             closeOnBackdrop: true,
@@ -5015,9 +5015,9 @@
                         
                         if (!jsonText) {
                             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                window.KefinTweaksToaster.toast('Please paste configuration JSON', '3');
+                                window.KefinTweaksToaster.toast('请粘贴配置 JSON', '3');
                             } else {
-                                alert('Please paste configuration JSON');
+                                alert('请粘贴配置 JSON');
                             }
                             return;
                         }
@@ -5029,9 +5029,9 @@
                         } catch (parseError) {
                             console.error('[KefinTweaks Configuration] Invalid JSON:', parseError);
                             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                window.KefinTweaksToaster.toast(`Invalid JSON: ${parseError.message}`, '5');
+                                window.KefinTweaksToaster.toast(`无效的 JSON：${parseError.message}`, '5');
                             } else {
-                                alert(`Invalid JSON: ${parseError.message}`);
+                                alert(`无效的 JSON：${parseError.message}`);
                             }
                             return;
                         }
@@ -5039,9 +5039,9 @@
                         // Validate config structure (basic check)
                         if (typeof importedConfig !== 'object' || importedConfig === null) {
                             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                window.KefinTweaksToaster.toast('Invalid configuration format', '5');
+                                window.KefinTweaksToaster.toast('配置格式无效', '5');
                             } else {
-                                alert('Invalid configuration format');
+                                alert('配置格式无效');
                             }
                             return;
                         }
@@ -5061,9 +5061,9 @@
                         } catch (error) {
                             console.error('[KefinTweaks Configuration] Error applying imported config:', error);
                             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                                window.KefinTweaksToaster.toast(`Error applying configuration: ${error.message}`, '5');
+                                window.KefinTweaksToaster.toast(`应用配置时出错：${error.message}`, '5');
                             } else {
-                                alert(`Error applying configuration: ${error.message}`);
+                                alert(`应用配置时出错：${error.message}`);
                             }
                         }
                     });
@@ -5088,18 +5088,18 @@
 
             const modal = window.ModalSystem.create({
                 id: 'importConfirmation',
-                title: 'Confirm Import',
+                title: '确认导入',
                 content: `
                     <div class="listItemBodyText" style="margin-bottom: 1em;">
-                        This will completely overwrite your current configuration. All existing settings will be replaced with the imported configuration. This action cannot be undone.
+                        此操作将完全覆盖您当前的配置。所有现有设置都将被导入的配置替换。此操作无法撤销。
                     </div>
                 `,
                 footer: `
                     <button class="emby-button raised button-submit" id="confirmImportConfirmBtn" style="padding: 0.75em 2em; font-size: 1em; font-weight: 500; margin-right: 1em;">
-                        <span>Continue</span>
+                        <span>继续</span>
                     </button>
                     <button class="emby-button raised" id="cancelImportConfirmBtn" style="padding: 0.75em 2em; font-size: 1em;">
-                        <span>Cancel</span>
+                        <span>取消</span>
                     </button>
                 `,
                 closeOnBackdrop: true,
@@ -5136,7 +5136,7 @@
         
         // Show success message
         if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-            window.KefinTweaksToaster.toast('Configuration imported successfully! Reloading...');
+            window.KefinTweaksToaster.toast('配置导入成功！正在重新加载...');
         }
         
         // Reopen modal with new config after a short delay
@@ -5156,7 +5156,7 @@
 
             const pluginId = await window.KefinTweaksUtils.resolvePluginId(JS_INJECTOR_ALIASES);
             if (!pluginId) {
-                throw new Error('JavaScript Injector plugin not found. Please ensure it is installed.');
+                throw new Error('未找到 JavaScript Injector 插件。请确保已安装。');
             }
 
             console.log('[KefinTweaks Configuration] Found JavaScript Injector plugin:', pluginId);
@@ -5192,7 +5192,7 @@
 
             const success = await window.KefinTweaksUtils.saveConfigToJavaScriptInjector(config);
             if (!success) {
-                throw new Error('Failed to save configuration to JavaScript Injector');
+                throw new Error('保存配置到 JavaScript Injector 失败');
             }
 
             console.log('[KefinTweaks Configuration] Configuration saved successfully');
@@ -5433,7 +5433,7 @@
         // Verify admin status before saving
         const userIsAdmin = await isAdmin();
         if (!userIsAdmin) {
-            alert('You must be an administrator to save configuration.');
+            alert('您必须是管理员才能保存配置。');
             return;
         }
 
@@ -5469,17 +5469,17 @@
             
             // Show success toast
             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                window.KefinTweaksToaster.toast('KefinTweaks saved!');
+                window.KefinTweaksToaster.toast('KefinTweaks 已保存！');
             }
         } catch (error) {
             console.error('[KefinTweaks Configuration] Error saving configuration:', error);
             
             // Show error toast
             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                window.KefinTweaksToaster.toast(`Error saving configuration: ${error.message}. Please ensure the JavaScript Injector plugin is installed and you have administrator permissions.`, '5');
+                window.KefinTweaksToaster.toast(`保存配置时出错：${error.message}。请确保已安装 JavaScript Injector 插件且您拥有管理员权限。`, '5');
             } else {
                 // Fallback to alert if toaster is not available
-                alert(`Error saving configuration: ${error.message}\n\nPlease ensure the JavaScript Injector plugin is installed and you have administrator permissions.`);
+                alert(`保存配置时出错：${error.message}\n\n请确保已安装 JavaScript Injector 插件且您拥有管理员权限。`);
             }
         }
     }
@@ -5487,11 +5487,11 @@
     async function handleResetConfig(modalInstance) {
         const userIsAdmin = await isAdmin();
         if (!userIsAdmin) {
-            alert('You must be an administrator to reset configuration.');
+            alert('您必须是管理员才能重置配置。');
             return;
         }
 
-        const confirmed = confirm('This will restore the KefinTweaks configuration to its defaults. It cannot be undone. Are you sure you want to continue?');
+        const confirmed = confirm('此操作将把 KefinTweaks 配置恢复为默认值，且无法撤销。确定要继续吗？');
         if (!confirmed) {
             return;
         }
@@ -5507,9 +5507,9 @@
             await KefinTweaksUtils.saveConfigToJavaScriptInjector(defaultConfig);
 
             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                window.KefinTweaksToaster.toast('Configuration reset to defaults.');
+                window.KefinTweaksToaster.toast('配置已重置为默认值。');
             } else {
-                alert('Configuration reset to defaults.');
+                alert('配置已重置为默认值。');
             }
 
             if (modalInstance && typeof modalInstance.close === 'function') {
@@ -5519,9 +5519,9 @@
         } catch (error) {
             console.error('[KefinTweaks Configuration] Error resetting config:', error);
             if (window.KefinTweaksToaster && window.KefinTweaksToaster.toast) {
-                window.KefinTweaksToaster.toast(`Error resetting configuration: ${error.message}`, '5');
+                window.KefinTweaksToaster.toast(`重置配置时出错：${error.message}`, '5');
             } else {
-                alert(`Error resetting configuration: ${error.message}`);
+                alert(`重置配置时出错：${error.message}`);
             }
         }
     }
@@ -5536,7 +5536,7 @@
             return JSON.parse(field.value);
         } catch (error) {
             console.error(`[KefinTweaks Configuration] Error parsing JSON field ${fieldId}:`, error);
-            alert(`Error parsing JSON in ${fieldId}: ${error.message}`);
+            alert(`解析 ${fieldId} 中的 JSON 时出错：${error.message}`);
             return defaultValue;
         }
     }
