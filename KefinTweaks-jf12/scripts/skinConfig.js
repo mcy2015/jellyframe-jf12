@@ -1,0 +1,1295 @@
+// KefinTweaks Default Skin Configuration
+// Default skins provided by KefinTweaks
+// These skins will be merged with admin-configured skins from KefinTweaksConfig
+// Admin-configured skins take priority over default skins (no duplicates by name)
+
+(function() {
+    'use strict';
+    
+    // ============================================================================
+    // DEFAULT SKIN CONFIGURATION
+    // ============================================================================
+
+    const getKefinTweaksRoot = () => {
+        // jf12 fork: the configured root only (upstream fell back to the author's GitHub Pages site)
+        return window.KefinTweaksConfig?.kefinTweaksRoot || window.KefinTweaksBootstrapRoot || '';
+    }
+    
+    const KEFIN_TWEAKS_DEFAULT_SKINS_CONFIG = {
+        // ============================================================================
+        // GLOBAL OPTIONAL INCLUDES
+        // ============================================================================
+        // Global optional includes that apply to all skins
+        // These will be merged with admin-configured global optional includes from KefinTweaksConfig
+        globalOptionalIncludes: [
+            {
+                name: 'Custom Media Covers',
+                url: 'https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/custom-media-covers-latest-min.css',
+                enabled: false
+            },
+            {
+                name: 'Center My Media',
+                url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/central-libraries-small.css',
+                enabled: false
+            },
+            {
+                name: 'Hide My Media Label',
+                url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/hide-my-media.css',
+                enabled: false
+            },
+            {
+                name: 'Smaller Cast Images',
+                url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/smaller-cast.css',
+                enabled: false
+            },
+            {
+                name: 'Episode Grid',
+                url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-EpisodeGrid.css',
+                enabled: false
+            },
+            {
+                name: 'Round Cast',
+                url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFLow-RoundCastCrew.css',
+                enabled: false
+            },
+            {
+                name: 'Smaller Cast',
+                url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/smallercast.css',
+                enabled: false
+            },
+            {
+                name: 'Compact Episode List',
+                url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/episodelist/episodes_compactlist.css',
+                enabled: false
+            },
+            {
+                name: 'Episode Grid',
+                url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/episodelist/episodes_grid.css',
+                enabled: false
+            },
+            {
+                name: 'Pan Animation',
+                url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/effects/pan-animation.css',
+                enabled: false
+            },
+            {
+                name: 'Animated Overlay',
+                url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-AnimatedOverlay.css',
+                enabled: false
+            },
+            {
+                name: 'Left Aligned Font / Poster Spacing / Watched Indicators',
+                url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-FontTweaks.css',
+                enabled: false
+            },
+            {
+                name: 'Wrap Items In Home Sections',
+                url: `${getKefinTweaksRoot()}skins/optional/global/wrapHomeScrollerItems.css`,
+                enabled: false
+            },
+            {
+                name: 'Genre Thumbnails',
+                url: `${getKefinTweaksRoot()}skins/optional/global/genreThumbnails.css`,
+                enabled: false
+            },
+            {
+                name: 'Upcoming Calendar View',
+                url: `${getKefinTweaksRoot()}skins/optional/global/upcomingCalendar.css`,
+                enabled: false
+            },
+            {
+                name: 'Hide Title If Logo Present',
+                url: `${getKefinTweaksRoot()}skins/optional/global/hideTitleIfLogoPresent.css`,
+                enabled: false
+            },
+            {
+                name: 'Sort People With Images First',
+                url: `${getKefinTweaksRoot()}skins/optional/global/sortPeopleWithImagesFirst.css`,
+                enabled: false
+            },
+            {
+                name: 'No Clear Art on Spotlights',
+                url: `${getKefinTweaksRoot()}skins/optional/global/noClearArtOnSpotlights.css`,
+                enabled: false
+            },
+            {
+                name: 'Show Section Controls Always',
+                url: `${getKefinTweaksRoot()}skins/optional/global/sectionControlsAlways.css`,
+                enabled: false
+            },
+            {
+                name: 'Studio Thumbnails',
+                url: `${getKefinTweaksRoot()}skins/optional/global/studioThumbnails.css`,
+                enabled: false
+            },
+            {
+                name: 'Spotlight Controls On Hover Only',
+                url: `${getKefinTweaksRoot()}skins/optional/global/spotlightControlsOnHover.css`,
+                enabled: false
+            },
+            {
+                name: 'Darken Background Images',
+                url: `${getKefinTweaksRoot()}skins/optional/global/darkenBackgroundImages.css`,
+                enabled: false
+            },
+            {
+                name: 'Left Aligned Card Footer Text',
+                url: `${getKefinTweaksRoot()}skins/optional/global/leftAlignCardFooterText.css`,
+                enabled: false
+            },
+            {
+                name: '16:9 Episode Thumbnails on Season Page',
+                url: `${getKefinTweaksRoot()}skins/optional/global/episodeThumbnailSize.css`,
+                enabled: false
+            },
+            {
+                name: 'Hide Missing And Unaired Indicators On Home Screen',
+                url: `${getKefinTweaksRoot()}skins/optional/global/hideMissingAndUnairedIndicatorsOnHomeScreen.css`,
+                enabled: false
+            }
+        ],
+        
+        // ============================================================================
+        // SKIN CONFIGURATION
+        // ============================================================================
+        // Configure available skins for the display settings page
+        // These skins will be merged with skins from the main KefinTweaks config
+        // Admin-configured skins take priority over default skins (no duplicates by name)
+        // Each skin's url field should be an array of objects with majorServerVersions and urls arrays
+        // Example: url: [{ majorServerVersions: [10, 11], urls: ['url1.css', 'url2.css'] }]
+        // Each skin can also have colorSchemes array for color variations specific to that skin
+        // Each skin should have an author field indicating who created the skin
+        skins: [
+            {
+                name: 'Default',
+                author: 'Jellyfin',
+                url: null,  // null means no additional CSS (default Jellyfin theme)
+                colorSchemes: []
+            },
+            {
+                name: 'ElegantFin',
+                author: 'lscambo13',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css',
+                            `${getKefinTweaksRoot()}skins/elegant-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/fin-kefin-10.10.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/ElegantFin-jellyfin-theme-build-latest-minified.css',
+                            `${getKefinTweaksRoot()}skins/elegant-kefin.css`,,
+                            `${getKefinTweaksRoot()}skins/elegant-kefin-10.11.css`,
+                            `${getKefinTweaksRoot()}skins/fin-kefin-10.11.css`
+                        ]
+                    }
+                ],
+                colorSchemes: [],
+                optionalIncludes: [
+                    {
+                        name: 'Media Bar Support',
+                        url: 'https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/media-bar-plugin-support-latest-min.css',
+                        enabled: true
+                    },
+                    {
+                        name: 'Media Bar Support (Nightly Version)',
+                        url: 'https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/media-bar-plugin-support-nightly.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Disable Card Hover Effect',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/cardHoverEffect.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Center Overlay Play Button',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/centerPlayButton.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Extra Overlay Buttons',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/extraOverlayButtons.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Library Label Visibility',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/libraryLabelVisibility.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Solid App Bar',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/solidAppBar.css`,
+                        enabled: false
+                    }
+                ]
+            },
+            {
+                name: 'NeutralFin',
+                author: 'KartoffelChipss',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/KartoffelChipss/NeutralFin@latest/theme/neutralfin-minified.css',
+                            `${getKefinTweaksRoot()}skins/neutralfin-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/fin-kefin-10.10.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/KartoffelChipss/NeutralFin@latest/theme/neutralfin-minified.css',
+                            `${getKefinTweaksRoot()}skins/neutralfin-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/fin-kefin-10.11.css`
+                        ]
+                    }
+                ],
+                colorSchemes: [],
+                optionalIncludes: [
+                    {
+                        name: 'Media Bar Support',
+                        url: 'https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/media-bar-plugin-support-latest-min.css',
+                        enabled: true
+                    },
+                    {
+                        name: 'Media Bar Support (Nightly Version)',
+                        url: 'https://cdn.jsdelivr.net/gh/lscambo13/ElegantFin@main/Theme/assets/add-ons/media-bar-plugin-support-nightly.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Disable Card Hover Effect',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/cardHoverEffect.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Center Overlay Play Button',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/centerPlayButton.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Extra Overlay Buttons',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/extraOverlayButtons.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Library Label Visibility',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/libraryLabelVisibility.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Solid App Bar',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/solidAppBar.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Jellyfin Lucide Icons (enable with Lucide Icons for KefinTweaks)',
+                        url: 'https://cdn.jsdelivr.net/gh/KartoffelChipss/Jellyfin-Lucide@main/theme/jellyfin-lucide.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Lucide Icons for KefinTweaks (enable with Jellyfin Lucide Icons)',
+                        url: `${getKefinTweaksRoot()}skins/optional/NeutralFin/lucide-icons-kefin.css`,
+                        enabled: false
+                    }
+                ]
+            },
+            {
+                name: 'GlassFin',
+                author: 'KBH-Reeper',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@latest/Theme/GlassFin-Theme-latest-stable.css',
+                            'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@latest/Theme/PluginStyling/MediaBar-Plugin-latest.css',
+                            `${getKefinTweaksRoot()}skins/glassfin-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/fin-kefin-10.10.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@latest/Theme/GlassFin-Theme-latest-stable.css',
+                            'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@latest/Theme/PluginStyling/MediaBar-Plugin-latest.css',
+                            `${getKefinTweaksRoot()}skins/glassfin-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/fin-kefin-10.11.css`
+                        ]
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Glass',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/BadgeStyling/Glass.css'
+                    },
+                    {
+                        name: 'Faded',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/BadgeStyling/Faded.css'
+                    },
+                    {
+                        name: 'Neon',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/BadgeStyling/Neon.css'
+                    },
+                    {
+                        name: 'PurpleGlass',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/BadgeStyling/PurpleGlass.css'
+                    },
+                    {
+                        name: 'PurpleStainedGlass',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/BadgeStyling/PurpleStainedGlass.css'
+                    },
+                    {
+                        name: 'RedGlass',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/BadgeStyling/RedGlass.css'
+                    },
+                    {
+                        name: 'BlueGlass',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/BadgeStyling/BlueGlass.css'
+                    }
+                ],
+                optionalIncludes: [
+                    {
+                        name: 'Media Bar Support',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/PluginStyling/MediaBar-Plugin-latest.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Additional Poster Buttons',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Stylings/CardButtons.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Watched Status Badges',
+                        url: 'https://cdn.jsdelivr.net/gh/KBH-Reeper/GlassFin@main/Theme/Styling/ActivateBadges.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Disable Card Hover Effect',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/cardHoverEffect.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Center Overlay Play Button',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/centerPlayButton.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Library Label Visibility',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/libraryLabelVisibility.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Solid App Bar',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/solidAppBar.css`,
+                        enabled: false
+                    }
+                ]
+            },
+            {
+                name: 'NetFin',
+                author: 'ya0903',
+                url: [
+                    {
+                        majorServerVersions: [10, 11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/ya0903/NetFin@main/netfin.css',
+                            `${getKefinTweaksRoot()}skins/netfin-kefin.css`,
+                        ]
+                    },
+                ],
+                colorSchemes: [],
+                optionalIncludes: [
+                    {
+                        name: 'Mobile Buttons Size Adjustment',
+                        url: `${getKefinTweaksRoot()}skins/optional/NetFin/mobileButtonsSizeAdjustment.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Disable Card Hover Effect',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/cardHoverEffect.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Center Overlay Play Button',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/centerPlayButton.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Extra Overlay Buttons',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/extraOverlayButtons.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Library Label Visibility',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/libraryLabelVisibility.css`,
+                        enabled: false
+                    },
+                    {
+                        name: 'Solid App Bar',
+                        url: `${getKefinTweaksRoot()}skins/optional/ElegantFin/solidAppBar.css`,
+                        enabled: false
+                    }
+                ]
+            },
+            {
+                name: 'Jellypane',
+                author: 'tedhinklater',
+                url: [ // TODO: Update this when we get the specific 10.10.X / 10.11.X versions
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/ranaldsgift/Jellypane@main/jellypane.css', 
+                            `${getKefinTweaksRoot()}skins/jellypane-kefin.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: ['https://cdn.jsdelivr.net/gh/tedhinklater/Jellypane@main/jellypane.css',
+                            `${getKefinTweaksRoot()}skins/jellypane-kefin.css`
+                        ]
+                    },
+                ],
+                colorSchemes: []
+            },
+            {
+                name: 'Finimalism 7',
+                author: 'tedhinklater',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/finimalism7.css',
+                            `${getKefinTweaksRoot()}skins/finimalism-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/finimalism-7-kefin.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/finimalism10.11.css',
+                            `${getKefinTweaksRoot()}skins/finimalism-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/finimalism-7-kefin.css`
+                        ]
+                    }
+                ],
+                colorSchemes: [],
+                optionalIncludes: [
+                    {
+                        name: 'No Animations',
+                        url: 'https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/no-animation.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Horizontal Scrolling',
+                        url: 'https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/horizontal-scrolling.css',
+                        enabled: false
+                    }
+                ]
+            },
+            {
+                name: 'Finimalism 11',
+                author: 'tedhinklater',
+                url: [
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/Finimalism11.css',
+                            `${getKefinTweaksRoot()}skins/finimalism-11-kefin.css`
+                        ]
+                    }
+                ],
+                colorSchemes: [],
+                optionalIncludes: [
+                    {
+                        name: 'Horizontal Scrolling on Home Page',
+                        url: 'https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/scrollers-11.css',
+                        enabled: false
+                    }
+                ]
+            },
+            {
+                name: 'Finimalism 12',
+                author: 'tedhinklater',
+                url: [
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/tedhinklater/finimalism@main/Finimalism12.css',
+                            `${getKefinTweaksRoot()}skins/finimalism-12-kefin.css`
+                        ]
+                    }
+                ],
+            },
+            {
+                name: 'Jellyfish',
+                author: 'n00bcodr',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: ['https://cdn.jsdelivr.net/gh/n00bcodr/jellyfish@main/theme.css']
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/n00bcodr/jellyfish@main/theme.css',
+                            'https://cdn.jsdelivr.net/gh/n00bcodr/jellyfish@main/10.11_fixes.css'
+                        ]
+                    }
+                ],
+                optionalIncludes: [
+                    {
+                        name: 'Floating Progress Bar',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/progress_bar.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Watched Indicators',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/indicators.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Text instead of icons for buttons on item page',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/icontext.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Colored Parental Ratings',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/ratings.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Streamberry logo',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/streamberry_logo.css',
+                        enabled: false
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Default',
+                        url: ''
+                    },
+                    {
+                        name: 'Banana',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/banana.css'
+                    },
+                    {
+                        name: 'Coal',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/coal.css'
+                    },
+                    {
+                        name: 'Coral',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/coral.css'
+                    },
+                    {
+                        name: 'Grass',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/grass.css'
+                    },
+                    {
+                        name: 'Jellyblue',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/jellyblue.css'
+                    },
+                    {
+                        name: 'Jellyflix',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/jellyflix.css'
+                    },
+                    {
+                        name: 'Lavender',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/lavender.css'
+                    },
+                    {
+                        name: 'Mint',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/mint.css'
+                    },
+                    {
+                        name: 'Ocean',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/ocean.css'
+                    },
+                    {
+                        name: 'Peach',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/peach.css'
+                    },
+                    {
+                        name: 'Watermelon',
+                        url: 'https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfish/colors/watermelon.css'
+                    }
+                ]
+            },
+            {
+                name: 'Glassmorphism',
+                author: 'alexyle',
+                url: [
+                    {
+                        majorServerVersions: [10, 11, 12],
+                        urls: ['https://cdn.jsdelivr.net/gh/alexyle/jellyfin-theme@main/glassmorphism/theme.css']
+                    }
+                ],
+                colorSchemes: []
+            },
+            {
+                name: 'Zombie',
+                author: 'MakD',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: ['https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/zombie_revived.css']
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Default',
+                        url: ''
+                    },
+                    {
+                        name: 'Amazon Prime',
+                        url: 'https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/amazon-prime.css'
+                    },
+                    {
+                        name: 'Apple TV',
+                        url: 'https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/apple-tv.css'
+                    },
+                    {
+                        name: 'Disney',
+                        url: 'https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/disney.css'
+                    },
+                    {
+                        name: 'HBO Max',
+                        url: 'https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/hbo-max.css'
+                    },
+                    {
+                        name: 'Hulu',
+                        url: 'https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/hulu.css'
+                    },
+                    {
+                        name: 'Netflix',
+                        url: 'https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/netflix.css'
+                    },
+                    {
+                        name: 'YouTube',
+                        url: 'https://cdn.jsdelivr.net/gh/MakD/zombie-release@latest/color-schemes/youtube.css'
+                    }
+                ]
+            },
+            {
+                name: 'Jamfin',
+                author: 'JamsRepos',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/base.css',
+                            `${getKefinTweaksRoot()}skins/jamfin-kefin.css`,
+                            `${getKefinTweaksRoot()}skins/jamfin-kefin-10.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/complete.css',
+                            `${getKefinTweaksRoot()}skins/jamfin-kefin.css`
+                        ]
+                    }
+                ],
+                colorSchemes: [],
+                optionalIncludes: [
+                    {
+                        name: 'Watched Indicators',
+                        url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/count-indicators.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Floating Progress Bar',
+                        url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/floating-progress.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Hide Forgot Password',
+                        url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/forgot-password.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Hover Animation',
+                        url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/moving-cards.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Static Sidebar',
+                        url: 'https://cdn.jsdelivr.net/gh/JamsRepos/Jamfin@latest/theme/modules/static-sidebar.css',
+                        enabled: false
+                    }
+                ]
+            },
+            {
+                name: 'Scyfin',
+                author: 'loof2736',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/loof2736/scyfin@v1.4.17/CSS/scyfin-theme.css',
+                            `${getKefinTweaksRoot()}skins/scyfin-kefin.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/scyfin-theme.css',
+                            `${getKefinTweaksRoot()}skins/scyfin-kefin.css`
+                        ]
+                    }
+                ],
+                optionalIncludes: [
+                    {
+                        name: 'Disable Static Drawer',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/disable-static-drawer.css',
+                        enabled: false
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Default',
+                        url: ''
+                    },
+                    {
+                        name: 'Seafoam',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/theme-seafoam.css'
+                    },
+                    {
+                        name: 'Coral',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/theme-coral.css'
+                    },
+                    {
+                        name: 'Snow',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/theme-snow.css'
+                    },
+                    {
+                        name: 'OLED',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/theme-oled.css'
+                    }
+                ]
+            },
+            {
+                name: 'Catppuccin',
+                author: 'Catppuccin',
+                url: [
+                    {
+                        majorServerVersions: [10, 11, 12],
+                        urls: ['https://jellyfin.catppuccin.com/theme.css']
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Latte',
+                        url: 'https://jellyfin.catppuccin.com/catppuccin-latte.css'
+                    },
+                    {
+                        name: 'Frappé',
+                        url: 'https://jellyfin.catppuccin.com/catppuccin-frappe.css'
+                    },
+                    {
+                        name: 'Macchiato',
+                        url: 'https://jellyfin.catppuccin.com/catppuccin-macchiato.css'
+                    },
+                    {
+                        name: 'Mocha',
+                        url: 'https://jellyfin.catppuccin.com/catppuccin-mocha.css'
+                    }
+                ]
+            },
+            {
+                name: 'Flow',
+                author: 'LitCastVlog',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-oneliner.css',
+                            `${getKefinTweaksRoot()}skins/flow-kefin.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-oneliner.css',
+                            'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-Compatibility.css',
+                            `${getKefinTweaksRoot()}skins/flow-kefin.css`
+                        ]
+                    }
+                ],
+                optionalIncludes: [
+                    {
+                        name: 'B/W Logo, Smaller Cast & Crew, Hide Upcoming on TV + Next Up in Season View',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-Extras.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Collapsible Side Drawer',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-Drawer-Toggle.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Bigger Logo',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-HighDPIExtras.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Darker Icons/Accents',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/ScyFlow-Dark.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Episode Grid Outline/Dim on Hover',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-EpisodeGrid-outline.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Horizontal Scroll Episodes',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-Scrollable-Episodes-WIP.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Horizontal Scroll Episodes with Controls Overlayed',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/ScyFlow-Scrollable-Episodes-ALT.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Nyan Progress Bar',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/NyanProgress.css',
+                        enabled: false
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Default',
+                        url: ''
+                    },
+                    {
+                        name: 'Orange',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/ScyFlow-Orange.css'
+                    },
+                    {
+                        name: 'Pink',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/ScyFlow-Pink.css'
+                    },
+                    {
+                        name: 'Rainbow',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/ScyFlow-Rainbow.css'
+                    },
+                    {
+                        name: 'Red',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/ScyFlow-Red.css'
+                    },
+                    {
+                        name: 'White',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/ScyFlow-White.css'
+                    },
+                    {
+                        name: 'Blue',
+                        url: 'https://cdn.jsdelivr.net/gh/LitCastVlog/Flow@main/CSS/Themes/ScyFlow-Blue.css'
+                    },
+                    {
+                        name: 'Seafoam',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/theme-seafoam.css'
+                    },
+                    {
+                        name: 'Coral',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/theme-coral.css'
+                    },
+                    {
+                        name: 'Snow',
+                        url: 'https://cdn.jsdelivr.net/gh/loof2736/scyfin@latest/CSS/theme-snow.css'
+                    }
+                ]
+            },
+            {
+                name: 'Ultrachromic',
+                author: 'CTalvio',
+                url: [
+                    {
+                        majorServerVersions: [10, 11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/base.css',
+                            'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/accentlist.css',
+                            'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/fixes.css',
+                            'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/jf_font.css',
+                            `${getKefinTweaksRoot()}skins/chromic-kefin.css`
+                        ]
+                    }
+                ],
+                optionalIncludes: [,
+                    {
+                        name: 'Dark',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/type/dark.css'
+                    },
+                    {
+                        name: 'Light',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/type/light.css'
+                    },
+                    {
+                        name: 'Colorful',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/type/colorful.css'
+                    },
+                    {
+                        name: 'Dark with Accent',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/type/dark_withaccent.css'
+                    },
+                    {
+                        name: 'Round UI Corners',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/rounding.css'
+                    },
+                    {
+                        name: 'Round UI with circle accent on hover',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/rounding_circlehover.css'
+                    },
+                    {
+                        name: 'Login Screen Minimal',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/login/login_minimalistic.css'
+                    },
+                    {
+                        name: 'Login Screen Full',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/login/login_frame.css'
+                    },
+                    {
+                        name: 'Input Fields with Border',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/fields/fields_border.css'
+                    },
+                    {
+                        name: 'Input Fields without Border',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/fields/fields_noborder.css'
+                    },
+                    {
+                        name: 'Floating Watched Indicators',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/cornerindicator/indicator_floating.css'
+                    },
+                    {
+                        name: 'Corner Watched Indicators',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/cornerindicator/indicator_corner.css'
+                    },
+                    {
+                        name: 'Simple Titles',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/titlepage/title_simple.css'
+                    },
+                    {
+                        name: 'Logo Titles',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/titlepage/title_simple-logo.css'
+                    },
+                    {
+                        name: 'Banner Titles',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/titlepage/title_banner.css'
+                    },
+                    {
+                        name: 'Banner Logo Titles',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/titlepage/title_banner-logo.css'
+                    },
+                    {
+                        name: 'Progress Bar',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/overlayprogress.css'
+                    },
+                    {
+                        name: 'Bottom Progress Bar',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/bottombarprogress.css'
+                    },
+                    {
+                        name: 'Floating Progress Bar',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/progress/floating.css'
+                    },
+                    {
+                        name: 'Hoverglow Effect',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/effects/hoverglow.css'
+                    },
+                    {
+                        name: 'Glassy Effect',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/effects/glassy.css'
+                    },
+                    {
+                        name: 'Mobile Backdrop "Hack"',
+                        url: 'https://ctalvio.github.io/Monochromic/backdrop-hack_style.css'
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Default',
+                        url: '',
+                    },
+                    {
+                        name: 'Monochromic',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/presets/monochromic_preset.css'
+                    },
+                    {
+                        name: 'Kaleidochromic',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/presets/kaleidochromic_preset.css'
+                    },
+                    {
+                        name: 'Novachromic',
+                        url: 'https://cdn.jsdelivr.net/gh/CTalvio/Ultrachromic/presets/novachromic_preset.css'
+                    }
+                ]
+            },
+            {
+                name: 'Evergreen',
+                author: 'everviolet',
+                url: [
+                    {
+                        majorServerVersions: [10, 11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/everviolet/jellyfin@latest/themes/evergarden-winter.css',
+                        ]
+                    },
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Winter',
+                        url: ''
+                    },
+                    {
+                        name: 'Fall',
+                        url: 'https://cdn.jsdelivr.net/gh/everviolet/jellyfin@latest/themes/evergarden-fall.css'
+                    },
+                    {
+                        name: 'Spring',
+                        url: 'https://cdn.jsdelivr.net/gh/everviolet/jellyfin@latest/themes/evergarden-spring.css'
+                    },
+                    {
+                        name: 'Summer',
+                        url: 'https://cdn.jsdelivr.net/gh/everviolet/jellyfin@latest/themes/evergarden-summer.css'
+                    },
+                ]
+            },
+            {
+                name: 'Finity',
+                author: 'prism2001',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/prism2001/finity@main/minimal/finity-minimal.css',
+                        ]
+                    },
+                ],
+            },
+            {
+                name: 'infinitv',
+                author: 'buesche87',
+                url: [
+                    {
+                        majorServerVersions: [10, 11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/buesche87/infinitv@latest/infinitv.css',
+                            `${getKefinTweaksRoot()}skins/infinitv-kefin.css`
+                        ]
+                    },
+                ],
+            },
+            {
+                name: 'JellySkin',
+                author: 'prayag17',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/main.css',
+                        ]
+                    },
+                ],
+                optionalIncludes: [
+                    {
+                        name: 'Logos',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/logo.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Remove Backdrop Filter',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/improvePerformance/removeBackdropFilter.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Remove Fading Scroll',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/improvePerformance/removeFadingScroll.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Horizontal My Media',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/horizontalMyMedia.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Video Theme Blur',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/videoThemeBlur.css',
+                        enabled: false
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Default',
+                        url: ''
+                    },
+                    {
+                        name: 'Mauve',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/gradients/mauve.css'
+                    },
+                    {
+                        name: 'Night Sky',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/gradients/nightSky.css'
+                    },
+                    {
+                        name: 'Sea',
+                        url: 'https://cdn.jsdelivr.net/npm/jellyskin@latest/dist/addons/gradients/sea.css'
+                    },
+                ]
+            },
+            {
+                name: 'Better Jellyfin UI',
+                author: 'tromoSM',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/theme.css',
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/theme.css',
+                        ]
+                    },
+                ],
+                optionalIncludes: [
+                    {
+                        name: 'Floating Header',
+                        url: 'https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/Floating-header.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'High Contrast Interface',
+                        url: 'https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/High-contrast-interface.css',
+                        enabled: false
+                    },
+                        {
+                        name: 'Scale up animation on hover card',
+                        url: 'https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/Scale-up-animation-on-hover-card.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'No liquid glass borders',
+                        url: 'https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/no-liquid-glass-borders.css',
+                        enabled: false
+                    },
+                    {
+                        name: 'Alternative navigation bar',
+                        url: 'https://cdn.jsdelivr.net/gh/tromoSM/better-jellyfin-ui@main/options/alternative-navigation-bar.css',
+                        enabled: false
+                    },
+                ],
+            },
+            {
+                name: 'Jellyfin Better Styles',
+                author: 'Tetrax-10',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/Tetrax-10/jellyfin-better-styles@dist/theme.css',
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/Tetrax-10/jellyfin-better-styles@dist/theme.css',
+                            `${getKefinTweaksRoot()}skins/better-styles-kefin-11.css`
+                        ]
+                    },
+                ],
+            },
+            {
+                name: 'Zesty Theme',
+                author: 'stpnwf',
+                url: [
+                    {
+                        majorServerVersions: [10],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@legacy/v10.10/theme.css',
+                            `${getKefinTweaksRoot()}skins/zesty-kefin.css`
+                        ]
+                    },
+                    {
+                        majorServerVersions: [11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/theme.css',
+                            `${getKefinTweaksRoot()}skins/zesty-kefin.css`
+                        ]
+                    },
+                ],
+                optionalIncludes: [
+                    {
+                        name: 'Alternative Login Background',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/login-alt.css',
+                        enabled: false
+                    }
+                ],
+                colorSchemes: [
+                    {
+                        name: 'Cyan',
+                        url: ''
+                    },
+                    {
+                        name: 'Fall',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/colorschemes/blue.css'
+                    },
+                    {
+                        name: 'Spring',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/colorschemes/coral.css'
+                    },
+                    {
+                        name: 'Summer',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/colorschemes/gray.css'
+                    },
+                    {
+                        name: 'Green',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/colorschemes/green.css'
+                    },
+                    {
+                        name: 'Purple',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/colorschemes/purple.css'
+                    },
+                    {
+                        name: 'Red',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/colorschemes/red.css'
+                    },
+                    {
+                        name: 'Yellow',
+                        url: 'https://cdn.jsdelivr.net/gh/stpnwf/ZestyTheme@latest/colorschemes/yellow.css'
+                    }
+                ]
+            },
+            {
+                //Abyss by ArumGupta
+                //@import url('https://cdn.jsdelivr.net/gh/AumGupta/abyss-jellyfin@main/abyss.css');
+                name: 'Abyss',
+                author: 'ArumGupta',
+                url: [
+                    {
+                        majorServerVersions: [10, 11, 12],
+                        urls: [
+                            'https://cdn.jsdelivr.net/gh/AumGupta/abyss-jellyfin@main/abyss.css',
+                            `${getKefinTweaksRoot()}skins/abyss-kefin.css`
+                        ]
+                    },
+                ],
+            },
+            // Add more skins here as needed
+        ]
+    };
+    
+    // ============================================================================
+    // CONFIGURATION EXPOSURE
+    // ============================================================================
+    // Make default skin configuration available to scripts
+    window.KefinTweaksDefaultSkinsConfig = KEFIN_TWEAKS_DEFAULT_SKINS_CONFIG;
+    
+    console.log('[KefinTweaks SkinConfig] Default skin configuration loaded. Available at window.KefinTweaksDefaultSkinsConfig');
+    
+})();
+

@@ -1,0 +1,25 @@
+body:has(.homePage:not(.hide)) .emby-tab-button {
+    display: flex;
+}
+body:has(.homePage:not(.hide)) .emby-tabs-slider {
+    display: flex;
+}
+body:has(.homePage:not(.hide)) .emby-tab-button > div {
+    align-self: normal;
+}
+.series-episodes-section {
+    grid-area: nextup;
+}
+.layout-desktop .mainDetailButtons:has(.btnReplay:not(.hide)) .btnPlay::after {
+    content: 'Resume' !important;
+}
+.layout-desktop .mainDetailButtons:has(.btnReplay:not(.hide)) .btnPlay {
+    margin-right: -115px !important;
+    padding-right: 20px !important;
+    right: 140px !important;
+}
+.spotlight-tagline .emby-tab-button,
+.spotlight-nav-buttons-container,
+.spotlight-section-title .emby-tab-button {
+    background-color: unset;
+}

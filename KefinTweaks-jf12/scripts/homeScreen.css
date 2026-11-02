@@ -1,0 +1,567 @@
+/* jf12 fork: the Google Fonts @import for the spotlight / card title fonts is gone from this file (every home page load called fonts.googleapis.com).
+   homeScreen3.js adds it only when HOME_SETTINGS.loadGoogleFonts is switched on AND a section uses one of those font families. */
+
+.sections.homeSectionsContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+/* jf12 fork: spacing belongs to KefinTweaks' own rows; a gap on the container would push Jellyfin's / Home Screen Sections' rows around.
+   overflow-x: clip keeps a row's off-screen cards from widening the page (the row is moved with transform: translateX). */
+.homeSectionsContainer > [data-section-id] {
+	margin-top: 1rem;
+	overflow-x: clip;
+}
+
+/* Where the KefinTweaks rows go relative to Jellyfin's / Home Screen Sections' rows: homeScreen3.js sets data-kefin-position
+   (below | above | mixed) and data-kefin-native (keep | hide) on the container from HOME_SETTINGS. The order offsets are applied in
+   cardBuilder (renderProgressiveSections); "hide" only hides with CSS, nothing is written to the server. */
+.homeSectionsContainer[data-kefin-native="hide"] > :not([data-section-id]):not(#discovery-loading-indicator):not(.load-more-discovery-btn) {
+	display: none !important;
+}
+/* Home / Discover / Pinned: outside the Home category the rows that are not KefinTweaks' own stay out of the way */
+.homeSectionsContainer[data-category]:not([data-category="none"]) > :not([data-section-id]):not(#discovery-loading-indicator):not(.load-more-discovery-btn) {
+	display: none !important;
+}
+
+.homePage [data-section-id] h2.sectionTitle,
+.homePage [data-section-id] .sectionTitleTextButton > .material-icons {
+	margin-bottom: 0 !important;
+	margin-top: 0 !important;
+	padding-bottom: 0 !important;
+	padding-top: 0 !important;
+}
+
+/* div#discovery-loading-indicator:not(.show)::before {
+    content: 'Loading...';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-50%);
+    visibility: visible;
+    text-align: center;
+    opacity: 1;
+} */
+
+#indexPage[data-discovery-ready] div#discovery-loading-indicator:not(.show)::before {
+	content: "Discover More";
+}
+
+#indexPage[data-discovery-exhausted] div#discovery-loading-indicator:not(.show)::before {
+	content: "No More Content to Discover";
+}
+
+div#discovery-loading-indicator:not(.show)::after {
+	content: "\E313";
+	font-family: "Material Icons";
+	position: absolute;
+	top: calc(50% + 0.4em);
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	font-size: 1.5em;
+	color: #ffffff;
+	visibility: visible;
+	opacity: 1;
+}
+
+#indexPage[data-discovery-exhausted] div#discovery-loading-indicator:not(.show)::after {
+	content: "";
+}
+
+[data-loading-discovery="true"] div#discovery-loading-indicator {
+	display: flex;
+}
+
+/* Idle Discover More / exhausted prompt (chevron mode) */
+#indexPage[data-discovery-ready] #discovery-loading-indicator:not(.show) {
+	display: flex !important;
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+/* Hide Discover More / loading affordance outside Home + Discover categories */
+#indexPage .homeSectionsContainer[data-category]:not([data-category="none"]):not([data-category="discovery"]) #discovery-loading-indicator,
+.homePage .homeSectionsContainer[data-category]:not([data-category="none"]):not([data-category="discovery"]) #discovery-loading-indicator,
+.libraryPage
+	.homeSectionsContainer[data-category]:not([data-category="none"]):not([data-category="discovery"])
+	#discovery-loading-indicator,
+#indexPage .homeSectionsContainer[data-category]:not([data-category="none"]):not([data-category="discovery"]) .discovery-loading-indicator,
+.homePage .homeSectionsContainer[data-category]:not([data-category="none"]):not([data-category="discovery"]) .discovery-loading-indicator,
+.libraryPage
+	.homeSectionsContainer[data-category]:not([data-category="none"]):not([data-category="discovery"])
+	.discovery-loading-indicator {
+	display: none !important;
+	visibility: hidden !important;
+	min-height: 0 !important;
+	height: 0 !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	opacity: 0 !important;
+}
+
+#indexPage[data-discovery-ready] #discovery-loading-indicator:not(.show) .spinner {
+	visibility: hidden;
+	opacity: 0;
+}
+
+/* #indexPage[data-discovery-ready]:not([data-infinite-scroll='true']) div#discovery-loading-indicator {
+    display: none;
+} */
+
+#indexPage:not([data-discovery-ready]) div#discovery-loading-indicator:not(.show)::after {
+	content: "";
+}
+
+/* Ensure Editor's Choice Banner appears at top of home screen if enabled */
+.editorsChoiceContainer {
+	order: 1 !important;
+}
+.spotlight-section {
+	width: calc(100% - (2 * max(env(safe-area-inset-left), 3.3%)));
+}
+
+.load-more-discovery-btn {
+	display: block;
+	visibility: visible;
+	order: 99998 !important;
+	margin: 2em auto;
+}
+
+.sections.loading-discovery .load-more-discovery-btn {
+	visibility: hidden !important;
+}
+
+/* Discovery section loading indicator */
+.sections.loading-discovery .discovery-loading-indicator {
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
+.discovery-loading-indicator,
+.load-more-discovery-btn {
+	height: 50px;
+}
+
+.discovery-loading-indicator {
+	display: none;
+	opacity: 1;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	font-size: 14px;
+	color: #666;
+	transition: opacity 0.3s ease;
+	position: relative;
+	justify-content: start;
+}
+
+.discovery-loading-indicator .spinner {
+	width: 30px;
+	height: 30px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top-color: var(--theme-primary-color, #3498db);
+	border-radius: 50%;
+	animation: discovery-spin 1s linear infinite;
+}
+
+@keyframes discovery-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+/* Hide scroll buttons on mobile using Jellyfin's layout classes */
+.layout-mobile .emby-scrollbuttons,
+.layout-tv .emby-scrollbuttons {
+	display: none !important;
+}
+
+.load-more-discovery-btn {
+	display: block;
+}
+
+.sections[data-loading-discovery="true"] .load-more-discovery-btn {
+	display: none !important;
+}
+
+.sections[data-loading-discovery="true"] .discovery-loading-indicator {
+	display: flex !important;
+	opacity: 1 !important;
+}
+
+.discovery-loading-indicator {
+	display: none;
+	opacity: 0;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	border-radius: 8px;
+	font-size: 14px;
+	color: #666;
+	transition: opacity 0.3s ease;
+	position: relative;
+	justify-content: start;
+	min-height: 200px;
+}
+
+.discovery-loading-indicator .spinner {
+	width: 30px;
+	height: 30px;
+	border: 2px solid rgba(255, 255, 255, 0.3);
+	border-top-color: var(--theme-primary-color, #3498db);
+	border-radius: 50%;
+	animation: discovery-spin 1s linear infinite;
+}
+
+@keyframes discovery-spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.homeSectionsContainer [data-section-id="popularTVNetworks"] .card .cardText {
+	visibility: hidden;
+}
+
+/* .homeSectionsContainer:not(.kefinHomeSectionsContainer) {
+    display: none !important;
+} */
+
+.homeSectionsContainer [data-section-id*="thematic-"] .card[data-type="Folder"] .cardScalable > a.cardImageContainer::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background: linear-gradient(#000000, rgb(0 0 0 / 0%) 50%);
+	box-shadow: inset 0px 0px 20px 5px black;
+}
+
+.layout-mobile .homeSectionsContainer [data-section-id*="thematic-"] .card[data-type="Folder"] a.cardImageContainer::after {
+	top: 0.5rem;
+	left: 0.5rem;
+	font-size: 1.5rem !important;
+	line-height: 1.8rem !important;
+}
+.homeSectionsContainer .card[data-type="TvChannel"] a.cardImageContainer:not([style])::after {
+	content: attr(aria-label);
+	font-size: 2rem;
+	text-wrap: auto;
+	text-align: center;
+}
+
+.emby-scroller-container[data-section-id="liveTv-channels"] .itemsContainer {
+	gap: 4rem;
+}
+.layout-mobile .emby-scroller-container[data-section-id="liveTv-channels"] .itemsContainer {
+	gap: 2rem;
+}
+
+[data-section-id="upcoming"] .missingIndicator {
+	display: none;
+}
+
+.homePage[data-discovery-ready] div#discovery-loading-indicator:not(.show) {
+	min-height: 50px;
+}
+
+@keyframes fadeInDelayed {
+	0%,
+	99% {
+		opacity: 0;
+		visibility: hidden;
+	}
+	100% {
+		opacity: 1;
+		visibility: visible;
+	}
+}
+
+[data-section-id="browse-by-studio"] .card {
+	width: 8vw !important;
+}
+
+[data-section-id="browse-by-studio"] .card,
+[data-section-id="browse-by-studio"] .card .cardScalable,
+[data-section-id="browse-by-studio"] .card .cardImageContainer,
+[data-section-id="browse-by-studio"] .card .cardPadder {
+	border-radius: 0px !important;
+}
+
+/* Hide scroll buttons on mobile and tablet layouts */
+@media (max-width: 768px) {
+	.emby-scrollbuttons {
+		display: none !important;
+	}
+
+	[data-section-id="browse-by-studio"] .card {
+		width: 30vw !important;
+	}
+}
+
+/* Home screen chrome: create section + category rail */
+.kefin-home-chrome {
+	position: fixed;
+	z-index: 12;
+	pointer-events: none;
+	opacity: 0.18;
+	transition: opacity 0.2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+	.kefin-home-chrome:hover,
+	.kefin-home-chrome:focus-within {
+		opacity: 1;
+	}
+}
+.kefin-home-chrome.hide,
+#kefin-home-category-rail.hide,
+#kefin-home-category-rail.hide .kefin-home-category-rail {
+	display: none !important;
+}
+
+/* Hide home chrome off-home via root page key (no :has; JMP-safe) */
+html:not([data-active-page="home"]) #kefin-home-category-rail,
+html:not([data-active-page="home"]) #kefin-home-create-section-btn {
+	display: none !important;
+}
+
+.kefin-home-chrome button,
+#kefin-home-category-rail button {
+	pointer-events: auto;
+}
+.kefin-home-create-section {
+	left: 0;
+	bottom: 0.25em;
+}
+.kefin-home-create-section-btn {
+	padding: 0.25em;
+}
+.kefin-home-create-section-btn .material-icons {
+	font-size: 1.75rem;
+}
+
+/* Outer sectionTabs wrapper — no native header layout */
+#kefin-home-category-rail.sectionTabs {
+	position: static;
+	display: contents;
+}
+
+/* Inner visual bar — keep our layout over skinHeader / MuiAppBar positioning */
+.kefin-home-category-rail {
+	--AppBar-background: var(--jf-palette-AppBar-defaultBg);
+	--AppBar-color: var(--jf-palette-text-primary);
+	background-color: var(--jf-palette-AppBar-darkBg, var(--AppBar-background));
+	color: var(--jf-palette-AppBar-darkColor, var(--AppBar-color));
+	z-index: 10;
+	gap: 0.25rem;
+	pointer-events: auto;
+	display: flex;
+}
+@media (hover: hover) and (pointer: fine) {
+	#kefin-home-category-rail .kefin-home-category-rail:hover,
+	#kefin-home-category-rail .kefin-home-category-rail:focus-within {
+		opacity: 1;
+		background: #0f0f0f !important;
+		border-radius: 0 25px 25px 0;
+		box-shadow: 1px 0px 5px -1px black;
+	}
+}
+.kefin-home-category-item {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.15rem;
+	min-width: 0;
+}
+.kefin-home-category-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.75;
+	-webkit-tap-highlight-color: transparent;
+}
+.kefin-home-category-btn.is-active,
+.kefin-home-category-item.is-active .kefin-home-category-btn {
+	opacity: 1;
+	color: var(--theme-primary-color, #00a4dc);
+	background: rgba(0, 164, 220, 0.18);
+}
+.kefin-home-category-btn .material-icons {
+	font-size: 1.35rem;
+	top: unset !important;
+}
+.kefin-home-category-btn-label {
+	display: none;
+	font-size: 0.65rem;
+	line-height: 1.1;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	max-width: 4.5rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	pointer-events: none;
+	text-align: center;
+}
+.kefin-home-category-item.is-active .kefin-home-category-btn-label {
+	color: var(--theme-primary-color, #00a4dc);
+}
+
+@media (max-width: 899px) {
+	#kefin-home-category-rail .kefin-home-category-rail {
+		top: auto;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
+		gap: 0.15rem;
+		padding: 0.4rem 0.5rem calc(0.4rem + env(safe-area-inset-bottom, 0px)) !important;
+		box-shadow: 1px 1px 1px 1px #fff !important;
+		border-radius: 0;
+		opacity: 1;
+		pointer-events: auto;
+		margin: 0 !important;
+		-webkit-backdrop-filter: blur(10px);
+		backdrop-filter: blur(10px);
+		border: none !important;
+		transition:
+			transform 0.25s ease,
+			opacity 0.25s ease;
+		background: var(--jf-palette-AppBar-darkBg, var(--AppBar-background));
+	}
+	#kefin-home-category-rail .kefin-home-category-rail:hover,
+	#kefin-home-category-rail .kefin-home-category-rail:focus-within {
+		opacity: 1;
+		background: var(--jf-palette-AppBar-darkBg, var(--AppBar-background)) !important;
+		border-radius: 0;
+		box-shadow: 1px 1px 1px 1px #fff !important;
+	}
+	.kefin-home-category-btn-label {
+		display: block;
+	}
+	.kefin-home-category-btn:hover,
+	.kefin-home-category-btn:focus,
+	.kefin-home-category-btn:focus-visible,
+	.kefin-home-category-btn:active {
+		opacity: 0.75;
+		background: transparent;
+		color: inherit;
+	}
+	.kefin-home-category-btn.is-active,
+	.kefin-home-category-btn.is-active:hover,
+	.kefin-home-category-btn.is-active:focus,
+	.kefin-home-category-btn.is-active:focus-visible,
+	.kefin-home-category-btn.is-active:active,
+	.kefin-home-category-item.is-active .kefin-home-category-btn,
+	.kefin-home-category-item.is-active .kefin-home-category-btn:hover,
+	.kefin-home-category-item.is-active .kefin-home-category-btn:focus,
+	.kefin-home-category-item.is-active .kefin-home-category-btn:focus-visible,
+	.kefin-home-category-item.is-active .kefin-home-category-btn:active {
+		opacity: 1;
+		color: var(--theme-primary-color, #00a4dc);
+		background: rgba(0, 164, 220, 0.18);
+	}
+	#kefin-home-category-rail.is-scroll-hidden .kefin-home-category-rail {
+		transform: translateY(100%);
+		pointer-events: none;
+		opacity: 0;
+	}
+	.kefin-home-create-section,
+	#kefin-home-create-section-btn {
+		display: none !important;
+	}
+	.homePage:not(.hide) {
+		padding-bottom: calc(4.25rem + env(safe-area-inset-bottom, 0px));
+	}
+}
+
+.kefin-section-more-toggle {
+	margin-left: auto !important;
+}
+
+@media (min-width: 900px) {
+	#kefin-home-category-rail .kefin-home-category-rail,
+	#kefin-home-category-rail .kefin-home-category-rail::before {
+		background: none !important;
+		background-color: transparent !important;
+	}
+	#kefin-home-category-rail .kefin-home-category-rail {
+		position: fixed !important;
+		z-index: 10;
+		top: 50vh !important;
+		left: 0 !important;
+		right: auto !important;
+		bottom: auto !important;
+		width: auto !important;
+		height: auto !important;
+		max-width: none !important;
+		flex-direction: column !important;
+		transform: translateY(-50%);
+		overflow: visible !important;
+		padding: 5px 0 !important;
+		margin: 0 !important;
+		backdrop-filter: none;
+		border: none !important;
+		display: grid !important;
+		grid-auto-rows: 1fr;
+	}
+}
+
+#kefin-home-category-rail .kefin-home-category-rail {
+	height: auto !important;
+}
+
+.sections.homeSectionsContainer[data-category="discovery"]::before {
+	content: "Discover Something To Watch";
+	padding-left: max(env(safe-area-inset-left), 3.3%);
+	font-size: 1.5rem;
+}
+
+html:not([data-active-page="home"]) .snowverlay {
+	display: none;
+}
+
+// Hide the seasonal animations on mobile by default
+@media (max-width: 899px) {
+	.snowverlay {
+		display: none !important;
+	}
+}
+
+html[data-active-page="home"] body[data-seasonal-background="true"] .backdropContainer .backdropImage {
+	background: none !important;
+}
+
+html[data-active-page="home"]
+	body[data-seasonal-background="true"]:has(.homePage:not(.hide))
+	#reactRoot:has(.homePage:not(.hide) #homeTab.is-active)
+	> .backgroundContainer::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0%;
+	background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), var(--seasonal-background-image);
+	background-position: center;
+	background-size: cover;
+}
+
+/* jf12 fork: the "Customize your Home Screen from your User Settings" hint (a :has() chain over all ten native slots) is gone: Jellyfin's rows are no longer hidden by this module. */

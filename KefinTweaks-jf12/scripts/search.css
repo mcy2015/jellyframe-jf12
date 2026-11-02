@@ -1,0 +1,166 @@
+/* KefinTweaks Enhanced Search, on Jellyfin 12.1's search page (the classic #searchPage inside the MUI shell).
+   Colours and shapes follow the Aurora Glass theme when it is loaded (--dcs-* tokens) and fall back to plain values without it. */
+
+#searchPage .searchFields {
+	position: relative;
+}
+
+#searchPage .padded-left.padded-right.searchFields {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+}
+
+/* the field is as wide as the native one (not shrunk to its content), the chips sit centred below it */
+#searchPage .searchFieldsInner {
+	width: min(893px, 100%);
+}
+
+.smart-search-mode .searchFieldsInner {
+	position: relative;
+}
+
+/* Jellyfin Enhanced's Seerr icon gets its own column beside the field (it takes no room when JE is not there) */
+.smart-search-mode .searchFieldsInner .inputContainer {
+	min-width: 0;
+}
+
+.smart-search-mode .searchFieldsInner .inputContainer:has(> #jellyseerr-search-icon) {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 30px;
+	column-gap: 0.6em;
+}
+
+.smart-search-mode .searchFieldsInner .inputContainer > #jellyseerr-search-icon {
+	position: static;
+	grid-column: 2;
+	grid-row: 1;
+	align-self: start;
+	height: 42px;
+	transform: none;
+	object-fit: contain;
+}
+
+.smart-search-mode .searchFieldsInner .inputContainer > #jellyseerr-search-icon:hover {
+	transform: scale(1.05);
+}
+
+.smart-search-mode .searchFieldsInner .inputContainer > #jellyseerr-search-icon.is-filter-active {
+	transform: scale(1.1);
+}
+
+.smart-search-mode .smart-search-wrapper {
+	grid-column: 1;
+	grid-row: 1;
+	min-width: 0;
+}
+
+/* 12.1 starts the page right below the app bar: no extra room above the field */
+#searchPage {
+	padding-top: 1rem !important;
+	display: flex;
+	flex-direction: column;
+}
+
+@media (min-width: 600px) {
+	#searchPage {
+		padding-top: 1.5rem !important;
+	}
+}
+
+#searchPage > * {
+	order: 1;
+}
+
+/* whatever Jellyfin Enhanced adds (the Seerr section and its notes) stays below our rows */
+#searchPage > .jellyseerr-section {
+	order: 2;
+	padding-left: max(env(safe-area-inset-left), 3.3%);
+}
+
+#searchPage > .jellyseerr-no-results-message {
+	order: 2;
+}
+
+/* JE's "nothing found in Jellyfin" note is only true once our search has finished and found nothing */
+.smart-search-mode .jellyseerr-no-results-message {
+	display: none;
+}
+
+.smart-search-mode.smart-search-none-found .jellyseerr-no-results-message {
+	display: block;
+}
+
+#searchPage .smart-search-empty {
+	padding: 2.5em 1em;
+	text-align: center;
+	opacity: 0.85;
+}
+
+div#smart-search-results {
+	padding-bottom: 0 !important;
+	padding-right: 0 !important;
+}
+
+/* our rows are scrollers that move with a transform (as on the home screen): they clip like the native rows do, or the page scrolls sideways */
+#smart-search-results .emby-scroller:not(.scrollX) {
+	overflow-x: clip;
+}
+
+#searchPage label[for="searchTextInput"] {
+	display: none;
+}
+
+#searchPage .searchfields-icon {
+	-webkit-align-self: flex-end;
+	align-self: flex-end;
+	font-size: 2em;
+	margin-bottom: 0.1em;
+	margin-right: 0.25em;
+}
+
+#searchPage .searchFieldsInner > .searchfields-icon {
+	display: none;
+}
+
+#searchPage .smart-search-wrapper .input-wrapper {
+	position: relative;
+}
+
+#searchPage .smart-search-wrapper span.searchfields-icon {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+/* the chips: All, Movies/TV, Music, Books, Request */
+#searchPage .smart-search-buttons {
+	margin-top: 10px;
+}
+
+#searchPage .smart-search-btn {
+	border-radius: var(--dcs-r-pill, 999px);
+	padding: 8px 16px;
+	transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+/* the chip that is on keeps the look of a primary button, from Jellyfin or from the theme (.button-submit) */
+#searchPage .smart-search-btn:not(.button-submit) {
+	background: var(--dcs-glass, rgba(255, 255, 255, 0.1));
+	color: var(--dcs-text, inherit);
+	border: 1px solid var(--dcs-hairline, rgba(255, 255, 255, 0.12));
+}
+
+#searchPage .smart-search-btn:not(.button-submit):hover,
+#searchPage .smart-search-btn:not(.button-submit):focus-visible {
+	background: var(--dcs-a14, rgba(255, 255, 255, 0.18));
+	border-color: var(--dcs-a35, rgba(255, 255, 255, 0.3));
+}
+
+/* our own results container replaces the native ones */
+#searchPage .searchResults\,:not(.smart-search-results),
+#searchPage .searchResults:not(.smart-search-results) {
+	display: none;
+}
