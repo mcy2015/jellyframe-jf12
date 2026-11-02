@@ -12,419 +12,419 @@ export const configSchema = {
     // General
     AutoDetectIntros: {
         kind: "checkbox",
-        label: "Automatically Analyze New Media",
+        label: "自动分析新媒体",
         description:
-            'If enabled, new media will be automatically analyzed for skippable segments when added to the library<br/><br/>Note: To configure the scheduled task, see <a href="#/dashboard/tasks">scheduled tasks</a>.',
+            '启用后，新媒体添加到媒体库时将自动分析其中的可跳过片段<br/><br/>注意：要配置计划任务，请参阅<a href="#/dashboard/tasks">计划任务</a>。',
     },
     ReanalyzeSettledSeasons: {
         kind: "checkbox",
-        label: "Re-analyze settled seasons",
+        label: "重新分析已稳定的季",
         description:
-            "When a season has no new episodes for the configured delay, re-analyze the season (using cached fingerprints) so segments are recomputed against the full season. Media is not re-decoded.",
+            "当某个季在设定的延迟时间内没有新剧集时，将重新分析该季（使用缓存的指纹），以便根据整季重新计算片段。媒体不会被重新解码。",
     },
     UseSettledSeasonChromaprintConsensus: {
         kind: "checkbox",
-        label: "Require Chromaprint consensus",
+        label: "要求 Chromaprint 共识",
         description:
-            "During settled-season re-analysis, require locally connected groups of episodes to share an intro or credits pattern for the pattern to be accepted as a segment.",
+            "在已稳定季的重新分析期间，要求本地相连的剧集组共享相同的片头或片尾模式，该模式才会被接受为片段。",
     },
     SettledSeasonChromaprintConsensusEpisodes: {
         kind: "number",
-        label: "Consensus episode threshold",
+        label: "共识剧集阈值",
         min: 2,
         max: 1000,
         step: 1,
         description:
-            "Target number of distinct episodes required to confirm a shared pattern. Comparable pattern groups can lower the target so mid-season theme changes can still qualify; one group covering at least three quarters of usable fingerprints can also qualify below the target.",
+            "确认共享模式所需的不同剧集目标数量。模式相近的组可降低该目标，使季中主题曲变化仍能达标；覆盖至少四分之三可用指纹的单个组也可在低于目标时达标。",
     },
     SettledSeasonDelayHours: {
         kind: "number",
-        label: "Settled season delay (hours)",
+        label: "已稳定季延迟（小时）",
         min: 0,
         max: 87600,
         step: 1,
         description:
-            "Treat a season as settled after this many hours without newly added episodes. Default is 24; increase this for weekly releases.",
+            "在某季经过这么多小时仍无新增剧集后，将其视为已稳定。默认值为 24；每周更新的剧集应调大此值。",
     },
     UpdateMediaSegments: {
         kind: "checkbox",
-        label: "Update Missing Segments During Scan",
+        label: "扫描期间更新缺失片段",
         description:
-            "Enable this option to update media segments for any uncached media during a library scan, including recently added, modified, or previously skipped (but not ignored) files.<br/><b>Warning:</b> This should be disabled if you're using media segment providers other than Intro Skipper.",
+            "启用此选项后，媒体库扫描期间将为所有未缓存的媒体更新媒体片段，包括最近添加、修改过或先前被跳过（但未被忽略）的文件。<br/><b>警告：</b>如果您使用 Intro Skipper 以外的媒体片段提供程序，应禁用此选项。",
     },
     SeriesExclusions: {
         kind: "list",
-        label: "Excluded series",
-        placeholder: "Series name",
+        label: "排除的剧集",
+        placeholder: "剧集名称",
         description:
-            "Series names matched exactly, case-insensitively. Start typing to pick from your libraries.",
+            "剧集名称精确匹配，不区分大小写。开始输入即可从您的媒体库中选择。",
     },
     MovieExclusions: {
         kind: "list",
-        label: "Excluded movies",
-        placeholder: "Movie name",
+        label: "排除的电影",
+        placeholder: "电影名称",
         description:
-            "Movie names matched exactly, case-insensitively. Start typing to pick from your libraries.",
+            "电影名称精确匹配，不区分大小写。开始输入即可从您的媒体库中选择。",
     },
     PathExclusions: {
         kind: "list",
-        label: "Excluded paths",
+        label: "排除的路径",
         placeholder: "/media/library",
         description:
-            "Exact paths or child paths under a listed root. Storage folders are available as suggestions when the server reports them.",
+            "精确路径或所列根路径下的子路径。当服务器报告存储文件夹时，它们会作为建议显示。",
     },
-    ScanIntroduction: { kind: "checkbox", label: "Introduction" },
-    ScanCredits: { kind: "checkbox", label: "Credits" },
-    ScanRecap: { kind: "checkbox", label: "Recap" },
-    ScanPreview: { kind: "checkbox", label: "Preview" },
-    ScanCommercial: { kind: "checkbox", label: "Commercials" },
+    ScanIntroduction: { kind: "checkbox", label: "片头" },
+    ScanCredits: { kind: "checkbox", label: "片尾" },
+    ScanRecap: { kind: "checkbox", label: "回顾" },
+    ScanPreview: { kind: "checkbox", label: "预告" },
+    ScanCommercial: { kind: "checkbox", label: "广告" },
     AnalyzeSeasonZero: {
         kind: "checkbox",
-        label: "Analyze Season 0 (Specials / Extras)",
+        label: "分析第 0 季（特别篇 / 附赠内容）",
         description:
-            "Note: Shows containing both a specials and extra folder will identify extras as season 0 and ignore specials, regardless of this setting.",
+            "注意：同时包含 specials 和 extra 文件夹的剧集，会将 extras 识别为第 0 季并忽略 specials，此项设置对此不生效。",
     },
     UseFileTransformationPlugin: {
         kind: "checkbox",
-        label: "Use File Transformation Plugin to patch the web interface",
+        label: "使用 File Transformation 插件修补 Web 界面",
     },
     SkipbuttonHideDelay: {
         kind: "number",
-        label: "Skip button hide delay (in seconds)",
+        label: "跳过按钮隐藏延迟（秒）",
         min: 0,
         max: 1000,
         description:
-            "Time in seconds before the skip button automatically hides. Set to 0 for persistent skip button (never hides).",
+            "跳过按钮自动隐藏前的时间（秒）。设为 0 表示跳过按钮持续显示（永不隐藏）。",
         warning:
-            "Note: This setting only applies to the web client (browsers, LG webOS, Android with web player enabled, etc). May require a refresh or clearing cache to see changes.",
+            "注意：此设置仅适用于 Web 客户端（浏览器、LG webOS、启用了 Web 播放器的 Android 等）。可能需要刷新或清除缓存才能看到更改。",
     },
     AutoSkipIntro: {
         kind: "checkbox",
-        label: "Auto-skip intros",
+        label: "自动跳过片头",
         description:
-            "Automatically skip intro segments without showing the skip button. Users who have explicitly set a preference in their Jellyfin settings will keep it.",
+            "自动跳过片头片段而不显示跳过按钮。已在 Jellyfin 设置中明确设置偏好的用户将保留其偏好。",
     },
     AutoSkipCredits: {
         kind: "checkbox",
-        label: "Auto-skip credits/outros",
+        label: "自动跳过片尾/结尾",
         description:
-            "Automatically skip credits/outro segments without showing the skip button. Users who have explicitly set a preference in their Jellyfin settings will keep it.",
+            "自动跳过片尾/结尾片段而不显示跳过按钮。已在 Jellyfin 设置中明确设置偏好的用户将保留其偏好。",
     },
     SkipButtonVisibleSeconds: {
         kind: "number",
-        label: "Hide skip button before segment end (seconds)",
+        label: "片段结束前隐藏跳过按钮（秒）",
         min: 0,
         max: 600,
         step: 1,
         description:
-            "Hide the skip button this many seconds before the segment ends. Set to 0 to disable this end-relative limit. The normal skip button hide delay still applies.",
+            "在片段结束前这么多秒隐藏跳过按钮。设为 0 可禁用此基于结束时间的限制。常规的跳过按钮隐藏延迟仍然生效。",
     },
     EnableMainMenu: {
         kind: "checkbox",
-        label: "Show Intro Skipper in Main Menu",
+        label: "在主菜单中显示 Intro Skipper",
         description:
-            "Toggle the Intro Skipper entry in the server's main navigation. Save and refresh the client (or clear cache) to apply.",
+            "控制服务器主导航中 Intro Skipper 条目的显示。保存并刷新客户端（或清除缓存）后生效。",
     },
 
     // Analysis
     PreferChromaprint: {
         kind: "checkbox",
-        label: "Prefer Chromaprint Analysis",
+        label: "优先使用 Chromaprint 分析",
         description:
-            "Run chromaprint before the chapter analyzer for intros and recaps. Credits ignore this setting.",
+            "在章节分析器之前对片头和回顾运行 Chromaprint。片尾不受此设置影响。",
     },
     EnhanceChapterCredits: {
         kind: "checkbox",
-        label: "Enhance chapter credits",
+        label: "增强章节片尾",
         description:
-            "When enabled, combine recognized credits chapters with black-frame and chromaprint results, which can extend the credits or find additional blocks. Credits are not re-analyzed until the next scan.",
+            "启用后，将识别出的片尾章节与黑帧和 Chromaprint 结果相结合，从而扩展片尾范围或找到额外的片段。片尾在下一次扫描前不会被重新分析。",
     },
     FullLengthChapters: {
         kind: "checkbox",
-        label: "Ignore duration limits for chapters",
+        label: "忽略章节的时长限制",
         description:
-            "Allow segments to extend to the end of a chapter when the marker exceeds other user settings, such as percentage or duration.",
+            "当章节标记超出其他用户设置（如百分比或时长）时，允许片段延伸至章节末尾。",
     },
     AnalysisPercent: {
         kind: "number",
-        label: "Percent of media to analyze",
+        label: "分析的媒体百分比",
         min: 1,
         max: 50,
         description:
-            "Analysis will be limited to this percentage of each item's runtime. For example, a value of 25 (the default) will limit analysis to the first quarter of each item.",
+            "分析将限制在每个项目时长的此百分比内。例如，值 25（默认值）会将分析限制在每个项目的前四分之一。",
     },
     AnalysisLengthLimit: {
         kind: "number",
-        label: "Maximum runtime to analyze (in minutes)",
+        label: "分析的最大时长（分钟）",
         min: 1,
         description:
-            "Analysis will be limited to this amount of each item's runtime. For example, a value of 10 (the default) will limit analysis to the first 10 minutes of each item.",
+            "分析将限制在每个项目时长的此时间内。例如，值 10（默认值）会将分析限制在每个项目的前 10 分钟。",
     },
     MinimumRecapDuration: {
         kind: "number",
-        label: "Minimum recap duration (in seconds)",
+        label: "最短回顾时长（秒）",
         min: 1,
         description:
-            "Recap chapters which are shorter than this duration will not be considered a recap.",
+            "短于此时长的回顾章节不会被视作回顾。",
     },
     MaximumRecapDuration: {
         kind: "number",
-        label: "Maximum recap duration (in seconds)",
+        label: "最长回顾时长（秒）",
         min: 1,
         description:
-            "Recap chapters which are longer than this duration will not be considered a recap.",
+            "长于此时长的回顾章节不会被视作回顾。",
     },
     MinimumRecapDetectionDuration: {
         kind: "number",
-        label: "Minimum detected recap duration (in seconds)",
+        label: "检测到的最短回顾时长（秒）",
         min: 1,
-        description: "Blackframe/chromaprint recaps shorter than this duration will not be detected.",
+        description: "短于此时长的黑帧/Chromaprint 回顾不会被检测到。",
     },
     MaximumRecapDetectionDuration: {
         kind: "number",
-        label: "Maximum detected recap duration (in seconds)",
+        label: "检测到的最长回顾时长（秒）",
         min: 1,
         description:
-            "Blackframe/chromaprint recaps longer than this duration will be capped or ignored.",
+            "长于此时长的黑帧/Chromaprint 回顾将被截断或忽略。",
     },
     MinimumIntroDuration: {
         kind: "number",
-        label: "Minimum introduction duration (in seconds)",
+        label: "最短片头时长（秒）",
         min: 1,
         description:
-            "Segments or similar sounding audio which is shorter than this duration will not be considered an introduction.",
+            "短于此时长的片段或听感相似的音频不会被视作片头。",
     },
     MaximumIntroDuration: {
         kind: "number",
-        label: "Maximum introduction duration (in seconds)",
+        label: "最长片头时长（秒）",
         min: 1,
         description:
-            "Segments or similar sounding audio which is longer than this duration will not be considered an introduction.",
+            "长于此时长的片段或听感相似的音频不会被视作片头。",
     },
     MinimumCreditsDuration: {
         kind: "number",
-        label: "Minimum credits duration (in seconds)",
+        label: "最短片尾时长（秒）",
         min: 1,
         description:
-            "Segments or similar sounding audio which is shorter than this duration will not be considered credits.",
+            "短于此时长的片段或听感相似的音频不会被视作片尾。",
     },
     MaximumCreditsDuration: {
         kind: "number",
-        label: "Maximum credits duration (in seconds)",
+        label: "最长片尾时长（秒）",
         min: 1,
         description:
-            "Segments or similar sounding audio which is longer than this duration will not be considered credits.",
+            "长于此时长的片段或听感相似的音频不会被视作片尾。",
     },
     MaximumMovieCreditsDuration: {
         kind: "number",
-        label: "Maximum movie credits duration (in seconds)",
+        label: "电影片尾最长时长（秒）",
         min: 1,
-        description: "Segments longer than this duration will not be considered movie credits.",
+        description: "长于此时长的片段不会被视作电影片尾。",
     },
     MinimumPreviewDuration: {
         kind: "number",
-        label: "Minimum preview duration (in seconds)",
+        label: "最短预告时长（秒）",
         min: 1,
-        description: "Segments which are shorter than this duration will not be considered a preview.",
+        description: "短于此时长的片段不会被视作预告。",
     },
     MaximumPreviewDuration: {
         kind: "number",
-        label: "Maximum preview duration (in seconds)",
+        label: "最长预告时长（秒）",
         min: 1,
-        description: "Segments which are longer than this duration will not be considered a preview.",
+        description: "长于此时长的片段不会被视作预告。",
     },
     MinimumCommercialDuration: {
         kind: "number",
-        label: "Minimum commercial duration (in seconds)",
+        label: "最短广告时长（秒）",
         min: 1,
         description:
-            "Segments which are shorter than this duration will not be considered a commercial.",
+            "短于此时长的片段不会被视作广告。",
     },
     MaximumCommercialDuration: {
         kind: "number",
-        label: "Maximum commercial duration (in seconds)",
+        label: "最长广告时长（秒）",
         min: 1,
         description:
-            "Segments which are longer than this duration will not be considered a commercial.",
+            "长于此时长的片段不会被视作广告。",
     },
 
     // Detection
     SnapToKeyframe: {
         kind: "checkbox",
-        label: "Enable keyframe snapping",
+        label: "启用关键帧对齐",
         description:
-            "Moves a segment's end to the nearest keyframe so a skip lands on a clean frame. Ends taken directly from a chapter stay on the chapter mark.",
+            "将片段结尾移动到最近的关键帧，使跳过落在清晰的画面上。直接取自章节的结尾仍停留在章节标记处。",
     },
     AdjustIntroBasedOnChapters: {
         kind: "checkbox",
-        label: "Enable chapter snapping",
+        label: "启用章节对齐",
         description:
-            "When enabled, segment start and end times will be adjusted to the nearest chapter boundary.",
+            "启用后，片段的开始和结束时间将被调整到最近的章节边界。",
     },
     AdjustIntroBasedOnSilence: {
         kind: "checkbox",
-        label: "Enable silence detection",
+        label: "启用静音检测",
         description:
-            "Moves a segment's end to the first silence inside the adjustment window. Ends taken directly from a chapter stay on the chapter mark.",
+            "将片段结尾移动到调整窗口内的第一个静音处。直接取自章节的结尾仍停留在章节标记处。",
     },
     SilenceDetectionMaximumNoise: {
         kind: "number",
-        label: "Noise tolerance",
+        label: "噪声容限",
         min: -90,
         max: 0,
-        description: "Noise tolerance in negative decibels.",
+        description: "以负分贝表示的噪声容限。",
     },
     SilenceDetectionMinimumDuration: {
         kind: "number",
-        label: "Minimum silence duration",
+        label: "最短静音时长",
         min: 0,
         step: 0.01,
-        description: "Minimum silence duration in seconds before adjusting introduction end time.",
+        description: "调整片头结束时间前所需的最短静音时长（秒）。",
     },
     AdjustWindowInward: {
         kind: "number",
-        label: "Adjustment window (inward)",
+        label: "调整窗口（向内）",
         min: 0,
         description:
-            "Maximum number of seconds to look inside a detected segment for a better start or end point. A larger value can trim extra time from the beginning or end.",
+            "在检测到的片段内部寻找更佳起点或终点的最大查找秒数。值越大，可从开头或结尾修剪掉更多时间。",
     },
     AdjustWindowOutward: {
         kind: "number",
-        label: "Adjustment window (outward)",
+        label: "调整窗口（向外）",
         min: 0,
         description:
-            "Maximum number of seconds to look beyond a detected segment for a better start or end point. A larger value can include more time before or after the segment.",
+            "在检测到的片段之外寻找更佳起点或终点的最大查找秒数。值越大，可包含片段前后更多的时间。",
     },
     EndSnapThreshold: {
         kind: "number",
-        label: "Snap to episode start/end threshold",
+        label: "对齐剧集开始/结束的阈值",
         min: 0,
         description:
-            "If a segment's start or end is within this many seconds of the episode's start or end, it will be automatically adjusted (snapped) to match the episode boundary. Set to 0 to disable snapping.",
+            "如果片段的开始或结束与剧集的开始或结束相差在此秒数以内，将被自动调整（对齐）以匹配剧集边界。设为 0 可禁用对齐。",
     },
     FirstEpisodeIntroMode: {
         kind: "select",
-        label: "First episode intro handling (per season)",
+        label: "首集片头处理方式（按季）",
         options: [
-            { value: "Analyze", label: "Analyze first episode intros" },
-            { value: "Ignore", label: "Ignore first episode intros" },
-            { value: "IgnoreAnime", label: "Ignore anime first episode intros" },
+            { value: "Analyze", label: "分析首集片头" },
+            { value: "Ignore", label: "忽略首集片头" },
+            { value: "IgnoreAnime", label: "忽略动画首集片头" },
         ],
         description:
-            "For each season, choose whether the first episode intro is analyzed, ignored, or ignored only when the show is anime.",
+            "为每个季选择是分析首集片头、忽略首集片头，还是仅在剧集为动画时忽略。",
     },
     AnimePreviewFromCreditsEnd: {
         kind: "checkbox",
-        label: "Set post-credits scene as preview for anime",
+        label: "将动画的片后场景设为预告",
         description:
-            "When enabled and no preview was detected, create a segment from the end of the last credits block to the end of the episode. This can also be toggled for any season or show in Timestamps > Manage.",
+            "启用且未检测到预告时，将从最后一个片尾块结束处到本集结束处创建一个片段。也可以在“时间戳 > 管理”中针对任意季或剧集切换此项。",
     },
     IntroStartOffset: {
         kind: "number",
-        label: "Intro Start Offset (seconds)",
+        label: "片头开始偏移（秒）",
         min: 0,
         step: 0.5,
         description:
-            "Default: 0. Example: If set to 3, the first 3 seconds of the intro will play before skipping.",
+            "默认值：0。示例：若设为 3，跳过前将先播放片头的前 3 秒。",
     },
     IncludeIntroStartOffsetWhenSnapping: {
         kind: "checkbox",
-        label: "Include start offset when snapping to episode start",
+        label: "对齐到剧集开头时包含开始偏移",
         description:
-            "When enabled, Intro Start Offset is also applied when the detected intro start is snapped to the beginning of the episode.",
+            "启用后，当检测到的片头开始对齐到剧集开头时，也会应用片头开始偏移。",
     },
     IntroEndOffset: {
         kind: "number",
-        label: "Intro End Offset (seconds)",
+        label: "片头结束偏移（秒）",
         min: 0,
         step: 0.5,
         description:
-            "Default: 0. Example: If set to 3, playback will resume 3 seconds before the end of the intro.",
+            "默认值：0。示例：若设为 3，播放将在片头结束前 3 秒处恢复。",
     },
 
     // Black frame
     DetectRecapUsingBlackFrames: {
         kind: "checkbox",
-        label: "Detect recap using black frames",
+        label: "使用黑帧检测回顾",
         description:
-            "When recap chapter detection fails, mark recap from 0:00 to the latest detected black frame within the detected recap duration limits and before the intro.",
+            "当回顾章节检测失败时，在检测到的回顾时长限制内且位于片头之前的范围内，将回顾标记为从 0:00 到最近检测到的黑帧。",
     },
     AnchorRecapToColdOpen: {
         kind: "checkbox",
-        label: "Keep the cold open before a recap",
+        label: "保留回顾之前的冷开场",
         description:
-            'Start a Chromaprint recap at the black frame just before the shared "previously on" sting instead of 0:00, so a scene played before the recap is not skipped. Chapter and black-frame-only recaps still start at 0:00. With the option above also enabled, Chromaprint must run first (Prefer Chromaprint Analysis on the Analysis tab), or the black-frame recap claims the episode at 0:00 before Chromaprint sees it.',
+            '从共享的“前情回顾”提示之前的黑帧处（而非 0:00）开始 Chromaprint 回顾，这样回顾之前播放的场景就不会被跳过。仅由章节或黑帧得到的回顾仍从 0:00 开始。如果同时启用了上面的选项，Chromaprint 必须先运行（“分析”选项卡中的“优先使用 Chromaprint 分析”），否则黑帧回顾会在 Chromaprint 检测之前抢先在 0:00 处占据本集。',
     },
     // No tab renders this. The Black Frame tab reads it to decide which of the
     // legacy and modern toggles to show.
-    UseLegacyBlackFrameAnalyzer: { kind: "checkbox", label: "Use legacy black frame analyzer" },
+    UseLegacyBlackFrameAnalyzer: { kind: "checkbox", label: "使用旧版黑帧分析器" },
     RefineCreditsBoundary: {
         kind: "checkbox",
-        label: "Refine credits boundary",
+        label: "优化片尾边界",
         description:
-            "Use frame-level analysis to find the exact credits boundary. Disable for faster analysis with keyframe-only accuracy.",
+            "使用帧级分析找到精确的片尾边界。禁用后分析更快，但仅有关键帧级别的精度。",
     },
     DetectNonBlackCredits: {
         kind: "checkbox",
-        label: "Detect card credits",
+        label: "检测卡片式片尾",
         description:
-            "Also detect credits shown on a near-uniform card: text over a black, white, grey, or muted-colour background. The result is combined with the black-frame and other credits candidates, so card credits before or after a black roll are included. Vivid, highly saturated backgrounds are not covered.",
+            "同时检测显示在近乎纯色卡片上的片尾：黑、白、灰或柔和色背景上的文字。结果会与黑帧及其他片尾候选合并，因此黑色滚动字幕前后的卡片式片尾也会被包含。鲜艳、高饱和度的背景不在覆盖范围内。",
     },
     UseChapterMarkersBlackFrame: {
         kind: "checkbox",
-        label: "Use chapter markers for credits detection",
+        label: "使用章节标记检测片尾",
         description:
-            "If enabled, chapter markers will be used to identify credits segments. Tries to detect credits by looking for black frames close to chapter markers.",
+            "启用后，将使用章节标记来识别片尾片段。通过在章节标记附近寻找黑帧来尝试检测片尾。",
     },
     BlackFrameMinimumPercentage: {
         kind: "number",
-        label: "Minimum percentage of black pixels",
+        label: "黑色像素最小百分比",
         min: 0,
         max: 100,
         description:
-            "Minimum percentage of black pixels in a frame before it is considered a black frame. Defaults to 85.",
+            "一帧中被视为黑帧所需的黑色像素最小百分比。默认值为 85。",
     },
     BlackFrameThreshold: {
         kind: "number",
-        label: "Black frame threshold",
+        label: "黑帧阈值",
         min: 16,
         max: 255,
-        description: "The threshold below which a pixel value is considered black. Defaults to 28.",
+        description: "像素值低于此阈值即被视为黑色。默认值为 28。",
     },
 
     // Chapters
     UseEmbeddedChaptersForAnalysis: {
         kind: "checkbox",
-        label: "Use embedded chapters for analysis",
+        label: "使用内嵌章节进行分析",
         description:
-            "Read chapters from the media file instead of Jellyfin's chapter table, so chapters other plugins add are ignored. Changing this makes the next analysis run probe each analyzed episode once and reanalyze only the episodes whose file and table hold different chapters. Each analyzed episode costs one ffprobe while it is on.",
+            "从媒体文件中读取章节，而非 Jellyfin 的章节表，因此其他插件添加的章节将被忽略。更改此项后，下一次分析将对每个已分析的剧集执行一次探测，并仅重新分析文件与章节表中章节不一致的剧集。启用期间，每个已分析的剧集都会消耗一次 ffprobe。",
     },
     ChapterAnalyzerIntroductionPattern: {
         kind: "regex",
-        label: "Introductions",
-        description: "Enter a regular expression to detect introduction chapters.",
+        label: "片头",
+        description: "输入用于检测片头章节的正则表达式。",
         default:
             "(^[\\s0-9.\\u266A-]*|/\\s*)((Intro|Introduction)(\\s+Start)?:?$|(OP[0-9]*|Opening|Abertura|\\u30AA\\u30FC\\u30D7\\u30CB\\u30F3\\u30B0|(Main\\s+)?Titles?)(\\s+(Theme|Song|Music|Credits|Titles?|Sequences?|Start))?(?![\\s:]+End)\\s*($|[-\\u2013\\u2014/:(]))",
     },
     ChapterAnalyzerEndCreditsPattern: {
         kind: "regex",
-        label: "Credits",
-        description: "Enter a regular expression to detect credits chapters.",
+        label: "片尾",
+        description: "输入用于检测片尾章节的正则表达式。",
         default:
             "(^[0-9.\\s\\u266A]*|[+,;:]\\s*)((The\\s+)?Credits?|(Mixed\\s+)?(ED[0-9]*(v[0-9]+)?|Ending)|Outro|Closing|Cast\\s+List|Abspann|Encerramento|\\u30A8\\u30F3\\u30C7\\u30A3\\u30F3\\u30B0)(\\s+(Theme|Song|Music|Start))?(?![\\s:]+End)\\s*($|:|[-\\u2013\\u2014]\\s)|(^|[^a-z])(End|Ending|Closing|Early|Final)\\s+(Credits?|Titles?)(?![a-z])(?![\\s:]+End)",
     },
     ChapterAnalyzerPreviewPattern: {
         kind: "regex",
-        label: "Preview",
-        description: "Enter a regular expression to detect preview chapters.",
+        label: "预告",
+        description: "输入用于检测预告章节的正则表达式。",
         default:
             "(^|\\s)(Preview|PV|Sneak\\s?Peek|Coming\\s?(Up|Soon)|Next\\s+(time|on|episode)|Extra|Teaser|Trailer)" +
             PATTERN_TAIL,
     },
     ChapterAnalyzerRecapPattern: {
         kind: "regex",
-        label: "Recaps",
-        description: "Enter a regular expression to detect recap chapters.",
+        label: "回顾",
+        description: "输入用于检测回顾章节的正则表达式。",
         default:
             "(^|[-\\u2013\\u2014|:.()\\[\\]])\\s*(Recap(?![a-z])(?![\\s:]+End)|(Last(\\s+(time|week|episode|season))?|Catch[ -]?up),?\\s+on(?![a-z])|" +
             "(Summary|Previously|Previous\\s+episode|Earlier|Last\\s+(time|week|episode|season)|Catch[ -]?up|(The\\s+)?(Story|Road)\\s+so\\s+far)(?![\\s:]+End)\\s*($|[-\\u2013\\u2014|:.()\\[\\]\\u2026]))|" +
@@ -432,109 +432,109 @@ export const configSchema = {
     },
     ChapterAnalyzerCommercialPattern: {
         kind: "regex",
-        label: "Commercials",
-        description: "Enter a regular expression to detect commercial chapters.",
+        label: "广告",
+        description: "输入用于检测广告章节的正则表达式。",
         default: "(^|\\s)(Ad(vert(isement)?)?|Commercial|Intermission)" + PATTERN_TAIL,
     },
     EnableSponsorBlockChapterDetection: {
         kind: "checkbox",
-        label: "Enable SponsorBlock chapter detection",
+        label: "启用 SponsorBlock 章节检测",
         description:
-            "Detect known SponsorBlock chapter labels in addition to the regular expressions above.",
+            "除上述正则表达式外，还检测已知的 SponsorBlock 章节标签。",
     },
 
     // Subtitles
     SubtitleLanguages: {
         kind: "text",
-        label: "Subtitle languages",
+        label: "字幕语言",
         placeholder: "ger, eng",
         description:
-            "Comma-separated language codes to read. Empty reads all. Recap title cards are often subtitled only in translation tracks, so reading only the audio language can miss them.",
+            "要读取的语言代码，以逗号分隔。留空则读取全部。回顾的标题卡往往只在翻译字幕轨中有字幕，因此仅读取音频语言可能会漏掉它们。",
     },
     SubtitleRecapPattern: {
         kind: "regex",
-        label: "Recap regex for subtitles",
+        label: "字幕回顾正则表达式",
         description:
-            "Matches text-subtitle cues announcing a recap. Enable recap matching for a season or show in Timestamps > Manage.",
+            "匹配文本字幕中提示回顾开始的字幕行。可在“时间戳 > 管理”中为某个季或剧集启用回顾匹配。",
         default:
             "\\bpreviously\\s+on|^\\W*(?:zuvor\\s+bei|zuletzt\\s+bei|was\\s+bisher\\s+geschah|bisher\\s+bei|anteriormente|previamente|précédemment|wat\\s+voorafging)|episodio?\\s+precedent[ei]|^\\W*前回までは|前情提要|지난\\s*이야기\\W*$",
     },
     SubtitlePreviewPattern: {
         kind: "regex",
-        label: "Preview regex for subtitles",
+        label: "字幕预告正则表达式",
         description:
-            "Matches text-subtitle cues announcing a preview. Enable preview matching for a season or show in Timestamps > Manage.",
+            "匹配文本字幕中提示预告开始的字幕行。可在“时间戳 > 管理”中为某个季或剧集启用预告匹配。",
         default:
             "\\b(?:here(?:'|’)?s|now)\\s+the\\s+preview\\b|^\\W*(?:\\[[^\\]]*\\]|\\([^)]*\\)|[^\\s:]+:)?\\s*next\\s+time\\b",
     },
     // FFmpeg
     PreferredAudioLanguage: {
         kind: "text",
-        label: "Preferred stream audio language",
+        label: "首选流音频语言",
         placeholder: "eng",
         description:
-            "Prefer an audio stream with this language tag when generating Chromaprint fingerprints. Empty or unmatched values will use the stream selection policy below.",
+            "生成 Chromaprint 指纹时，优先选择具有此语言标签的音频流。留空或无匹配时将使用下方的流选择策略。",
     },
     PreferAudioStreamWithMostChannels: {
         kind: "checkbox",
-        label: "Prefer highest audio channel count",
+        label: "优先选择声道数最多的音频",
         description:
-            "When enabled, Chromaprint uses the stream FFmpeg would pick, ranking the default stream first, then channel count, then stream order. When disabled, the first stream is selected.",
+            "启用后，Chromaprint 使用 FFmpeg 会选择的流：默认流优先，其次按声道数，再按流顺序。禁用后选择第一个流。",
     },
     ProbeAudioDuration: {
         kind: "checkbox",
-        label: "Probe audio duration for credits",
+        label: "探测音频时长以检测片尾",
         description:
-            "Use ffprobe to base credits fingerprinting on the first audio stream duration when container runtime is longer than the audio.",
+            "当容器时长大于音频时长时，使用 ffprobe 让片尾指纹以第一个音频流的时长为准。",
     },
     MaxParallelism: {
         kind: "number",
-        label: "Maximum degree of parallelism",
+        label: "最大并行度",
         min: 1,
-        description: "Maximum number of seasons analyzed concurrently; episodes within each season run sequentially.",
+        description: "并发分析的最大季数；每季内的剧集按顺序分析。",
     },
     ProcessPriority: {
         kind: "select",
-        label: "FFmpeg Priority",
+        label: "FFmpeg 优先级",
         options: [
-            { value: "Idle", label: "Idle" },
-            { value: "BelowNormal", label: "Below Normal" },
-            { value: "Normal", label: "Normal" },
-            { value: "AboveNormal", label: "Above Normal" },
-            { value: "High", label: "High" },
-            { value: "RealTime", label: "Highest" },
+            { value: "Idle", label: "空闲" },
+            { value: "BelowNormal", label: "低于正常" },
+            { value: "Normal", label: "正常" },
+            { value: "AboveNormal", label: "高于正常" },
+            { value: "High", label: "高" },
+            { value: "RealTime", label: "最高" },
         ],
         description:
-            "Priority of analysis FFmpeg processes. Below Normal reduces contention; Realtime may starve other work.",
+            "分析用 FFmpeg 进程的优先级。“低于正常”可减少资源争用；“实时”可能让其他工作得不到资源。",
     },
     ProcessThreads: {
         kind: "number",
-        label: "FFmpeg codec threads",
+        label: "FFmpeg 编解码线程数",
         min: 0,
         max: 16,
         description:
-            "Codec threads per FFmpeg process. 0 lets FFmpeg choose. Lower values reduce CPU use but may slow scans; use Maximum degree of parallelism to limit process count.",
+            "每个 FFmpeg 进程的编解码线程数。0 表示由 FFmpeg 自行选择。值越低 CPU 占用越少，但可能减慢扫描；可使用“最大并行度”来限制进程数量。",
     },
     ScanTimeoutSeconds: {
         kind: "number",
-        label: "FFmpeg scan timeout (seconds)",
+        label: "FFmpeg 扫描超时（秒）",
         min: 0,
         description:
-            "Kill a fingerprint or detection scan that runs longer than this. Raise it for high-bitrate media on slow disks. 0 disables the limit.",
+            "终止运行时间超过此值的指纹或检测扫描。慢速磁盘上的高码率媒体应调大此值。0 表示不限制。",
     },
     CacheCompressionLevel: {
         kind: "select",
-        label: "Cache Compression Level",
+        label: "缓存压缩级别",
         options: [
-            { value: "NoCompression", label: "No Compression" },
-            { value: "Fastest", label: "Fastest" },
-            { value: "Optimal", label: "Optimal" },
-            { value: "SmallestSize", label: "Smallest Size" },
+            { value: "NoCompression", label: "无压缩" },
+            { value: "Fastest", label: "最快" },
+            { value: "Optimal", label: "最佳" },
+            { value: "SmallestSize", label: "最小体积" },
         ],
         description:
-            "Controls the Brotli compression level for the detection cache. " +
-            "Higher compression reduces disk usage but increases CPU time during analysis. " +
-            "Changing this only affects newly cached data.",
+            "控制检测缓存的 Brotli 压缩级别。" +
+            "压缩率越高，磁盘占用越少，但分析期间的 CPU 时间越多。" +
+            "更改此项仅影响新缓存的数据。",
     },
 } as const satisfies FieldSchema;
 

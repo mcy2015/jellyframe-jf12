@@ -201,12 +201,12 @@
     "owner": "mcy2015 (upstream: intro-skipper org)",
     "versions": [
       {
-        "version": "12.0.6.1",
-        "changelog": "Built from upstream 12.0 branch @ 2026-10-31; dashboard web UI (tabs/components, ~200 strings) localized to zh-CN; tsc + vite + dotnet build all clean.",
+        "version": "12.0.6.2",
+        "changelog": "Dashboard localization completed: config/schema.ts (~160 strings - all setting labels/descriptions/placeholders/options) now zh-CN alongside the previously translated tabs/components.",
         "targetAbi": "12.4.0.0",
-        "sourceUrl": "https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/dist/IntroSkipper_12.0.6.1_jf124.zip",
-        "checksum": "B66A1BEA62D723482FF771425736A700",
-        "timestamp": "2026-11-02T07:40:00Z",
+        "sourceUrl": "https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/dist/IntroSkipper_12.0.6.2_jf124.zip",
+        "checksum": "07AE4EBA6D6F7CC81D91219A148B8828",
+        "timestamp": "2026-11-02T17:30:00Z",
         "dependencies": [
           "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
         ]
