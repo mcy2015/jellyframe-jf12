@@ -41,11 +41,11 @@
 
 已发布自托管插件仓库：**https://github.com/mcy2015/jellyframe-jf12**（公开仓，manifest + dist 全在仓内；jsDelivr/raw 双通道 + 回下 md5 全部验证通过）。
 
-1. Dashboard → 插件 → 存储库 → 添加：
+1. Dashboard → 插件 → 存储库 → 添加（**NAS 实测 raw 可达，此为常态 URL**，永远最新无 CDN 缓存）：
    ```
-   https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@main/manifest.json
+   https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/manifest.json
    ```
-   （2026-11-02 下午实测 @main 已收敛返回全部 9 插件；若某次更新后目录缺新条目，是 jsDelivr 边缘又卡旧代际——临时换 @<最新短sha> 版 URL 或用 raw.githubusercontent.com 同路径）
+   （raw 不可达时的备选：jsDelivr `https://cdn.jsdelivr.net/gh/mcy2015/jellyframe-jf12@<最新短sha>/manifest.json`——注意 @main 在 push 后有分钟至小时级的旧代际缓存窗口，不推荐作常态）
 2. 目录 → 先装 **File Transformation**（3.0.0.0）→ 按提示重启
 3. 再装 **Jellyframe**（**1.5.3.1**，为 12.4 编译件）→ 重启
 4. 走下面验证清单
