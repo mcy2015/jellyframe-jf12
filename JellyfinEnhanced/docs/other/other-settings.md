@@ -12,7 +12,7 @@ Use these controls to personalize Jellyfin and manage your server. Unless marked
     |---|---|
     | **Display** | **Icons & Theme**, **Default Language**, **MDBList Ratings**, **Content Warnings**, client tag-cache clearing |
     | **Playback** | **Shortcuts Panel & Toast Timing** |
-    | **Extras** | **UI Tweaks**, **External Links**, **Custom Image Assets** |
+    | **Extras** | **UI Tweaks**, **Active Streams**, **External Links**, **Metadata Icons & Sidebar Links**, **Splash Screen Override**, **Custom Image Assets** |
     | **Pages** | Hidden Content and Activity Feed — links to their canonical guides below |
     | **Admin** | **Usage Statistics**, **Maintenance Mode**, **Tag Cache**, **Developer Settings** |
 
@@ -123,7 +123,7 @@ Use the user Activity Feed to see activity separately from dashboard icon colori
 
 See who is watching and open their current session details from Jellyfin's header.
 
-**How to use:** Open admin **Extras** → **UI Tweaks** and turn on **Active Streams Header Widget**. Click **Save Settings**, reload, and open the widget; use **Refresh** for current data.
+**How to use:** Open admin **Extras** → **Active Streams** and turn on **Active Streams Header Widget**. Click **Save Settings**, reload, and open the widget; use **Refresh** for current data.
 
 | Setting | Default | What it does |
 |---|---|---|
@@ -194,6 +194,8 @@ Show supported metadata and external links as icons on item detail pages.
 
 ## MDBList Ratings
 
+Poster **Rating** groups can also select named source chips using the configured key, independently of the detail-row and metadata-sync switches; see [Rating Tags](../enhanced/tags.md#rating-tags).
+
 Show ratings from several sources on detail pages, or fill Jellyfin's own Community/Critic Rating fields. Displaying ratings, fetching data, and writing Jellyfin fields have separate controls.
 
 ### How to use
@@ -228,7 +230,7 @@ To hide the entire row, turn off **Show Ratings Row on Item Details**. Clearing 
 | Setting | Default | What it does |
 |---|---|---|
 | **Fetch Ratings from MDBList** | Off | Allows the corresponding scheduled task to fetch missing/stale MDBList data without changing Jellyfin rating fields. |
-| **Fetch Task Reserve** | 400 | Stops Fetch when the remaining account quota is at or below this value. |
+| **Fetch Task Reserve** | 400 | Stops Fetch, and named-source rating tag enrichment, when the remaining account quota is at or below this value. |
 
 ??? note "Details"
 
@@ -359,7 +361,7 @@ Refresh cached JE data when it becomes stale. These actions do not reset all pre
 
 | Action | Location | What it does |
 |---|---|---|
-| **Clear All Client Caches** | Admin **Display** → **Media Tags**, with **Server-Side Tag Cache** off; **Overview** → **Quick Actions** labels the shortcut **Clear all client tag caches** | Clears targeted JE client caches on their next page load. Keeps server-stored personal preferences and unrelated browser storage. |
+| **Clear All Client Caches** | Admin **Media Tags** → **Server**, with **Server-Side Tag Cache** off; **Overview** → **Quick Actions** labels the shortcut **Clear all client tag caches** | Clears targeted JE client caches on their next page load. Keeps server-stored personal preferences and unrelated browser storage. |
 | **Rebuild Server Tag Cache** | Admin **Admin** → **Tag Cache**, with **Server-Side Tag Cache** on | Rebuilds cached tag data for the library. This may take time on a large server. |
 | **Clear Translation Cache** | Per-user Enhanced panel → **Language Settings** | Clears this browser's translation entries and reloads. Does not signal other clients or reset the language selection. |
 

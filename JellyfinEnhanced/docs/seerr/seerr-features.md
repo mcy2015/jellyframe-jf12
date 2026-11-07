@@ -283,13 +283,15 @@ Admin settings under **Seerr** → **Discovery & UI Extras** ([full reference](s
 
     It does not continuously poll. It shows up to 20 cast entries, 20 keywords, and six trailers. **View on SIMKL** is available when an IMDb ID exists, with no separate switch.
 
+    On a title protected by Spoiler Guard, More Info and result cards follow your [Spoiler Guard settings](../spoiler-guard/spoiler-guard-features.md#what-spoiler-guard-protects), wherever you open them from. External links in More Info, such as **View on Seerr**, lead to the unprotected pages on those sites.
+
     The modal's **Streaming** section is independent of poster icons. With TMDB configured, it shows up to six unique subscription providers using your per-user Elsewhere region, then the server region (US by default). If the selected region is absent from supplied data, it tries US and then the first supplied region. See [provider settings](seerr-settings.md#streaming-providers).
 
 #### Spoiler Guard before library arrival
 
 Protect a title from spoilers before it arrives in your library. This is a **per-user** choice.
 
-**How to use:** Press **Enable Spoiler Guard** in More Info. The button becomes **Spoiler Guard (pending)**; you can disable it again from there.
+**How to use:** Press **Enable Spoiler Guard** in More Info. The button becomes **Spoiler Guard (pending)**, or **Spoiler Guard: On** if the title is already in your library, and More Info reloads with the protected details. You can disable it again from there. A movie protected through a collection shows **Spoiler Guard: On** without a way to change it here; change it on the collection.
 
 Related admin settings ([Spoiler Guard reference](../spoiler-guard/spoiler-guard-settings.md)):
 
@@ -508,7 +510,7 @@ Choose **Video**, **Audio**, **Subtitles**, or **Other** in **Issue Type**.
 
 ??? info "How it works"
 
-    Specials (season zero) and other item types are excluded. The item needs TMDB identification, which can come from the parent series or fallback lookup; submission also needs a Seerr media record (`mediaInfo.id`). Ordinary users need `CREATE_ISSUES` or `MANAGE_ISSUES`; reads need `VIEW_ISSUES` or `MANAGE_ISSUES`. Linked Jellyfin/Seerr administrators bypass those local permission checks.
+    Specials (season zero) and other item types are excluded. The item needs TMDB identification. Movies and series use their own TMDB ID. Season and episode pages always use the parent series' TMDB ID, because Seerr tracks TV media only by series, and send the selected season and episode numbers with the report. Submission also needs a Seerr media record (`mediaInfo.id`). Ordinary users need `CREATE_ISSUES` or `MANAGE_ISSUES`; reads need `VIEW_ISSUES` or `MANAGE_ISSUES`. Linked Jellyfin/Seerr administrators bypass those local permission checks.
 
     Missing linkage can fail submission while the button remains visible. If Seerr is inactive at initialization, the reporter is not added; if availability fails later, an eligible identified item can show a disabled reporting button. Missing identification can also make reporting unavailable.
 
@@ -516,7 +518,7 @@ Choose **Video**, **Audio**, **Subtitles**, or **Other** in **Issue Type**.
 
 ## Requests Page
 
-The shared Requests page combines Seerr requests and optional issues with *arr downloads/history. This page is the guide to its Seerr parts; see [*arr features](../arr/arr-features.md) for download progress, search, import outcomes, and history.
+The shared Requests page combines Seerr requests and optional issues with *arr downloads/history. This page is the guide to its Seerr parts; see [*arr features](../arr/arr-features.md) for download progress, search, import outcomes, and history. Spoiler Guard's **Hide air date** setting also hides dates here for protected titles.
 
 ![Requests page with status filters and request cards](../images/arr/requests-overview.webp)
 
@@ -782,7 +784,7 @@ Server automations can request the next season or collection movie based on play
 
 **How to use:**
 
-1. Enable the desired feature under **Seerr** → **Automatic Requests**.
+1. Enable the desired feature under **Seerr** → **Auto Season Requests** or **Auto Movie Requests**.
 2. Save, then restart Jellyfin or run **Jellyfin Enhanced Startup** once to start monitoring playback.
 
 !!! warning "Review automation access"
@@ -832,7 +834,7 @@ Admin trigger settings ([complete trigger and destination reference](seerr-setti
 | **After X minutes watched** | On | Checks when playback position reaches the threshold. Seeking or resuming can satisfy it. |
 | **Minutes Watched Threshold:** | 20 | Position threshold in minutes; input range 1–180. |
 | **Only request if released** | On | A valid future release date prevents submission; missing/unparseable dates do not. |
-| **Quality Profile Mode:** | **Default** | Uses Seerr defaults, copies the first existing request with **Original**, or sends configured choices with **Custom**. |
+| **Quality Profile Mode:** | **Default** | Uses Seerr defaults, copies the first existing request with **Original**, or sends configured choices with **Custom** (a 4K Radarr server is requested as a 4K request). |
 
 ??? info "How it works"
 

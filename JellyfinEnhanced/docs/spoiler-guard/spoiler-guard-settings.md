@@ -260,7 +260,7 @@ Choose which information to hide while you browse protected titles. These admin 
 | **Hide TV show descriptions** | On (effective default) | Independently hides guarded TV show descriptions. |
 | **Hide episode descriptions** | On | Replaces nonempty descriptions on eligible episodes, movies, later seasons, and extras. |
 | **Placeholder text** | `Spoiler Guard activated` | Replacement for a protected nonempty description. |
-| **Hide tags** | On | Removes story tags and JE genre, language, and quality overlays on eligible content. Score overlays use the separate ratings policy. |
+| **Hide tags** | On | Removes story tags and JE genre, language, quality, logo and custom overlays on eligible content. Score overlays use the separate ratings policy. |
 | **Hide chapter names (keep timestamps)** | On | Uses `Chapter N` for protected chapter names; keeps timestamps. Image-byte protection is independent. |
 | **Hide taglines** | On | Removes eligible taglines. |
 | **Hide ratings** | On | Clears community and critic scores and suppresses their JE card overlays. |
@@ -339,7 +339,7 @@ Spoiler Guard can hide JE's Reviews panel on protected detail pages. This helps 
 
 ??? note "Review scope and API limits"
 
-    Review suppression runs in JE's injected web client. It covers guarded Series/Season/Episode pages, including watched episodes, and directly guarded movies, including played movies. Collection-only movie protection does not suppress the panel. A failed state load can suppress the panel broadly on eligible page types.
+    Review suppression runs in JE's injected web client. It covers guarded Series/Season/Episode pages, including watched episodes, and guarded movies, including played movies and movies guarded through a collection. A failed state load can suppress the panel broadly on eligible page types.
 
     The Reviews API applies author visibility rules but does not suppress responses based on the viewer's Spoiler Guard state.
 
@@ -351,7 +351,7 @@ Title and description protection can also remove text from links, paths, and oth
 
     Effective title replacement or applicable description hiding can clear filesystem paths, episode-title/sort fields, custom rating, remote trailers, external links, stream titles/comments, attachment filenames/comments, surviving character roles, and protected chapter image paths.
 
-    Cast and chapter-name opt-outs do not independently restore those fields. Indexed subtitle delivery URLs remain available; raw external subtitle URLs can be cleared. Movie media-source version names are retained.
+    Cast and chapter-name opt-outs do not independently restore those fields. Indexed subtitle delivery URLs remain available; raw external subtitle URLs can be cleared. Movie media-source version names are retained. External links are cleared only from seasons, episodes, and extras: series and movies keep theirs because their titles are never replaced, and Seerr, \*arr, Letterboxd, and Elsewhere rely on them.
 
 ## Advanced per-category reveals
 

@@ -33,7 +33,15 @@ Use the build that matches your Jellyfin server. Both versions support the seven
 
     Script loading and branding use built-in request-time middleware on both versions. The conditional server code adapts Activity library access and item statistics. Jellyfin 12 uses access-scoping and batch APIs; 10.11 uses compatible access queries and individual user-data reads. These differences don't reserve the seven JE pages, tags, or automatic requests for Jellyfin 12.
 
-    The startup log reports a wrong build as `BUILD/HOST MISMATCH`. The authenticated, administrator-only `/JellyfinEnhanced/host-compat` diagnostic identifies the expected artifact. There is no setting to turn off this check.
+    The startup log reports a wrong build as `BUILD/HOST MISMATCH`. The authenticated, administrator-only `/JellyfinEnhanced/host-compat` diagnostic identifies the expected artifact on Jellyfin 12.x and 10.11.x; on Jellyfin 13 and newer there is none. There is no setting to turn off this check.
+
+## Support policy
+
+Jellyfin 12.x is JE's primary target. New features and fixes are built and tested there first.
+
+The Jellyfin 10.11.x build keeps compiling and shipping with each release, on a best-effort basis, without 10.11-only features or fixes. Jellyfin 10.11 runs on .NET 9, which Microsoft stops supporting after November 10, 2026. The 10.11 build keeps loading after that date, but on a runtime that no longer gets security updates. If you're on 10.11, plan your move to Jellyfin 12.
+
+Jellyfin 13 isn't supported yet. It's expected to change server interfaces JE is built against, and Jellyfin still loads older plugin builds, so features could fail or return the wrong items without an error. On Jellyfin 13, the admin page shows **This Jellyfin version is not supported yet** and the startup log reports `BUILD/HOST MISMATCH`. Stay on Jellyfin 12.x until a JE release lists Jellyfin 13 support. See [troubleshooting](../installation/troubleshooting.md#wrong-plugin-build).
 
 ## Clients and playback
 
@@ -134,8 +142,8 @@ Connect only the services your chosen features need. The table shows where to se
 | Feature | Requires | Where to configure |
 | --- | --- | --- |
 | Seerr search, requests, issues, and discovery | Enabled Seerr integration, reachable Seerr URL and API key; a linked, unblocked user with the relevant Seerr permissions | **Seerr → Seerr Connection Setup** and **Users**; [Seerr settings](../seerr/seerr-settings.md) and [permission audit](../seerr/permission-audit.md) |
-| Automatic season requests | Configured Seerr and the automatic request switches, eligible playback, and permitted linked users | **Seerr → Automatic Requests**; [Seerr features](../seerr/seerr-features.md) |
-| Automatic movie requests | Configured Seerr plus **TMDB API Key** for movie discovery, eligible playback, and permitted linked users | **Seerr → Seerr Connection Setup** and **Automatic Requests** |
+| Automatic season requests | Configured Seerr and the automatic request switches, eligible playback, and permitted linked users | **Seerr → Auto Season Requests**; [Seerr features](../seerr/seerr-features.md) |
+| Automatic movie requests | Configured Seerr plus **TMDB API Key** for movie discovery, eligible playback, and permitted linked users | **Seerr → Seerr Connection Setup** and **Auto Movie Requests** |
 | Requests page | **Enable Requests Page**; Seerr for requests/issues, enabled Sonarr/Radarr instances with API keys for downloads/history | **Pages → Requests Page**, **Seerr**, and **\*arr**; [*arr settings](../arr/arr-settings.md) |
 | Calendar | **Enable Calendar Page** and at least one configured source: enabled Sonarr/Radarr instance with API key, or Shoko URL and API key | **Pages → Calendar Page** and **\*arr → Sonarr / Radarr / Shoko**; [*arr features](../arr/arr-features.md) |
 | Sonarr/Radarr item links and tag synchronization | Enabled instances with **URL** and **API Key**. Item links also need a Jellyfin administrator account and **Enable \*arr Links on Detail Pages**. Sync needs **Enable Tags Sync** and its scheduled task. | **\*arr → Sonarr / Radarr**, **\*arr UI Links**, and **Tags Sync** |
@@ -145,7 +153,7 @@ Connect only the services your chosen features need. The table shows where to se
 | Elsewhere streaming providers and TMDB reviews | **TMDB API Key**, the relevant switches, and appropriate TMDB item IDs | **Elsewhere & Reviews**; [Elsewhere & Reviews Settings](../elsewhere/elsewhere-settings.md) |
 | MDBList ratings and rating synchronization | **MDBList API Key** and the relevant display/fetch/sync switches; fetching depends on the account's available allowance | **Display → MDBList Ratings**; [MDBList settings](../other/other-settings.md#mdblist-ratings) |
 | Standalone Letterboxd links | **Enable Letterboxd Links**; movies need an IMDb ID. No Letterboxd account/API key is configured in JE | **Extras → External Links**; [Other settings](../other/other-settings.md) |
-| Ordinary poster rating tags | Stored Jellyfin community or critic ratings; no JE TMDB/MDBList key merely to display those values | **Display → Media Tags** or personal **UI Settings**; [Tags & badges](../enhanced/tags.md) |
+| Ordinary poster rating tags | Stored Jellyfin community or critic ratings; no JE TMDB/MDBList key merely to display those values | **Display → Media Tags** or personal **Media Tags**; [Tags & badges](../enhanced/tags.md) |
 
 ??? note "Service and network details"
 

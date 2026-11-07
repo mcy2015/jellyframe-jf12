@@ -45,6 +45,7 @@ ternaries) can only be covered by the list. The font URL carries the plugin
 version as a cache key (`JE.cdn.font`), so a rebuilt subset is picked up on
 the next release.
 """
+import json
 import re
 import subprocess
 import sys
@@ -56,7 +57,7 @@ ROOT = Path(__file__).resolve().parents[2]
 JS = ROOT / 'Jellyfin.Plugin.JellyfinEnhanced' / 'js'
 FONTS = JS / 'fonts'
 CONFIG_PAGE = ROOT / 'Jellyfin.Plugin.JellyfinEnhanced' / 'Configuration' / 'configPage.html'
-CONFIG_CSS = CONFIG_PAGE.with_name('configPage.css')
+CONFIG_DIR = CONFIG_PAGE.parent
 UI_STYLES = JS / 'enhanced' / 'ui-styles.js'
 
 # Icon names per face. Keep the comments: they say which module needs a name.
@@ -83,7 +84,7 @@ ICONS = {
         # jellyseerr/recommendations/recommendations-render.js row scroll arrows
         'chevron_left', 'chevron_right',
     },
-    # tags/genretags.js genreIconMap: scanned from the source, nothing to list.
+    # tags/genre-icons.json (genretags.js's table): read from the source, nothing to list.
     'outlined': set(),
 }
 
@@ -132,7 +133,8 @@ def ligature_map(font):
 
 def sources():
     """The client sources and the config page."""
-    return sorted(JS.rglob('*.js')) + [CONFIG_PAGE, CONFIG_CSS]
+    # The config page is the HTML shell plus the settings engine, the section files and the one stylesheet.
+    return sorted(JS.rglob('*.js')) + [CONFIG_PAGE, CONFIG_DIR / 'jeAdmin.js', CONFIG_DIR / 'jeAdmin.css'] + sorted((CONFIG_DIR / 'admin').glob('*.js')) + sorted((CONFIG_DIR / 'admin').glob('*.css'))
 
 
 def blank(match):
@@ -156,10 +158,10 @@ def generic_class_uses():
 def scan_sources():
     """Collect literal icon names from the client sources and config page."""
     found = {'rounded': set(), 'outlined': set()}
-    genre = (JS / 'tags' / 'genretags.js').read_text(encoding='utf-8')
-    match = re.search(r"const genreIconMap = \{(.*?)\n\s*\};", genre, re.S)
-    if match:
-        found['outlined'].update(re.findall(r":\s*'([a-z0-9_]+)'", match.group(1)))
+    # The genre table genretags.js is generated from (scripts/generate_genre_labels.py).
+    genre = json.loads((JS / 'tags' / 'genre-icons.json').read_text(encoding='utf-8'))
+    found['outlined'].add(genre['defaultIcon'])
+    found['outlined'].update(icon for names in genre['names'].values() for icon in names.values())
     element = re.compile(r'<span\s+class="([^"]*)"[^>]*>\s*([a-z0-9_]+)\s*</span>')
     for path in sources():
         text = path.read_text(encoding='utf-8')

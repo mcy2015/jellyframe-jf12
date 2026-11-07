@@ -13,7 +13,10 @@ public class ApiAssetTests
     {
         // Asset actions use only the logger and HTTP context; unrelated host services are deliberately absent.
         var constructor = typeof(JellyfinEnhancedController).GetConstructors().Single();
-        var arguments = constructor.GetParameters().Select(p => p.ParameterType == typeof(Jellyfin.Plugin.JellyfinEnhanced.Logger) ? (object)fixture.Logger : services.FirstOrDefault(p.ParameterType.IsInstanceOfType)).ToArray();
+        var arguments = constructor.GetParameters().Select(p => p.ParameterType == typeof(Jellyfin.Plugin.JellyfinEnhanced.Services.SpoilerSeerrRedactor) && !services.OfType<Jellyfin.Plugin.JellyfinEnhanced.Services.SpoilerSeerrRedactor>().Any()
+            // Inert until a test turns Spoiler Guard on, and then it supplies its own.
+            ? new Jellyfin.Plugin.JellyfinEnhanced.Services.SpoilerSeerrRedactor(null!, null!, null!, null!, null!)
+            : p.ParameterType == typeof(Jellyfin.Plugin.JellyfinEnhanced.Logger) ? (object)fixture.Logger : services.FirstOrDefault(p.ParameterType.IsInstanceOfType)).ToArray();
         var controller = (JellyfinEnhancedController)constructor.Invoke(arguments);
         controller.ControllerContext = new ControllerContext { HttpContext = new DefaultHttpContext() };
         return controller;
@@ -31,7 +34,7 @@ public class ApiAssetTests
         {
             var result = Assert.IsType<FileStreamResult>(controller.GetScript(path));
             using var reader = new StreamReader(result.FileStream);
-            Assert.Equal("application/javascript", result.ContentType);
+            Assert.Equal("application/javascript; charset=utf-8", result.ContentType);
             Assert.False(string.IsNullOrWhiteSpace(await reader.ReadToEndAsync()), path);
         }
         Assert.Equal("public, max-age=31536000, immutable", controller.Response.Headers.CacheControl);
@@ -54,13 +57,19 @@ public class ApiAssetTests
         using var fixture = new CoreFixture();
         var controller = Controller(fixture);
         foreach (var (result, mime) in new[] {
-            (controller.GetConfigPageStylesheet(), "text/css"),
+            (controller.GetAdminStylesheet(), "text/css"),
             (controller.GetScript("component-scripts.json"), "application/json"),
             (controller.GetMainScript(), "application/javascript") })
         {
+            if (result is ContentResult content)
+            {
+                Assert.Equal(mime, content.ContentType);
+                Assert.NotEmpty(content.Content ?? string.Empty);
+                continue;
+            }
             var file = Assert.IsType<FileStreamResult>(result);
             using var reader = new StreamReader(file.FileStream);
-            Assert.Equal(mime, file.ContentType);
+            Assert.Equal(mime + "; charset=utf-8", file.ContentType);
             Assert.NotEmpty(await reader.ReadToEndAsync());
         }
     }
@@ -135,5 +144,25 @@ public class ApiAssetTests
         Assert.Equal(bundle.Script, rebuilt.Script);
         var changed = ClientScriptBundle.GetBundle("next-version", false, fixture.Logger);
         Assert.Contains("v=next-version", Encoding.UTF8.GetString(changed.SourceMap));
+    }
+
+    [Fact]
+    public void AdminSchemaScriptAndStylesheetAreServedAsOneConcatenatedFileEach()
+    {
+        using var fixture = new CoreFixture();
+        var controller = Controller(fixture);
+
+        var script = Assert.IsType<ContentResult>(controller.GetAdminScript());
+        Assert.Equal("application/javascript", script.ContentType);
+        // Engine first, then every embedded Configuration/admin/*.js section file.
+        Assert.Contains("window.JEAdmin", script.Content);
+        Assert.Contains("JEAdmin.define(", script.Content);
+        Assert.Contains("JEAdmin.setPerUser(", script.Content);
+        Assert.True(script.Content.IndexOf("window.JEAdmin = {", StringComparison.Ordinal) < script.Content.IndexOf("JEAdmin.setPerUser(", StringComparison.Ordinal));
+
+        var styles = Assert.IsType<ContentResult>(controller.GetAdminStylesheet());
+        Assert.Equal("text/css", styles.ContentType);
+        Assert.Contains(".jea-section", styles.Content);
+        Assert.Equal("public, max-age=31536000, immutable", controller.Response.Headers.CacheControl);
     }
 }

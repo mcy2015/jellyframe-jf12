@@ -113,7 +113,7 @@ Admin settings in **Elsewhere & Reviews**:
 | **Hide reviews from disabled users** | On | Hides these authors' reviews from other non-admin viewers. |
 | **Also save review star ratings as the user's Jellyfin rating** | Off | Copies movie/series review stars to the author's Jellyfin rating at twice the star value. |
 | **Show average user rating on poster cards** | Off | Adds visible local-review averages to eligible posters when rating tags are enabled. |
-| **Show "—" on posters for unrated items** | On | Shows a dash when no visible rated-review average exists, if poster averages are enabled. |
+| **Show a dash on posters for unrated items** | On | Shows a dash when no visible rated-review average exists, if poster averages are enabled. |
 
 Your server's review cards appear before TMDB cards. They have green borders, author names and avatars, update dates, and star ratings when supplied. Use **Read More** and **Read Less** for long text.
 
@@ -248,7 +248,7 @@ Translate English TMDB and AniList reviews into your Jellyfin language. Each rev
 
     Jellyfin Enhanced tries your browser's built-in translator first (Chrome and Edge, over HTTPS or localhost). It runs on your device, nothing is sent anywhere, and the browser may download a language model the first time. If the browser cannot translate, or fails, the review text goes to the LibreTranslate instance you set. If neither is available, the button is not shown.
 
-    Translations are done live and are never stored. The server keeps only a small in-memory cache of recent translations for one hour, which is cleared on restart. Reviews over 20,000 characters are not sent to LibreTranslate.
+    Translations are done live and are never stored. The server keeps only a small in-memory cache of recent translations for one hour, which is cleared on restart. Reviews over 20,000 characters are not sent to LibreTranslate. A paragraph over 2,000 characters is sent in pieces, split between sentences, because hosted LibreTranslate plans reject longer text.
 
     The translator receives plain prose, because translators mangle links and formatting. Links in the review are kept where they can be matched: each link is put back on its translated label, or on its original wording when that still appears in the translation (titles and names usually do). A link that matches neither shows as plain text, and italics are not kept in the translation. **Show original** restores the full formatting.
 
@@ -272,7 +272,7 @@ Admin settings in **Elsewhere & Reviews**:
 
 ![Movie release dates and episode air date](../images/enhanced/release-dates.webp)
 
-No available date means no chip. There is no personal enable switch. This feature does not require **Enable Elsewhere**. See [Release Dates settings](elsewhere-settings.md#release-dates).
+No available date means no chip. Spoiler Guard's **Hide air date** setting also removes these chips from protected titles. There is no personal enable switch. This feature does not require **Enable Elsewhere**. See [Release Dates settings](elsewhere-settings.md#release-dates).
 
 ??? info "Which dates are shown"
 

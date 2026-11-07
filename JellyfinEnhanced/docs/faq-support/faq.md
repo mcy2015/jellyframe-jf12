@@ -164,7 +164,7 @@ These screenshots show external account management. They do not show JE feature 
 
 ### Tags not showing on posters?
 
-Open **UI Settings** in the Enhanced panel, enable the tag groups you want, and check the item's metadata; your saved choices override administrator defaults. See [Tags & Badges](../enhanced/tags.md) for setup, scopes, and native posters, and the [score sources and fallback rules](../enhanced/tags.md#rating-tags) for season/episode differences between server-cache, batch, and player paths. For stale data, use [targeted cache troubleshooting](../installation/troubleshooting.md#stale-caches-or-missing-assets).
+Open **Media Tags** in the Enhanced panel, turn on the tag groups you want on its **Groups** tab, and check the item's metadata; your saved choices override administrator defaults. See [Tags & Badges](../enhanced/tags.md) for setup, scopes, and native posters, and the [score sources and fallback rules](../enhanced/tags.md#rating-tags) for season/episode differences between server-cache, batch, and player paths. For stale data, use [targeted cache troubleshooting](../installation/troubleshooting.md#stale-caches-or-missing-assets).
 
 ### Bookmarks not syncing across devices?
 
@@ -183,10 +183,10 @@ See [Smart Bookmarks](../enhanced/enhanced-features.md#smart-bookmarks) for book
 
 Saved personal preferences take precedence over administrator defaults. Ordinary administrator saves do not continually replace your choices.
 
-To deliberately replace existing preferences:
+To change only some settings for existing users, change them in the admin page and use **Apply the above** in the banner that appears in that card. To deliberately replace all existing preferences:
 
 1. Save the desired administrator defaults.
-2. Use administrator **Overview** → **Quick Actions** → **Overwrite everyone's personal settings**.
+2. Use administrator **Overview** → **Quick Actions** → **Apply all plugin settings to every user**.
 
 !!! warning
 

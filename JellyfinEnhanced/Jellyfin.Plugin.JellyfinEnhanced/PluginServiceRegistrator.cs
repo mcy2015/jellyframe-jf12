@@ -44,8 +44,10 @@ namespace Jellyfin.Plugin.JellyfinEnhanced
             serviceCollection.AddHttpClient(Helpers.Jellyseerr.SeerrHttpHelper.NamedClient)
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
                 {
-                    AllowAutoRedirect = false
-                });
+                    AllowAutoRedirect = false,
+                    UseCookies = false
+                })
+                .AddHttpMessageHandler(() => new Helpers.Jellyseerr.SeerrCsrfHandler());
             serviceCollection.AddSingleton<Logger>();
             serviceCollection.AddSingleton<UserConfigurationManager>();
             // Auto-detects newly added config-page settings by diffing the
@@ -73,6 +75,11 @@ namespace Jellyfin.Plugin.JellyfinEnhanced
             // endpoint (no API key), cached to disk indefinitely for hits / with a TTL
             // for misses — see WikidataAwardsService for details.
             serviceCollection.AddSingleton<WikidataAwardsService>();
+            serviceCollection.AddSingleton<AwardTagsService>();
+            // Leaving soon facts (Maintainerr API or collection names), refreshed by RefreshLeavingSoonTagsTask.
+            // Its Maintainerr client never follows redirects (the API key must not reach another origin).
+            LeavingSoonService.AddHttpClient(serviceCollection);
+            serviceCollection.AddSingleton<LeavingSoonService>();
             serviceCollection.AddSingleton<AnilistReviewsService>();
             serviceCollection.AddSingleton<ReviewTranslationService>();
             serviceCollection.AddSingleton<MdblistService>();
@@ -80,6 +87,15 @@ namespace Jellyfin.Plugin.JellyfinEnhanced
             // In-memory, size-bounded cache + single-flight for TMDB passthrough and
             // person lookups -- see TmdbResponseCache for TTLs and why it is account-safe.
             serviceCollection.AddSingleton<TmdbResponseCache>();
+            // Server-wide trending list for the Status Tags poster badges (30-minute cache).
+            serviceCollection.AddSingleton<StatusTagsTrendingService>();
+            // TMDB schedule facts for the Status Tags series badges (rate-limited lookups).
+            serviceCollection.AddSingleton<StatusTagsSeriesService>();
+            serviceCollection.AddSingleton<NativeStatusRefreshService>();
+            serviceCollection.AddHostedService(sp => sp.GetRequiredService<NativeStatusRefreshService>());
+            // Logos tag group: daily TMDB provider/network/studio lookups and the logo image proxy cache.
+            serviceCollection.AddSingleton<TagLogoService>();
+            serviceCollection.AddSingleton<StatusTagsScenesService>();
             // Size / watch-progress of an item subtree in a handful of queries
             // (details-page media-info chips) -- see ItemStatsService.
             serviceCollection.AddSingleton<ItemStatsService>();
@@ -98,6 +114,7 @@ namespace Jellyfin.Plugin.JellyfinEnhanced
             serviceCollection.AddTransient<MdblistRatingsFetchTask>();
             serviceCollection.AddTransient<MdblistRatingsSyncTask>();
             serviceCollection.AddTransient<BuildTagCacheTask>();
+            serviceCollection.AddTransient<RefreshAwardTagsTask>();
             serviceCollection.AddTransient<JellyseerrWatchlistSyncTask>();
             serviceCollection.AddTransient<JellyfinToSeerrWatchlistSyncTask>();
             serviceCollection.AddTransient<JellyseerrUserImportTask>();
@@ -141,6 +158,8 @@ namespace Jellyfin.Plugin.JellyfinEnhanced
             // Spoiler Field Strip: removes spoiler-y metadata (Overview, ratings,
             // title, cast, etc.) from BaseItemDto responses for guarded unwatched episodes.
             serviceCollection.AddSingleton<SpoilerFieldStripFilter>();
+            // The same policy for the Seerr, TMDB and MDBList data JE shows itself.
+            serviceCollection.AddSingleton<SpoilerSeerrRedactor>();
             // Auto-enable spoiler mode for a series on first play of S1E1.
             // Gated by SpoilerAutoEnableOnFirstPlay; runs on every PlaybackStart.
             serviceCollection.AddScoped<IEventConsumer<PlaybackStartEventArgs>, SpoilerAutoEnableOnFirstPlayConsumer>();
@@ -183,6 +202,7 @@ namespace Jellyfin.Plugin.JellyfinEnhanced
             serviceCollection.AddSingleton<PosterTagDataProvider>();
             serviceCollection.AddSingleton<CompositeImageCache>();
             serviceCollection.AddSingleton<PosterTagRenderer>();
+            serviceCollection.AddSingleton<PosterTagStatusProvider>();
             serviceCollection.AddSingleton<PosterTagComposer>();
             serviceCollection.AddSingleton<NativePosterTagStamper>();
             serviceCollection.AddSingleton<PosterTagImageFilter>();

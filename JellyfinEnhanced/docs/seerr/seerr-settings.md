@@ -351,7 +351,7 @@ See [Auto-Request Settings](seerr-features.md#auto-request-settings) for trigger
 
 Request the next numeric season near the end of the current one.
 
-**How to use:** Open **Seerr** → **Automatic Requests** → **Auto Season Requests**. Enable the feature and choose the threshold below.
+**How to use:** Open **Seerr** → **Auto Season Requests**. Enable the feature and choose the threshold below.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
@@ -367,7 +367,7 @@ Request the next numeric season near the end of the current one.
 
 Request the next collection movie based on playback.
 
-**How to use:** Open **Seerr** → **Automatic Requests** → **Auto Movie Requests**. Enable the feature, choose playback triggers, and select a quality profile mode.
+**How to use:** Open **Seerr** → **Auto Movie Requests**. Enable the feature, choose playback triggers, and select a quality profile mode.
 
 | Setting | Default | What it does |
 | --- | --- | --- |
@@ -378,7 +378,7 @@ Request the next collection movie based on playback.
 | **Only request if released** | On | Skips a movie with a valid future release date. Missing/unparseable dates do not block a request. |
 | **Quality Profile Mode:** | **Default** | **Default** lets Seerr choose. **Original** copies settings from the watched movie's first Seerr request. **Custom** sends the configured selections below. |
 | **Use default instead of 4K fallback** | On | In **Original**, falls back to Seerr defaults when the copied request was 4K. Turn off to preserve those 4K settings. |
-| **Radarr Server:** | Unset | Destination used only in **Custom**. |
+| **Radarr Server:** | Unset | Destination used only in **Custom**. A server marked **(4K)** is requested as a 4K request. |
 | **Quality Profile:** | Unset | Profile used only in **Custom**. |
 | **Root Folder:** | Empty | Folder used only in **Custom**. |
 
@@ -523,7 +523,7 @@ For routes, layout limits, Plugin Pages restart rules, and Custom Tabs setup, se
 
 Use these controls to investigate stale status or permissions.
 
-**How to use:** Open **Seerr** → **Debug** and adjust the cache settings below. Reload other clients as needed.
+**How to use:** Open **Seerr** → **Debug & Caching** and adjust the cache settings below. Reload other clients as needed.
 
 | Setting | Default | What it does |
 | --- | --- | --- |

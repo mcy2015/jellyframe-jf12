@@ -9,7 +9,7 @@ Use Jellyfin Enhanced's shortcuts, browsing tools, and player controls to make J
 **Open your personal settings:**
 
 1. Press ++question++ outside a text field to open the Enhanced panel. You can also choose **Enhanced Panel** under the **Jellyfin Enhanced** drawer heading, **Jellyfin Enhanced** in Jellyfin 12's avatar menu, or **Jellyfin Enhanced - User Settings** in user preferences. During playback in mobile or TV web layouts, use the tune button titled **Jellyfin Enhanced** when the player controls are available. Desktop layouts hide this button.
-2. Use **Search settings…** or select the section named in the feature below. On phones, use the back arrow to return to the section list.
+2. Use **Search settings…** or select the section named in the feature below. On phones, use the back arrow to return to the section list. On desktop, use **Default** / **Large** / **Fill** in the header or drag the bottom-right corner to resize the panel; see [Enhanced Panel](enhanced-settings.md#enhanced-panel).
 3. Close with ×, ++escape++, or ++question++.
 
 **Open admin settings:** Go to **Dashboard → Plugins → Jellyfin Enhanced**. Tables below show stock defaults for a new installation.
@@ -18,7 +18,7 @@ Use Jellyfin Enhanced's shortcuts, browsing tools, and player controls to make J
 
     Where an admin setting supplies a personal default, existing users keep their saved choices. Personal settings and shortcut overrides save automatically on the server for each account. Reload another open client to load changes.
 
-    See [Enhanced Settings](enhanced-settings.md) and [Settings Overview](../getting-started/settings-overview.md) for the default/override workflow, including **Overview → Quick Actions → Overwrite everyone's personal settings**.
+    See [Enhanced Settings](enhanced-settings.md) and [Settings Overview](../getting-started/settings-overview.md) for the default/override workflow, including **Overview → Quick Actions → Apply all plugin settings to every user**.
 
 ??? note "Choose where JE pages appear"
 
@@ -311,6 +311,8 @@ Navigate Jellyfin and control local video playback without opening menus. Admin 
 | **Skip Intro/Outro** | ++o++ | Skips the current segment. |
 | **Step Back One Frame** | ++comma++ | Pauses and seeks back one estimated frame. |
 | **Step Forward One Frame** | ++period++ | Pauses and seeks forward one estimated frame. |
+| **Decrease Subtitle Offset** | ++left-bracket++ | Shifts subtitles 0.1 s earlier (lowers the offset) and briefly shows Jellyfin's subtitle offset panel. |
+| **Increase Subtitle Offset** | ++right-bracket++ | Shifts subtitles 0.1 s later (raises the offset) and briefly shows Jellyfin's subtitle offset panel. |
 | **Jump to Last Position** | ++z++ | Returns once to the position saved before the last seek. |
 | **Jump to % of video** | ++0++–++9++ | Seeks to 0%, 10%, … 90%. Can be disabled but not rebound. |
 
@@ -323,7 +325,7 @@ Navigate Jellyfin and control local video playback without opening menus. Admin 
 
     Modifier-only presses are ignored. Conflicts and reserved native player bindings are rejected with a red shake; a dot marks personal overrides. Changes save in your server-side `shortcuts.json`.
 
-    Administrators can set server bindings in **Keyboard → Keyboard Config** using its recorder, then **Save Settings**. While recording there, ++delete++ disables an action and ++backspace++ restores its stock binding. Existing personal overrides still take precedence.
+    Administrators can set server bindings in **Keyboard → Keyboard Shortcuts** using its recorder, then **Save Settings**. While recording there, ++delete++ disables an action and ++backspace++ restores its stock binding. Existing personal overrides still take precedence.
 
     Held ++c++ or ++v++ does not repeatedly cycle tracks. Frame stepping uses media frame-rate metadata. When it is missing, JE falls back to 24 fps and shows a notice.
 
@@ -410,7 +412,7 @@ After you pause and stop interacting, JE can display artwork and media informati
 
 | Setting | Default | What it does |
 |---|---|---|
-| **Enable Custom Pause Screen** — admin **Playback → Playback & Tab Switch** | On | Supplies the initial personal default. |
+| **Enable Custom Pause Screen** — admin **Playback → Player Behaviour** | On | Supplies the initial personal default. |
 | **Custom Pause Screen** — personal **Playback Settings** | On | Enables the overlay; reload after changing enablement. |
 | **Delay before showing (seconds):** — personal **Playback Settings** | 5 | Idle delay while paused; accepts integers from 1–60 and updates the running delay. |
 
@@ -429,7 +431,7 @@ Manage tab-switch playback, temporary speed boosts, and automatic intro/outro sk
 ![Playing movie with Enhanced player controls](../images/enhanced/player-osd.webp)
 *The player also shows rating chips, a bookmark button, and the optional Playback Info overlay.*
 
-**How to use:** Open **Playback Settings** for tab-switch and hold controls, or **Auto-Skip Settings** for intros/outros. Admin defaults are under **Playback → Playback & Tab Switch** and **Playback → Auto-Skip**.
+**How to use:** Open **Playback Settings** for tab-switch and hold controls, or **Auto-Skip Settings** for intros/outros. Admin defaults are under **Playback → Player Behaviour** and **Playback → Auto-Skip**.
 
 - For continuous Picture-in-Picture playback, turn off **Auto-pause**.
 - For temporary 2× speed, hold the video background with the left mouse button or touch for 500 ms. Release or cancel to restore the previous speed. Hold only on the video background.
@@ -506,7 +508,7 @@ For white text on a semi-transparent black box like the example below, set **Tex
 
 ![Custom-styled subtitle on a semi-transparent box during playback](../images/enhanced/subtitle-live.webp)
 
-To stop styling, turn on personal **Disable Custom Styles** and reload. To change the starting preference for everyone, save admin **Disable Custom Subtitle Styles by default**. Use **Overwrite everyone's personal settings** only if you intend to replace existing personal preferences.
+To stop styling, turn on personal **Disable Custom Styles** and reload. To change the starting preference for everyone, save admin **Disable Custom Subtitle Styles by default**. Use **Apply all plugin settings to every user** only if you intend to replace existing personal preferences.
 
 !!! note "Choose a supported text track"
 
@@ -531,7 +533,7 @@ See Jellyfin's community/critic scores in the player or briefly show age-rating 
 
 **How to use:** Start playback to see the optional startup badge; reveal the player controls to see score chips beside the time information.
 
-Admin **Display → Media Tags** and **Playback → Playback & Tab Switch**, respectively:
+Admin **Display → Media Tags** and **Playback → Player Behaviour**, respectively:
 
 | Setting | Default | What it does |
 |---|---|---|
@@ -631,7 +633,7 @@ Admin **Pages → Activity Feed**:
 | **Use Custom Tabs** | Off | Uses Custom Tabs instead of a native tab. |
 | **Add the Custom Tabs entry for me** | Off | Manages the entry on save. |
 
-The live section also requires admin **Extras → UI Tweaks → Active Streams Header Widget**. Non-admins need **Show widget to non-admins**.
+The live section also requires admin **Extras → Active Streams → Active Streams Header Widget**. Non-admins need **Show widget to non-admins**.
 
 ??? info "Activity collection, access, and refresh"
 
@@ -773,13 +775,13 @@ See total file size and available audio languages in a title's detail informatio
 
 **How to use:**
 
-1. Open **UI Settings** and enable the chip you want.
+1. Enable **Show File Sizes** in **UI Settings** or **Show Audio Languages** in **Media Tags** (**Layout** tab).
 2. Open a detail page. Selecting another media version changes its size and audio-language data.
 
 | Setting | Default | What it does |
 |---|---|---|
 | **Show file sizes** — admin **Display**; **Show File Sizes** — personal **UI Settings** | Off | Shows total file size. |
-| **Show available audio languages on item detail page** — admin **Display**; **Show Audio Languages** — personal **UI Settings** | On | Shows detail-page audio-language chips. |
+| **Show available audio languages on item detail page** — admin **Display**; **Show Audio Languages** — personal **Media Tags** | On | Shows detail-page audio-language chips. |
 
 ??? note "Supported items and audio-language links"
 

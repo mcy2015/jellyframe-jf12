@@ -176,7 +176,7 @@ Native Poster Tags adds your chosen tags to posters in eligible native apps. Cho
 <details>
 <summary>Tag settings and how native posters work</summary>
 
-JE draws your selected tags into returned Primary images without changing artwork files. An administrator enables **Enable Native Poster Tags (Experimental)**; you can opt out with **Show Tags in Native Clients (Experimental)** in **UI Settings**. Your app may need a library refresh or restart to show changes.
+JE draws your selected tags into returned Primary images without changing artwork files. An administrator enables **Enable Native Poster Tags (Experimental)**; you can opt out with **Show Tags in Native Clients (Experimental)** in **Media Tags** → **Layout**. Your app may need a library refresh or restart to show changes.
 
 See [Native Poster Tags](https://n00bcodr.github.io/Jellyfin-Enhanced/enhanced/tags/#native-poster-tags-experimental) for eligible clients and exclusions, [Tag Styles](https://n00bcodr.github.io/Jellyfin-Enhanced/enhanced/tags/#tag-styles-and-css) for colors, [tag-cache settings](https://n00bcodr.github.io/Jellyfin-Enhanced/enhanced/tags/#server-side-tag-cache) for exclusions and rebuilding, and [audio-language synchronization](https://n00bcodr.github.io/Jellyfin-Enhanced/enhanced/tags/#audio-language-links) for Jellyfin tag links and existing items.
 
@@ -528,7 +528,7 @@ Everything is configured from **Dashboard → Plugins → Jellyfin Enhanced**, w
 <details>
 <summary>Replacing personal settings and where choices are saved</summary>
 
-To replace everyone’s choices, save the admin changes first. Then use **Overwrite everyone's personal settings** under **Overview → Quick Actions**. Personal settings are stored on the server; theme choices and Catch Up dismissals use browser storage.
+To change only the settings you just edited for everyone, use **Apply the above** in that card's banner. To replace everyone’s choices, save the admin changes first. Then use **Apply all plugin settings to every user** under **Overview → Quick Actions**. Personal settings are stored on the server; theme choices and Catch Up dismissals use browser storage.
 
 </details>
 

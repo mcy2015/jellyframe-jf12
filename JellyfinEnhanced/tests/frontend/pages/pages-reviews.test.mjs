@@ -28,7 +28,7 @@ for(const Type of ['Movie','Series','Season','Episode']) {
   const guardedKey=Type==='Season'||Type==='Episode'?'series':'item';
   const item={Id:'item',Type,SeriesId:'series',ProviderIds:{Tmdb:'7'},ParentIndexNumber:1,IndexNumber:2};
   const guard=key=>({whenLoaded:async()=>{},isLoadOk:()=>true,
-    isEnabledFor:id=>Type!=='Movie'&&id===key,isMovieEnabledFor:id=>Type==='Movie'&&id===key});
+    isEnabledFor:id=>Type!=='Movie'&&id===key,isMovieInScope:async id=>Type==='Movie'&&id===key});
   test(`reviews suppress guarded ${Type} pages before fetching content`,async t=>{
     const h=await setup(t,{item,config:{SpoilerBlurEnabled:true},spoilerBlur:guard(guardedKey)});
     assert.equal(h.calls.length,0);assert.equal(h.document.querySelector('.tmdb-reviews-section'),null);
@@ -43,7 +43,7 @@ test('reviews fail closed when spoiler state fails to load',async t=>{
   assert.equal(h.calls.length,0);assert.equal(h.document.querySelector('.tmdb-reviews-section'),null);
 });
 test('reviews honor user opt-out of hiding reviews and render an empty writeable section once',async t=>{
-  const h=await setup(t,{config:{SpoilerBlurEnabled:true},spoilerBlur:{getUserPrefs:()=>({HideReviews:false}),isMovieEnabledFor:()=>true}});
+  const h=await setup(t,{config:{SpoilerBlurEnabled:true},spoilerBlur:{getUserPrefs:()=>({HideReviews:false}),isMovieInScope:async()=>true}});
   assert.equal(h.calls.length,2);assert.ok(h.document.querySelector('.tmdb-reviews-section'));await h.navigate();assert.equal(h.calls.length,2);
 });
 test('episode reviews use series/season/episode key without fetching top-level TMDB reviews',async t=>{
@@ -162,7 +162,7 @@ function translationPlugin(languages,{fail=false}={}){
   const requests=[];
   const plugin=async(url,options)=>{
     if(url==='/translate/languages')return {languages};
-    if(url==='/translate'){requests.push(options.body);if(fail)throw Error('offline');return {text:'Hallo Welt'};}
+    if(url==='/translate'){requests.push(options.body);if(fail)throw fail===true?Error('offline'):fail;return {text:'Hallo Welt'};}
     return {reviews:[]};
   };
   return {plugin,requests};
@@ -195,6 +195,24 @@ test('translate button keeps the original and reports a failed translation',asyn
   assert.deepEqual(toasts,['reviews_translate_failed']);assert.equal(card.querySelector('.tmdb-review-text').textContent,'Hello world');
   assert.equal(button.textContent,'translatereviews_translate');
 });
+// The server passes LibreTranslate's 429 on as 429 (with the wait) and its 403 as code translation_refused.
+const httpError=(status,responseJSON)=>Object.assign(Error(`HTTP ${status}`),{status,responseJSON});
+for(const [label,error,toast] of [
+  ['a rate limit with a wait',httpError(429,{code:'translation_rate_limited',retryAfterSeconds:42}),'reviews_translate_rate_limited_wait:42'],
+  ['a rate limit without a wait',httpError(429,{code:'translation_rate_limited',retryAfterSeconds:null}),'reviews_translate_rate_limited'],
+  ['a refusal',httpError(502,{code:'translation_refused'}),'reviews_translate_refused'],
+  ['any other server failure',httpError(502),'reviews_translate_failed'],
+]){
+  test(`translate button shows the matching toast for ${label}`,async t=>{
+    const {plugin}=translationPlugin(['de'],{fail:error});const toasts=[];
+    const h=await setup(t,{config:{ReviewTranslationEnabled:true,ReviewTranslationServer:true},tmdb:english,lang:'de',plugin});await nextTurn();
+    h.JE.toast=message=>toasts.push(message);h.JE.t=(key,params)=>params?`${key}:${params.seconds}`:key;
+    const card=h.document.querySelector('.tmdb-review-card');const button=card.querySelector('.je-review-translate');
+    button.click();await nextTurn();
+    assert.deepEqual(toasts,[toast]);assert.equal(card.querySelector('.tmdb-review-text').textContent,'Hello world');
+    assert.equal(button.textContent,'translatereviews_translate');
+  });
+}
 
 function fakeTranslator({fail=false,prefix='DE:',transform}={}){
   const created=[];
@@ -261,4 +279,8 @@ test('translated review links a label by its original wording when the label tra
 test('translated review leaves a link as plain text when neither wording is in the translation',async t=>{
   const result=await translateLinked(t,'A <a href="https://x.test/a">real dude</a>.',text=>text==='real dude'?'type':'A mec.');
   assert.equal(result,'A mec.');
+});
+test('a failed scope lookup suppresses reviews on a movie, as other failed guard checks do',async t=>{
+  const h=await setup(t,{config:{SpoilerBlurEnabled:true},spoilerBlur:{isMovieInScope:async()=>{throw new Error('offline');}}});
+  assert.equal(h.document.querySelector('.tmdb-reviews-section'),null);
 });
