@@ -2,11 +2,14 @@
  * @file Random-item header button: fetches a random movie/series and navigates to it.
  * Split from features.js (code motion; bodies verbatim).
  *
- * Two per-user settings narrow where the pick comes from:
+ * Three per-user settings narrow where the pick comes from:
  *   - randomScopeCurrentContainer: on a Playlist/BoxSet details page, pick
  *     from that container's items.
  *   - randomSourceId: a pinned playlist/collection to pick from on every page.
- * Either falls back to the whole library (with a toast) when it yields nothing.
+ *   - randomLibraryIds: libraries (CollectionFolder/UserView ids) to pick from
+ *     instead of the whole library; empty means every library.
+ * Each falls back to the next scope in line, ending with the whole library
+ * (with a toast) when it yields nothing.
  */
 (function(JE) {
     'use strict';
@@ -90,16 +93,33 @@
     /**
      * Fetches up to 100 candidate items in random order: the direct children
      * of `parentId` when given (a playlist's entries, a collection's titles),
-     * otherwise the whole library recursively.
+     * otherwise the whole library recursively. A library (CollectionFolder/
+     * UserView) id needs `recursive` because its items are nested.
      * @param {string} userId
      * @param {string|null} parentId
+     * @param {boolean} [recursive] Also set for library scopes (children live deeper).
+     * @param {boolean} [inContainer] True when parentId is a playlist/boxset (episodes count as shows).
      * @returns {Promise<object[]>}
      */
-    async function fetchCandidates(userId, parentId) {
-        const scope = parentId ? `ParentId=${parentId}` : 'Recursive=true';
-        const apiUrl = ApiClient.getUrl(`/Users/${userId}/Items?IncludeItemTypes=${includeItemTypes(!!parentId)}&${scope}&SortBy=Random&Limit=100&Fields=ExternalUrls`);
+    async function fetchCandidates(userId, parentId, recursive = false, inContainer = !!parentId) {
+        const scope = parentId ? `ParentId=${parentId}${recursive ? '&Recursive=true' : ''}` : 'Recursive=true';
+        const apiUrl = ApiClient.getUrl(`/Users/${userId}/Items?IncludeItemTypes=${includeItemTypes(inContainer)}&${scope}&SortBy=Random&Limit=100&Fields=ExternalUrls`);
         const response = await ApiClient.ajax({ type: 'GET', url: apiUrl, dataType: 'json' });
         return response?.Items || [];
+    }
+
+    /**
+     * Fetches candidates from the libraries pinned in the settings panel, up to
+     * 100 random draws per library merged into one pool. Returns null when no
+     * library scope is configured, [] when the configured libraries hold nothing.
+     * @param {string} userId
+     * @returns {Promise<object[]|null>}
+     */
+    async function libraryScopedCandidates(userId) {
+        const libraryIds = (JE.currentSettings.randomLibraryIds || []).filter(Boolean);
+        if (libraryIds.length === 0) return null;
+        const perLibrary = await Promise.all(libraryIds.map(id => fetchCandidates(userId, id, true, false).catch(() => [])));
+        return perLibrary.flat();
     }
 
     /**
@@ -133,6 +153,16 @@
             let items = container ? filterUnwatched(await fetchCandidates(userId, container.Id)) : [];
             if (container && items.length === 0) {
                 fallbackNotice = JE.t('toast_random_source_empty', { name: JE.escapeHtml(container.Name) });
+            }
+            // Library scope (settings panel): only when no container provided items.
+            if (items.length === 0) {
+                const scoped = await libraryScopedCandidates(userId);
+                if (scoped) {
+                    items = filterUnwatched(scoped);
+                    // A stale notice from the empty container scope must not ride
+                    // on a successful library-scope draw (it is consumed per navigation).
+                    fallbackNotice = items.length === 0 ? JE.t('toast_random_libraries_empty') : null;
+                }
             }
             if (items.length === 0) {
                 const libraryItems = await fetchCandidates(userId, null);

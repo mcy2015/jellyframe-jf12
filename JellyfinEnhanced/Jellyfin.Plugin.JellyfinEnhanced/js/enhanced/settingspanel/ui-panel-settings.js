@@ -654,6 +654,54 @@
             });
         }
 
+        // Library scope checkboxes: lists the user's media libraries; none checked = whole library.
+        const librariesBox = document.getElementById('randomLibrariesBox');
+        if (librariesBox) {
+            const libUserId = ApiClient.getCurrentUserId();
+            ApiClient.ajax({ type: 'GET', url: ApiClient.getUrl(`/Users/${libUserId}/Views`), dataType: 'json' })
+                .then(response => {
+                    if (!librariesBox.isConnected) return; // panel closed before the list arrived
+                    const libraries = (response?.Items || []).filter(item => item.Type === 'CollectionFolder' || item.Type === 'UserView');
+                    const selected = new Set(JE.currentSettings.randomLibraryIds || []);
+                    // Prune saved ids of deleted libraries: without this a stale id stays
+                    // checked forever (no checkbox exists to uncheck it) and every roll
+                    // needlessly falls through to the whole-library fallback.
+                    if (libraries.length > 0 && selected.size > 0) {
+                        const live = new Set(libraries.map(item => item.Id));
+                        const pruned = Array.from(selected).filter(id => live.has(id));
+                        if (pruned.length !== selected.size) {
+                            JE.currentSettings.randomLibraryIds = pruned;
+                            JE.saveUserSettings('settings.json', JE.currentSettings);
+                            selected.clear();
+                            pruned.forEach(id => selected.add(id));
+                        }
+                    }
+                    libraries.forEach(item => {
+                        const label = document.createElement('label');
+                        label.style.cssText = 'display:flex; align-items:center; gap:8px; cursor:pointer; margin:6px 0;';
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.checked = selected.has(item.Id);
+                        checkbox.dataset.libraryId = item.Id;
+                        checkbox.style.cssText = `width:18px; height:18px; accent-color:${primaryAccentColor}; cursor:pointer;`;
+                        checkbox.addEventListener('change', e => {
+                            const ids = new Set(JE.currentSettings.randomLibraryIds || []);
+                            if (e.target.checked) ids.add(item.Id); else ids.delete(item.Id);
+                            JE.currentSettings.randomLibraryIds = Array.from(ids);
+                            JE.saveUserSettings('settings.json', JE.currentSettings);
+                            JE.toast(JE.t('toast_random_selection_status', { item_type: JE.escapeHtml(item.Name), status: e.target.checked ? JE.t('selection_included') : JE.t('selection_excluded') }));
+                            resetAutoCloseTimer();
+                        });
+                        const name = document.createElement('span');
+                        name.textContent = item.Name;
+                        label.appendChild(checkbox);
+                        label.appendChild(name);
+                        librariesBox.appendChild(label);
+                    });
+                })
+                .catch(err => console.warn('🪼 Jellyfin Enhanced: Could not list libraries for the random scope picker', err));
+        }
+
         document.getElementById('releaseNotesBtn').addEventListener('click', async () => { await showReleaseNotesNotification(); resetAutoCloseTimer(); });
 
         // --- Position Selectors ---

@@ -117,7 +117,7 @@
             subtitleVerticalPosition: 95, subtitleHorizontalPosition: 50,
             randomButtonEnabled: true,
             randomIncludeMovies: true, randomIncludeShows: true, randomUnwatchedOnly: false,
-            randomScopeCurrentContainer: false, randomSourceId: '',
+            randomScopeCurrentContainer: false, randomSourceId: '', randomLibraryIds: [],
             showWatchProgress: false, showFileSizes: false, showAudioLanguages: true, removeContinueWatchingEnabled: false,
             watchProgressMode: 'percentage',
             watchProgressTimeFormat: 'hours',

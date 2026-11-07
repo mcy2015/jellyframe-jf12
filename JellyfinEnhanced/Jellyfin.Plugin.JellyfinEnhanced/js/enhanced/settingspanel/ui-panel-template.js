@@ -308,6 +308,11 @@
                                 <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" id="randomIncludeMovies" ${JE.currentSettings.randomIncludeMovies ? 'checked' : ''} style="width:18px; height:18px; accent-color:${toggleAccentColor}; cursor:pointer;"><span>${JE.t('panel_settings_random_button_movies')}</span></label>
                                 <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;"><input type="checkbox" id="randomIncludeShows" ${JE.currentSettings.randomIncludeShows ? 'checked' : ''} style="width:18px; height:18px; accent-color:${toggleAccentColor}; cursor:pointer;"><span>${JE.t('panel_settings_random_button_shows')}</span></label>
                             </div>
+                            <div style="font-weight:500; margin:16px 0 8px;">${JE.t('panel_settings_random_button_libraries')}</div>
+                            <div id="randomLibrariesBox" style="padding:12px; background:${presetBoxBackground}; border-radius:6px; border-left:3px solid ${toggleAccentColor};">
+                                <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-bottom:8px;">${JE.t('panel_settings_random_button_libraries_desc')}</div>
+                                <!-- Library checkboxes are appended asynchronously in wireMiscSettingsControls -->
+                            </div>
                             <div style="font-weight:500; margin:16px 0 8px;">${JE.t('panel_settings_random_button_source')}</div>
                             <div style="padding:12px; background:${presetBoxBackground}; border-radius:6px; border-left:3px solid ${toggleAccentColor};">
                                 <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;"><input type="checkbox" id="randomScopeCurrentContainer" ${JE.currentSettings.randomScopeCurrentContainer ? 'checked' : ''} style="width:18px; height:18px; accent-color:${toggleAccentColor}; cursor:pointer;"><div><div style="font-weight:500;">${JE.t('panel_settings_random_button_scope_current')}</div><div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px;">${JE.t('panel_settings_random_button_scope_current_desc')}</div></div></label>

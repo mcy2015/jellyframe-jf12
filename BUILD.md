@@ -16,7 +16,8 @@
 | `CustomTabs_0.3.0.1_jf124.zip` | Custom Tabs 0.3.0.1（配置页汉化） | 自定义标签页，依赖 FT |
 | `PluginPages_3.0.0.1_jf124.zip` | Plugin Pages 3.0.0.1 | 插件自定义页面，依赖 FT |
 | `EditorsChoice_1.6.2.1_jf124.zip` | EditorsChoice 1.6.2.1（配置页汉化） | Netflix 式精选滑块，依赖 FT |
-| `JellyfinEnhanced_12.14.0.1_jf124.zip` | Jellyfin Enhanced 12.14.0.1（jf12 重编 + 管理配置页汉化约 1000 处；用户面板仍英文） | Web UI 增强套件，依赖 FT。⚠️ 装了本仓版本就不要再加 JE 官方源升级，否则英文版会覆盖汉化 |
+| `JellyfinEnhanced_12.14.0.2_jf124.zip` | Jellyfin Enhanced 12.14.0.2（jf12 重编 + 管理配置页汉化约 1000 处；用户面板随机按钮新增「媒体库范围」多选） | Web UI 增强套件，依赖 FT。⚠️ 装了本仓版本就不要再加 JE 官方源升级，否则英文版会覆盖汉化 |
+| `JellyfinEnhanced_12.14.0.1_jf124.zip` | JE 12.14.0.1（旧版，无媒体库范围功能；manifest 历史条目仍指向它） | 回退件 |
 
 ### Jellyfin Enhanced 官方源（本项目已自带汉化版，仅供对照）
 官方仓库原生支持 Jellyfin 12.x：`https://raw.githubusercontent.com/n00bcodr/jellyfin-plugins/main/manifest.json`。上游周更（12.13→12.14 仅 6 天），官方新版本号 > 12.14.0.1 时若同时加了官方源会被提示升级并覆盖汉化。

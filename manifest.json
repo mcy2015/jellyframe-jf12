@@ -180,6 +180,17 @@
     "owner": "mcy2015 (upstream: n00bcodr)",
     "versions": [
       {
+        "version": "12.14.0.2",
+        "changelog": "Random button: new per-user Library Scope picker in the Enhanced panel - restrict random picks to selected libraries (falls back to the whole library when a scope is empty); item types remain a filter within the scope. zh-CN/zh-HK/en panel strings included.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/dist/JellyfinEnhanced_12.14.0.2_jf124.zip",
+        "checksum": "B002A4088A8417D2F406D6AC1D6AD700",
+        "timestamp": "2026-11-08T03:30:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      },
+      {
         "version": "12.14.0.1",
         "changelog": "Rebuilt against Jellyfin 12.4 (net10.0, AssemblyVersion 12.14.0.1); admin config page (~1000 strings) localized to zh-CN; no functional changes vs upstream 12.14.0.0.",
         "targetAbi": "12.4.0.0",

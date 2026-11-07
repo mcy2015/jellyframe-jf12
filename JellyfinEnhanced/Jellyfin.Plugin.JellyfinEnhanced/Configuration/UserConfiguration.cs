@@ -30,6 +30,8 @@ namespace Jellyfin.Plugin.JellyfinEnhanced.Configuration
         public bool RandomIncludeShows { get; set; }
         public bool RandomScopeCurrentContainer { get; set; }
         public string RandomSourceId { get; set; } = "";
+        /// <summary>Libraries (CollectionFolder/UserView ids) the random button draws from; empty = whole library.</summary>
+        public List<string> RandomLibraryIds { get; set; } = new List<string>();
         public bool ShowWatchProgress { get; set; }
         public string WatchProgressMode { get; set; } = "percentage";
         public string WatchProgressTimeFormat { get; set; } = "hours";
