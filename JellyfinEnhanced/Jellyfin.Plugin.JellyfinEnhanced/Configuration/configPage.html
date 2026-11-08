@@ -67,10 +67,10 @@
                     <div class="je-header-title-row">
                         <h2 class="sectionTitle">Jellyfin Enhanced</h2>
                         <a class="je-help-link" target="_blank" href="https://github.com/n00bcodr/Jellyfin-Enhanced" title="Help" aria-label="Docs and Help">
-                            <span class="je-help-link-label">Help</span>
+                            <span class="je-help-link-label">帮助</span>
                         </a>
                         <button id="toggleDescriptionsBtn" type="button" class="je-desc-toggle" title="Show or hide setting descriptions" aria-label="Show or hide setting descriptions" aria-pressed="true">
-                            <span class="je-desc-toggle-label">Descriptions</span>
+                            <span class="je-desc-toggle-label">描述说明</span>
                             <span class="je-desc-toggle-state" aria-hidden="true">On</span>
                         </button>
                     </div>
@@ -85,30 +85,30 @@
                 </div>
 
                 <div class="je-tab-bar">
-                <button class="jellyfin-tab-button active" data-tab="overview"><h3><i class="material-icons je-tab-icon" aria-hidden="true">dashboard</i>Overview</h3></button>
-                <button class="jellyfin-tab-button" data-tab="display"><h3><i class="material-icons je-tab-icon" aria-hidden="true">palette</i>Display</h3></button>
-                <button class="jellyfin-tab-button" data-tab="media-tags"><h3><i class="material-icons je-tab-icon" aria-hidden="true">sell</i>Media Tags</h3></button>
-                <button class="jellyfin-tab-button" data-tab="playback"><h3><i class="material-icons je-tab-icon" aria-hidden="true">play_circle</i>Playback</h3></button>
-                <button class="jellyfin-tab-button" data-tab="pages"><h3><i class="material-icons je-tab-icon" aria-hidden="true">view_list</i>Pages</h3></button>
+                <button class="jellyfin-tab-button active" data-tab="overview"><h3><i class="material-icons je-tab-icon" aria-hidden="true">dashboard</i>总览</h3></button>
+                <button class="jellyfin-tab-button" data-tab="display"><h3><i class="material-icons je-tab-icon" aria-hidden="true">palette</i>显示</h3></button>
+                <button class="jellyfin-tab-button" data-tab="media-tags"><h3><i class="material-icons je-tab-icon" aria-hidden="true">sell</i>媒体标签</h3></button>
+                <button class="jellyfin-tab-button" data-tab="playback"><h3><i class="material-icons je-tab-icon" aria-hidden="true">play_circle</i>播放</h3></button>
+                <button class="jellyfin-tab-button" data-tab="pages"><h3><i class="material-icons je-tab-icon" aria-hidden="true">view_list</i>页面</h3></button>
                 <button class="jellyfin-tab-button" data-tab="seerr"><h3><img data-je-cdn="selfhst/svg/seerr.svg" alt="" class="je-tab-icon-img">Seerr</h3></button>
                 <button class="jellyfin-tab-button" data-tab="arr"><h3><i class="material-icons je-tab-icon" aria-hidden="true">dns</i>*arr</h3></button>
-                <button class="jellyfin-tab-button" data-tab="services"><h3><i class="material-icons je-tab-icon" aria-hidden="true">hub</i>Services</h3></button>
-                <button class="jellyfin-tab-button" data-tab="elsewhere"><h3><i class="material-icons je-tab-icon" aria-hidden="true">travel_explore</i>Elsewhere &amp; Reviews</h3></button>
-                <button class="jellyfin-tab-button" data-tab="extras"><h3><i class="material-icons je-tab-icon" aria-hidden="true">auto_awesome</i>Extras</h3></button>
-                    <button class="jellyfin-tab-button" data-tab="keyboard"><h3><i class="material-icons je-tab-icon" aria-hidden="true">keyboard</i>Keyboard</h3></button>
-                    <button class="jellyfin-tab-button" data-tab="admin"><h3><i class="material-icons je-tab-icon" aria-hidden="true">admin_panel_settings</i>Admin</h3></button>
-                    <button class="jellyfin-tab-button" data-tab="about"><h3><i class="material-icons je-tab-icon" aria-hidden="true">favorite</i>Credits</h3></button>
-                <button class="jellyfin-tab-button" data-tab="docs"><h3><i class="material-icons je-tab-icon" aria-hidden="true">menu_book</i>Docs</h3></button>
+                <button class="jellyfin-tab-button" data-tab="services"><h3><i class="material-icons je-tab-icon" aria-hidden="true">hub</i>服务</h3></button>
+                <button class="jellyfin-tab-button" data-tab="elsewhere"><h3><i class="material-icons je-tab-icon" aria-hidden="true">travel_explore</i>Elsewhere 与评论</h3></button>
+                <button class="jellyfin-tab-button" data-tab="extras"><h3><i class="material-icons je-tab-icon" aria-hidden="true">auto_awesome</i>附加功能</h3></button>
+                    <button class="jellyfin-tab-button" data-tab="keyboard"><h3><i class="material-icons je-tab-icon" aria-hidden="true">keyboard</i>快捷键</h3></button>
+                    <button class="jellyfin-tab-button" data-tab="admin"><h3><i class="material-icons je-tab-icon" aria-hidden="true">admin_panel_settings</i>管理</h3></button>
+                    <button class="jellyfin-tab-button" data-tab="about"><h3><i class="material-icons je-tab-icon" aria-hidden="true">favorite</i>制作信息</h3></button>
+                <button class="jellyfin-tab-button" data-tab="docs"><h3><i class="material-icons je-tab-icon" aria-hidden="true">menu_book</i>文档</h3></button>
                 </div>
             </div>
 
             <div id="je-probe-warning" class="je-note-banner" style="display: none;" role="status" aria-live="polite">
                 <i class="material-icons je-note-icon">warning_amber</i>
                 <div>
-                    <strong>Plugin detection issue</strong>
+                    <strong>插件检测问题</strong>
                     <span id="je-probe-warning-msg"></span>
                     <div style="margin-top:8px;">
-                        <button id="je-probe-retry-btn" type="button" class="jea-btn">Retry</button>
+                        <button id="je-probe-retry-btn" type="button" class="jea-btn">重试</button>
                     </div>
                 </div>
             </div>
@@ -116,14 +116,14 @@
             <div id="je-host-mismatch-warning" class="je-note-banner" style="display: none;" role="alert">
                 <i class="material-icons je-note-icon">warning_amber</i>
                 <div>
-                    <strong id="je-host-mismatch-title">Wrong plugin build for this Jellyfin version</strong>
+                    <strong id="je-host-mismatch-title">当前插件构建与该 Jellyfin 版本不匹配</strong>
                     <span id="je-host-mismatch-msg"></span>
                     <div id="je-host-mismatch-install" style="margin-top:8px;">
-                        Install <code id="je-host-mismatch-asset"></code> instead, from the plugin repository
+                        请改从插件仓库安装 <code id="je-host-mismatch-asset"></code>
                         <a id="je-host-mismatch-link" target="_blank" rel="noopener noreferrer"></a>.
                     </div>
                     <div id="je-host-unsupported-check" style="margin-top:8px; display:none;">
-                        Check the Jellyfin Enhanced releases for a build that lists <span id="je-host-unsupported-line"></span> support:
+                        请到 Jellyfin Enhanced 的 releases 页寻找构建清单中标注 <span id="je-host-unsupported-line"></span> 支持版本：
                         <a id="je-host-unsupported-link" href="https://github.com/n00bcodr/Jellyfin-Enhanced/releases" target="_blank" rel="noopener noreferrer">https://github.com/n00bcodr/Jellyfin-Enhanced/releases</a>.
                     </div>
                 </div>
@@ -135,13 +135,13 @@
                     <div class="je-info-banner je-fieldset-wide je-overview-intro">
                         <i class="material-icons je-info-icon">dashboard</i>
                         <div>
-                            The essential enhancement suite for Jellyfin, bundling advanced features and customizations into one convenient plugin.<br/><br/>
-                            This <strong>Overview</strong> is a read-only snapshot of:<br/>
-                            &bull; Service connection health<br/>
-                            &bull; Which optional companion plugins are installed<br/>
-                            &bull; Which features are enabled or misconfigured<br/><br/>
-                            <em>To turn features on or off, use the other tabs</em> (Display, Playback, Pages, Seerr, *arr, Extras, ...).<br/>
-                            Clicking any card here jumps straight to the tab that owns it.
+                            Jellyfin 的核心增强套件，把高级功能与自定义选项打包进一个插件。<br/><br/>
+                            这个<strong>总览</strong>页是以下内容的只读快照：<br/>
+                            &bull; 各服务连接健康状况<br/>
+                            &bull; 安装了哪些可选配套插件<br/>
+                            &bull; 哪些功能已启用或配置有误<br/><br/>
+                            <em>要开关各项功能，请使用其他标签页</em> （显示、播放、页面、Seerr、*arr、附加功能等）。<br/>
+                            点击这里的任意卡片会直达其所属标签页。
                         </div>
                     </div>
 
@@ -155,9 +155,9 @@
                     <div class="je-info-banner je-fieldset-wide je-tab-intro">
                         <i class="material-icons je-info-icon">person</i>
                         <div>
-                            <strong>Many of these are personal settings.</strong><br/>
-                            What you set here is the default every user starts with. Each user can change their own copy in the <strong>Enhanced Panel</strong> (sidebar link, user menu, or press <kbd class="je-kbd">?</kbd> while browsing).<br/>
-                            Changing a setting here does not change existing users. A setting with the small people icon shows a banner in its card when you change it: <strong>Apply the above</strong> copies just the changed settings to every user, and <strong>Apply all plugin settings</strong> copies all of them.
+                            <strong>其中许多是个人化设置。</strong><br/>
+                            此处设置的是每个用户的初始默认值，各用户可在<strong>增强面板</strong>（侧边栏入口、用户菜单，或浏览时按 <kbd class="je-kbd">?</kbd>）中修改自己的副本。<br/>
+                            在此更改设置不会影响已有用户。带小人图标的设置项被修改时，其卡片会显示横幅：<strong>应用上述更改</strong> 只把本次改动推送给所有用户，<strong>应用全部插件设置</strong> 则推送全部设置。
                         </div>
                     </div>
 
@@ -185,9 +185,9 @@
                     <div class="je-info-banner je-fieldset-wide je-tab-intro">
                         <i class="material-icons je-info-icon">person</i>
                         <div>
-                            <strong>Many of these are personal settings.</strong><br/>
-                            What you set here is the default every user starts with. Each user can change their own copy in the <strong>Enhanced Panel</strong> (sidebar link, user menu, or press <kbd class="je-kbd">?</kbd> while browsing).<br/>
-                            Changing a setting here does not change existing users. A setting with the small people icon shows a banner in its card when you change it: <strong>Apply the above</strong> copies just the changed settings to every user, and <strong>Apply all plugin settings</strong> copies all of them.
+                            <strong>其中许多是个人化设置。</strong><br/>
+                            此处设置的是每个用户的初始默认值，各用户可在<strong>增强面板</strong>（侧边栏入口、用户菜单，或浏览时按 <kbd class="je-kbd">?</kbd>）中修改自己的副本。<br/>
+                            在此更改设置不会影响已有用户。带小人图标的设置项被修改时，其卡片会显示横幅：<strong>应用上述更改</strong> 只把本次改动推送给所有用户，<strong>应用全部插件设置</strong> 则推送全部设置。
                         </div>
                     </div>
 
@@ -202,8 +202,8 @@
                     <div class="je-info-banner je-fieldset-wide je-tab-intro">
                         <i class="material-icons je-info-icon">integration_instructions</i>
                         <div>
-                            These features add or replace pages in the Jellyfin web UI. Support integration with <a class="sectionTitle" target="_blank" href="https://github.com/IAmParadox27/jellyfin-plugin-pages">Plugin Pages</a> (sidebar) or <a class="sectionTitle" target="_blank" href="https://github.com/IAmParadox27/jellyfin-plugin-custom-tabs">Custom Tabs</a> (home page).<br/>
-                            <strong>On Jellyfin 12's Modern Layout, sidebar links (including Plugin Pages) only appear on mobile</strong>, not desktop, a limitation of that layout's nav drawer. Use the <strong>native Home tab</strong> option below for a desktop-visible entry point on Jellyfin 12.
+                            这些功能会添加或替换 Jellyfin 网页界面中的页面。支持与 <a class="sectionTitle" target="_blank" href="https://github.com/IAmParadox27/jellyfin-plugin-pages">Plugin Pages</a> （侧边栏）或 <a class="sectionTitle" target="_blank" href="https://github.com/IAmParadox27/jellyfin-plugin-custom-tabs">Custom Tabs</a> （主页）。<br/>
+                            <strong>在 Jellyfin 12 的现代布局下，侧边栏链接（含 Plugin Pages）仅在移动端</strong>显示而不在桌面端显示，这是该布局导航抽屉的限制。请使用下方的 <strong>原生主页标签</strong> 选项，即可在 Jellyfin 12 桌面端获得可见入口。
                         </div>
                     </div>
 
@@ -234,7 +234,7 @@
                     <div class="je-info-banner je-fieldset-wide je-tab-intro">
                         <i class="material-icons je-info-icon">download_for_offline</i>
                         <div>
-                            Connect Jellyfin Enhanced to your <strong>Sonarr</strong>, <strong>Radarr</strong>, <strong>Bazarr</strong>, and <strong>Shoko</strong> instances.<br/>Each service gets its own box below; add as many Sonarr/Radarr instances as you want (one per quality profile / library), plus a single Bazarr endpoint and a single Shoko endpoint. Each instance can be enabled, disabled, or removed independently.
+                            把 Jellyfin Enhanced 连接到你的 <strong>Sonarr</strong>、<strong>Radarr</strong>、<strong>Bazarr</strong> 和 <strong>Shoko</strong> 实例。<br/>每个服务在下方有独立卡片；Sonarr/Radarr 实例可随意添加（每个质量方案/媒体库一条），另支持一个 Bazarr 端点和一个 Shoko 端点。各实例可独立启用、禁用或移除。
                         </div>
                     </div>
 
@@ -262,7 +262,7 @@
                     <div class="je-info-banner je-fieldset-wide je-tab-intro">
                         <i class="material-icons je-info-icon">hub</i>
                         <div>
-                            Third-party services Jellyfin Enhanced can talk to, in one place: keys, connection tests and the features that depend on them. Each card here is a linked copy of the one in its feature tab, so changing it in either place changes both. Seerr and the *arr apps have their own tabs.
+                            第三方服务集中管理：API 密钥、连接测试及依赖它们的功能。这里的每张卡片都是其功能标签页中卡片的联动副本，两处任改一处即同步。Seerr 和 *arr 应用有专属标签页。
                         </div>
                     </div>
 
@@ -320,7 +320,7 @@
                 </div>
 
                 <div class="je-apply-hint">
-                    Settings require a page refresh to take effect. Clear browser cache if changes persist.
+                    设置需刷新页面后生效 to take effect. Clear browser cache if changes persist.
                 </div>
 
                 <div class="je-save-dock" role="toolbar" aria-label="Save settings">
@@ -330,7 +330,7 @@
                     </span>
                     <button class="je-save-dock-btn" type="submit">
                         <i class="material-icons je-save-dock-icon" aria-hidden="true">save</i>
-                        <span>Save Settings</span>
+                        <span>保存设置</span>
                     </button>
                 </div>
             </form>
@@ -338,7 +338,7 @@
             <!-- Media Tags: drawn by js/enhanced/admintags/ the first time the tab opens, and saved one field at a time.
                  Outside the form, so its Save, unsaved-changes badge and search never read these controls. -->
             <div id="media-tags" class="jellyfin-tab-content je-mt-tab">
-                <div class="je-tag-admin"><p class="je-ta-wait" role="status">Loading Media Tags settings…</p></div>
+                <div class="je-tag-admin"><p class="je-ta-wait" role="status">正在加载媒体标签设置…</p></div>
             </div>
         </div>
     </div>
@@ -793,7 +793,7 @@
                 if (!root) return;
                 root.innerHTML = '<div class="je-ta-wait" role="alert">'
                     + jeMtEsc('Jellyfin Enhanced has not finished loading in this browser, so the Media Tags settings cannot be shown. '
-                    + 'Retry, and if this stays, check that the plugin is active and see the browser console.')
+                    + '重试；若持续如此，请检查插件是否处于启用状态，并查看浏览器控制台。')
                     + ' <button type="button" class="jea-btn" data-je-mt-retry>' + jeMtEsc('Retry') + '</button></div>';
                 root.querySelector('[data-je-mt-retry]').addEventListener('click', function () { jeMountMediaTags(); }, { once: true });
             }
@@ -3067,7 +3067,7 @@
                     host.appendChild(wrap);
                 });
                 if (!eligible.length) {
-                    host.innerHTML = '<div class="fieldDescription">No movie or TV libraries found.</div>';
+                    host.innerHTML = '<div class="fieldDescription">未找到电影或电视剧媒体库。</div>';
                 }
                 // Ids saved earlier whose library has since been deleted: the
                 // server can't match them (so, if they were the only ones,
@@ -4110,7 +4110,7 @@
         }
 
         async function resetAllUserSettingsNow() {
-            if (await JEAdmin.confirm("Are you sure?\n\nThis saves the current configuration, then copies these Display/Playback/etc. values into every user's Enhanced Panel settings, replacing anything they've customized for themselves. This cannot be undone per-user; each user would have to re-apply their own preferences afterward.")) {
+            if (await JEAdmin.confirm("确定吗？\n\n这将保存当前配置，并把这些 显示/播放 等值复制为每个用户的增强面板设置，覆盖其所有个人定制。无法按用户撤销；之后各用户需要重新设置自己的偏好。")) {
                 Dashboard.showLoadingMsg();
                 try {
                     // First, save the current configuration
@@ -4848,15 +4848,15 @@
             { id: 'showReleaseDate',          checkFn: hasTmdbKey, hint: 'Add a TMDB API Key to enable', icon: 'key' },
             { id: 'showElsewhereOnJellyseerr', checkFn: hasTmdbKey, hint: 'Add a TMDB API Key to enable', icon: 'key' },
             { id: 'autoMovieRequestEnabled',   checkFn: hasTmdbKey, hint: 'Add a TMDB API Key to enable', icon: 'key' },
-            { id: 'autoSkipIntro',                 checkFn: function() { return hasIntroSkipper !== false; }, hint: 'Install Intro Skipper plugin to enable', icon: 'extension' },
-            { id: 'autoSkipOutro',                 checkFn: function() { return hasIntroSkipper !== false; }, hint: 'Install Intro Skipper plugin to enable', icon: 'extension' },
-            { id: 'bookmarksUsePluginPages',       checkFn: function() { return hasPluginPages !== false; }, hint: 'Install Plugin Pages plugin to enable', icon: 'extension' },
-            { id: 'hiddenContentUsePluginPages',   checkFn: function() { return hasPluginPages !== false; }, hint: 'Install Plugin Pages plugin to enable', icon: 'extension' },
-            { id: 'downloadsUsePluginPages',       checkFn: function() { return hasPluginPages !== false; }, hint: 'Install Plugin Pages plugin to enable', icon: 'extension' },
-            { id: 'calendarUsePluginPages',        checkFn: function() { return hasPluginPages !== false; }, hint: 'Install Plugin Pages plugin to enable', icon: 'extension' },
-            { id: 'recommendationsUsePluginPages', checkFn: function() { return hasPluginPages !== false; }, hint: 'Install Plugin Pages plugin to enable', icon: 'extension' },
-            { id: 'activityFeedUsePluginPages',    checkFn: function() { return hasPluginPages !== false; }, hint: 'Install Plugin Pages plugin to enable', icon: 'extension' },
-            { id: 'catchUpUsePluginPages',           checkFn: function() { return hasPluginPages !== false; }, hint: 'Install Plugin Pages plugin to enable', icon: 'extension' },
+            { id: 'autoSkipIntro',                 checkFn: function() { return hasIntroSkipper !== false; }, hint: '需安装 Intro Skipper 插件', icon: 'extension' },
+            { id: 'autoSkipOutro',                 checkFn: function() { return hasIntroSkipper !== false; }, hint: '需安装 Intro Skipper 插件', icon: 'extension' },
+            { id: 'bookmarksUsePluginPages',       checkFn: function() { return hasPluginPages !== false; }, hint: '需安装 Plugin Pages 插件', icon: 'extension' },
+            { id: 'hiddenContentUsePluginPages',   checkFn: function() { return hasPluginPages !== false; }, hint: '需安装 Plugin Pages 插件', icon: 'extension' },
+            { id: 'downloadsUsePluginPages',       checkFn: function() { return hasPluginPages !== false; }, hint: '需安装 Plugin Pages 插件', icon: 'extension' },
+            { id: 'calendarUsePluginPages',        checkFn: function() { return hasPluginPages !== false; }, hint: '需安装 Plugin Pages 插件', icon: 'extension' },
+            { id: 'recommendationsUsePluginPages', checkFn: function() { return hasPluginPages !== false; }, hint: '需安装 Plugin Pages 插件', icon: 'extension' },
+            { id: 'activityFeedUsePluginPages',    checkFn: function() { return hasPluginPages !== false; }, hint: '需安装 Plugin Pages 插件', icon: 'extension' },
+            { id: 'catchUpUsePluginPages',           checkFn: function() { return hasPluginPages !== false; }, hint: '需安装 Plugin Pages 插件', icon: 'extension' },
             { id: 'bookmarksUseCustomTabs',        checkFn: function() { return hasCustomTabs !== false; }, hint: 'Install Custom Tabs plugin to enable', icon: 'extension' },
             { id: 'hiddenContentUseCustomTabs',    checkFn: function() { return hasCustomTabs !== false; }, hint: 'Install Custom Tabs plugin to enable', icon: 'extension' },
             { id: 'downloadsUseCustomTabs',        checkFn: function() { return hasCustomTabs !== false; }, hint: 'Install Custom Tabs plugin to enable', icon: 'extension' },
@@ -5725,7 +5725,7 @@
          * rendered as "Checking…" rather than asserting missing.
          */
         var OPTIONAL_PLUGINS = [
-            { key: 'fileTransformation', name: 'File Transformation', icon: 'transform',       url: 'https://github.com/IAmParadox27/jellyfin-plugin-file-transformation', purpose: 'Required by Custom Tabs, Plugin Pages, and other plugins that modify the web client.', getFlag: function(){ return hasFileTransformation; } },
+            { key: 'fileTransformation', name: 'File Transformation', icon: 'transform',       url: 'https://github.com/IAmParadox27/jellyfin-plugin-file-transformation', purpose: 'Custom Tabs、Plugin Pages 及其他修改网页客户端的插件都依赖它。', getFlag: function(){ return hasFileTransformation; } },
             { key: 'pluginPages',        name: 'Plugin Pages',        icon: 'view_list',       url: 'https://github.com/IAmParadox27/jellyfin-plugin-pages',               purpose: 'Sidebar pages for Bookmarks, Hidden Content, Requests, Calendar.',                   getFlag: function(){ return hasPluginPages; } },
             { key: 'customTabs',         name: 'Custom Tabs',         icon: 'tab',             url: 'https://github.com/IAmParadox27/jellyfin-plugin-custom-tabs',         purpose: 'Home-page tab entries for Bookmarks, Hidden Content, Requests, Calendar.',          getFlag: function(){ return hasCustomTabs; } },
             { key: 'introSkipper',       name: 'Intro Skipper',       icon: 'skip_next',       url: 'https://github.com/intro-skipper/intro-skipper',                      purpose: 'Source of timestamps for Auto-skip Intro / Auto-skip Outro.',                        getFlag: function(){ return hasIntroSkipper; } },
@@ -6085,7 +6085,7 @@
             }
         })();
 
-        // A page can use the native Home tab or Custom Tabs, never both: the two
+        // A page can use the 原生主页标签 or Custom Tabs, never both: the two
         // would register competing tabs for the same page.
         var TAB_EXCLUSIVE_PAIRS = ['bookmarks', 'hiddenContent', 'downloads', 'calendar', 'recommendations', 'activityFeed', 'catchUp'].map(function(p) {
             return { native: p + 'UseNativeTab', custom: p + 'UseCustomTabs' };
@@ -7578,7 +7578,7 @@
                     var countdown = document.createElement('span');
                     countdown.className = 'je-preview-panel-countdown';
                     countdown.textContent = fmtSeconds(ms);
-                    body.appendChild(document.createTextNode('This is how long the real shortcuts/settings panel (opened with the '));
+                    body.appendChild(document.createTextNode('真实的快捷键/设置面板（'));
                     var kbd = document.createElement('kbd');
                     kbd.textContent = '?';
                     body.appendChild(kbd);

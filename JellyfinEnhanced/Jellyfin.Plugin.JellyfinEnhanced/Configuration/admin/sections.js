@@ -4,76 +4,76 @@
 /* Display tab sections. See jeAdmin.js for the field spec. */
 JEAdmin.define({
         'ui-preferences': {
-            title: 'UI Preferences',
+            title: '界面偏好',
             fields: [
-                { id: 'showWatchProgress', prop: 'ShowWatchProgress', type: 'toggle', perUser: true, label: 'Show watch progress',
-                  desc: 'Show watch progress for items in item details page.' },
-                { id: 'watchProgressDefaultMode', prop: 'WatchProgressDefaultMode', type: 'select', default: 'percentage', label: 'Watch Progress Default',
-                  options: [['percentage', 'Percentage'], ['time', 'Time Watched'], ['remaining', 'Time Remaining']],
-                  desc: 'Choose default display for watch progress (percentage, time watched, or time remaining).' },
-                { id: 'watchProgressTimeFormat', prop: 'WatchProgressTimeFormat', type: 'select', default: 'hours', label: 'Watch Progress Time Format',
+                { id: 'showWatchProgress', prop: 'ShowWatchProgress', type: 'toggle', perUser: true, label: '显示观看进度',
+                  desc: '在条目详情页中显示条目的观看进度。' },
+                { id: 'watchProgressDefaultMode', prop: 'WatchProgressDefaultMode', type: 'select', default: 'percentage', label: '观看进度默认样式',
+                  options: [['percentage', '百分比'], ['time', '已观看时长'], ['remaining', '剩余时长']],
+                  desc: '选择观看进度的默认显示方式（百分比、已观看时长或剩余时长）。' },
+                { id: 'watchProgressTimeFormat', prop: 'WatchProgressTimeFormat', type: 'select', default: 'hours', label: '观看进度时间格式',
                   options: [['hours', 'h:m'], ['full', 'y:mo:d:h:m']],
-                  desc: 'Select how time-based progress is shown.' },
-                { id: 'showFileSizes', prop: 'ShowFileSizes', type: 'toggle', perUser: true, label: 'Show file sizes',
-                  desc: 'Display the file size of each item on item detail pages or collections pages.' },
-                { id: 'showAudioLanguages', prop: 'ShowAudioLanguages', type: 'toggle', perUser: true, label: 'Show available audio languages on item detail page',
-                  desc: 'List the audio language flags available for each title on its detail page.' },
-                { id: 'removeContinueWatchingEnabled', prop: 'RemoveContinueWatchingEnabled', type: 'toggle', perUser: true, label: 'Enable "Remove from Continue Watching"',
-                  desc: 'Adds a "Remove from Continue Watching" option to the right-click / long-press context menu. Hides items non-destructively, so playback position is preserved and entries appear in Hidden Content\'s management page (look for "Add back to Continue Watching" on each entry). Items also unhide automatically when you resume playback.' }
+                  desc: '选择基于时间的进度的显示方式。' },
+                { id: 'showFileSizes', prop: 'ShowFileSizes', type: 'toggle', perUser: true, label: '显示文件大小',
+                  desc: '在条目详情页或合集页中显示每个条目的文件大小。' },
+                { id: 'showAudioLanguages', prop: 'ShowAudioLanguages', type: 'toggle', perUser: true, label: '在条目详情页显示可用的音频语言',
+                  desc: '在详情页中列出每个片目可用的音频语言标志。' },
+                { id: 'removeContinueWatchingEnabled', prop: 'RemoveContinueWatchingEnabled', type: 'toggle', perUser: true, label: '启用"从继续观看中移除"',
+                  desc: '在右键 / 长按上下文菜单中添加"从继续观看中移除"选项。以非破坏性方式隐藏条目，因此播放进度会保留，且条目会出现在"隐藏内容"管理页中（在每个条目上可找到"重新加入继续观看"）。恢复播放时，条目也会自动取消隐藏。' }
             ]
         },
         'icons-theme': {
-            title: 'Icons & Theme',
+            title: '图标与主题',
             fields: [
-                { id: 'useIcons', prop: 'UseIcons', type: 'toggle', main: true, default: true, label: 'Use Icons in UI', descClass: 'je-field-desc-lg',
-                  desc: 'Display icons throughout the UI (toasts, settings panel headers, etc.)' },
-                { id: 'iconStyle', prop: 'IconStyle', type: 'select', default: 'emoji', label: 'Icon Style',
-                  options: [['emoji', 'Emoji'], ['lucide', 'Lucide Icons'], ['mui', 'Material UI Icons']],
-                  desc: 'Choose between emoji characters, Lucide icons, or Material UI icons.' }
+                { id: 'useIcons', prop: 'UseIcons', type: 'toggle', main: true, default: true, label: '在界面中显示图标', descClass: 'je-field-desc-lg',
+                  desc: '在整个界面中显示图标（提示消息、设置面板标题等）' },
+                { id: 'iconStyle', prop: 'IconStyle', type: 'select', default: 'emoji', label: '图标风格',
+                  options: [['emoji', '表情符号'], ['lucide', 'Lucide 图标'], ['mui', 'Material UI 图标']],
+                  desc: '在表情符号、Lucide 图标或 Material UI 图标之间选择。' }
             ]
         },
         'content-warnings': {
-            title: 'Content Warnings (DoesTheDogDie)', iconImg: 'ddd-static/favicon.ico',
+            title: '内容警告（DoesTheDogDie）', iconImg: 'ddd-static/favicon.ico',
             fields: [
-                { id: 'doesTheDogDieEnabled', prop: 'DoesTheDogDieEnabled', type: 'toggle', main: true, label: 'Show Content Warnings',
+                { id: 'doesTheDogDieEnabled', prop: 'DoesTheDogDieEnabled', type: 'toggle', main: true, label: '显示内容预警',
                   toConfig: (v) => !!v, fromConfig: (v) => !!v,
-                  desc: '<ul class="je-desc-list"><li>Shows community-voted content warnings (a dog dies, gore, flashing lights and more) on movie and show pages</li><li>Each user picks the triggers they care about with the gear icon on the section</li><li>Requires a free API key from doesthedogdie.com. The free tier is for non-commercial use and allows 5,000 requests a month for the whole server. Results are cached for weeks, so only titles nobody has opened yet cost requests</li></ul>' },
-                { id: 'doesTheDogDieApiKey', prop: 'DoesTheDogDieApiKey', type: 'text', label: 'DoesTheDogDie API Key',
+                  desc: '<ul class="je-desc-list"><li>在电影和剧集页面显示社区投票的内容警告（有狗死亡、血腥、闪光等）</li><li>每个用户可通过该区块的齿轮图标选择自己在意的触发项</li><li>需要 doesthedogdie.com 的免费 API 密钥。免费档仅限非商业使用，全服每月 5,000 次请求。结果缓存数周，只有从未被打开过的条目才消耗请求次数</li></ul>' },
+                { id: 'doesTheDogDieApiKey', prop: 'DoesTheDogDieApiKey', type: 'text', label: 'DoesTheDogDie API 密钥',
                   toConfig: (v) => String(v || '').trim(), fromConfig: (v) => v || '',
-                  desc: 'Your API key from your <a class="sectionTitle" href="https://www.doesthedogdie.com/profile" target="_blank">doesthedogdie.com</a> profile page.' }
+                  desc: '你的 API 密钥来自 <a class="sectionTitle" href="https://www.doesthedogdie.com/profile" target="_blank">doesthedogdie.com</a> 个人资料页。' }
             ]
         },
         'awards': {
-            title: 'Awards',
+            title: '奖项',
             fields: [
-                { id: 'showAwards', prop: 'ShowAwards', type: 'toggle', main: true, label: 'Show Awards Banner', descClass: 'je-field-desc-sm-font-lg',
-                  desc: 'Shows a wins/nominations banner on item-details pages, sourced from Wikidata by TMDB id. Data is as accurate as what is available in Wikidata.' }
+                { id: 'showAwards', prop: 'ShowAwards', type: 'toggle', main: true, label: '显示奖项横幅', descClass: 'je-field-desc-sm-font-lg',
+                  desc: '在条目详情页显示获奖/提名横幅，数据按 TMDB id 取自 Wikidata，准确性以 Wikidata 所载为准。' }
             ]
         },
         'random-button': {
-            title: 'Random Button',
+            title: '随机按钮',
             fields: [
-                { id: 'randomButtonEnabled', prop: 'RandomButtonEnabled', type: 'toggle', perUser: true, main: true, label: 'Enable Random Button',
-                  desc: 'Adds a "Play Random" button to the Jellyfin header that opens a random item from the user\'s accessible libraries.' },
-                { id: 'randomUnwatchedOnly', prop: 'RandomUnwatchedOnly', type: 'toggle', perUser: true, label: 'Show unwatched only',
-                  desc: 'When enabled, the random picker only chooses items the user has not watched yet.' },
-                { id: 'randomIncludeMovies', prop: 'RandomIncludeMovies', type: 'toggle', perUser: true, label: 'Include movies',
-                  desc: 'Include movies in the random pool.' },
-                { id: 'randomIncludeShows', prop: 'RandomIncludeShows', type: 'toggle', perUser: true, label: 'Include shows',
-                  desc: 'Include TV Shows in the random pool.' },
-                { id: 'randomScopeCurrentContainer', prop: 'RandomScopeCurrentContainer', type: 'toggle', perUser: true, label: 'Scope to the current playlist or collection',
-                  desc: 'On a playlist or collection page, the Random button picks from that container\'s items instead of the whole library. Users can also pin a playlist or collection as their permanent source in the Enhanced panel.' }
+                { id: 'randomButtonEnabled', prop: 'RandomButtonEnabled', type: 'toggle', perUser: true, main: true, label: '启用随机按钮',
+                  desc: '在 Jellyfin 页头添加"随机播放"按钮，可从用户可访问的媒体库中随机打开一个条目。' },
+                { id: 'randomUnwatchedOnly', prop: 'RandomUnwatchedOnly', type: 'toggle', perUser: true, label: '仅显示未观看',
+                  desc: '启用后，随机选取只会选择用户尚未观看的条目。' },
+                { id: 'randomIncludeMovies', prop: 'RandomIncludeMovies', type: 'toggle', perUser: true, label: '包含电影',
+                  desc: '将电影纳入随机池。' },
+                { id: 'randomIncludeShows', prop: 'RandomIncludeShows', type: 'toggle', perUser: true, label: '包含剧集',
+                  desc: '将剧集纳入随机池。' },
+                { id: 'randomScopeCurrentContainer', prop: 'RandomScopeCurrentContainer', type: 'toggle', perUser: true, label: '限定在当前播放列表或合集内',
+                  desc: '在播放列表或合集页面，随机按钮将从该容器的条目中选取，而不是整个媒体库。用户还可以在增强面板中将某个播放列表或合集固定为永久来源。' }
             ]
         },
         'audio-language-tags': {
-            title: 'Audio Language Tags', icon: 'translate',
+            title: '音频语言标签', icon: 'translate',
             fields: [
-                { id: 'audioLanguageTagSyncEnabled', prop: 'AudioLanguageTagSyncEnabled', type: 'toggle', main: true, label: 'Enable Audio Language Tags Sync', descClass: 'je-field-desc-xl',
-                  desc: 'Adds each movie\'s and series\' audio languages as Jellyfin tags. A regional track such as en-US gets a base tag ("JE Language: English") and a regional tag ("JE Language: English (United States)").<br/><br/>Existing items are tagged by the "Sync Audio Language Tags to Jellyfin" scheduled task. New and changed items are tagged after a library scan when the Server-Side Tag Cache is enabled.' },
-                { id: 'audioLanguageTagPrefix', prop: 'AudioLanguageTagPrefix', type: 'text', label: 'Tag Prefix', placeholder: 'JE Language: ', default: 'JE Language: ',
-                  desc: 'Prefix added before each language, e.g. "JE Language: English".' },
-                { id: 'audioLanguageTagShowAsLinks', prop: 'AudioLanguageTagShowAsLinks', type: 'toggle', default: true, label: 'Link audio languages to their tag page', descClass: 'je-field-desc-xl',
-                  desc: 'Links each audio language on item detail pages to Jellyfin\'s list of items with that tag.' }
+                { id: 'audioLanguageTagSyncEnabled', prop: 'AudioLanguageTagSyncEnabled', type: 'toggle', main: true, label: '启用音频语言标签同步', descClass: 'je-field-desc-xl',
+                  desc: '把每部电影/剧集的音频语言添加为 Jellyfin 标签。地区音轨（如 en-US）会得到基础标签（“JE Language: English”）和地区标签（“JE Language: English (United States)”）。<br/><br/>已有条目由“同步音频语言标签到 Jellyfin”计划任务打标；启用服务端标签缓存后，新增/变更条目在媒体库扫描后自动打标。' },
+                { id: 'audioLanguageTagPrefix', prop: 'AudioLanguageTagPrefix', type: 'text', label: '标签前缀', placeholder: 'JE 语言：', default: 'JE Language: ',
+                  desc: '加在每个语言前面的前缀，例如 "JE Language: English"。' },
+                { id: 'audioLanguageTagShowAsLinks', prop: 'AudioLanguageTagShowAsLinks', type: 'toggle', default: true, label: '将音频语言链接到其标签页', descClass: 'je-field-desc-xl',
+                  desc: '把条目详情页上的每个音频语言链接到 Jellyfin 中带该标签的条目列表。' }
             ]
         }
     });
@@ -84,26 +84,26 @@ JEAdmin.define({
     const UL = (...li) => '<ul class="je-desc-list">' + li.map((x) => '<li>' + x + '</li>').join('') + '</ul>';
     const tog = (id, label, desc, extra) => Object.assign({ id, type: 'toggle', manual: true, label, desc }, extra);
     const sel = (id, label, options, desc, extra) => Object.assign({ id, type: 'select', manual: true, label, options, desc }, extra);
-    const RS = [['tmdb', 'TMDB'], ['tomatoes', 'RT Critic'], ['popcorn', 'RT Audience'], ['imdb', 'IMDb'], ['trakt', 'Trakt'],
-        ['metacritic', 'Metascore'], ['metacriticuser', 'Metacritic User'], ['letterboxd', 'Letterboxd'], ['myanimelist', 'MAL'], ['anilist', 'AniList'], ['master', 'Master']];
-    const RSN = [['', 'None']].concat(RS);
+    const RS = [['tmdb', 'TMDB'], ['tomatoes', '烂番茄影评人'], ['popcorn', '烂番茄观众'], ['imdb', 'IMDb'], ['trakt', 'Trakt'],
+        ['metacritic', 'Metascore'], ['metacriticuser', 'Metacritic 用户'], ['letterboxd', 'Letterboxd'], ['myanimelist', 'MAL'], ['anilist', 'AniList'], ['master', '主设置']];
+    const RSN = [['', '无']].concat(RS);
     const arrow = (d) => '<i class="material-icons je-cat-arrow-icon" aria-hidden="true">arrow_' + d + 'ward</i>';
 
     JEAdmin.define({
         'overview-status': {
-            title: 'Service Status', icon: 'sensors', class: 'je-overview-section',
+            title: '服务状态', icon: 'sensors', class: 'je-overview-section',
             items: [{ type: 'custom', html: '<div class="je-service-dashboard" id="je-service-dashboard"><div class="je-checklist-empty">Loading service status…</div></div>' }]
         },
         'overview-plugins': {
-            title: 'Optional Dependencies', icon: 'extension', class: 'je-overview-section', id: 'overview-optional-plugins-section',
+            title: '可选依赖', icon: 'extension', class: 'je-overview-section', id: 'overview-optional-plugins-section',
             items: [{ type: 'custom', html: '<div class="je-optional-plugins-dashboard" id="je-optional-plugins"></div>' }]
         },
         'overview-features': {
-            title: 'Features', icon: 'toggle_on', class: 'je-overview-section', id: 'overview-features-section',
+            title: '功能', icon: 'toggle_on', class: 'je-overview-section', id: 'overview-features-section',
             items: [{ type: 'custom', html: '<div class="je-features-dashboard" id="je-features-dashboard"><div class="je-checklist-empty">Loading features…</div></div>' }]
         },
         'overview-actions': {
-            title: 'Quick Actions', icon: 'bolt', class: 'je-overview-section', id: 'overview-quick-actions-section',
+            title: '快捷操作', icon: 'bolt', class: 'je-overview-section', id: 'overview-quick-actions-section',
             items: [{ type: 'custom', html: '<div class="je-quick-actions-grid" id="je-quick-actions-grid">'
                 + '<button type="button" id="retestAllConnectionsBtn" class="je-quick-action" data-action="retest-all"><i class="material-icons je-quick-action-icon" aria-hidden="true">sync</i><div class="je-quick-action-text"><span class="je-quick-action-title">Re-test all service connections</span><span class="je-quick-action-detail">Re-runs the TMDB / Seerr / Sonarr / Radarr tests</span></div></button>'
                 + '<button type="button" id="resetAllUserSettingsBtn" class="je-quick-action" data-action="apply-all-users"><i class="material-icons je-quick-action-icon" aria-hidden="true">group</i><div class="je-quick-action-text"><span class="je-quick-action-title">Apply all plugin settings to every user</span><span class="je-quick-action-detail">Copies every personal setting from the plugin (Display, Playback, ...) into each user, replacing the values they set for themselves</span></div></button>'
@@ -116,31 +116,31 @@ JEAdmin.define({
         // at a time). This card has no fields, so this page's load, Save and apply-to-users never read or write any of
         // them; its links open that tab in place (configPage.html handles links to this page itself).
         'media-tags': {
-            title: 'Media Tags', icon: 'sell', id: 'mediaTagsCard',
+            title: '媒体标签', icon: 'sell', id: 'mediaTagsCard',
             items: [{ type: 'custom', html: '<div class="je-media-tags-card"><div class="je-media-tags-card-text">'
                 + '<div class="fieldDescription">Poster tags (quality, genre, language, rating, age rating, status, people), their default layout, rules and colours, the tag cache and Native Poster Tags have their own tab, Media Tags, which saves each change as you make it.</div>'
                 + '<dl class="je-media-tags-card-facts" id="jeMediaTagsCardFacts" aria-live="polite"></dl></div>'
                 + '<a class="jea-btn jea-btn-primary je-media-tags-open" href="#/configurationpage?name=Jellyfin%20Enhanced&amp;jeSection=media-tags"><i class="material-icons" aria-hidden="true">sell</i><span>Open Media Tags</span></a>'
                 + '<div class="je-media-tags-card-links">'
-                + [['layout', 'Layout defaults'], ['groups', 'Groups'], ['rules', 'Rules'], ['colours', 'Colours'], ['badges', 'Status badges'], ['server', 'Tag cache &amp; native posters']]
+                + [['layout', '布局默认值'], ['groups', '分组'], ['rules', '规则'], ['colours', '配色'], ['badges', '状态徽章'], ['server', '标签缓存与原生海报']]
                     .map(([section, label]) => '<a class="je-media-tags-card-link" href="#/configurationpage?name=Jellyfin%20Enhanced&amp;jeSection=media-tags&amp;tab=' + section + '">' + label + '</a>').join('')
                 + '</div></div>' }]
         },
 
         'spoiler-guard': {
-            title: 'Spoiler Guard', icon: 'blur_on',
+            title: '剧透保护', icon: 'blur_on',
             items: [
                 { type: 'note', html: '<strong>Spoiler Guard</strong> hides episode thumbnails, season posters, movie posters and chapter scenes for unwatched titles each user opts into. It also strips spoiler-bearing metadata: synopses, episode titles, tags, taglines, ratings, air dates, cast on unwatched episodes, chapter names, and TMDB / user reviews on opted-in series.' },
                 tog('spoilerBlurEnabled', 'Enable Spoiler Guard', 'Turns the whole feature on. While it\'s off, the per-show toggle button never appears and nothing is ever hidden. Turn it on to let users protect individual shows, movies, and collections from their own detail pages.', { main: true }),
-                sel('spoilerBlurMode', 'Image replacement mode', [['hide', 'Show stock cards (hide images entirely, default)'], ['blur', 'Blur images']],
+                sel('spoilerBlurMode', 'Image replacement mode', [['hide', '显示通用卡片（完全隐藏图片，默认）'], ['blur', '模糊图片']],
                     'How protected cards look. <strong>Show stock cards</strong> (default) swaps each unwatched image for a safe parent-level placeholder: episodes show their series backdrop, seasons show the series poster, collection-opted movies show the collection art. <strong>Blur images</strong> instead applies a strong blur to the original so silhouettes and dominant colours still hint at "something is here". Pick stock cards for the strictest hide; pick blur if the placeholders feel too aggressive.'),
-                { id: 'spoilerBlurIntensity', type: 'number', manual: true, label: 'Blur intensity', min: 5, max: 100, step: 1,
-                  desc: 'How strong the blur is. <strong>5</strong> is barely smudged, <strong>40</strong> is the recommended default (characters become unrecognisable but the colours still come through), <strong>100</strong> is almost a solid colour wash. Applies to "Blur images" mode, and to "Show stock cards" mode when an item has no safe parent art to substitute (e.g. a directly-opted-in movie), where the original is blurred as a fallback.' },
+                { id: 'spoilerBlurIntensity', type: 'number', manual: true, label: '模糊强度', min: 5, max: 100, step: 1,
+                  desc: '模糊强度。<strong>5</strong> 只是轻抹，<strong>40</strong> 为推荐默认值（人物无法辨认但颜色仍透出），<strong>100</strong> 几乎是纯色块。作用于“模糊图像”模式，以及“显示通用卡片”模式下无安全父级图可替换时（如单独加入的电影）对原图的兜底模糊。' },
                 tog('spoilerBlurArtwork', 'Also hide the wide backdrop / fanart', 'By default the protection covers posters, episode thumbs, and screenshots, but leaves the wide cinematic backdrop / fanart on detail pages alone (it\'s usually atmosphere, not plot). Turn this on if you want backdrops hidden too for maximum protection.'),
                 tog('spoilerKeepMoviePosters', 'Keep movie posters visible', 'When on, a protected movie\'s poster still shows in full, but the scene thumbnails inside the movie\'s detail page (chapters, screenshots) stay hidden. Useful if you find movie posters are usually marketing art that doesn\'t give plot away, while the chapter scene-thumbs inside the movie do. Doesn\'t affect TV shows.'),
                 tog('spoilerBlurTrickplay', 'Hide trickplay seek previews', 'Protects the scrubbing thumbnails the player shows while you seek through an unwatched protected episode or movie. Sheets that end before your saved progress are still shown. Turn this off to always show seek previews. Users can also turn it off for themselves in their Spoiler Guard settings.'),
                 tog('spoilerBlurStrictRefresh', 'Strict refresh mode (full page reload after toggle)', 'After a user flips Spoiler Guard on or off, card images update on the page instantly. By default, on-page text (description, episode titles, ratings) only refreshes when they navigate next. Turn this on to also reload the whole page after a toggle so the text updates straight away, at the cost of a brief page flash. Most users prefer it off for the smoother feel.'),
-                { type: 'group', title: 'Auto-enable', open: true, items: [
+                { type: 'group', title: '自动启用', open: true, items: [
                     tog('spoilerAutoEnableOnFirstPlay', 'Auto-enable Spoiler Guard on first play of a new show', 'When on, Spoiler Guard turns itself on for a series the moment a user starts Season 1 Episode 1 of a show they\'ve never watched. They don\'t have to remember to flip the toggle before pressing play. Rewatches and jumping in at later episodes are ignored; only a fresh first-play counts.'),
                     tog('spoilerAutoEnableOnSeerrRequest', 'Auto-enable Spoiler Guard on Seerr request', 'When on, requesting something through Seerr also pre-arms Spoiler Guard for that title: when the show or movie lands in the library, protection is already on for the user who requested it. Users can also pre-arm titles manually with the "Enable Spoiler Guard" button in the Seerr details popup (always available regardless of this toggle), handy when someone else requested the title first.'),
                     tog('spoilerAutoEnableOnLibraryAdd', 'Auto-enable Spoiler Guard when new titles are added to the library', 'When on, every new show or movie that appears in the library (from a scan, a Seerr download, or a manual copy) is added to the Spoiler Guard list of every user who can see that library, so protection is in place before anyone presses play. Only brand-new titles are affected: a user who later switches Spoiler Guard off for a title isn\'t re-armed by metadata refreshes. Library scans are batched, so a big scan results in one settings write per user rather than one per title.'),
@@ -155,12 +155,12 @@ JEAdmin.define({
                         + '<div class="jea-actions"><button id="spoilerApplyExistingBtn" type="button" class="jea-btn"><span>Apply to existing titles now…</span></button></div>'
                         + '<div id="spoilerApplyExistingStatus" class="fieldDescription" aria-live="polite"></div></div>' }
                 ] },
-                { type: 'group', title: 'Hide metadata on unwatched episodes', items: [
+                { type: 'group', title: '隐藏未看剧集的元数据', items: [
                     { type: 'note', html: 'These options hide spoiler-bearing text on protected TV shows and their unwatched episodes. Hidden centrally so the protection works the same in every Jellyfin client.' },
                     tog('spoilerStripSeriesOverview', 'Hide TV show descriptions', 'Swaps the description on a protected TV show\'s own detail page for the placeholder text below. Independent from episode descriptions, so you can keep the show\'s general premise visible while still hiding episode plots.'),
                     tog('spoilerStripOverview', 'Hide episode descriptions', 'Swaps the per-episode plot summary for the placeholder text below. The single biggest source of leaks, strongly recommended on.'),
-                    { id: 'spoilerOverviewPlaceholder', type: 'text', manual: true, label: 'Placeholder text', attrs: { maxlength: '200' },
-                      desc: 'Text shown where a protected TV show or episode description would normally appear, so the page doesn\'t have an empty gap. Default: "Spoiler Guard activated".' },
+                    { id: 'spoilerOverviewPlaceholder', type: 'text', manual: true, label: '占位文本', attrs: { maxlength: '200' },
+                      desc: '在受保护剧集或单集简介原位置显示的文本，避免页面出现空白。默认："剧透保护已启用"。' },
                     tog('spoilerStripTags', 'Hide tags', 'Hides plot-bearing tags (phrases like "Death of a main character") and the genre / quality / language / rating chips Jellyfin Enhanced draws on top of cards. Recommended on.'),
                     tog('spoilerStripChapters', 'Hide chapter names (keep timestamps)', 'Chapter labels like "X dies" or "Y is revealed" can spoil the whole episode. Hides the names but leaves the chapter markers on the seek bar so users can still skip around. Recommended on.'),
                     tog('spoilerStripTaglines', 'Hide taglines', 'Marketing taglines like "Everything changes tonight" basically advertise the twist. Recommended on.'),
@@ -168,11 +168,11 @@ JEAdmin.define({
                     tog('spoilerStripPremiereDate', 'Hide air date', 'A long gap before a particular episode can give away "this one\'s the season finale" without even reading the title. Hides the date so the schedule itself stays a surprise.'),
                     tog('spoilerReplaceTitle', 'Replace episode titles', 'Swaps episode names like "The Death of X" for "Season 2, Episode 6". Some clients show the title in navigation tooltips and breadcrumbs where the swap can look a bit clinical; turn off if your users prefer to keep the original titles visible.'),
                     tog('spoilerStripCast', 'Hide cast on unwatched episodes', 'An unexpected guest star, or a regular suddenly missing from the cast list, can give away the whole episode. Hides the cast on unwatched episodes; pick what counts as "cast" below.'),
-                    sel('spoilerStripCastMode', 'Cast hiding scope', [['GuestStars', 'Guest stars only (recommended)'], ['All', 'Entire cast (regulars + guest stars)']],
+                    sel('spoilerStripCastMode', 'Cast hiding scope', [['GuestStars', '仅客串演员（推荐）'], ['All', '全体演职员（常驻 + 客串）']],
                         '<strong>Guest stars only</strong> keeps the regular cast visible, since they\'re in every episode anyway and don\'t give anything away. <strong>Entire cast</strong> is the strict option for shows where the recurring cast appearing or not appearing in a given episode is itself the spoiler.', { showIf: 'spoilerStripCast' }),
                     tog('spoilerStripReviews', 'Hide reviews on Spoiler Guard series', 'Hides the Reviews panel on the detail pages of shows the user has Spoiler Guard on for. Reviews very often spoil plot points from anywhere in the series. Recommended on.')
                 ] },
-                { type: 'group', title: 'Advanced per-category reveals', items: [
+                { type: 'group', title: '按类别逐步揭示（高级）', items: [
                     tog('spoilerAdvancedMode', 'Enable advanced per-category reveals', 'Instead of one uniform strip for every unwatched episode, the user\'s <strong>next</strong> unwatched episode and the rest of its season get the reveal settings below. Later seasons, skipped earlier seasons and specials always keep the full strip. A reveal only relaxes a strip that is enabled above; categories whose strip is off show everywhere already. Each user can opt back into the uniform full strip from their settings panel.'),
                     { type: 'note', html: 'Checked = still hidden for that category. Unchecked = revealed. The next-episode title starts revealed; that\'s the point of advanced mode: see <em>what</em> you\'re about to watch, and nothing more.' },
                     tog('spoilerNextEpisodeStripTitle', 'Next episode: keep title hidden', null, { showIf: 'spoilerAdvancedMode' }),
@@ -187,12 +187,12 @@ JEAdmin.define({
         },
 
         'default-language': {
-            title: 'Default Language', icon: 'language',
-            items: [sel('DefaultLanguage', 'Default UI Language', [['', 'System Default']], 'Sets the default language for all users. Users can still override this in their own settings.')]
+            title: '默认语言', icon: 'language',
+            items: [sel('DefaultLanguage', 'Default UI Language', [['', '系统默认']], 'Sets the default language for all users. Users can still override this in their own settings.')]
         },
 
         'mdblist': {
-            title: 'MDBList Ratings', iconImg: 'mdblist-static/favicon.ico',
+            title: 'MDBList 评分', iconImg: 'mdblist-static/favicon.ico',
             items: [
                 tog('mdblistRatingsEnabled', 'Enable MDBList Ratings', UL('Shows TMDB, Rotten Tomatoes, IMDb, Trakt and other ratings on item-details pages', 'Can fill in Jellyfin\'s own missing Community/Critic Rating fields', 'Requires a free API key from mdblist.com'), { main: true }),
                 { type: 'custom', html: '<div class="inputContainer jea-row"><label class="inputLabel" for="mdblistApiKey">MDBList API Key</label>'
@@ -204,15 +204,15 @@ JEAdmin.define({
                 tog('mdblistRatingsShowPercentSymbol', 'Show % Symbol', 'Appends "%" after each rating badge\'s number.'),
                 { type: 'custom', html: '<details id="mdblistSourcesAdminDetails" class="je-details-section"><summary>Configure ratings shown</summary><div class="je-details-body"><div class="fieldDescription je-field-desc-sm">Pick which ratings appear on the item-details row, and the order they\'re shown in. Use the '
                     + arrow('up') + ' / ' + arrow('down') + ' buttons to reorder. All checked by default.</div><div id="mdblistRatingsSourcesAdmin"></div></div></details>' },
-                { type: 'group', title: 'Fetch ratings (scheduled task)', items: [
+                { type: 'group', title: '拉取评分（计划任务）', items: [
                     tog('mdblistRatingsFetchEnabled', 'Fetch Ratings from MDBList', 'Enables the <strong>Fetch Ratings from MDBList</strong> scheduled task (Dashboard, Scheduled Tasks):' + UL(
                         'Looks up MDBList data for any movie/series whose cached ratings are missing or stale, and saves it. Doesn\'t touch Jellyfin\'s own rating fields',
                         'A found title stays cached for 7 days (3 days for a confirmed "no match") before being refetched. Already-fresh titles are skipped on a re-run, so it\'s safe to schedule this frequently, even daily',
                         'Stops once today\'s quota drops to the reserve below')),
-                    { id: 'mdblistFetchReserve', type: 'number', manual: true, label: 'Fetch Task Reserve', min: 1, max: 100000, showIf: 'mdblistRatingsFetchEnabled',
-                      desc: 'The fetch task stops once today\'s live remaining quota drops to this many, reserving that much for people browsing the library (an item-details page fetches live if nothing\'s cached yet).' }
+                    { id: 'mdblistFetchReserve', type: 'number', manual: true, label: '拉取任务预留', min: 1, max: 100000, showIf: 'mdblistRatingsFetchEnabled',
+                      desc: '当日剩余实时配额降至该数值时，抓取任务即停止，为浏览媒体库的用户保留这部分配额（详情页在无缓存时会实时抓取）。' }
                 ] },
-                { type: 'group', title: 'Sync ratings into Jellyfin (scheduled task)', items: [
+                { type: 'group', title: '同步评分进 Jellyfin（计划任务）', items: [
                     tog('mdblistRatingsAutoSyncEnabled', 'Sync Ratings from MDBList to Jellyfin', 'Enables the <strong>Sync Ratings from MDBList to Jellyfin</strong> scheduled task:' + UL(
                         'Sets Community / Critic Ratings (source selectable below, default TMDB / Rotten Tomatoes) from whatever\'s already cached (see Fetch above) into Jellyfin\'s own fields',
                         'Requires the <strong>Fetch Ratings from MDBList</strong> task to be enabled and run first')),
@@ -242,88 +242,88 @@ JEAdmin.define({
                 + '<span id="tmdbStatusIndicator" class="material-icons"></span>'
                 + '<button type="button" class="testTmdbBtn jea-btn">Test</button></div></div>'
                 + '<div class="je-setting-description" data-desc-for="TMDB_API_KEY"><div class="fieldDescription">Your API key from The Movie DB (TMDB). <a class="sectionTitle" href="https://www.themoviedb.org/settings/api" target="_blank">How to?</a> Shared with Seerr Settings. Needed by Elsewhere, TMDB Reviews and Release Dates.</div></div>' },
-            { id: 'DEFAULT_REGION', prop: 'DEFAULT_REGION', manual: true, type: 'select', options: [], label: 'Default Region',
-                           desc: 'The default region for streaming provider lookup and release dates. Empty defaults to US. <a class="sectionTitle" href="https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfin-Elsewhere/resources/regions.txt" target="_blank">Full List</a>' }
+            { id: 'DEFAULT_REGION', prop: 'DEFAULT_REGION', manual: true, type: 'select', options: [], label: '默认地区',
+                           desc: '流媒体提供商查询与发行日期的默认地区。留空默认美国。<a class="sectionTitle" href="https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfin-Elsewhere/resources/regions.txt" target="_blank">完整列表</a>' }
         ]
     },
     'elsewhere': {
-        title: 'Elsewhere (Streaming Providers)', icon: 'live_tv',
+        title: 'Elsewhere（流媒体提供商）', icon: 'live_tv',
         items: [
-            { id: 'elsewhereEnabled', prop: 'ElsewhereEnabled', type: 'toggle', main: true, label: 'Enable Elsewhere',
-              desc: 'Adds an "Elsewhere" panel to item detail pages showing where the title is available on streaming services in the user\'s region (powered by TMDB watch-provider data).' },
-            { id: 'DEFAULT_PROVIDERS', prop: 'DEFAULT_PROVIDERS', type: 'text', label: 'Default Providers', placeholder: 'e.g., Netflix,Hulu',
-              desc: 'A list of default streaming providers to show. Leave blank to show all. <a class="sectionTitle" href="https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfin-Elsewhere/resources/providers.txt" target="_blank">Full List</a>' },
-            { id: 'IGNORE_PROVIDERS', prop: 'IGNORE_PROVIDERS', type: 'text', label: 'Ignore Providers', placeholder: 'e.g., .*with Ads, Hulu',
-              desc: 'A list of providers to ignore from the default region (supports regex). <a class="sectionTitle" href="https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfin-Elsewhere/resources/providers.txt" target="_blank">Full List</a>' },
-            { id: 'ElsewhereSeasonProviders', prop: 'ElsewhereSeasonProviders', type: 'toggle', default: true, label: 'Per-season providers',
-              desc: 'On Series and Season pages, look up streaming providers per season from TMDB. A season is labelled only when seasons differ; seasons TMDB has no data for fall back to the series providers. Only applies when the series uses the default (aired) season order. Users can turn this off for themselves in the Elsewhere search settings.' },
-            { type: 'group', title: 'Custom Branding', items: [
-                { id: 'ElsewhereCustomBrandingText', prop: 'ElsewhereCustomBrandingText', type: 'text', label: 'Custom Branding Message', placeholder: 'e.g., Only available on My Server',
-                  desc: 'Custom message to display when content is not available on any streaming providers. Leave blank to disable custom branding.' },
-                { id: 'ElsewhereCustomBrandingImageUrl', prop: 'ElsewhereCustomBrandingImageUrl', type: 'text', label: 'Custom Branding Icon URL', placeholder: '/web/assets/img/icon.png',
-                  desc: 'Optional URL for an icon to display next to the custom message. Leave blank for no icon.' }
+            { id: 'elsewhereEnabled', prop: 'ElsewhereEnabled', type: 'toggle', main: true, label: '启用 Elsewhere',
+              desc: '在条目详情页添加“Elsewhere”面板，显示该影片在用户所在地区的流媒体服务上架情况（数据来自 TMDB watch-provider）。' },
+            { id: 'DEFAULT_PROVIDERS', prop: 'DEFAULT_PROVIDERS', type: 'text', label: '默认流媒体服务', placeholder: '例如：Netflix,Hulu',
+              desc: '默认显示的流媒体服务列表。留空显示全部。<a class="sectionTitle" href="https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfin-Elsewhere/resources/providers.txt" target="_blank">完整列表</a>' },
+            { id: 'IGNORE_PROVIDERS', prop: 'IGNORE_PROVIDERS', type: 'text', label: '忽略的流媒体服务', placeholder: '例如：.*with Ads, Hulu',
+              desc: '默认地区中要忽略的流媒体服务（支持正则）。<a class="sectionTitle" href="https://cdn.jsdelivr.net/gh/n00bcodr/Jellyfin-Elsewhere/resources/providers.txt" target="_blank">完整列表</a>' },
+            { id: 'ElsewhereSeasonProviders', prop: 'ElsewhereSeasonProviders', type: 'toggle', default: true, label: '按季配置提供商',
+              desc: '在剧集和季页面上，按季从 TMDB 查询流媒体提供商。只有各季不同时才会标注；TMDB 没有数据的季会回退使用整部剧集的提供商。仅在剧集使用默认（按播出日期）季顺序时生效。用户可以在 Elsewhere 搜索设置中自行关闭此功能。' },
+            { type: 'group', title: '自定义品牌', items: [
+                { id: 'ElsewhereCustomBrandingText', prop: 'ElsewhereCustomBrandingText', type: 'text', label: '自定义品牌消息', placeholder: '例如：仅在我的服务器上可用',
+                  desc: '当内容在任何流媒体提供商处都不可用时显示的自定义消息。留空则禁用自定义品牌。' },
+                { id: 'ElsewhereCustomBrandingImageUrl', prop: 'ElsewhereCustomBrandingImageUrl', type: 'text', label: '自定义品牌图标 URL', placeholder: '/web/assets/img/icon.png',
+                  desc: '可选的图标 URL，显示在自定义消息旁边。留空则不显示图标。' }
             ] }
         ]
     },
     'reviews-panel': {
-        title: 'Reviews Panel', icon: 'rate_review',
+        title: '评论面板', icon: 'rate_review',
         items: [
-            { id: 'reviewsExpandedByDefault', prop: 'ReviewsExpandedByDefault', type: 'toggle', label: 'Expand reviews by default',
-              desc: 'When enabled, the reviews section opens expanded by default for all users (unless they override in their session).' }
+            { id: 'reviewsExpandedByDefault', prop: 'ReviewsExpandedByDefault', type: 'toggle', label: '默认展开评论',
+              desc: '启用后，所有用户的评论区默认展开（除非用户在会话中自行覆盖）。' }
         ]
     },
     'reviews-tmdb': {
-        title: 'TMDB Reviews', icon: 'reviews',
+        title: 'TMDB 评论', icon: 'reviews',
         items: [
-            { id: 'showReviews', prop: 'ShowReviews', type: 'toggle', main: true, label: 'Show TMDB Reviews',
-              desc: 'Requires TMDB API Key to be set.' }
+            { id: 'showReviews', prop: 'ShowReviews', type: 'toggle', main: true, label: '显示 TMDB 评论',
+              desc: '需要先设置 TMDB API 密钥。' }
         ]
     },
     'reviews-anilist': {
         title: 'AniList', iconImg: 'anilist-static/icon.svg',
         items: [
-            { id: 'showAnilistReviews', prop: 'ShowAnilistReviews', type: 'toggle', main: true, label: 'Show AniList Reviews',
-              desc: 'Shows the top AniList user reviews for anime in the reviews section.<br>Will only work if AniList is a metadata provider, since items are matched by their AniList ID.<br>No API key needed.<br>Spoiler sections of reviews are hidden.' }
+            { id: 'showAnilistReviews', prop: 'ShowAnilistReviews', type: 'toggle', main: true, label: '显示 AniList 评论',
+              desc: '在评论区显示该动画在 AniList 的热门用户评论。<br>仅当 AniList 已配置为元数据提供者时可用（按 AniList ID 匹配条目）。<br>无需 API 密钥。<br>评论中的剧透段落会被隐藏。' }
         ]
     },
     'reviews-translation': {
-        title: 'Review Translation', icon: 'translate',
+        title: '评论翻译', icon: 'translate',
         items: [
-            { id: 'reviewTranslationEnabled', prop: 'ReviewTranslationEnabled', type: 'toggle', main: true, label: 'Enable Review Translation',
-              desc: 'Adds a Translate button to English TMDB and AniList reviews, translating them into the user\'s Jellyfin language.<br>Desktop Chrome and Edge translate on the device, with nothing sent anywhere, but only over HTTPS or localhost. Firefox, Safari, mobile browsers and the Jellyfin apps do not have a built-in translator.<br>Everyone else uses your own <a class="sectionTitle" href="https://libretranslate.com" target="_blank">LibreTranslate</a> instance, if you set one below. Only the review text is sent to it.<br>Translations are done live and are not stored. The button only shows for languages the browser or your instance offers.' },
-            { id: 'reviewTranslationUrl', prop: 'ReviewTranslationUrl', type: 'text', label: 'LibreTranslate URL (optional)', placeholder: 'http://localhost:5000',
+            { id: 'reviewTranslationEnabled', prop: 'ReviewTranslationEnabled', type: 'toggle', main: true, label: '启用评论翻译',
+              desc: '为英文 TMDB 和 AniList 评论添加“翻译”按钮，翻译成用户的 Jellyfin 语言。<br>桌面版 Chrome/Edge 在设备端翻译、不外发任何内容，但仅在 HTTPS 或 localhost 下可用。Firefox、Safari、移动浏览器及 Jellyfin 客户端没有内置翻译。<br>其他环境使用你在下方配置的 <a class="sectionTitle" href="https://libretranslate.com" target="_blank">LibreTranslate</a> 实例（仅发送评论文本）。<br>翻译实时进行、不做存储。按钮只对浏览器或实例支持的语言显示。' },
+            { id: 'reviewTranslationUrl', prop: 'ReviewTranslationUrl', type: 'text', label: 'LibreTranslate 地址（可选）', placeholder: 'http://localhost:5000',
               toConfig: (v) => (v || '').trim(),
-              desc: 'Fallback for browsers without a built-in translator. Base address of the instance, without a trailing path.' },
-            { id: 'reviewTranslationApiKey', prop: 'ReviewTranslationApiKey', type: 'password', label: 'LibreTranslate API Key (optional)',
+              desc: '供没有内置翻译器的浏览器使用的后备方案。实例的基础地址，不带末尾路径。' },
+            { id: 'reviewTranslationApiKey', prop: 'ReviewTranslationApiKey', type: 'password', label: 'LibreTranslate API 密钥（可选）',
               toConfig: (v) => (v || '').trim(),
-              desc: 'Only needed when your instance requires a key.' }
+              desc: '仅当你的实例要求密钥时才需要填写。' }
         ]
     },
     'reviews-user': {
-        title: 'User Reviews', icon: 'rate_review',
+        title: '用户评论', icon: 'rate_review',
         items: [
             { type: 'note', html: 'Completely independent of Elsewhere being enabled and TMDB Reviews being enabled.' },
-            { id: 'showUserReviews', prop: 'ShowUserReviews', type: 'toggle', main: true, label: 'Enable User Written Reviews',
-              desc: 'Allows users to write reviews and rate items in the library.' },
-            { id: 'hideReviewsFromHiddenUsers', prop: 'HideReviewsFromHiddenUsers', type: 'toggle', default: true, label: 'Hide reviews from hidden users',
-              desc: 'When enabled, reviews written by Jellyfin users marked as "Hide this user from login screens" are hidden from non-admin viewers. Admins always see all reviews.' },
-            { id: 'hideReviewsFromDisabledUsers', prop: 'HideReviewsFromDisabledUsers', type: 'toggle', default: true, label: 'Hide reviews from disabled users',
-              desc: 'When enabled, reviews written by Jellyfin users marked as "Disable this user" are hidden from non-admin viewers. Admins always see all reviews.' },
-            { id: 'mirrorReviewRatingsToJellyfin', prop: 'MirrorReviewRatingsToJellyfin', type: 'toggle', label: 'Also save review star ratings as the user\'s Jellyfin rating',
-              desc: 'When a user rates a movie or series in a review, also write that rating (scaled to Jellyfin\'s 0-10) to their Jellyfin user rating for the item, so scrobblers and rating sync tools that read Jellyfin user data pick it up. Overwrites any rating the user set elsewhere. Deleting a review, or removing its stars, clears the Jellyfin rating only if it still matches the review; a rating changed elsewhere since is left alone. Season/episode reviews are not mirrored.' },
-            { type: 'group', title: 'Poster cards', items: [
-                { id: 'showUserRatingOnPosters', prop: 'ShowUserRatingOnPosters', type: 'toggle', label: 'Show average user rating on poster cards',
-                  desc: 'When Rating Tags are enabled, overlay a <span class="je-msym-rounded" style="font-size:14px;vertical-align:middle;color:#e91e8c;">person_heart</span> chip on poster cards showing the average rating from all user reviews.' },
-                { id: 'showUserRatingDash', prop: 'ShowUserRatingDash', type: 'toggle', default: true, label: 'Show a dash on posters for unrated items',
-                  desc: 'When Rating Tags are enabled, a <span class="je-msym-rounded" style="font-size:14px;vertical-align:middle;color:#e91e8c;">person_heart</span> chip appears on every poster. Enable this to show a dash for items the user has not rated yet. Disable to hide the chip entirely for unrated items.' }
+            { id: 'showUserReviews', prop: 'ShowUserReviews', type: 'toggle', main: true, label: '启用用户撰写评论',
+              desc: '允许用户为媒体库中的条目撰写评论并评分。' },
+            { id: 'hideReviewsFromHiddenUsers', prop: 'HideReviewsFromHiddenUsers', type: 'toggle', default: true, label: '隐藏已隐藏用户的评论',
+              desc: '启用后，标记为“在登录界面隐藏此用户”的 Jellyfin 用户所写评论对非管理员访客隐藏。管理员始终可见全部评论。' },
+            { id: 'hideReviewsFromDisabledUsers', prop: 'HideReviewsFromDisabledUsers', type: 'toggle', default: true, label: '隐藏已禁用用户的评论',
+              desc: '启用后，标记为“禁用此用户”的 Jellyfin 用户所写评论对非管理员访客隐藏。管理员始终可见全部评论。' },
+            { id: 'mirrorReviewRatingsToJellyfin', prop: 'MirrorReviewRatingsToJellyfin', type: 'toggle', label: '同时将评论的星级评分保存为用户的 Jellyfin 评分',
+              desc: '用户在评论中给电影/剧集打分时，同时把该评分（换算为 Jellyfin 的 0-10）写入其对条目的 Jellyfin 用户评分，方便读取 Jellyfin 用户数据的联动/评分同步工具。会覆盖用户在其他地方设置的评分。删除评论或去掉星级时，仅当 Jellyfin 评分仍与评论一致才清除；若评分后来在别处改过则保留。季/单集评论不同步。' },
+            { type: 'group', title: '海报卡片', items: [
+                { id: 'showUserRatingOnPosters', prop: 'ShowUserRatingOnPosters', type: 'toggle', label: '在海报卡片上显示用户平均评分',
+                  desc: '评分标签启用时，在海报卡片上叠加 <span class="je-msym-rounded" style="font-size:14px;vertical-align:middle;color:#e91e8c;">person_heart</span> 徽章，显示全部用户评论的平均分。' },
+                { id: 'showUserRatingDash', prop: 'ShowUserRatingDash', type: 'toggle', default: true, label: '未评分条目的海报显示短横线',
+                  desc: '评分标签启用时，每张海报都会显示 <span class="je-msym-rounded" style="font-size:14px;vertical-align:middle;color:#e91e8c;">person_heart</span> 徽章。勾选此项可为用户尚未评分的条目显示短横线；不勾则未评分条目完全不显示徽章。' }
             ] }
         ]
     },
     'release-dates': {
-        title: 'Release Dates', icon: 'event',
+        title: '上映/播出日期', icon: 'event',
         items: [
-            { id: 'showReleaseDate', prop: 'ShowReleaseDates', type: 'toggle', main: true, label: 'Show Release/Air Date',
-              desc: 'Requires TMDB API Key to be set. Shows a chip on Movie, Series, Season and Episode detail pages with the cinema/digital/physical release date or next/last air date, sourced from TMDB. Uses the Default Region set under TMDB Connection above to pick which country\'s dates to prefer.' }
+            { id: 'showReleaseDate', prop: 'ShowReleaseDates', type: 'toggle', main: true, label: '显示上映/播出日期',
+              desc: '需要 TMDB API 密钥。在电影/剧集/季/单集详情页显示上映（影院/数字/实体）或下次/上次播出日期徽章，数据来自 TMDB，并按上方 TMDB 连接里设置的默认地区优先选取国家日期。' }
         ]
     }
 });
@@ -332,65 +332,65 @@ JEAdmin.define({
 /* Playback tab sections. See jeAdmin.js for the field spec. */
 JEAdmin.define({
     'pb-tabswitch': {
-        title: 'Player Behaviour', icon: 'play_circle',
+        title: '播放器行为', icon: 'play_circle',
         items: [
-            { id: 'autoPauseEnabled', prop: 'AutoPauseEnabled', type: 'toggle', perUser: true, label: 'Auto-pause on tab switch',
-              desc: 'Pause playback automatically when you switch to another browser tab.' },
-            { id: 'autoResumeEnabled', prop: 'AutoResumeEnabled', type: 'toggle', perUser: true, label: 'Auto-resume on tab switch',
-              desc: 'Resume playback automatically when you switch back to the player tab.' },
-            { id: 'autoPipEnabled', prop: 'AutoPipEnabled', type: 'toggle', perUser: true, label: 'Auto Picture-in-Picture on tab switch',
-              desc: 'Enter the browser\'s Picture-in-Picture mode when switching tabs (browser support required).' },
-            { id: 'longPress2xEnabled', prop: 'LongPress2xEnabled', type: 'toggle', perUser: true, label: 'Long press/hold for 2x speed β',
-              desc: 'Long-press anywhere on the player to temporarily play at 2x speed; release to return to normal speed. Beta, touch devices only.' },
-            { id: 'showPlaybackRatingBadge', prop: 'ShowPlaybackRatingBadge', type: 'toggle', label: 'Show Age Rating When Playback Starts',
-              desc: 'Briefly shows the age rating in a corner of the player when a video starts, followed by a line of any content-advisory tags (such as violence or strong language) and a line of its genres.' },
-            { id: 'pauseScreenEnabled', prop: 'PauseScreenEnabled', type: 'toggle', perUser: true, label: 'Enable Custom Pause Screen',
-              desc: 'Shows an overlay with details about what is playing while playback is paused.' }
+            { id: 'autoPauseEnabled', prop: 'AutoPauseEnabled', type: 'toggle', perUser: true, label: '切换标签页时自动暂停',
+              desc: '切换到其他浏览器标签页时自动暂停播放。' },
+            { id: 'autoResumeEnabled', prop: 'AutoResumeEnabled', type: 'toggle', perUser: true, label: '切回标签页时自动恢复',
+              desc: '切回播放器标签页时自动恢复播放。' },
+            { id: 'autoPipEnabled', prop: 'AutoPipEnabled', type: 'toggle', perUser: true, label: '切换标签页时自动画中画',
+              desc: '切换标签页时进入浏览器画中画模式（需要浏览器支持）。' },
+            { id: 'longPress2xEnabled', prop: 'LongPress2xEnabled', type: 'toggle', perUser: true, label: '长按 2 倍速播放 β',
+              desc: '在播放器任意位置长按可临时 2 倍速播放，松开恢复原速。测试版，仅限触屏设备。' },
+            { id: 'showPlaybackRatingBadge', prop: 'ShowPlaybackRatingBadge', type: 'toggle', label: '播放开始时显示分级',
+              desc: '视频开始播放时在播放器角落短暂显示分级，随后显示一行内容提示标签（如暴力或粗口）和一行流派信息。' },
+            { id: 'pauseScreenEnabled', prop: 'PauseScreenEnabled', type: 'toggle', perUser: true, label: '启用自定义暂停界面',
+              desc: '暂停播放时显示当前播放内容的详情浮层。' }
         ]
     },
     'pb-autoskip': {
-        title: 'Auto-Skip', icon: 'skip_next',
+        title: '自动跳过', icon: 'skip_next',
         items: [
-            { id: 'autoSkipIntro', prop: 'AutoSkipIntro', type: 'toggle', perUser: true, label: 'Auto-skip Intro',
-              desc: 'Automatically skip detected intros. Requires the Intro Skipper plugin.' },
-            { id: 'autoSkipOutro', prop: 'AutoSkipOutro', type: 'toggle', perUser: true, label: 'Auto-skip Outro',
-              desc: 'Automatically skip detected outros (end credits). Requires the Intro Skipper plugin.' }
+            { id: 'autoSkipIntro', prop: 'AutoSkipIntro', type: 'toggle', perUser: true, label: '自动跳过片头',
+              desc: '自动跳过检测到的片头。需要 Intro Skipper 插件。' },
+            { id: 'autoSkipOutro', prop: 'AutoSkipOutro', type: 'toggle', perUser: true, label: '自动跳过片尾',
+              desc: '自动跳过检测到的片尾（演职员表）。需要 Intro Skipper 插件。' }
         ]
     },
     'pb-subtitles': {
-        title: 'Subtitles', icon: 'subtitles',
+        title: '字幕', icon: 'subtitles',
         items: [
-            { id: 'disableCustomSubtitleStyles', prop: 'DisableCustomSubtitleStyles', type: 'toggle', perUser: true, label: 'Disable Custom Subtitle Styles by default',
-              desc: 'Globally disables Jellyfin\'s custom subtitle style overrides so the source subtitle styling is shown unmodified.' },
-            { type: 'group', title: 'Default appearance for new users', open: true, items: [
-                { id: 'DefaultSubtitleStyle', prop: 'DefaultSubtitleStyle', type: 'select', perUser: true, default: 0, label: 'Default Subtitle Style',
-                  options: [['0', 'Clean White'], ['1', 'Classic Black Box'], ['2', 'Netflix Style'], ['3', 'Cinema Yellow'], ['4', 'Soft Gray'], ['5', 'High Contrast']],
+            { id: 'disableCustomSubtitleStyles', prop: 'DisableCustomSubtitleStyles', type: 'toggle', perUser: true, label: '默认禁用自定义字幕样式',
+              desc: '全局禁用 Jellyfin 的自定义字幕样式覆盖，按源字幕样式原样显示。' },
+            { type: 'group', title: '新用户的默认外观', open: true, items: [
+                { id: 'DefaultSubtitleStyle', prop: 'DefaultSubtitleStyle', type: 'select', perUser: true, default: 0, label: '默认字幕样式',
+                  options: [['0', '纯白简洁'], ['1', '经典黑底'], ['2', 'Netflix 风格'], ['3', '影院黄'], ['4', '柔和灰'], ['5', '高对比']],
                   toConfig: (v) => parseInt(v, 10),
-                  desc: 'Default subtitle style preset applied to new users; users can override in their personal settings.' },
-                { id: 'DefaultSubtitleSize', prop: 'DefaultSubtitleSize', type: 'select', perUser: true, default: 0, label: 'Default Subtitle Size',
-                  options: [['0', 'Tiny'], ['1', 'Small'], ['2', 'Normal'], ['3', 'Large'], ['4', 'Extra Large'], ['5', 'Gigantic']],
+                  desc: '应用于新用户的默认字幕样式预设；用户可在个人设置中覆盖。' },
+                { id: 'DefaultSubtitleSize', prop: 'DefaultSubtitleSize', type: 'select', perUser: true, default: 0, label: '默认字幕大小',
+                  options: [['0', '极小'], ['1', '小'], ['2', '正常'], ['3', '大'], ['4', '特大'], ['5', '巨大']],
                   toConfig: (v) => parseInt(v, 10),
-                  desc: 'Default subtitle size applied to new users; users can override in their personal settings.' },
-                { id: 'DefaultSubtitleFont', prop: 'DefaultSubtitleFont', type: 'select', perUser: true, default: 0, label: 'Default Subtitle Font',
-                  options: [['0', 'Default'], ['1', 'Noto Sans'], ['2', 'Sans Serif'], ['3', 'Typewriter'], ['4', 'Roboto']],
+                  desc: '应用于新用户的默认字幕大小；用户可在个人设置中覆盖。' },
+                { id: 'DefaultSubtitleFont', prop: 'DefaultSubtitleFont', type: 'select', perUser: true, default: 0, label: '默认字幕字体',
+                  options: [['0', '默认'], ['1', 'Noto Sans'], ['2', '无衬线体'], ['3', '打字机体'], ['4', 'Roboto']],
                   toConfig: (v) => parseInt(v, 10),
-                  desc: 'Default subtitle font applied to new users; users can override in their personal settings.' },
-                { id: 'DefaultSubtitleTextEffect', prop: 'DefaultSubtitleTextEffect', type: 'select', perUser: true, default: 0, label: 'Default Subtitle Text Effect',
-                  options: [['0', 'Auto'], ['1', 'None'], ['2', 'Shadow'], ['3', 'Outline'], ['4', 'Outline + Shadow']],
+                  desc: '应用于新用户的默认字幕字体；用户可在个人设置中覆盖。' },
+                { id: 'DefaultSubtitleTextEffect', prop: 'DefaultSubtitleTextEffect', type: 'select', perUser: true, default: 0, label: '默认字幕文字效果',
+                  options: [['0', '自动'], ['1', '无'], ['2', '阴影'], ['3', '描边'], ['4', '描边 + 阴影']],
                   toConfig: (v) => parseInt(v, 10),
-                  desc: 'Default subtitle text effect (outline / drop shadow) applied to new users; users can override in their personal settings. Auto adds a shadow only when the subtitle background is transparent.' }
+                  desc: '应用于新用户的默认字幕文字效果（描边 / 投影）；用户可在个人设置中覆盖。"自动"仅在字幕背景透明时添加阴影。' }
             ] }
         ]
     },
     'pb-timing': {
-        title: 'Shortcuts Panel & Toast Timing', icon: 'timer',
+        title: '快捷键面板与提示消息时序', icon: 'timer',
         items: [
-            { id: 'HelpPanelAutocloseDelay', prop: 'HelpPanelAutocloseDelay', type: 'number', default: 15000, min: 0, step: 1, label: 'Shortcuts Panel Autoclose Delay (ms)',
-              desc: 'How long the Jellyfin Enhanced shortcuts/settings panel (opened with the <kbd>?</kbd> key) stays open without interaction before auto-closing. Default: 15000 ms (15 seconds).' },
-            { type: 'button', id: 'jeTestShortcutsPanel', label: 'Preview autoclose' },
-            { id: 'ToastDuration', prop: 'ToastDuration', type: 'number', default: 3000, min: 0, step: 1, label: 'Toast Notification Duration (ms)',
-              desc: 'How long pop-up toast messages (e.g. &ldquo;Shuffle enabled&rdquo;, &ldquo;Bookmark saved&rdquo;) stay on-screen before fading out. Default: 3000 ms (3 seconds).' },
-            { type: 'button', id: 'jeTestToast', label: 'Preview toast' }
+            { id: 'HelpPanelAutocloseDelay', prop: 'HelpPanelAutocloseDelay', type: 'number', default: 15000, min: 0, step: 1, label: '快捷键面板自动关闭延时（毫秒）',
+              desc: 'Jellyfin Enhanced 快捷键/设置面板（<kbd>?</kbd> 键打开）无操作自动关闭的等待时长。默认 15000 毫秒（15 秒）。' },
+            { type: 'button', id: 'jeTestShortcutsPanel', label: '预览自动关闭' },
+            { id: 'ToastDuration', prop: 'ToastDuration', type: 'number', default: 3000, min: 0, step: 1, label: '提示消息持续时间（毫秒）',
+              desc: '弹出的提示消息（如“随机播放已启用”、“书签已保存”）在屏幕上停留多久后淡出。默认 3000 毫秒（3 秒）。' },
+            { type: 'button', id: 'jeTestToast', label: '预览提示消息' }
         ]
     }
 });
@@ -429,14 +429,14 @@ JEAdmin.define({
             + `</details>`;
         // Placement toggles are rendered here but loaded and saved by configPage.html (Custom Tabs sync, plugin detection, v12 hints).
         return {
-            type: 'group', title: 'Where it appears', open: true, items: [
+            type: 'group', title: '显示位置', open: true, items: [
                 { id: `${o.p}UseNativeTab`, type: 'toggle', manual: true, label: `Add ${o.name} as a native Home tab`,
                   desc: `Adds ${o.name} as its own tab on the Home page, no external plugin needed.<br/><strong>Recommended on Jellyfin 12's experimental layout</strong> (the default).` },
                 { id: `${o.p}UsePluginPages`, type: 'toggle', manual: true, label: o.ppLabel, desc: `${o.ppIntro}<br/>${PP_NOTE} ${PP_BADGE}` },
                 { id: `${o.p}UseCustomTabs`, type: 'toggle', manual: true, label: o.ctLabel, desc: guide },
                 { type: 'html', html: `<div class="je-note-banner je-v12-tab-hint-banner" id="je-v12-hint-${o.hint}" style="display:none;"><i class="material-icons je-note-icon">info</i>`
                     + `<div>On Jellyfin 12, <strong>"Add ${o.name} as a native Home tab"</strong> is more reliable than Custom Tabs. The two cannot be enabled together.</div></div>` },
-                { id: `${o.p}AutoCreateCustomTab`, type: 'toggle', manual: true, label: 'Add the Custom Tabs entry for me',
+                { id: `${o.p}AutoCreateCustomTab`, type: 'toggle', manual: true, label: '自动添加 Custom Tabs 条目',
                   rowClass: 'je-customtabs-automanage', rowAttrs: { 'data-gated-by': gate }, descAttrs: { 'data-gated-by': gate },
                   desc: `Jellyfin Enhanced will create the matching Custom Tabs entry on save. Turning off "${o.ctLabel}" removes the entry; turning it back on re-creates it. Leave unchecked to manage the Custom Tabs entry yourself.` }
             ]
@@ -449,38 +449,38 @@ JEAdmin.define({
 
     JEAdmin.define({
         'pages-bookmarks': {
-            title: 'Bookmarks', icon: 'bookmark',
+            title: '书签', icon: 'bookmark',
             items: [
-                note('<strong>How to use:</strong> press <kbd class="je-kbd">B</kbd> or click the bookmark icon during playback to save the current time. Bookmarks show as pins on the progress bar (click one to jump there) and track by TMDB/TVDB ids, so they work across file versions of the same content.'),
-                T('bookmarksEnabled', 'BookmarksEnabled', 'Enable Bookmarks Feature',
-                    'Save custom bookmarks/timestamps while watching videos to quickly jump back to your favorite scenes or moments.', { main: true, default: true }),
-                placement({ p: 'bookmarks', en: 'bookmarksEnabled', name: 'Bookmarks', ppLabel: 'Use Plugin Pages for Bookmarks Library',
-                    ppIntro: `Adds a "Bookmarks" link via ${ppLink}.`, ctLabel: 'Use Custom Tabs for Bookmarks', noun: 'Bookmarks library',
-                    hint: 'bookmarks', cls: 'sections bookmarks', text: 'Bookmarks' })
+                note('<strong>用法：</strong>播放时按 <kbd class="je-kbd">B</kbd> 或点击书签图标保存当前时间。书签在进度条上显示为图钉（点击即跳转），并按 TMDB/TVDB id 记录，同一内容的不同文件版本通用。'),
+                T('bookmarksEnabled', 'BookmarksEnabled', '启用书签功能',
+                    '观看视频时保存自定义书签/时间点，方便快速跳回喜欢的场景或瞬间。', { main: true, default: true }),
+                placement({ p: 'bookmarks', en: 'bookmarksEnabled', name: '书签', ppLabel: '用 Plugin Pages 承载书签库',
+                    ppIntro: `Adds a "Bookmarks" link via ${ppLink}.`, ctLabel: '用 Custom Tabs 承载书签', noun: '书签库',
+                    hint: 'bookmarks', cls: 'sections bookmarks', text: '书签' })
             ]
         },
         'pages-hidden-content': {
-            title: 'Hidden Content', icon: 'visibility_off',
+            title: '隐藏内容', icon: 'visibility_off',
             items: [
-                note('<strong>Hidden Content</strong> lets users hide individual items from Home and Library views and browse them from a dedicated Hidden Content page. Per-user state with a server-wide enable/disable kill switch.'),
-                T('hiddenContentEnabled', 'HiddenContentEnabled', 'Enable Hidden Content',
-                    'Enable or disable the Hidden Content feature server-wide. When disabled, hide buttons, filtering, sidebar navigation, and settings panel options are all removed. User data is preserved and restored when re-enabled.', { main: true }),
-                placement({ p: 'hiddenContent', en: 'hiddenContentEnabled', name: 'Hidden Content', ppLabel: 'Use Plugin Pages for Hidden Content',
-                    ppIntro: `Replaces the default Hidden Content page with a ${ppLink} implementation.`, ctLabel: 'Use Custom Tabs for Hidden Content',
-                    noun: 'Hidden Content page', hint: 'hiddenContent', cls: 'jellyfinenhanced hidden-content', text: 'Hidden Content' }),
+                note('<strong>Hidden Content</strong> lets users hide individual items from Home and Library views and browse them from a dedicated 隐藏内容页. Per-user state with a server-wide enable/disable kill switch.'),
+                T('hiddenContentEnabled', 'HiddenContentEnabled', '启用隐藏内容',
+                    '全服务器范围启用/禁用隐藏内容功能。禁用时，隐藏按钮、过滤、侧边栏导航与设置面板选项都会移除。用户数据保留，重新启用后恢复。', { main: true }),
+                placement({ p: 'hiddenContent', en: 'hiddenContentEnabled', name: '隐藏内容', ppLabel: '用 Plugin Pages 承载隐藏内容',
+                    ppIntro: `Replaces the default 隐藏内容页 with a ${ppLink} implementation.`, ctLabel: '用 Custom Tabs 承载隐藏内容',
+                    noun: '隐藏内容页', hint: 'hiddenContent', cls: 'jellyfinenhanced hidden-content', text: '隐藏内容' }),
                 T('hiddenContentAdmin', 'HiddenContentAdmin', 'Let admins view and manage other users\' hidden content',
-                    'Adds a "user filter" dropdown on the Hidden Content page so an admin can see what any user has hidden, with an Edit toggle to unhide items or add new ones from the library or Seerr on that user\'s behalf. Turn this off if you don\'t want to edit/manage other users\' hidden content.', { default: true }),
+                    'Adds a "user filter" dropdown on the 隐藏内容页 so an admin can see what any user has hidden, with an Edit toggle to unhide items or add new ones from the library or Seerr on that user\'s behalf. Turn this off if you don\'t want to edit/manage other users\' hidden content.', { default: true }),
                 {
-                    type: 'group', title: 'Defaults for new users', items: [
-                        note('<strong>Defaults for new users</strong> and the <em>Apply all plugin settings to every user</em> action in Overview &gt; Quick Actions. Existing users keep their current settings until you apply them.'),
-                        HC_DEFAULT('hiddenContentDefaultEnabled', 'Hidden Content enabled by default',
-                            'When on, Hidden Content starts active for new users, so they can hide things straight away and the filtering takes effect immediately. When off, users have to turn it on themselves first.', true),
+                    type: 'group', title: '新用户默认值', items: [
+                        note('<strong>新用户默认值</strong>与 总览 &gt; 快捷操作 中的 <em>应用全部插件设置到每位用户</em> 共用此处设置。已有用户保持其当前设置，直到你执行应用。'),
+                        HC_DEFAULT('hiddenContentDefaultEnabled', '默认为新用户启用隐藏内容',
+                            '开启时，新用户的隐藏内容功能默认激活，可立即隐藏条目且过滤即时生效。关闭时，用户需自行开启。', true),
                         {
-                            type: 'group', title: 'Hide buttons', open: true, items: [
+                            type: 'group', title: '隐藏按钮', open: true, items: [
                                 HC_DEFAULT('hiddenContentDefaultShowHideButtons', 'Show "Hide" buttons by default',
-                                    'When on, the Hide button shows up across the apps so users can hide things they don\'t want to see. When off, no Hide button appears anywhere, but users can still bring back items they\'ve already hidden from the Hidden Content page.', true),
+                                    'When on, the Hide button shows up across the apps so users can hide things they don\'t want to see. When off, no Hide button appears anywhere, but users can still bring back items they\'ve already hidden from the 隐藏内容页.', true),
                                 HC_DEFAULT('hiddenContentDefaultShowHideConfirmation', 'Show confirmation dialog before hiding',
-                                    'When on, clicking Hide asks "are you sure?" first. Turn off for one-click hiding. Items can always be brought back from the Hidden Content page.', true),
+                                    'When on, clicking Hide asks "are you sure?" first. Turn off for one-click hiding. Items can always be brought back from the 隐藏内容页.', true),
                                 HC_DEFAULT('hiddenContentDefaultShowButtonJellyseerr', 'Show "Hide" button on Seerr search results',
                                     'Adds a Hide button to Seerr search and discover results, so users can hide a movie or show even before it\'s been added to their library.', true),
                                 HC_DEFAULT('hiddenContentDefaultShowButtonDetails', 'Show "Hide" button on item details pages',
@@ -492,7 +492,7 @@ JEAdmin.define({
                             ]
                         },
                         {
-                            type: 'group', title: 'Where hidden items are filtered out', open: true, items: [
+                            type: 'group', title: '隐藏条目的过滤范围', open: true, items: [
                                 HC_DEFAULT('hiddenContentDefaultFilterLibrary', 'Filter Library & details pages',
                                     'When on, hidden items don\'t appear when users browse a library (Movies, Shows, etc.) or in the suggestion rows on a details page. Turn off if users still want to see hidden items while browsing.', true),
                                 HC_DEFAULT('hiddenContentDefaultFilterSearch', 'Filter Search results',
@@ -520,15 +520,15 @@ JEAdmin.define({
             ]
         },
         'pages-requests': {
-            title: 'Requests Page', icon: 'download',
+            title: '请求页面', icon: 'download',
             items: [
-                note('<strong>Requests Page</strong> shows a Requests button in the sidebar with a dedicated view of active downloads from Sonarr/Radarr and requests from Seerr.'
+                note('<strong>请求页</strong>在侧边栏显示请求按钮，提供 Sonarr/Radarr 活动下载与 Seerr 请求的专属视图。'
                     + '<div id="requestsPageRequirementsLine" style="display: none; margin-top: 10px;"><strong>Requirements:</strong> <span id="requestsPageRequirementsList">Configure Sonarr and/or Radarr, plus Seerr, URLs and API keys.</span></div>'),
                 T('downloadsPageEnabled', 'DownloadsPageEnabled', 'Enable Requests Page',
                     'Adds a "Requests" link to the navigation showing active downloads and requests.', { main: true, default: true }),
-                placement({ p: 'downloads', en: 'downloadsPageEnabled', name: 'Requests', ppLabel: 'Use Plugin Pages for Requests',
-                    ppIntro: `Replaces the default Requests page with a ${ppLink} implementation.`, ctLabel: 'Use Custom Tabs for Requests',
-                    noun: 'Requests page', hint: 'downloads', cls: 'jellyfinenhanced requests', text: 'Requests' }),
+                placement({ p: 'downloads', en: 'downloadsPageEnabled', name: '请求', ppLabel: '用 Plugin Pages 承载请求页',
+                    ppIntro: `Replaces the default Requests page with a ${ppLink} implementation.`, ctLabel: '用 Custom Tabs 承载请求页',
+                    noun: '请求页', hint: 'downloads', cls: 'jellyfinenhanced requests', text: '请求' }),
                 T('showDownloadsInRequests', 'ShowDownloadsInRequests', 'Show Downloads in Requests Page',
                     'Shows active downloads from Sonarr/Radarr on the Requests page. (Requires *arr links and API keys to be configured)', { default: true }),
                 T('downloadsFilterByUserRequests', 'DownloadsFilterByUserRequests', 'Filter Downloads by User Requests',
@@ -541,27 +541,27 @@ JEAdmin.define({
                     'When enabled, only Jellyfin administrators see the Download History section. Regular users won\'t see it at all.', { showIf: 'downloadsShowHistory' }),
                 T('downloadsPagePollingEnabled', 'DownloadsPagePollingEnabled', 'Enable Auto-Refresh',
                     'Periodically refresh the Requests page so download progress updates without manual reload.', { default: true }),
-                { id: 'downloadsPollIntervalSeconds', prop: 'DownloadsPollIntervalSeconds', type: 'number', min: 30, max: 300, default: 30, label: 'Poll Interval (seconds)',
-                  desc: 'How often to refresh download status automatically. Minimum is 30 seconds and applies only when auto-refresh is enabled.',
+                { id: 'downloadsPollIntervalSeconds', prop: 'DownloadsPollIntervalSeconds', type: 'number', min: 30, max: 300, default: 30, label: '轮询间隔（秒）',
+                  desc: '自动刷新下载状态的频率。最小 30 秒，且仅在启用自动刷新时生效。',
                   showIf: 'downloadsPagePollingEnabled',
                   toConfig: (v) => { const n = Math.floor(Number(v)); return n >= 30 ? n : 30; } }
             ]
         },
         'pages-calendar': {
-            title: 'Calendar Page', icon: 'calendar_today',
+            title: '日历页面', icon: 'calendar_today',
             items: [
-                note('<strong>Calendar Page</strong> adds a Calendar button in the sidebar with a dedicated view of upcoming releases from Sonarr and Radarr.<br/><strong>Requirements:</strong> Configure Sonarr and/or Radarr URLs and API keys.'),
+                note('<strong>日历页</strong>在侧边栏添加日历按钮，展示 Sonarr/Radarr 即将发布的内容。<br/><strong>前提：</strong>配置 Sonarr 和/或 Radarr 的地址与 API 密钥。'),
                 T('calendarPageEnabled', 'CalendarPageEnabled', 'Enable Calendar Page',
                     'Adds a "Calendar" link to the navigation showing upcoming releases from Sonarr/Radarr.', { main: true, default: true }),
-                placement({ p: 'calendar', en: 'calendarPageEnabled', name: 'Calendar', ppLabel: 'Use Plugin Pages',
-                    ppIntro: `Replaces the default Calendar page with a ${ppLink} implementation.`, ctLabel: 'Use Custom Tabs',
-                    noun: 'Calendar page', hint: 'calendar', cls: 'jellyfinenhanced calendar', text: 'Calendar' }),
-                { id: 'calendarFirstDayOfWeek', prop: 'CalendarFirstDayOfWeek', type: 'select', default: 'Monday', label: 'First Day of Week',
+                placement({ p: 'calendar', en: 'calendarPageEnabled', name: '日历', ppLabel: '使用 Plugin Pages',
+                    ppIntro: `Replaces the default Calendar page with a ${ppLink} implementation.`, ctLabel: '使用 Custom Tabs',
+                    noun: '日历页', hint: 'calendar', cls: 'jellyfinenhanced calendar', text: '日历' }),
+                { id: 'calendarFirstDayOfWeek', prop: 'CalendarFirstDayOfWeek', type: 'select', default: 'Monday', label: '每周第一天',
                   options: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'].map((d) => [d, d]),
-                  desc: 'Which day appears as the first column of the calendar grid.' },
-                { id: 'calendarTimeFormat', prop: 'CalendarTimeFormat', type: 'select', default: '5pm/5:30pm', label: 'Time Format',
+                  desc: '日历网格的第一列显示星期几。' },
+                { id: 'calendarTimeFormat', prop: 'CalendarTimeFormat', type: 'select', default: '5pm/5:30pm', label: '时间格式',
                   options: [['5pm/5:30pm', '5pm/5:30pm'], ['17:00/17:30', '17:00/17:30']],
-                  desc: 'Whether release times display in 12-hour (5pm) or 24-hour (17:00) format.' },
+                  desc: '发行时间以 12 小时制（5pm）还是 24 小时制（17:00）格式显示。' },
                 T('calendarHighlightFavorites', 'CalendarHighlightFavorites', 'Highlight Favorites/Watchlist', 'Show a golden border on calendar entries for items in your Jellyfin favorites.'),
                 T('calendarHighlightWatchedSeries', 'CalendarHighlightWatchedSeries', 'Highlight Watched Series', 'Show a border on calendar entries for series you have watched episodes from.'),
                 T('calendarFilterByLibraryAccess', 'CalendarFilterByLibraryAccess', 'Filter by Library Access',
@@ -573,26 +573,26 @@ JEAdmin.define({
             ]
         },
         'pages-recommendations': {
-            title: 'Seerr Recommendations Page', icon: 'auto_awesome',
+            title: 'Seerr 推荐页面', icon: 'auto_awesome',
             items: [
                 note('<strong>Seerr Recommendations Page</strong> adds a dedicated view with Seerr-powered rows: Trending, Popular Movies, Popular TV Shows, Upcoming Movies and Upcoming TV Shows.<br/><strong>Requirements:</strong> Seerr integration must be configured and enabled.'),
                 T('recommendationsPageEnabled', 'RecommendationsPageEnabled', 'Enable Recommendations Page',
                     'Adds a "Seerr Recommendations" link to the navigation showing Seerr discover rows.', { main: true }),
-                placement({ p: 'recommendations', en: 'recommendationsPageEnabled', name: 'Recommendations', ppLabel: 'Use Plugin Pages',
-                    ppIntro: `Replaces the default Recommendations page with a ${ppLink} implementation.`, ctLabel: 'Use Custom Tabs',
-                    noun: 'Recommendations page', hint: 'recommendations', cls: 'jellyfinenhanced recommendations', text: 'Recommendations' })
+                placement({ p: 'recommendations', en: 'recommendationsPageEnabled', name: '推荐', ppLabel: '使用 Plugin Pages',
+                    ppIntro: `Replaces the default Recommendations page with a ${ppLink} implementation.`, ctLabel: '使用 Custom Tabs',
+                    noun: '推荐页', hint: 'recommendations', cls: 'jellyfinenhanced recommendations', text: '推荐' })
             ]
         },
         'pages-activity': {
-            title: 'Activity Feed', icon: 'history',
+            title: '动态', icon: 'history',
             items: [
                 note('<strong>Activity Feed</strong> shows recently watched, favorited, and reviewed titles across the server. Each viewer only sees activity for items they themselves have library access to.'),
                 T('activityFeedEnabled', 'ActivityFeedEnabled', 'Enable Activity Feed', 'Turns the feature on. While it\'s off, no activity is recorded or shown.', { main: true }),
-                placement({ p: 'activityFeed', en: 'activityFeedEnabled', name: 'Activity', ppLabel: 'Use Plugin Pages',
-                    ppIntro: `Adds an "Activity" link via ${ppLink}.`, ctLabel: 'Use Custom Tabs',
-                    noun: 'Activity page', hint: 'activityFeed', cls: 'jellyfinenhanced activity', text: 'Activity' }),
+                placement({ p: 'activityFeed', en: 'activityFeedEnabled', name: '活动', ppLabel: '使用 Plugin Pages',
+                    ppIntro: `Adds an "Activity" link via ${ppLink}.`, ctLabel: '使用 Custom Tabs',
+                    noun: '活动页', hint: 'activityFeed', cls: 'jellyfinenhanced activity', text: '活动' }),
                 {
-                    type: 'group', title: 'What to show', open: true, items: [
+                    type: 'group', title: '显示内容', open: true, items: [
                         T('activityFeedShowWatched', 'ActivityFeedShowWatched', 'Show recently watched', 'Titles users finished watching.', { default: true }),
                         T('activityFeedShowFavorited', 'ActivityFeedShowFavorited', 'Show recently favorited', 'Titles users added to their favorites.', { default: true }),
                         T('activityFeedShowReviewed', 'ActivityFeedShowReviewed', 'Show recently reviewed', 'Titles users reviewed.', { default: true }),
@@ -605,13 +605,13 @@ JEAdmin.define({
             ]
         },
         'pages-catchup': {
-            title: 'Catch Up', icon: 'style',
+            title: '补看', icon: 'style',
             items: [
                 note('<strong>Catch Up</strong> shows unwatched movies and shows as cards. Swipe right to mark watched, left to dismiss, up to add to your watchlist (the Likes flag) and down to open the title. Handy for finding out what people have already seen.'),
                 T('catchUpEnabled', 'CatchUpEnabled', 'Enable Catch Up', 'Turns the feature on. Each user only sees titles they have library access to.', { main: true }),
-                placement({ p: 'catchUp', en: 'catchUpEnabled', name: 'Catch Up', ppLabel: 'Use Plugin Pages',
-                    ppIntro: `Adds a "Catch Up" link via ${ppLink}.`, ctLabel: 'Use Custom Tabs',
-                    noun: 'Catch Up page', hint: 'catchUp', cls: 'jellyfinenhanced catchup', text: 'Catch Up' }),
+                placement({ p: 'catchUp', en: 'catchUpEnabled', name: '补看', ppLabel: '使用 Plugin Pages',
+                    ppIntro: `Adds a "Catch Up" link via ${ppLink}.`, ctLabel: '使用 Custom Tabs',
+                    noun: '补看页', hint: 'catchUp', cls: 'jellyfinenhanced catchup', text: '补看' }),
                 T('catchUpLogEnabled', 'CatchUpLogEnabled', 'Record Catch Up activity',
                     'Logs who swiped what (user, title, action and time) to <code>catchup-log.jsonl</code> in the plugin\'s configuration folder. Administrators can read it, with a per-user summary, in the Activity panel on the Catch Up page. The log is size-bounded (about 5&nbsp;MB per file, two files kept).', { default: true })
             ]
@@ -628,65 +628,65 @@ JEAdmin.define({
 
     JEAdmin.define({
         'extras-ui': {
-            title: 'UI Tweaks', icon: 'palette',
+            title: '界面微调', icon: 'palette',
             items: [
-                { id: 'coloredRatingsEnabled', prop: 'ColoredRatingsEnabled', type: 'toggle', label: 'Colored Ratings Backgrounds',
-                  desc: 'Applies color-coded backgrounds to media ratings. If you notice missing or incorrect ratings, please submit a PR to <a class="sectionTitle" href="https://github.com/n00bcodr/Jellyfin-Enhanced/" target="_blank">Jellyfin-Enhanced</a>.' + shot('Colored Ratings Example', 'ratings.png') },
-                { id: 'themeSelectorEnabled', prop: 'ThemeSelectorEnabled', type: 'toggle', label: 'Theme Selector (Jellyfish)',
-                  desc: 'Adds a theme selector to quickly switch between Jellyfish color themes. Only changes the color theme of Jellyfish when used natively, not through KefinTweaks.' + shot('Theme Selector Example', 'theme-selector.png') },
-                { id: 'coloredActivityIconsEnabled', prop: 'ColoredActivityIconsEnabled', type: 'toggle', label: 'Colored Dashboard Icons',
-                  desc: 'Replaces Dashboard Activity Icons with Material Design icons and background color.' + shot('Colored Activity Icons Example', 'colored-activity-icons.png') },
-                { id: 'loginImageEnabled', prop: 'EnableLoginImage', type: 'toggle', label: 'Profile Picture on Login',
-                  desc: 'Displays the user\'s profile picture on the manual login screen instead of the name. When a user is selected, their avatar appears above the password field.' + shot('Login Image Example', 'login-image.png') },
-                { id: 'pluginIconsEnabled', prop: 'PluginIconsEnabled', type: 'toggle', label: 'Custom Plugin Menu Icons',
-                  desc: 'Replaces default plugin folder icons with custom icons on the Dashboard sidebar. Currently replaces icons for (if installed): Jellyfin Enhanced, JavaScript Injector, Intro Skipper, Reports, JellySleep, Home Screen Sections, File Transformation, Jellyfin Helper, Newsletters, Segment Editor and Moonbase.' + shot('Plugin Icons Example', 'plugin-icons.png', true) }
+                { id: 'coloredRatingsEnabled', prop: 'ColoredRatingsEnabled', type: 'toggle', label: '彩色评分背景',
+                  desc: '为媒体分级套用彩色背景。如发现缺失或错误的分级，请向 <a class="sectionTitle" href="https://github.com/n00bcodr/Jellyfin-Enhanced/" target="_blank">Jellyfin-Enhanced</a> 提交 PR。' + shot('Colored Ratings Example', 'ratings.png') },
+                { id: 'themeSelectorEnabled', prop: 'ThemeSelectorEnabled', type: 'toggle', label: '主题选择器（Jellyfish）',
+                  desc: '添加主题选择器，快速切换 Jellyfish 配色主题。仅在原生使用 Jellyfish 时改变其配色，经 KefinTweaks 加载时无效。' + shot('Theme Selector Example', 'theme-selector.png') },
+                { id: 'coloredActivityIconsEnabled', prop: 'ColoredActivityIconsEnabled', type: 'toggle', label: '彩色仪表盘图标',
+                  desc: '将控制台活动图标替换为 Material Design 图标并加背景色。' + shot('Colored Activity Icons Example', 'colored-activity-icons.png') },
+                { id: 'loginImageEnabled', prop: 'EnableLoginImage', type: 'toggle', label: '登录时显示头像',
+                  desc: '手动登录界面显示用户头像而非用户名。选中用户后，头像会出现在密码框上方。' + shot('Login Image Example', 'login-image.png') },
+                { id: 'pluginIconsEnabled', prop: 'PluginIconsEnabled', type: 'toggle', label: '自定义插件菜单图标',
+                  desc: '替换控制台侧边栏插件文件夹的默认图标。当前替换（如已安装）：Jellyfin Enhanced、JavaScript Injector、Intro Skipper、Reports、JellySleep、Home Screen Sections、File Transformation、Jellyfin Helper、Newsletters、Segment Editor 和 Moonbase。' + shot('Plugin Icons Example', 'plugin-icons.png', true) }
             ]
         },
         'extras-streams': {
-            title: 'Active Streams', icon: 'podcasts',
+            title: '活动串流', icon: 'podcasts',
             items: [
-                { id: 'activeStreamsEnabled', prop: 'ActiveStreamsEnabled', type: 'toggle', main: true, label: 'Active Streams Header Widget',
-                  desc: 'Adds a live stream counter to the header. Click it to open a panel showing who is currently playing, what they\'re watching, playback state, progress, and transcoding details. By default the widget is only visible to admin accounts.' },
-                { id: 'activeStreamsAllUsers', prop: 'ActiveStreamsAllUsers', type: 'toggle', label: 'Show widget to non-admins' }
+                { id: 'activeStreamsEnabled', prop: 'ActiveStreamsEnabled', type: 'toggle', main: true, label: '页头活动播放流小组件',
+                  desc: '在页头添加实时串流计数。点击打开面板，可查看谁在播放、在看什么、播放状态、进度及转码详情。默认仅管理员账号可见该挂件。' },
+                { id: 'activeStreamsAllUsers', prop: 'ActiveStreamsAllUsers', type: 'toggle', label: '向非管理员显示小组件' }
             ]
         },
         'extras-links': {
-            title: 'External Links', icon: 'link',
+            title: '外部链接', icon: 'link',
             items: [
-                { id: 'letterboxdEnabled', prop: 'LetterboxdEnabled', type: 'toggle', main: true, label: 'Enable Letterboxd Links',
-                  desc: 'Adds Letterboxd links to movie and person details pages.' },
-                { id: 'showLetterboxdLinkAsText', prop: 'ShowLetterboxdLinkAsText', type: 'toggle', label: 'Show link as text',
-                  desc: 'When enabled, shows "Letterboxd" as text instead of the Letterboxd icon.' }
+                { id: 'letterboxdEnabled', prop: 'LetterboxdEnabled', type: 'toggle', main: true, label: '启用 Letterboxd 链接',
+                  desc: '在电影和人物详情页添加 Letterboxd 链接。' },
+                { id: 'showLetterboxdLinkAsText', prop: 'ShowLetterboxdLinkAsText', type: 'toggle', label: '以文本形式显示链接',
+                  desc: '启用后以文字“Letterboxd”代替其图标显示。' }
             ]
         },
         'extras-metadata-icons': {
-            title: 'Metadata Icons & Sidebar Links', icon: 'extension',
+            title: '元数据图标与侧边栏链接', icon: 'extension',
             items: [
-                { id: 'metadataIconsEnabled', prop: 'MetadataIconsEnabled', type: 'toggle', label: 'Enable Metadata Icons (Druidblack)',
+                { id: 'metadataIconsEnabled', prop: 'MetadataIconsEnabled', type: 'toggle', label: '启用元数据图标（Druidblack）',
                   fromConfig: (v) => !!v,
-                  desc: 'Shows metadata icons instead of text. When enabled, links from the plugin will also use icons instead of text (Letterboxd, *arr Links).' },
-                { type: 'group', title: 'Sidebar custom links', items: [
-                    { id: 'customPluginLinks', prop: 'CustomPluginLinks', type: 'textarea', rows: 3, placeholder: 'Page Name | icon_name', label: 'Sidebar Custom Links',
-                      desc: '<strong>Format:</strong> <code>Configuration Page Name | Material Icon Name</code><br/>'
+                  desc: '显示元数据图标而非文字。启用后，插件提供的链接（Letterboxd、*arr 链接）也用图标显示。' },
+                { type: 'group', title: '侧边栏自定义链接', items: [
+                    { id: 'customPluginLinks', prop: 'CustomPluginLinks', type: 'textarea', rows: 3, placeholder: '页面名称 | 图标名', label: '侧边栏自定义链接',
+                      desc: '<strong>格式：</strong><code>配置页名称 | Material 图标名</code><br/>'
                           + '<strong>Important:</strong> Use the exact name that appears in the configuration page URL (e.g., "Jellyfin%20Tweaks" becomes "Jellyfin Tweaks").<br/>'
                           + '<a class="sectionTitle" href="https://fonts.google.com/icons?icon.set=Material+Icons" target="_blank">Browse Material Icons</a><br/>'
                           + 'Use "Test Links" to preview your links in the sidebar. They appear immediately and disappear on page refresh.' },
-                    { type: 'button', id: 'testCustomPluginLinksBtn', label: 'Test Links' }
+                    { type: 'button', id: 'testCustomPluginLinksBtn', label: '测试链接' }
                 ] }
             ]
         },
         'extras-splash': {
-            title: 'Splash Screen Override', icon: 'wallpaper',
+            title: '启动画面覆盖', icon: 'wallpaper',
             items: [
-                { id: 'enableCustomSplashScreen', prop: 'EnableCustomSplashScreen', type: 'toggle', main: true, label: 'Enable Splash Screen Override',
-                  desc: 'Replace Jellyfin\'s login splash background with a custom image URL specified below.' },
-                { id: 'splashScreenImageUrl', prop: 'SplashScreenImageUrl', type: 'text', placeholder: '/web/assets/banner.png', label: 'Splash Screen Image URL',
-                  desc: 'URL for the splash screen image. Defaults to Jellyfin banner.' },
+                { id: 'enableCustomSplashScreen', prop: 'EnableCustomSplashScreen', type: 'toggle', main: true, label: '启用启动画面覆盖',
+                  desc: '用下方指定的自定义图片 URL 替换 Jellyfin 的登录启动画面背景。' },
+                { id: 'splashScreenImageUrl', prop: 'SplashScreenImageUrl', type: 'text', placeholder: '/web/assets/banner.png', label: '启动画面图片 URL',
+                  desc: '启动画面图片的 URL。默认使用 Jellyfin 横幅。' },
                 { type: 'note', tone: 'warn', html: 'Might cause strange behaviour if <a class="sectionTitle" href="https://github.com/IAmParadox27/jellyfin-plugin-media-bar" target="_blank">jellyfin-plugin-media-bar</a> is installed. All changes require a page refresh; if old settings persist, force clear the browser cache.' }
             ]
         },
         'extras-branding': {
-            title: 'Custom Image Assets', icon: 'image', class: 'je-fieldset-wide',
+            title: '自定义图像资源', icon: 'image', class: 'je-fieldset-wide',
             items: [
                 { type: 'note', html: 'Uploaded icon / favicon / logo images are applied automatically at request time. Changes apply on next page load (a hard refresh may be needed if your browser cached the old image).' },
                 { type: 'custom', html: '<div class="je-branding-grid">' + [
@@ -710,10 +710,10 @@ JEAdmin.define({
             ]
         },
         'keyboard': {
-            title: 'Keyboard Shortcuts', icon: 'keyboard',
+            title: '键盘快捷键', icon: 'keyboard',
             items: [
-                { id: 'disableAllShortcuts', prop: 'DisableAllShortcuts', type: 'toggle', label: 'Disable Keyboard Shortcuts',
-                  desc: 'Disables all keyboard shortcuts, and hides the "Shortcuts" tab in the Enhanced Panel.' },
+                { id: 'disableAllShortcuts', prop: 'DisableAllShortcuts', type: 'toggle', label: '禁用键盘快捷键',
+                  desc: '禁用全部键盘快捷键，并隐藏增强面板中的“快捷键”标签页。' },
                 { type: 'note', html: '<strong>Users can customize their own settings from the Enhanced Panel:</strong> press <code>?</code> (default shortcut), long-press the profile picture in the top-right corner, use the "Jellyfin Enhanced" link in the sidebar, or open it from the playback controls menu (mobile only).' },
                 { type: 'html', html: '<div class="fieldDescription je-sc-help">Click a key, then press the new key combination (for example <kbd>Shift+A</kbd>). <b>Delete</b> disables the shortcut for every user, <b>Backspace</b> restores its default. Users can still change their own keys from their Enhanced Panel.</div>'
                     + '<div id="shortcut-error-comment" style="display: none; color: #ff6b6b; margin-top:5px;"></div>'
@@ -736,27 +736,27 @@ JEAdmin.define({
 
 JEAdmin.define({
     'seerr-connection': {
-        title: 'Seerr Connection Setup', icon: 'link', attrs: { 'data-dep-setup': '' },
+        title: 'Seerr 连接设置', icon: 'link', attrs: { 'data-dep-setup': '' },
         items: [
-            { id: 'jellyseerrEnabled', prop: 'JellyseerrEnabled', type: 'toggle', main: true, label: 'Enable Seerr integration',
-              desc: 'Enables all Seerr-powered features for this server: Seerr search results, request buttons, the Requests page, auto-requests, and user import. Required for any Seerr feature to work.' },
-            { id: 'jellyseerrUrls', type: 'textarea', manual: true, rows: 3, label: 'Seerr URL(s) (One per line)',
+            { id: 'jellyseerrEnabled', prop: 'JellyseerrEnabled', type: 'toggle', main: true, label: '启用 Seerr 集成',
+              desc: '启用本服务器的全部 Seerr 功能：Seerr 搜索结果、请求按钮、请求页面、自动请求与用户导入。任何 Seerr 功能都依赖此项。' },
+            { id: 'jellyseerrUrls', type: 'textarea', manual: true, rows: 3, label: 'Seerr 地址（每行一条）',
               placeholder: 'http://192.168.1.10:5055\nhttps://jellyseerr.example.com',
-              desc: 'Enter your Seerr instance URLs, one per line. The script will use the first one that connects successfully.' },
+              desc: '输入你的 Seerr 实例 URL，每行一个。脚本将使用第一个连接成功的地址。' },
             { type: 'custom', html: keyRow('JellyseerrApiKey', 'JellyseerrApiKey', 'Seerr API Key', 'jellyseerrStatusIndicator',
                 '<button type="button" id="testJellyseerrBtn" class="jea-btn">Test</button>',
                 'API key from Seerr. (Settings &gt; General Settings &gt; API Key)') },
             { type: 'custom', html: keyRow('jellyseerr_TMDB_API_KEY', 'TMDB_API_KEY', 'TMDB API Key', 'jellyseerrTmdbStatusIndicator',
                 '<button type="button" class="testTmdbBtn jea-btn">Test</button>',
                 'Your API key from The Movie DB (TMDB). <a href="https://www.themoviedb.org/settings/api" target="_blank" rel="noopener">How to?</a><br/>TMDB API key for automatic movie collection requests and Seerr Collection Results. Shared with Elsewhere Settings') },
-            { type: 'group', title: 'Advanced URL Mappings', items: [
-                { id: 'jellyseerrUrlMappings', type: 'textarea', manual: true, rows: 4, label: 'Seerr URL Mappings',
+            { type: 'group', title: '高级地址映射', items: [
+                { id: 'jellyseerrUrlMappings', type: 'textarea', manual: true, rows: 4, label: 'Seerr 地址映射',
                   placeholder: 'https://jellyfin.mydomain.com|https://jellyseerr.mydomain.com',
-                  desc: 'Map your Jellyfin URLs to specific Seerr URLs for displaying links to users. Users will get the appropriate Seerr link when using "Link result titles to Seerr instead of TMDB", based on what link they use to access Jellyfin.<br/>Format: <code>JellyfinURL|SeerrURL</code>, one mapping per line.<br/>If no mapping matches or this is empty, the first URL from above will be used.' },
+                  desc: '把 Jellyfin 地址映射到指定的 Seerr 地址以展示给用户。用户使用“结果标题链接到 Seerr 而非 TMDB”时，会按其访问 Jellyfin 所用的地址得到对应 Seerr 链接。<br/>格式：<code>JellyfinURL|SeerrURL</code>，每行一条。<br/>无匹配或留空时，使用上方第一个地址。' },
                 { type: 'note', html: '<strong>URL Mapping Examples:</strong><br/>Remote access: <code>https://jellyfin.mydomain.com|https://jellyseerr.mydomain.com</code><br/>Local access: <code>http://192.168.1.10:8096|http://192.168.1.10:5055</code><br/>With base URL: <code>https://example.com/jellyfin|https://example.com/jellyseerr</code>' },
                 { type: 'note', tone: 'warn', html: 'Make sure proper mappings are added to appropriate URLs in order for mobile clients to open Seerr links correctly.' },
                 { type: 'note', html: '"<b>Enable Jellyfin Sign-In</b>" must be enabled in Seerr User Settings (/settings/users). All users must be imported to Seerr as Jellyfin users for them to be able to request content.' },
-                { type: 'button', id: 'validateSeerrMappingsBtn', label: 'Validate Mappings' },
+                { type: 'button', id: 'validateSeerrMappingsBtn', label: '校验映射' },
                 { type: 'custom', html: '<div id="seerrMappingsValidationResult" style="display: none;"></div>' }
             ] },
             { type: 'note', html: '<b>Jellyfin Enhanced is not affiliated with Seerr.</b> Seerr is an independent project. This plugin only uses Seerr\'s public API to integrate request and discovery features into Jellyfin. Please report plugin issues to the <a href="https://github.com/n00bcodr/Jellyfin-Enhanced/issues" target="_blank" rel="noopener">Jellyfin Enhanced issue tracker</a>, not the Seerr team.' }
@@ -764,105 +764,105 @@ JEAdmin.define({
     },
 
     'seerr-search': {
-        title: 'Search & Requests', icon: 'search',
+        title: '搜索与请求', icon: 'search',
         items: [
-            { id: 'jellyseerrShowSearchResults', prop: 'JellyseerrShowSearchResults', type: 'toggle', default: true, label: 'Show Seerr Results in Search',
-              desc: 'Enhance Jellyfin search by showing results from Seerr.<br/>This allows users to discover and request missing movies and shows directly from Jellyfin.' },
-            { id: 'jellyseerrSearchExcludeLibraryItems', prop: 'JellyseerrSearchExcludeLibraryItems', type: 'toggle', label: 'Exclude search items already in library',
-              desc: 'Hide Seerr search results that already exist in your Jellyfin library (the ones marked as available), including shows where only some seasons are in the library.<br/>If disabled, available items are shown and link to the media item in the library.' },
+            { id: 'jellyseerrShowSearchResults', prop: 'JellyseerrShowSearchResults', type: 'toggle', default: true, label: '在搜索中显示 Seerr 结果',
+              desc: '在 Jellyfin 搜索中显示 Seerr 结果。<br/>用户可直接在 Jellyfin 里发现并请求缺失的电影和剧集。' },
+            { id: 'jellyseerrSearchExcludeLibraryItems', prop: 'JellyseerrSearchExcludeLibraryItems', type: 'toggle', label: '排除媒体库中已有的搜索条目',
+              desc: '隐藏媒体库中已有的 Seerr 搜索结果（标记为“可观看”的那些），包括仅部分季入库的剧集。<br/>关闭时，已有条目仍显示并链接到库内条目。' },
             { type: 'custom', html: '<div class="jea-note jea-note-warn" id="je-search-exclude-library-warning" style="display:none;"><strong>Warning:</strong> A movie in the library in a lower quality won\'t appear to request in higher quality like 4K, and a show with only some seasons won\'t appear to request the rest. Missing seasons can still be requested with the <strong>Request More</strong> button on the show\'s page, and anything can still be requested directly in Seerr.</div>' },
-            { id: 'showCollectionsInSearch', prop: 'ShowCollectionsInSearch', type: 'toggle', default: true, label: 'Show Collections in Seerr Results',
-              desc: 'Display TMDB collections (e.g., Harry Potter, Marvel Cinematic Universe) in Seerr search results with an option to request the entire collection at once.' },
-            { id: 'jellyseerrEnable4kRequests', prop: 'JellyseerrEnable4KRequests', type: 'toggle', label: 'Enable 4K Requests',
-              desc: 'When enabled, movie request buttons include a dropdown to request a 4K version.' },
-            { id: 'jellyseerrEnable4kTvRequests', prop: 'JellyseerrEnable4KTvRequests', type: 'toggle', label: 'Enable 4K TV Requests',
-              desc: 'When enabled, TV request buttons include a dropdown that opens the season request modal in 4K mode.' },
-            { id: 'jellyseerrShowAdvanced', prop: 'JellyseerrShowAdvanced', type: 'toggle', label: 'Show advanced request options',
-              desc: 'Lets users choose the Server, Quality and Path while requesting. Only shown to users with the Advanced Requests (or Manage Requests) permission in Seerr. <br/> Note: This will disregard any Override Rules set in Seerr.' },
-            { id: 'jellyseerrSingleSeasonRequestOnly', prop: 'JellyseerrSingleSeasonRequestOnly', type: 'toggle', label: 'Only allow requesting one season at a time',
-              desc: 'Removes "Select All" and lets users pick only one season per request. Requires "Partial requests" to be enabled in Seerr; otherwise Seerr itself requires all seasons.' },
-            { id: 'jellyseerrShowQuotaInfo', prop: 'JellyseerrShowQuotaInfo', type: 'toggle', default: true, label: 'Show request quota info',
-              desc: 'When enabled, request modals display a chip showing the user\'s request usage and when their next slot frees up. Quota errors get a detailed dialog instead of a vanishing toast.' }
+            { id: 'showCollectionsInSearch', prop: 'ShowCollectionsInSearch', type: 'toggle', default: true, label: '在 Seerr 结果中显示合集',
+              desc: '在 Seerr 搜索结果中显示 TMDB 合集（如哈利·波特、漫威电影宇宙），并可一键请求整个合集。' },
+            { id: 'jellyseerrEnable4kRequests', prop: 'JellyseerrEnable4KRequests', type: 'toggle', label: '启用 4K 请求',
+              desc: '启用后，电影请求按钮带下拉菜单，可请求 4K 版本。' },
+            { id: 'jellyseerrEnable4kTvRequests', prop: 'JellyseerrEnable4KTvRequests', type: 'toggle', label: '启用 4K 剧集请求',
+              desc: '启用后，剧集请求按钮的下拉菜单会以 4K 模式打开按季请求窗口。' },
+            { id: 'jellyseerrShowAdvanced', prop: 'JellyseerrShowAdvanced', type: 'toggle', label: '显示高级请求选项',
+              desc: '允许用户在请求时选择服务器、质量和路径。仅对拥有 Seerr 高级请求（或管理请求）权限的用户显示。<br/>注意：会忽略 Seerr 中设置的覆盖规则。' },
+            { id: 'jellyseerrSingleSeasonRequestOnly', prop: 'JellyseerrSingleSeasonRequestOnly', type: 'toggle', label: '一次仅允许请求一季',
+              desc: '去掉“全选”，每次请求只能选一季。需要 Seerr 开启“部分请求”，否则 Seerr 本身会要求请求全部季。' },
+            { id: 'jellyseerrShowQuotaInfo', prop: 'JellyseerrShowQuotaInfo', type: 'toggle', default: true, label: '显示请求配额信息',
+              desc: '启用后，请求窗口会显示用户的请求用量徽章及下一个空位释放时间。配额错误会弹出详细说明而非一闪而过的提示。' }
         ]
     },
 
     'seerr-discovery': {
-        title: 'Discovery & UI Extras', icon: 'explore',
+        title: '发现与界面附加功能', icon: 'explore',
         items: [
-            { id: 'jellyseerrUseMoreInfoModal', prop: 'JellyseerrUseMoreInfoModal', type: 'toggle', label: 'Open results in "More Info" modal',
-              desc: 'When enabled, clicking a Seerr result title or poster opens an in-app More Info modal.<br/>When disabled, clicking will open the item in Seerr.' },
-            { id: 'jellyseerrAvailablePosterLinksToJellyfin', prop: 'JellyseerrAvailablePosterLinksToJellyfin', type: 'toggle', label: 'Link available items\' posters straight to Jellyfin',
-              desc: 'For a Seerr result that\'s already available in your library, clicking the poster goes straight to the Jellyfin item, just like the title link already does. If "Open results in More Info modal" above is enabled, the modal can no longer be opened by clicking the poster of an available item.' },
-            { id: 'jellyseerrShowReportButton', prop: 'JellyseerrShowReportButton', type: 'toggle', label: 'Show "Report Issue" button on items',
-              desc: 'When enabled, a small report icon will be added to item action icons allowing users to report playback/content issues to Seerr.' },
-            { id: 'jellyseerrShowIssueIndicator', prop: 'JellyseerrShowIssueIndicator', type: 'toggle', label: 'Show open issue indicator',
-              desc: 'When enabled, the report issue button turns orange and shows a count badge if the item has open issues in Seerr.' },
-            { id: 'showElsewhereOnJellyseerr', prop: 'ShowElsewhereOnJellyseerr', type: 'toggle', label: 'Show Streaming Providers on Posters',
-              desc: 'Displays icons of available streaming services (from your default region) on Seerr Posters.<br/><br/><b>Requires TMDB API Key to be configured in Elsewhere Settings</b>' },
-            { id: 'jellyseerrShowDetailPageLink', prop: 'JellyseerrShowDetailPageLink', type: 'toggle', default: true, label: 'Show Seerr link on item detail pages',
-              desc: 'Adds a Seerr tag to the External Links row on movie/show detail pages (the same row TMDB/IMDb icons appear in, and *arr links when enabled; it shows there regardless of whether *arr links are configured). If "Open results in More Info modal" above is enabled, clicking it opens that modal (status, downloads, and who requested it); otherwise it links straight to the item on Seerr.' },
-            { id: 'jellyseerrShowDetailPageLinkAsText', prop: 'JellyseerrShowDetailPageLinkAsText', type: 'toggle', label: 'Show as text instead of icon',
-              desc: 'Renders the Seerr detail-page link as the word "Seerr" instead of the icon. Independent of the *arr links "show as text" setting, so it applies even when *arr links are disabled.' },
-            { type: 'group', title: 'Item Pages Discovery', items: [
-                { id: 'jellyseerrShowSimilar', prop: 'JellyseerrShowSimilar', type: 'toggle', default: true, label: 'Show similar items',
-                  desc: 'Displays similar movies/shows from Seerr on item details pages. Limited to 20 items.' },
-                { id: 'jellyseerrShowRecommended', prop: 'JellyseerrShowRecommended', type: 'toggle', default: true, label: 'Show recommended items',
-                  desc: 'Displays recommended movies/shows from Seerr on item details pages. Limited to 20 items.' },
-                { id: 'jellyseerrShowRequestMoreOnSeries', prop: 'JellyseerrShowRequestMoreOnSeries', type: 'toggle', default: true, label: 'Show "Request More" button on Series',
-                  desc: 'Adds a "Request More" button beside the Seasons section heading on Series detail pages when the show has unrequested seasons in Seerr. Lets users request additional seasons without going through the search bar.' },
-                { id: 'jellyseerrExcludeLibraryItems', prop: 'JellyseerrExcludeLibraryItems', type: 'toggle', default: true, label: 'Exclude items already in library',
-                  desc: 'Hide similar/recommended items that already exist in your Jellyfin library from the results.<br/>If disabled, the items that are available link to the media item in the library.' },
-                { id: 'jellyseerrExcludeBlocklistedItems', prop: 'JellyseerrExcludeBlocklistedItems', type: 'toggle', label: 'Exclude blocklisted items',
-                  desc: 'When enabled, items marked as blocklisted in Seerr will not appear in similar/recommended suggestions.' }
+            { id: 'jellyseerrUseMoreInfoModal', prop: 'JellyseerrUseMoreInfoModal', type: 'toggle', label: '在“更多信息”弹窗中打开结果',
+              desc: '启用后，点击 Seerr 结果标题或海报会打开应用内“更多信息”窗口。<br/>关闭则跳转到 Seerr 打开该条目。' },
+            { id: 'jellyseerrAvailablePosterLinksToJellyfin', prop: 'JellyseerrAvailablePosterLinksToJellyfin', type: 'toggle', label: '将可用条目的海报直接链接到 Jellyfin',
+              desc: '对媒体库中已有的 Seerr 结果，点击海报直接跳到 Jellyfin 条目（与标题链接行为一致）。若上方“以更多信息窗口打开结果”已启用，则已有条目的海报不再打开该窗口。' },
+            { id: 'jellyseerrShowReportButton', prop: 'JellyseerrShowReportButton', type: 'toggle', label: '在条目上显示“报告问题”按钮',
+              desc: '启用后，条目操作图标区会出现小的报告图标，用户可向 Seerr 上报播放/内容问题。' },
+            { id: 'jellyseerrShowIssueIndicator', prop: 'JellyseerrShowIssueIndicator', type: 'toggle', label: '显示未解决问题指示器',
+              desc: '启用后，若该条目在 Seerr 有未处理问题，报告按钮变橙色并显示数量徽章。' },
+            { id: 'showElsewhereOnJellyseerr', prop: 'ShowElsewhereOnJellyseerr', type: 'toggle', label: '在海报上显示流媒体平台',
+              desc: '在 Seerr 海报上显示可用的流媒体服务图标（按默认地区）。<br/><br/><b>需要在 Elsewhere 设置中配置 TMDB API 密钥</b>' },
+            { id: 'jellyseerrShowDetailPageLink', prop: 'JellyseerrShowDetailPageLink', type: 'toggle', default: true, label: '在条目详情页显示 Seerr 链接',
+              desc: '在电影/剧集详情页的外部链接行（TMDB/IMDb 图标及启用后的 *arr 链接所在行）添加 Seerr 标记，无论是否配置 *arr 链接都会显示。若上方“以更多信息窗口打开结果”已启用，点击它打开该窗口（状态、下载、请求人）；否则直接链接到 Seerr 的条目页。' },
+            { id: 'jellyseerrShowDetailPageLinkAsText', prop: 'JellyseerrShowDetailPageLinkAsText', type: 'toggle', label: '以文本而非图标显示',
+              desc: '把 Seerr 详情页链接渲染为文字“Seerr”而非图标。独立于 *arr 链接的“显示为文字”设置，即使 *arr 链接关闭也生效。' },
+            { type: 'group', title: '条目页发现内容', items: [
+                { id: 'jellyseerrShowSimilar', prop: 'JellyseerrShowSimilar', type: 'toggle', default: true, label: '显示相似条目',
+                  desc: '在条目详情页显示来自 Seerr 的相似电影/剧集，最多 20 条。' },
+                { id: 'jellyseerrShowRecommended', prop: 'JellyseerrShowRecommended', type: 'toggle', default: true, label: '显示推荐条目',
+                  desc: '在条目详情页显示来自 Seerr 的推荐电影/剧集，最多 20 条。' },
+                { id: 'jellyseerrShowRequestMoreOnSeries', prop: 'JellyseerrShowRequestMoreOnSeries', type: 'toggle', default: true, label: '在剧集上显示“请求更多”按钮',
+                  desc: '当剧集在 Seerr 存在未请求的季时，在剧集详情页“季”标题旁显示“请求更多”按钮，无需经过搜索即可补请。' },
+                { id: 'jellyseerrExcludeLibraryItems', prop: 'JellyseerrExcludeLibraryItems', type: 'toggle', default: true, label: '排除媒体库中已有的条目',
+                  desc: '从相似/推荐结果中隐藏媒体库已有的条目。<br/>关闭时，已有条目仍显示并链接到库内条目。' },
+                { id: 'jellyseerrExcludeBlocklistedItems', prop: 'JellyseerrExcludeBlocklistedItems', type: 'toggle', label: '排除黑名单条目',
+                  desc: '启用后，Seerr 黑名单中的条目不会出现在相似/推荐建议里。' }
             ] },
-            { type: 'group', title: '"More" Discovery', items: [
-                { id: 'jellyseerrShowNetworkDiscovery', prop: 'JellyseerrShowNetworkDiscovery', type: 'toggle', default: true, label: 'Show "More from Network"',
-                  desc: 'When viewing a network page (e.g., Netflix, HBO), displays additional content from that network available in Seerr.' },
-                { id: 'jellyseerrShowGenreDiscovery', prop: 'JellyseerrShowGenreDiscovery', type: 'toggle', default: true, label: 'Show "More Genre"',
-                  desc: 'When viewing a genre page (e.g., Action, Comedy), displays additional content in that genre from Seerr.' },
-                { id: 'jellyseerrShowTagDiscovery', prop: 'JellyseerrShowTagDiscovery', type: 'toggle', default: true, label: 'Show "More Tag"',
-                  desc: 'When viewing a tag page (e.g., cooking, superhero), displays additional content with that keyword from Seerr.' },
-                { id: 'jellyseerrShowPersonDiscovery', prop: 'JellyseerrShowPersonDiscovery', type: 'toggle', default: true, label: 'Show "More from Actor"',
-                  desc: 'When viewing an actor/person page, displays their filmography from Seerr including content not in your library.' },
-                { id: 'jellyseerrShowCollectionDiscovery', prop: 'JellyseerrShowCollectionDiscovery', type: 'toggle', default: true, label: 'Show missing collection movies',
-                  desc: 'When viewing a collection/BoxSet page, shows movies from the collection that are not yet in your library with request buttons.' }
+            { type: 'group', title: '“更多”页发现内容', items: [
+                { id: 'jellyseerrShowNetworkDiscovery', prop: 'JellyseerrShowNetworkDiscovery', type: 'toggle', default: true, label: '显示“该电视网的更多内容”',
+                  desc: '浏览电视网络页（如 Netflix、HBO）时，显示该网络在 Seerr 可请求的其他内容。' },
+                { id: 'jellyseerrShowGenreDiscovery', prop: 'JellyseerrShowGenreDiscovery', type: 'toggle', default: true, label: '显示“更多流派”',
+                  desc: '浏览类型页（如动作、喜剧）时，显示该类型下 Seerr 可请求的其他内容。' },
+                { id: 'jellyseerrShowTagDiscovery', prop: 'JellyseerrShowTagDiscovery', type: 'toggle', default: true, label: '显示“更多标签”',
+                  desc: '浏览标签页（如烹饪、超级英雄）时，显示带该关键词的 Seerr 可请求内容。' },
+                { id: 'jellyseerrShowPersonDiscovery', prop: 'JellyseerrShowPersonDiscovery', type: 'toggle', default: true, label: '显示“该演员的更多作品”',
+                  desc: '浏览演员/人物页时，显示其 Seerr 影视作品列表（含未入库内容）。' },
+                { id: 'jellyseerrShowCollectionDiscovery', prop: 'JellyseerrShowCollectionDiscovery', type: 'toggle', default: true, label: '显示合集中缺失的电影',
+                  desc: '浏览合集页时，显示合集中尚未入库的电影并附请求按钮。' }
             ] }
         ]
     },
 
     'seerr-auto-season': {
-        title: 'Auto Season Requests', icon: 'playlist_add',
+        title: '自动按季请求', icon: 'playlist_add',
         items: [
-            { id: 'autoSeasonRequestEnabled', prop: 'AutoSeasonRequestEnabled', type: 'toggle', main: true, label: 'Enable Automatic Advance Season Requests',
-              desc: 'Automatically request the next season in Seerr when a user is about to finish the current season.' },
-            { id: 'autoSeasonRequestRequireAllWatched', prop: 'AutoSeasonRequestRequireAllWatched', type: 'toggle', label: 'Require All Prior Episodes Watched',
-              desc: 'Require all episodes before the threshold to be watched. For example, if threshold is 2 and there are 10 episodes, when watching episode 8, all episodes 1-7 must be watched or marked as watched. This prevents accidentally triggering requests by jumping to later episodes.<br/>This might cause requests to not be triggered if users skip episodes.' },
-            { id: 'autoSeasonRequestThresholdValue', prop: 'AutoSeasonRequestThresholdValue', type: 'number', min: 1, max: 20, default: 2, label: 'Episodes Remaining Threshold',
+            { id: 'autoSeasonRequestEnabled', prop: 'AutoSeasonRequestEnabled', type: 'toggle', main: true, label: '启用自动提前请求下一季',
+              desc: '用户即将看完当前季时，自动在 Seerr 请求下一季。' },
+            { id: 'autoSeasonRequestRequireAllWatched', prop: 'AutoSeasonRequestRequireAllWatched', type: 'toggle', label: '要求之前的剧集全部看过',
+              desc: '要求阈值之前的所有集都已观看或标记为已看。例如阈值 2、全季 10 集：看到第 8 集时，第 1–7 集必须都已看完，防止直接跳到后面误触发请求。<br/>若用户跳集，可能导致请求不触发。' },
+            { id: 'autoSeasonRequestThresholdValue', prop: 'AutoSeasonRequestThresholdValue', type: 'number', min: 1, max: 20, default: 2, label: '剩余集数阈值',
               toConfig: (v) => Math.trunc(v) || 2,
-              desc: 'Request the next season when the number of unwatched episodes is at or below this number. Default: 2 episodes.' },
+              desc: '当未观看的剧集数达到或低于此数字时请求下一季。默认：2 集。' },
             { type: 'note', html: 'Requests are triggered when users start or complete watching episodes.<br/>Set the threshold to 2-3 episodes to give time for downloading before users finish watching.<br/>Example: with threshold 2, when a user starts episode 8 of 10 of season 1, season 2 is requested.<br/>If a user has already triggered a request for a season, it is not requested again even if another user reaches the threshold.' }
         ]
     },
 
     'seerr-auto-movie': {
-        title: 'Auto Movie Requests', icon: 'movie',
+        title: '自动电影请求', icon: 'movie',
         items: [
-            { id: 'autoMovieRequestEnabled', prop: 'AutoMovieRequestEnabled', type: 'toggle', main: true, label: 'Enable Auto Movie Requests',
-              desc: 'Automatically request the next movie in a collection based on configured triggers.<br/><strong>Requirements:</strong> TMDB API key must be configured.' },
+            { id: 'autoMovieRequestEnabled', prop: 'AutoMovieRequestEnabled', type: 'toggle', main: true, label: '启用自动电影请求',
+              desc: '按配置的触发条件自动请求合集中的下一部电影。<br/><strong>前提：</strong>必须配置 TMDB API 密钥。' },
             // Triggers map to one AutoMovieRequestTriggerType value, so these three stay loaded and saved by configPage.html.
-            { id: 'autoMovieRequestTriggerOnStart', manual: true, type: 'toggle', label: 'When movie starts',
-              desc: 'Trigger an auto-request for the next movie in the collection as soon as a user starts a movie.' },
-            { id: 'autoMovieRequestTriggerOnMinutesWatched', manual: true, type: 'toggle', label: 'After X minutes watched',
-              desc: 'Select one or both triggers. If both are selected, the request will be triggered if either condition is met.' },
-            { id: 'autoMovieRequestMinutesWatched', manual: true, type: 'number', min: 1, max: 180, placeholder: '20', label: 'Minutes Watched Threshold',
-              desc: 'How many minutes a user should watch before triggering a request? Must be between 1 and 180 minutes.' },
-            { id: 'autoMovieRequestCheckReleaseDate', prop: 'AutoMovieRequestCheckReleaseDate', type: 'toggle', default: true, label: 'Only request if released',
-              desc: 'When enabled, future releases will be skipped. Only movies that have already been released will be requested.' },
-            { id: 'autoMovieRequestQualityMode', prop: 'AutoMovieRequestQualityMode', type: 'select', default: 'default', label: 'Quality Profile Mode',
-              options: [['default', 'Default'], ['original', 'Original'], ['custom', 'Custom']],
-              desc: '<strong>Default:</strong> Seerr uses its default Radarr server and quality profile.<br/><strong>Original:</strong> Uses the same quality profile as the movie being watched (falls back to default if not found).<br/><strong>Custom:</strong> Always uses the specific Radarr server, quality profile, and root folder selected below.' },
-            { id: 'autoMovieRequestFallbackOn4k', prop: 'AutoMovieRequestFallbackOn4k', type: 'toggle', default: true, label: 'Use default instead of 4K fallback',
-              desc: 'Only applies when Quality Profile Mode is set to "Original". If the watched movie was requested with a 4K profile, the auto-request will use Seerr\'s default profile instead. This prevents requests from failing or requiring manual approval for users who don\'t have 4K request permissions in Seerr. Disable this if all your users have 4K request access and you want to preserve the original 4K profile.' },
+            { id: 'autoMovieRequestTriggerOnStart', manual: true, type: 'toggle', label: '电影开始播放时',
+              desc: '用户一开始播放电影就触发合集中下一部的自动请求。' },
+            { id: 'autoMovieRequestTriggerOnMinutesWatched', manual: true, type: 'toggle', label: '观看 X 分钟后',
+              desc: '选择一个或两个触发条件。两个都选时，满足任一即触发请求。' },
+            { id: 'autoMovieRequestMinutesWatched', manual: true, type: 'number', min: 1, max: 180, placeholder: '20', label: '观看分钟数阈值',
+              desc: '用户观看多少分钟后触发请求？取值 1–180 分钟。' },
+            { id: 'autoMovieRequestCheckReleaseDate', prop: 'AutoMovieRequestCheckReleaseDate', type: 'toggle', default: true, label: '仅请求已上映的电影',
+              desc: '启用后跳过尚未上映的影片，只请求已上映的电影。' },
+            { id: 'autoMovieRequestQualityMode', prop: 'AutoMovieRequestQualityMode', type: 'select', default: 'default', label: '质量方案模式',
+              options: [['default', '默认'], ['original', '原画质'], ['custom', '自定义']],
+              desc: '<strong>默认：</strong>Seerr 使用其默认 Radarr 服务器与质量方案。<br/><strong>原方案：</strong>沿用所看电影当初的质量方案（找不到则回退默认）。<br/><strong>自定义：</strong>始终使用下方选定的 Radarr 服务器、质量方案与根目录。' },
+            { id: 'autoMovieRequestFallbackOn4k', prop: 'AutoMovieRequestFallbackOn4k', type: 'toggle', default: true, label: '用默认画质配置替代 4K 配置',
+              desc: '仅在质量方案模式为“原方案”时生效。若所看电影当初以 4K 方案请求，自动请求会改用 Seerr 默认方案，避免没有 4K 请求权限的用户请求失败或需要人工审批。若所有用户都有 4K 权限且想保留原 4K 方案，可关闭此项。' },
             { type: 'custom', html:
               '<div id="autoMovieRequestCustomSettings" class="jea-custom-box" style="display:none;">' +
                 '<div class="inputContainer jea-row"><label class="inputLabel" for="autoMovieRequestServer">Radarr Server</label><select id="autoMovieRequestServer" name="autoMovieRequestServer" class="jea-input"></select></div>' +
@@ -875,40 +875,40 @@ JEAdmin.define({
     },
 
     'seerr-sync': {
-        title: 'Recently Added Sync to Seerr', icon: 'sync',
+        title: '最近添加同步到 Seerr', icon: 'sync',
         items: [
-            { id: 'triggerSeerrScanOnItemAdded', prop: 'TriggerSeerrScanOnItemAdded', type: 'toggle', main: true, label: 'Trigger Seerr recently-added scan when new Jellyfin items are added',
-              desc: 'When Jellyfin reports new library items added, enabling this triggers the "Jellyfin Recently Added Scan" job so that request statuses are immediately updated instead of waiting till next schedule run. Events are debounced, so a bulk import collapses into a single trigger.<br/><strong>Tip:</strong> With this enabled, you can set Seerr\'s recently-added scan Frequency to a much longer interval (60 minutes) to reduce noise.' },
+            { id: 'triggerSeerrScanOnItemAdded', prop: 'TriggerSeerrScanOnItemAdded', type: 'toggle', main: true, label: '添加新 Jellyfin 条目时触发 Seerr 最近添加扫描',
+              desc: 'Jellyfin 报告新增媒体库条目时，启用此项会立即触发“Jellyfin 最近添加扫描”任务，即时更新请求状态而不用等下次调度。事件带防抖，批量导入只触发一次。<br/><strong>提示：</strong>启用后可把 Seerr 最近添加扫描频率拉长（60 分钟）以减少噪音。' },
             // Clamped to 5..3600 on save, so loaded and saved by configPage.html.
-            { id: 'seerrScanDebounceSeconds', manual: true, type: 'number', min: 5, max: 3600, step: 1, label: 'Debounce (seconds)',
-              desc: 'Wait this many seconds after the LAST item added before firing the scan. Default 60. Range 5 to 3600.' },
+            { id: 'seerrScanDebounceSeconds', manual: true, type: 'number', min: 5, max: 3600, step: 1, label: '防抖（秒）',
+              desc: '最后一个条目入库后再等多少秒才触发扫描。默认 60，范围 5–3600。' },
             { type: 'custom', html: '<div class="jea-actions"><button type="button" id="triggerSeerrScanNowBtn" class="jea-btn">Trigger scan now</button><span id="triggerSeerrScanNowStatus" class="material-icons" aria-hidden="true"></span></div>' +
               '<div class="je-setting-description" data-desc-for="triggerSeerrScanNowBtn"><div class="fieldDescription">Uses the Seerr URL and API key entered in the Connection Setup section above. If multiple URLs are configured, the first reachable one is used.</div></div>' }
         ]
     },
 
     'seerr-watchlist': {
-        title: 'Watchlist', icon: 'bookmark_added',
+        title: '观看列表', icon: 'bookmark_added',
         items: [
-            { id: 'addRequestedMediaToWatchlist', prop: 'AddRequestedMediaToWatchlist', type: 'toggle', label: 'Add requested media to Watchlist',
-              desc: 'When enabled, any media requested through Seerr Search via Jellyfin Enhanced will automatically be added to the requesting user\'s Watchlist.<br/><strong>Note:</strong> Requires <a class="je-bold-link" href="https://github.com/ranaldsgift/KefinTweaks" target="_blank">KefinTweaks</a> to be installed to actually view the watchlisted items. <span class="je-installed-badge" data-plugin="kefintweaks"><i class="material-icons" aria-hidden="true">check_circle</i>KefinTweaks detected</span>' },
-            { id: 'syncJellyseerrWatchlist', prop: 'SyncJellyseerrWatchlist', type: 'toggle', label: 'Sync Seerr Watchlist → Jellyfin',
-              desc: 'When enabled, items from each user\'s Seerr watchlist will be automatically synced to their Jellyfin watchlist.<br/>Configure how often the sync should run in Jellyfin Dashboard &gt; Scheduled Tasks &gt; "Sync Watchlist from Seerr to Jellyfin".<br/><strong>Note:</strong> Requires <a class="je-bold-link" href="https://github.com/ranaldsgift/KefinTweaks" target="_blank">KefinTweaks</a> to actually render the watchlist UI. <span class="je-installed-badge" data-plugin="kefintweaks"><i class="material-icons" aria-hidden="true">check_circle</i>KefinTweaks detected</span>' },
-            { id: 'syncJellyfinWatchlistToSeerr', prop: 'SyncJellyfinWatchlistToSeerr', type: 'toggle', label: 'Sync Jellyfin Watchlist → Seerr',
-              desc: 'When enabled, items from a user\'s Jellyfin watchlist (from <a class="je-bold-link" href="https://github.com/ranaldsgift/KefinTweaks" target="_blank">KefinTweaks</a>) will be automatically synced to their Seerr watchlist.<br/>Configure how often the sync should run in Jellyfin Dashboard &gt; Scheduled Tasks &gt; "Sync Watchlist from Jellyfin to Seerr". <span class="je-installed-badge" data-plugin="kefintweaks"><i class="material-icons" aria-hidden="true">check_circle</i>KefinTweaks detected</span>' },
-            { id: 'preventWatchlistReAddition', prop: 'PreventWatchlistReAddition', type: 'toggle', default: true, label: 'Prevent re-adding removed items',
-              desc: 'When enabled, items will only be added to a user\'s watchlist once. If a user manually removes an item from their watchlist, it won\'t be automatically re-added during future sync runs.' },
+            { id: 'addRequestedMediaToWatchlist', prop: 'AddRequestedMediaToWatchlist', type: 'toggle', label: '将请求的媒体添加到观看列表',
+              desc: '启用后，凡通过 Jellyfin Enhanced 的 Seerr 搜索请求的媒体，都会自动加入请求用户的稍后观看。<br/><strong>注意：</strong>需要安装 <a class="je-bold-link" href="https://github.com/ranaldsgift/KefinTweaks" target="_blank">KefinTweaks</a> 才能实际查看稍后观看条目。<span class="je-installed-badge" data-plugin="kefintweaks"><i class="material-icons" aria-hidden="true">check_circle</i>已检测到 KefinTweaks</span>' },
+            { id: 'syncJellyseerrWatchlist', prop: 'SyncJellyseerrWatchlist', type: 'toggle', label: '同步 Seerr 观看列表 → Jellyfin',
+              desc: '启用后，各用户 Seerr 稍后观看中的条目会自动同步到其 Jellyfin 稍后观看。<br/>同步频率在 控制台 &gt; 计划任务 &gt; “从 Seerr 同步稍后观看到 Jellyfin” 中配置。<br/><strong>注意：</strong>需要 <a class="je-bold-link" href="https://github.com/ranaldsgift/KefinTweaks" target="_blank">KefinTweaks</a> 来渲染稍后观看界面。<span class="je-installed-badge" data-plugin="kefintweaks"><i class="material-icons" aria-hidden="true">check_circle</i>已检测到 KefinTweaks</span>' },
+            { id: 'syncJellyfinWatchlistToSeerr', prop: 'SyncJellyfinWatchlistToSeerr', type: 'toggle', label: '同步 Jellyfin 观看列表 → Seerr',
+              desc: '启用后，用户 Jellyfin 稍后观看（<a class="je-bold-link" href="https://github.com/ranaldsgift/KefinTweaks" target="_blank">KefinTweaks</a>）中的条目会自动同步到其 Seerr 稍后观看。<br/>同步频率在 控制台 &gt; 计划任务 &gt; “从 Jellyfin 同步稍后观看到 Seerr” 中配置。<span class="je-installed-badge" data-plugin="kefintweaks"><i class="material-icons" aria-hidden="true">check_circle</i>已检测到 KefinTweaks</span>' },
+            { id: 'preventWatchlistReAddition', prop: 'PreventWatchlistReAddition', type: 'toggle', default: true, label: '防止重新添加已移除的条目',
+              desc: '启用后，条目只加入用户稍后观看一次。用户手动移除后，后续同步不会再自动加回。' },
             // Clamped to 1..3650 on save and shown only while the toggle above is on (handler in configPage.html).
-            { id: 'watchlistMemoryRetentionDays', manual: true, type: 'number', min: 1, max: 3650, step: 1, label: 'Memory retention (days)',
-              desc: 'How long to remember that an item was processed before allowing it to be re-added.<br/>After this period, manually removed items (if unwatched) will be automatically re-added to watchlist if they\'re still in Seerr requests or Seerr watchlist.<br/><strong>Examples:</strong> 30 days = items can be re-added after 1 month; 365 days = remember for 1 year (recommended); 3650 days = remember for 10 years (nearly permanent).<br/>Only applies when "Prevent re-adding removed items" is enabled.' }
+            { id: 'watchlistMemoryRetentionDays', manual: true, type: 'number', min: 1, max: 3650, step: 1, label: '记忆保留天数',
+              desc: '记住条目已处理多久之后才允许再次添加。<br/>超过该天数后，手动移除的条目（若未观看）只要仍在 Seerr 请求或 Seerr 稍后观看中，就会自动加回。<br/><strong>示例：</strong>30 天 = 一个月后可重新添加；365 天 = 记一年（推荐）；3650 天 = 记十年（近乎永久）。<br/>仅在启用“防止重新添加已移除条目”时生效。' }
         ]
     },
 
     'seerr-users': {
-        title: 'Users', icon: 'group_add',
+        title: '用户', icon: 'group_add',
         items: [
-            { id: 'jellyseerrAutoImportUsers', prop: 'JellyseerrAutoImportUsers', type: 'toggle', label: 'Auto import Jellyfin users to Seerr',
-              desc: 'Automatically import Jellyfin users into Seerr so they can use Seerr Search without needing to visit Seerr directly. New users are imported the first time they use Seerr Search; a scheduled task also bulk-imports periodically. Already-imported users are skipped.<br/>Configure the bulk import frequency in Jellyfin Dashboard &gt; Scheduled Tasks &gt; "Import Jellyfin Users to Seerr".' },
+            { id: 'jellyseerrAutoImportUsers', prop: 'JellyseerrAutoImportUsers', type: 'toggle', label: '自动导入 Jellyfin 用户到 Seerr',
+              desc: '自动把 Jellyfin 用户导入 Seerr，使其无需访问 Seerr 网站即可使用 Seerr 搜索。新用户首次使用 Seerr 搜索时导入；计划任务也会定期批量导入。已导入的用户会跳过。<br/>批量导入频率在 控制台 &gt; 计划任务 &gt; “导入 Jellyfin 用户到 Seerr” 中配置。' },
             { type: 'custom', html:
               '<details id="blockedUsersDetails" class="jea-group">' +
                 '<summary>Blocked Users <span id="blockedUsersCount">(none)</span></summary>' +
@@ -919,31 +919,31 @@ JEAdmin.define({
                 '</div>' +
               '</details>' +
               '<input id="jellyseerrImportBlockedUsers" type="hidden" value=""/>' },
-            { type: 'button', id: 'btnImportJellyseerrUsers', label: 'Import Users Now', variant: 'primary' },
+            { type: 'button', id: 'btnImportJellyseerrUsers', label: '立即导入用户', variant: 'primary' },
             { type: 'custom', html: '<div id="importUsersResult" style="display: none; margin-top:10px;"></div>' }
         ]
     },
 
     'seerr-audit': {
-        title: 'Permission Audit', icon: 'verified_user',
+        title: '权限审计', icon: 'verified_user',
         items: [
             { type: 'note', html: 'Check which users are missing Seerr permissions required for the features you have enabled. Only users linked to a Seerr account are checked.' },
-            { type: 'button', id: 'btnPermissionAudit', label: 'Run Audit', variant: 'primary' },
+            { type: 'button', id: 'btnPermissionAudit', label: '运行审计', variant: 'primary' },
             { type: 'custom', html: '<div id="permissionAuditResult" style="display: none; margin-top: 1em;"></div>' }
         ]
     },
 
     'seerr-debug': {
-        title: 'Debug & Caching', icon: 'bug_report',
+        title: '调试与缓存', icon: 'bug_report',
         items: [
-            { id: 'jellyseerrDisableCache', prop: 'JellyseerrDisableCache', type: 'toggle', label: 'Disable server-side response cache',
-              desc: 'When enabled, all Seerr proxy requests bypass the server-side cache and are fetched fresh from Seerr every time. This is useful for testing but will increase load on your Seerr instance. <b>Not recommended for normal use.</b>' },
-            { id: 'jellyseerrResponseCacheTtlMinutes', prop: 'JellyseerrResponseCacheTtlMinutes', type: 'number', min: 1, default: 10, label: 'Response Cache TTL (min)',
+            { id: 'jellyseerrDisableCache', prop: 'JellyseerrDisableCache', type: 'toggle', label: '禁用服务端响应缓存',
+              desc: '启用后，所有 Seerr 代理请求绕过服务端缓存、每次都从 Seerr 现取。适合测试，但会增加 Seerr 实例负载。<b>不建议日常使用。</b>' },
+            { id: 'jellyseerrResponseCacheTtlMinutes', prop: 'JellyseerrResponseCacheTtlMinutes', type: 'number', min: 1, default: 10, label: '响应缓存 TTL（分钟）',
               toConfig: (v) => Math.trunc(v) || 10,
-              desc: 'How long Seerr API responses (search, discovery, recommendations) are cached. Default: 10 minutes.' },
-            { id: 'jellyseerrUserIdCacheTtlMinutes', prop: 'JellyseerrUserIdCacheTtlMinutes', type: 'number', min: 1, default: 30, label: 'User ID Cache TTL (min)',
+              desc: 'Seerr API 响应（搜索、发现、推荐）的缓存时长。默认：10 分钟。' },
+            { id: 'jellyseerrUserIdCacheTtlMinutes', prop: 'JellyseerrUserIdCacheTtlMinutes', type: 'number', min: 1, default: 30, label: '用户 ID 缓存 TTL（分钟）',
               toConfig: (v) => Math.trunc(v) || 30,
-              desc: 'How long the Jellyfin → Seerr user ID mapping is cached. Default: 30 minutes.' }
+              desc: 'Jellyfin → Seerr 用户 ID 映射的缓存时长。默认：30 分钟。' }
         ]
     }
 });
@@ -981,10 +981,10 @@ JEAdmin.define({
         title: 'Bazarr', iconImg: 'selfhst/svg/bazarr.svg', attrs: { 'data-dep-setup': '' },
         items: [
             { type: 'note', html: 'Automated subtitle downloading and management for Sonarr and Radarr. Single instance, no API key, detail-page links only.' },
-            { id: 'bazarrUrl', prop: 'BazarrUrl', type: 'text', label: 'Bazarr URL', placeholder: 'e.g., http://192.168.100.100:6767',
-              desc: 'This links to the main movies/series page; Bazarr does not support direct item deep-links.<br/>If Bazarr sits behind an auth proxy (Authentik, Authelia, Cloudflare Access, etc.), put the INTERNAL address here (e.g. <code>http://bazarr:6767</code>) and use the URL Mappings below to redirect user-facing links to the public URL.' },
-            { id: 'bazarrUrlMappings', prop: 'BazarrUrlMappings', type: 'textarea', rows: 3, label: 'Bazarr URL Mappings', placeholder: 'jellyfin_url|bazarr_url',
-              desc: 'Map Jellyfin access URLs to Bazarr URLs. Format: <code>jellyfin_url|bazarr_url</code> (one per line).' },
+            { id: 'bazarrUrl', prop: 'BazarrUrl', type: 'text', label: 'Bazarr 地址', placeholder: 'e.g., http://192.168.100.100:6767',
+              desc: '链接指向电影/剧集主页面；Bazarr 不支持条目深链。<br/>若 Bazarr 在认证代理（Authentik、Authelia、Cloudflare Access 等）之后，此处填内网地址（如 <code>http://bazarr:6767</code>），并用下方地址映射把用户侧链接重定向到公网地址。' },
+            { id: 'bazarrUrlMappings', prop: 'BazarrUrlMappings', type: 'textarea', rows: 3, label: 'Bazarr 地址映射', placeholder: 'jellyfin_url|bazarr_url',
+              desc: '把 Jellyfin 访问地址映射到 Bazarr 地址。格式：<code>jellyfin_url|bazarr_url</code>（每行一条）。' },
             { type: 'html', html: '<div class="je-arr-action-row"><button type="button" id="validateBazarrMappingsBtn" class="jea-btn">Validate Mappings</button></div><div id="bazarrMappingsValidationResult"></div>' }
         ]
     },
@@ -992,56 +992,56 @@ JEAdmin.define({
         title: 'Shoko', iconImg: 'selfhst/svg/shoko-server.svg', attrs: { 'data-dep-setup': '' },
         items: [
             { type: 'note', html: 'Surfaces upcoming anime episodes from your Shoko Server collection on the Calendar page. Single instance, no admin-assigned name.' },
-            { id: 'shokoUrl', prop: 'ShokoUrl', type: 'text', label: 'Shoko URL', placeholder: 'e.g., http://192.168.100.100:8111',
-              desc: 'If Shoko sits behind an auth proxy (Authentik, Authelia, Cloudflare Access, etc.), put the INTERNAL address here (e.g. <code>http://shoko:8111</code>) and use the URL Mappings below to redirect user-facing links to the public URL.' },
-            { id: 'shokoApiKey', prop: 'ShokoApiKey', type: 'text', showIf: 'shokoUrl', label: 'Shoko API Key',
+            { id: 'shokoUrl', prop: 'ShokoUrl', type: 'text', label: 'Shoko 地址', placeholder: 'e.g., http://192.168.100.100:8111',
+              desc: '若 Shoko 位于认证代理之后（Authentik、Authelia、Cloudflare Access 等），此处填内网地址（如 <code>http://shoko:8111</code>），并用下方地址映射把用户侧链接重定向到公网地址。' },
+            { id: 'shokoApiKey', prop: 'ShokoApiKey', type: 'text', showIf: 'shokoUrl', label: 'Shoko API 密钥',
               toConfig: (v) => (v || '').replace(/\s/g, ''),
-              desc: 'API key from Shoko\'s web UI (Settings &gt; API Keys &gt; Add API Key).' },
-            { type: 'group', showIf: 'shokoUrl', title: 'Episode types to show on Calendar', open: true, items: [
-                { id: 'shokoShowEpisodes', prop: 'ShokoShowEpisodes', type: 'toggle', default: true, label: 'Episodes' },
-                { id: 'shokoShowSpecials', prop: 'ShokoShowSpecials', type: 'toggle', label: 'Specials' },
-                { id: 'shokoShowCredits', prop: 'ShokoShowCredits', type: 'toggle', label: 'Credits (OP/ED)' },
-                { id: 'shokoShowTrailers', prop: 'ShokoShowTrailers', type: 'toggle', label: 'Trailers' },
-                { id: 'shokoShowParodies', prop: 'ShokoShowParodies', type: 'toggle', label: 'Parodies' },
-                { id: 'shokoShowOther', prop: 'ShokoShowOther', type: 'toggle', label: 'Other',
-                  desc: 'Which AniDB episode types appear as calendar events. Episodes are on by default; the rest are usually calendar noise.' }
+              desc: '来自 Shoko 网页界面的 API 密钥（设置 &gt; API 密钥 &gt; 添加 API 密钥）。' },
+            { type: 'group', showIf: 'shokoUrl', title: '日历显示的剧集类型', open: true, items: [
+                { id: 'shokoShowEpisodes', prop: 'ShokoShowEpisodes', type: 'toggle', default: true, label: '剧集' },
+                { id: 'shokoShowSpecials', prop: 'ShokoShowSpecials', type: 'toggle', label: '特别篇' },
+                { id: 'shokoShowCredits', prop: 'ShokoShowCredits', type: 'toggle', label: '片头片尾（OP/ED）' },
+                { id: 'shokoShowTrailers', prop: 'ShokoShowTrailers', type: 'toggle', label: '预告片' },
+                { id: 'shokoShowParodies', prop: 'ShokoShowParodies', type: 'toggle', label: '恶搞篇' },
+                { id: 'shokoShowOther', prop: 'ShokoShowOther', type: 'toggle', label: '其他',
+                  desc: '哪些 AniDB 剧集类型会显示为日历事件。剧集默认开启，其余通常只是日历上的干扰信息。' }
             ] },
-            { type: 'group', showIf: 'shokoUrl', title: 'Advanced URL Mappings', items: [
-                { id: 'shokoUrlMappings', prop: 'ShokoUrlMappings', type: 'textarea', rows: 3, label: 'Shoko URL Mappings', placeholder: 'jellyfin_url|shoko_url',
-                  desc: 'Map Jellyfin access URLs to Shoko URLs. Format: <code>jellyfin_url|shoko_url</code> (one per line).' },
+            { type: 'group', showIf: 'shokoUrl', title: '高级地址映射', items: [
+                { id: 'shokoUrlMappings', prop: 'ShokoUrlMappings', type: 'textarea', rows: 3, label: 'Shoko 地址映射', placeholder: 'jellyfin_url|shoko_url',
+                  desc: '把 Jellyfin 访问地址映射到 Shoko 地址。格式：<code>jellyfin_url|shoko_url</code>（每行一条）。' },
                 { type: 'html', html: '<div class="je-arr-action-row"><button type="button" id="validateShokoMappingsBtn" class="jea-btn">Validate Mappings</button></div><div id="shokoMappingsValidationResult"></div>' }
             ] }
         ]
     },
     'arr-links': {
-        title: '*arr UI Links', icon: 'link',
+        title: '*arr 界面链接', icon: 'link',
         items: [
-            { id: 'arrLinksEnabled', prop: 'ArrLinksEnabled', type: 'toggle', main: true, label: 'Enable *arr Links on Detail Pages',
-              desc: 'Show Sonarr, Radarr, and Bazarr links of the items on item detail pages for quick access. <strong>Admins only</strong>.<br/>If no URL is configured for a service, links for that service are not shown.' },
-            { id: 'showArrLinksAsText', prop: 'ShowArrLinksAsText', type: 'toggle', label: 'Show links as text',
-              desc: 'Render the *arr links as plain text labels instead of icon buttons.' },
-            { id: 'arrLinksShowStatusSingle', prop: 'ArrLinksShowStatusSingle', type: 'toggle', label: 'Show status badge for single-instance',
-              desc: 'When off (default), a single matching Sonarr/Radarr instance renders as a plain icon/text.<br/>When on, it also shows the episode count (e.g. 22/41) and a colored left border indicating download status. Multi-instance dropdowns always show this detail.' }
+            { id: 'arrLinksEnabled', prop: 'ArrLinksEnabled', type: 'toggle', main: true, label: '在详情页启用 *arr 链接',
+              desc: '在条目详情页显示其 Sonarr/Radarr/Bazarr 链接以便快速跳转。<strong>仅管理员可见</strong>。<br/>未配置地址的服务不显示链接。' },
+            { id: 'showArrLinksAsText', prop: 'ShowArrLinksAsText', type: 'toggle', label: '以文本形式显示链接',
+              desc: '将 *arr 链接渲染为纯文本标签，而不是图标按钮。' },
+            { id: 'arrLinksShowStatusSingle', prop: 'ArrLinksShowStatusSingle', type: 'toggle', label: '为单实例显示状态徽章',
+              desc: '关闭（默认）时，唯一匹配的 Sonarr/Radarr 实例只显示普通图标/文字。<br/>开启后还会显示集数（如 22/41）及表示下载状态的彩色左边框。多实例下拉菜单始终显示该详情。' }
         ]
     },
     'arr-tags': {
-        title: 'Tags Sync', icon: 'label',
+        title: '标签同步', icon: 'label',
         items: [
-            { id: 'arrTagsSyncEnabled', prop: 'ArrTagsSyncEnabled', type: 'toggle', main: true, label: 'Enable Tags Sync',
-              desc: 'Fetches all tags from Radarr and Sonarr instances defined above and adds them as Jellyfin tags.<br/><strong>Note:</strong> Run the sync task from Dashboard &gt; Scheduled Tasks &gt; "Sync Tags from *arr to Jellyfin" and configure how often it should run.' },
-            { id: 'arrTagsPrefix', prop: 'ArrTagsPrefix', type: 'text', default: 'Requested by: ', label: 'Tag Prefix', placeholder: 'JE Arr Tag: ',
-              desc: 'Prefix to add before each tag (e.g., "JE Arr Tag: " will result in "JE Arr Tag: 1 - Jellyfish")' },
-            { id: 'arrTagsClearOldTags', prop: 'ArrTagsClearOldTags', type: 'toggle', default: true, label: 'Clear old tags before sync',
-              desc: 'When enabled, removes all existing tags starting with the prefix before adding new ones. This keeps tags in sync with your *arr applications.' },
-            { id: 'arrTagsShowAsLinks', prop: 'ArrTagsShowAsLinks', type: 'toggle', default: true, label: 'Show synced tags as links',
-              desc: 'Displays tags with the configured prefix as clickable links on item detail pages. Helpful if your theme hides tags.' },
-            { type: 'group', title: 'Tag Filters', items: [
-                { id: 'arrTagsSyncFilter', prop: 'ArrTagsSyncFilter', type: 'textarea', rows: 3, label: 'Sync to Jellyfin Filter', placeholder: 'One per line',
-                  desc: 'Only sync specific tags from *arr to Jellyfin. Enter one tag name per line (without the prefix).<br/>Leave empty to sync all tags.<br/><strong>Example:</strong> to only sync "1 - Jellyfish" and "trakt", enter:<br/><code>1 - Jellyfish</code><br/><code>trakt</code>' },
-                { id: 'arrTagsLinksFilter', prop: 'ArrTagsLinksFilter', type: 'textarea', rows: 3, label: 'Show as Links Filter', placeholder: 'One per line',
-                  desc: 'Only show specific tags as links. Enter one tag name per line (without the prefix).<br/>Leave empty to show all tags with the prefix.<br/><strong>Example:</strong> to only show "JE Arr Tag: 1 - Jellyfish" and "JE Arr Tag: trakt" as links, enter:<br/><code>1 - Jellyfish</code><br/><code>trakt</code>' },
-                { id: 'arrTagsLinksHideFilter', prop: 'ArrTagsLinksHideFilter', type: 'textarea', rows: 3, label: 'Hide Specific Links Filter', placeholder: 'One per line',
-                  desc: 'Hide specific tags from being displayed as links. Enter one tag name per line (without the prefix).<br/>This filter takes priority over the "Show" filter above.<br/><strong>Example:</strong> to hide "JE Arr Tag: spam_tag" and "JE Arr Tag: test_tag", enter:<br/><code>spam_tag</code><br/><code>test_tag</code>' }
+            { id: 'arrTagsSyncEnabled', prop: 'ArrTagsSyncEnabled', type: 'toggle', main: true, label: '启用标签同步',
+              desc: '从上面配置的 Radarr/Sonarr 实例拉取全部标签并添加为 Jellyfin 标签。<br/><strong>注意：</strong>请在 控制台 &gt; 计划任务 &gt; “从 *arr 同步标签到 Jellyfin” 中运行并配置频率。' },
+            { id: 'arrTagsPrefix', prop: 'ArrTagsPrefix', type: 'text', default: 'Requested by: ', label: '标签前缀', placeholder: 'JE *arr 标签：',
+              desc: '在每个标签前添加的前缀（例如，填 “JE Arr Tag: ” 会得到 “JE Arr Tag: 1 - Jellyfish”）' },
+            { id: 'arrTagsClearOldTags', prop: 'ArrTagsClearOldTags', type: 'toggle', default: true, label: '同步前清除旧标签',
+              desc: '启用后，添加新标签前会先移除所有带此前缀的旧标签，保持与 *arr 应用同步。' },
+            { id: 'arrTagsShowAsLinks', prop: 'ArrTagsShowAsLinks', type: 'toggle', default: true, label: '以链接形式显示已同步的标签',
+              desc: '把带此前缀的标签在条目详情页渲染为可点击链接。若你的主题隐藏标签，这会有用。' },
+            { type: 'group', title: '标签过滤', items: [
+                { id: 'arrTagsSyncFilter', prop: 'ArrTagsSyncFilter', type: 'textarea', rows: 3, label: '同步到 Jellyfin 的标签过滤', placeholder: '每行一条',
+                  desc: '只把指定的 *arr 标签同步到 Jellyfin。每行一个标签名（不含前缀）。<br/>留空则同步全部。<br/><strong>示例：</strong>只同步 “1 - Jellyfish” 和 “trakt”，则输入：<br/><code>1 - Jellyfish</code><br/><code>trakt</code>' },
+                { id: 'arrTagsLinksFilter', prop: 'ArrTagsLinksFilter', type: 'textarea', rows: 3, label: '显示为链接的过滤', placeholder: '每行一条',
+                  desc: '只把指定标签显示为链接。每行一个标签名（不含前缀）。<br/>留空则显示全部带前缀标签。<br/><strong>示例：</strong>只显示 “JE Arr Tag: 1 - Jellyfish” 和 “JE Arr Tag: trakt”，则输入：<br/><code>1 - Jellyfish</code><br/><code>trakt</code>' },
+                { id: 'arrTagsLinksHideFilter', prop: 'ArrTagsLinksHideFilter', type: 'textarea', rows: 3, label: '隐藏指定链接的过滤', placeholder: '每行一条',
+                  desc: '指定标签不显示为链接。每行一个标签名（不含前缀）。<br/>此过滤优先于上方“显示”过滤。<br/><strong>示例：</strong>隐藏 “JE Arr Tag: spam_tag” 和 “JE Arr Tag: test_tag”，则输入：<br/><code>spam_tag</code><br/><code>test_tag</code>' }
             ] }
         ]
     }
@@ -1052,20 +1052,20 @@ JEAdmin.define({
  * side effects (enable/disable calls, jeTouched, jeLoaded, JSON user list); only their markup is rendered here. */
 JEAdmin.define({
     'analytics': {
-        title: 'Usage Statistics',
+        title: '使用统计',
         icon: 'insights',
         class: 'je-fieldset-wide',
         items: [
             { type: 'note', html: 'Fully opt-in and off by default. No URLs, API keys, usernames, filenames, or media titles are ever collected. Turning this on always includes just an anonymous install ID, plugin version, and Jellyfin version/target, enough to answer "how many installs are on the latest version." Untick all three options to share only that. Use the preview below to see exactly what would be sent, or read <a class="sectionTitle" href="https://n00bcodr.github.io/Jellyfin-Enhanced/advanced/community-analytics/" target="_blank" rel="noopener">what each option collects and why</a>.' },
-            { id: 'analyticsEnabled', type: 'toggle', main: true, manual: true, label: 'Share Anonymous Usage Statistics',
-              desc: 'Periodically sends an anonymous report to the Jellyfin Enhanced community analytics project. Each install gets a random ID that identifies nothing about you or your server.' },
+            { id: 'analyticsEnabled', type: 'toggle', main: true, manual: true, label: '分享匿名使用统计',
+              desc: '定期向 Jellyfin Enhanced 社区统计项目发送匿名报告。每个安装会获得一个随机 ID，不会泄露关于你或你服务器的任何信息。' },
             { type: 'custom', html: '<div id="analyticsSubOptionsContainer"></div>' },
-            { id: 'analyticsShareFeatureFlags', type: 'toggle', manual: true, label: 'Feature toggle states (on/off only)' },
-            { id: 'analyticsShareUsageCounts', type: 'toggle', manual: true, label: 'Feature usage counts' },
-            { id: 'analyticsShareDataSizes', type: 'toggle', manual: true, label: 'Data file sizes (bytes only, never contents)' },
-            { id: 'analyticsReportIntervalDays', type: 'number', manual: true, min: 7, max: 30, step: 1, label: 'Reporting interval (days)',
-              desc: 'How often a report is sent, between 7 and 30 days.' },
-            { type: 'group', title: 'Preview and status', items: [
+            { id: 'analyticsShareFeatureFlags', type: 'toggle', manual: true, label: '功能开关状态（仅开/关）' },
+            { id: 'analyticsShareUsageCounts', type: 'toggle', manual: true, label: '功能使用次数' },
+            { id: 'analyticsShareDataSizes', type: 'toggle', manual: true, label: '数据文件大小（仅字节数，绝不包含内容）' },
+            { id: 'analyticsReportIntervalDays', type: 'number', manual: true, min: 7, max: 30, step: 1, label: '上报间隔（天）',
+              desc: '报告发送频率，7–30 天一次。' },
+            { type: 'group', title: '预览与状态', items: [
                 { type: 'custom', html:
                     '<div class="jea-actions"><button type="button" id="analyticsPreviewBtn" class="jea-btn">Preview</button></div>'
                     + '<div id="analyticsPreviewContainer" style="display:none"><div class="fieldDescription">This reflects what would be sent based on the selections above.</div>'
@@ -1076,31 +1076,31 @@ JEAdmin.define({
     },
 
     'maintenance': {
-        title: 'Maintenance Mode',
+        title: '维护模式',
         icon: 'construction',
         class: 'je-fieldset-wide',
         items: [
-            { id: 'maintenanceModeEnabled', type: 'toggle', manual: true, label: 'Enable Maintenance Mode',
-              desc: 'When enabled, the selected action is applied to affected users immediately on save. A banner is shown on the Jellyfin login page. Admins are <strong>never</strong> affected. Disabling restores all users automatically.' },
-            { id: 'maintenanceModeDurationMinutes', type: 'number', manual: true, showIf: 'maintenanceModeEnabled', min: 0, max: 525600, step: 1, label: 'Duration (minutes)',
-              desc: '0 = stays on until you turn it off. Otherwise maintenance ends itself after this many minutes: the banner shows a live countdown and the toggle above switches off automatically. Changing the number restarts the clock; saving other settings does not.' },
-            { type: 'group', showIf: 'maintenanceModeEnabled', title: 'Messages', open: true, items: [
-                { id: 'maintenanceModeMessage', type: 'textarea', manual: true, rows: 2, label: 'Login Page Banner Message',
-                  placeholder: 'This server is currently undergoing maintenance. Please try again later.',
-                  desc: 'Shown as a red banner at the top of every page (login + home). Plain text only. Use <code>{countdown}</code> for the time remaining and <code>{ends_at}</code> for the end time; with a duration set and no token, the time remaining is appended automatically.' },
-                { id: 'maintenanceModeNotificationMessage', type: 'textarea', manual: true, rows: 2, label: 'Active Session Notification',
-                  placeholder: 'Server maintenance is starting. Please finish up and try again later.',
-                  desc: 'Sent as a native Jellyfin popup to anyone currently watching; reaches all clients (web, mobile, TV apps). Same <code>{countdown}</code> / <code>{ends_at}</code> tokens as the banner.' },
-                { id: 'maintenanceModeRemindOnPlayback', type: 'toggle', manual: true, label: 'Remind on playback start',
-                  desc: 'While maintenance is active, re-send the notification above (with the time remaining) to affected non-admin users each time they start playing something, on any client. At most once every 5 minutes per session. Only useful when accounts are <em>not</em> disabled.' }
+            { id: 'maintenanceModeEnabled', type: 'toggle', manual: true, label: '启用维护模式',
+              desc: '启用后，保存时立即对受影响用户执行所选动作。Jellyfin 登录页会显示横幅。管理员<strong>绝不会</strong>受影响。关闭维护会自动恢复所有用户。' },
+            { id: 'maintenanceModeDurationMinutes', type: 'number', manual: true, showIf: 'maintenanceModeEnabled', min: 0, max: 525600, step: 1, label: '持续时间（分钟）',
+              desc: '0 = 一直保持到手动关闭。否则到期后自动结束维护：横幅实时倒计时，上方开关自动关闭。修改分钟数会重新计时；保存其他设置不会。' },
+            { type: 'group', showIf: 'maintenanceModeEnabled', title: '消息', open: true, items: [
+                { id: 'maintenanceModeMessage', type: 'textarea', manual: true, rows: 2, label: '登录页横幅消息',
+                  placeholder: '服务器正在维护中，请稍后再试。',
+                  desc: '以红色横幅显示在每页（登录页+主页）顶部。纯文本。可用 <code>{countdown}</code> 表示剩余时间、<code>{ends_at}</code> 表示结束时间；设置了时长且未用标记时，会自动追加剩余时间。' },
+                { id: 'maintenanceModeNotificationMessage', type: 'textarea', manual: true, rows: 2, label: '活动会话通知',
+                  placeholder: '服务器维护即将开始，请尽快结束当前操作，稍后再试。',
+                  desc: '以 Jellyfin 原生弹窗发给所有正在观看的用户；覆盖全部客户端（网页/移动/TV）。支持与横幅相同的 <code>{countdown}</code> / <code>{ends_at}</code> 标记。' },
+                { id: 'maintenanceModeRemindOnPlayback', type: 'toggle', manual: true, label: '开始播放时提醒',
+                  desc: '维护期间，受影响的非管理员用户每次在任何客户端开始播放时，重发上述通知（含剩余时间）。每会话最多每 5 分钟一次。仅在账号<em>未</em>被禁用时有用。' }
             ] },
-            { type: 'group', showIf: 'maintenanceModeEnabled', title: 'Action', open: true, items: [
-                { id: 'mmAction_accounts', type: 'toggle', manual: true, attrs: { checked: 'checked' }, label: 'Disable user accounts',
-                  desc: 'Users cannot log in at all until maintenance ends.' },
-                { id: 'mmAction_remote', type: 'toggle', manual: true, label: 'Disable remote connections',
-                  desc: 'Blocks connections from outside the local network; LAN access still works.' }
+            { type: 'group', showIf: 'maintenanceModeEnabled', title: '执行动作', open: true, items: [
+                { id: 'mmAction_accounts', type: 'toggle', manual: true, attrs: { checked: 'checked' }, label: '禁用用户账号',
+                  desc: '维护结束前用户完全无法登录。' },
+                { id: 'mmAction_remote', type: 'toggle', manual: true, label: '禁用远程连接',
+                  desc: '阻止局域网以外的连接；局域网内仍可访问。' }
             ] },
-            { type: 'group', title: 'Affected users', open: true, items: [
+            { type: 'group', title: '受影响用户', open: true, items: [
                 { type: 'custom', html:
                     '<div class="jea-radio-list">'
                     + '<label class="jea-radio"><input type="radio" name="maintenanceModeUsers" id="mmUsers_all" value="all" checked/><span>All non-admin users</span></label>'
@@ -1111,9 +1111,9 @@ JEAdmin.define({
                     + '<div id="je-mm-users-inner"><div id="je-mm-users-loading" class="fieldDescription">Loading users...</div></div>'
                     + '</div>' }
             ] },
-            { type: 'group', title: 'Daily schedule', open: true, items: [
-            { id: 'maintenanceScheduleEnabled', type: 'toggle', manual: true, label: 'Enable daily maintenance window',
-              desc: 'Turns maintenance mode on and off by itself every day between the times below (server local time), with its own message and action, e.g. for nightly library scans. Uses the <strong>Affected users</strong> selection above. The manual toggle takes precedence while it is on; turning the schedule off ends a running window early.' },
+            { type: 'group', title: '每日定时', open: true, items: [
+            { id: 'maintenanceScheduleEnabled', type: 'toggle', manual: true, label: '启用每日维护窗口',
+              desc: '每天在下方设定的时间段（服务器本地时间）自动开关维护模式，可配独立的消息与动作，例如夜间扫库。使用上方<strong>受影响用户</strong>的选择。手动开关开启时优先；关闭定时会提前结束进行中的窗口。' },
             { type: 'custom', showIf: 'maintenanceScheduleEnabled', html:
                 '<div class="jea-timepair">'
                 + '<div class="inputContainer jea-row"><label class="inputLabel" for="maintenanceScheduleStart">Start time</label><input id="maintenanceScheduleStart" name="maintenanceScheduleStart" type="time" class="jea-input"/></div>'
@@ -1121,26 +1121,26 @@ JEAdmin.define({
                 + '</div>'
                 + '<div id="mmScheduleSameTimeWarning" class="fieldDescription jea-warn-text" style="display:none">Start and end time must differ; the schedule is ignored until they do.</div>'
                 + '<div id="mmServerTimeHint" class="fieldDescription"></div>' },
-            { id: 'maintenanceScheduleMessage', type: 'textarea', manual: true, showIf: 'maintenanceScheduleEnabled', rows: 2, label: 'Scheduled Banner Message',
-              placeholder: 'The library is updating; slowdowns are normal. Time remaining: {countdown}',
-              desc: 'Banner shown while the window is active. Same <code>{countdown}</code> / <code>{ends_at}</code> tokens.' },
-            { id: 'maintenanceScheduleNotificationMessage', type: 'textarea', manual: true, showIf: 'maintenanceScheduleEnabled', rows: 2, label: 'Scheduled Session Notification',
-              placeholder: 'The library is updating; slowdowns are normal.',
-              desc: 'Popup sent to active sessions when the window starts, and on playback start when reminders are on.' },
-            { type: 'group', showIf: 'maintenanceScheduleEnabled', title: 'Scheduled action (leave both off for a banner-only window)', open: true, items: [
-                { id: 'mmSchedAction_accounts', type: 'toggle', manual: true, label: 'Disable user accounts' },
-                { id: 'mmSchedAction_remote', type: 'toggle', manual: true, label: 'Disable remote connections' }
+            { id: 'maintenanceScheduleMessage', type: 'textarea', manual: true, showIf: 'maintenanceScheduleEnabled', rows: 2, label: '定时横幅消息',
+              placeholder: '媒体库正在更新，出现卡顿属正常现象。剩余时间：{countdown}',
+              desc: '窗口生效期间显示的横幅。支持同样的 <code>{countdown}</code> / <code>{ends_at}</code> 标记。' },
+            { id: 'maintenanceScheduleNotificationMessage', type: 'textarea', manual: true, showIf: 'maintenanceScheduleEnabled', rows: 2, label: '定时会话通知',
+              placeholder: '媒体库正在更新，出现卡顿属正常现象。',
+              desc: '窗口开始时发给活动会话的弹窗；开启提醒后，播放开始时也会发送。' },
+            { type: 'group', showIf: 'maintenanceScheduleEnabled', title: '定时动作（两者都不勾则只显示横幅）', open: true, items: [
+                { id: 'mmSchedAction_accounts', type: 'toggle', manual: true, label: '禁用用户账号' },
+                { id: 'mmSchedAction_remote', type: 'toggle', manual: true, label: '禁用远程连接' }
             ] }
             ] }
         ]
     },
 
     'developer': {
-        title: 'Developer Settings',
+        title: '开发者设置',
         icon: 'code',
         items: [
-            { id: 'devMode', prop: 'DevMode', type: 'toggle', label: 'Dev Mode',
-              desc: 'Disables JS caching so scripts are always re-fetched from the server. Default: OFF.' },
+            { id: 'devMode', prop: 'DevMode', type: 'toggle', label: '开发者模式',
+              desc: '禁用 JS 缓存，脚本总是从服务器重新拉取。默认关闭。' },
             { type: 'note', tone: 'warn', html: 'Do not change this if you do not know why you are changing it.' }
         ]
     }
@@ -1150,7 +1150,7 @@ JEAdmin.define({
 /* About tab: credits for the projects this plugin's features build on. */
 JEAdmin.define({
     'credits': {
-        title: 'Credits', icon: 'favorite',
+        title: '制作信息', icon: 'favorite',
         items: [
             { type: 'note', html: 'Jellyfin Enhanced builds on the work of other Jellyfin community projects. Thank you to their authors.' },
             { type: 'html', html: '<ul class="jea-credits">'

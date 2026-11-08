@@ -180,6 +180,17 @@
     "owner": "mcy2015 (upstream: n00bcodr)",
     "versions": [
       {
+        "version": "12.15.0.2",
+        "changelog": "zh-CN localization of the rebuilt schema-driven admin page (~450 strings across Configuration/admin/sections.js, configPage.html tabs/cards, placeholders), restoring the fork's Chinese admin UI on top of upstream 12.15.0.0. Proper nouns (Seerr, Sonarr/Radarr/Bazarr, TMDB...) kept in English. No functional changes vs 12.15.0.1.",
+        "targetAbi": "12.4.0.0",
+        "sourceUrl": "https://raw.githubusercontent.com/mcy2015/jellyframe-jf12/main/dist/JellyfinEnhanced_12.15.0.2_jf124.zip",
+        "checksum": "6B2C6078F94F22A424C9E20B2673554A",
+        "timestamp": "2026-11-08T07:30:00Z",
+        "dependencies": [
+          "5e87cc92-571a-4d8d-8d98-d2d4147f9f90"
+        ]
+      },
+      {
         "version": "12.15.0.1",
         "changelog": "Sync with upstream Jellyfin Enhanced 12.15.0.0 (media tags redesign, rebuilt schema-driven admin page, Seerr/fixes). Keeps the fork's per-user Library Scope for the random button (12.14.0.2 feature) and panel zh-CN/zh-HK/en strings. Admin page follows upstream's rebuilt English page for now; zh-CN re-localization to follow.",
         "targetAbi": "12.4.0.0",

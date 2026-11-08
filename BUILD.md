@@ -16,7 +16,8 @@
 | `CustomTabs_0.3.0.1_jf124.zip` | Custom Tabs 0.3.0.1（配置页汉化） | 自定义标签页，依赖 FT |
 | `PluginPages_3.0.0.1_jf124.zip` | Plugin Pages 3.0.0.1 | 插件自定义页面，依赖 FT |
 | `EditorsChoice_1.6.2.1_jf124.zip` | EditorsChoice 1.6.2.1（配置页汉化） | Netflix 式精选滑块，依赖 FT |
-| `JellyfinEnhanced_12.15.0.1_jf124.zip` | JE 12.15.0.1（同步上游 12.15.0.0：Media Tags 重设计 + 管理页 schema 重构；保留 fork 的随机按钮媒体库范围与面板三语。⚠️ 上游重构了管理页，本版管理页暂回英文，zh-CN 汉化待补） | Web UI 增强套件，依赖 FT。⚠️ 装了本仓版本就不要再加 JE 官方源升级 |
+| `JellyfinEnhanced_12.15.0.2_jf124.zip` | JE 12.15.0.2（同步上游 12.15.0.0 + 新版 schema 管理页 zh-CN 汉化 ~450 串；保留随机按钮媒体库范围。当前版） | Web UI 增强套件，依赖 FT。⚠️ 装了本仓版本就不要再加 JE 官方源升级 |
+| `JellyfinEnhanced_12.15.0.1_jf124.zip` | JE 12.15.0.1（同步上游 12.15.0.0，管理页为英文；被 0.2 取代） | 回退件 |
 | `JellyfinEnhanced_12.14.0.2_jf124.zip` | JE 12.14.0.2（随机按钮「媒体库范围」多选；管理页汉化版） | 回退件 |
 | `JellyfinEnhanced_12.14.0.1_jf124.zip` | JE 12.14.0.1（旧版，无媒体库范围功能；manifest 历史条目仍指向它） | 回退件 |
 
